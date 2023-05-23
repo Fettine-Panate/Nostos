@@ -20,10 +20,10 @@ struct MapScreen: View {
         
         //TODO: da fare su una posizione statica (quella dell'utente
         ZStack{
+//            CurrentPositionView()
+//                .rotationEffect(.degrees(gyroRotation), anchor: .center)
+//                .animation(.easeInOut, value: gyroRotation)
             MapBackground()
-            Circle()
-                .fill(Color.blue)
-                .frame(width: 10, height: 10)
             IndicatorView()
                 .rotationEffect(.degrees(gyroRotation), anchor: .center)
                 .animation(.easeInOut, value: gyroRotation)
@@ -34,9 +34,10 @@ struct MapScreen: View {
                 .onDisappear {
                     stopGyroscopeUpdates()
                 }
+                // Used to see if my idea were correct
+            
             VStack{
                 Spacer()
-                // Used to see if my idea were correct
                 Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
                     .onAppear{
                         path.addLocation(userLocation, checkLocation: path.checkDistance)

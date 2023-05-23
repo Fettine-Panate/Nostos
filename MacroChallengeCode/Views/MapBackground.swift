@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MapBackground: View {
     var body: some View {
         ZStack {
+            CompassView()
             Circle()
                 .stroke(Color.gray, lineWidth: 0.3)
                 .frame(width: 300, height: 300)

@@ -21,6 +21,9 @@
 		91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */; };
 		91AB9F042A1BAD640068F553 /* LocationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F032A1BAD640068F553 /* LocationRequestView.swift */; };
 		9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257B2A1CF09300159166 /* IndicatorView.swift */; };
+		9FF2257E2A1D04D000159166 /* CurrentPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257D2A1D04D000159166 /* CurrentPositionView.swift */; };
+		9FF225802A1D079800159166 /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257F2A1D079800159166 /* CompassHeading.swift */; };
+		9FF225822A1D07BD00159166 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225812A1D07BD00159166 /* CompassView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		91AB9F022A1B9A8A0068F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91AB9F032A1BAD640068F553 /* LocationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestView.swift; sourceTree = "<group>"; };
 		9FF2257B2A1CF09300159166 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
+		9FF2257D2A1D04D000159166 /* CurrentPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPositionView.swift; sourceTree = "<group>"; };
+		9FF2257F2A1D079800159166 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
+		9FF225812A1D07BD00159166 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,9 @@
 				915805722A1CB785007E579F /* MapBackground.swift */,
 				915805742A1CB9FF007E579F /* BeamShape.swift */,
 				9FF2257B2A1CF09300159166 /* IndicatorView.swift */,
+				9FF2257D2A1D04D000159166 /* CurrentPositionView.swift */,
+				9FF2257F2A1D079800159166 /* CompassHeading.swift */,
+				9FF225812A1D07BD00159166 /* CompassView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,12 +316,15 @@
 				915805752A1CB9FF007E579F /* BeamShape.swift in Sources */,
 				915805712A1CB31C007E579F /* MapScreen.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
+				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
 				91AB9F042A1BAD640068F553 /* LocationRequestView.swift in Sources */,
 				9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */,
 				918DD10B2A17D3F500E44590 /* MacroChallengeCodeApp.swift in Sources */,
 				9158056F2A1CAE97007E579F /* Path.swift in Sources */,
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
+				9FF225822A1D07BD00159166 /* CompassView.swift in Sources */,
 				91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */,
+				9FF2257E2A1D04D000159166 /* CurrentPositionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
