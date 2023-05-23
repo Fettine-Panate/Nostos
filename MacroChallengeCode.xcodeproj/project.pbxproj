@@ -20,6 +20,7 @@
 		918DD1282A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD1272A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift */; };
 		91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */; };
 		91AB9F042A1BAD640068F553 /* LocationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F032A1BAD640068F553 /* LocationRequestView.swift */; };
+		9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257B2A1CF09300159166 /* IndicatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerDelegate.swift; sourceTree = "<group>"; };
 		91AB9F022A1B9A8A0068F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91AB9F032A1BAD640068F553 /* LocationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestView.swift; sourceTree = "<group>"; };
+		9FF2257B2A1CF09300159166 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				915805702A1CB31C007E579F /* MapScreen.swift */,
 				915805722A1CB785007E579F /* MapBackground.swift */,
 				915805742A1CB9FF007E579F /* BeamShape.swift */,
+				9FF2257B2A1CF09300159166 /* IndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				915805712A1CB31C007E579F /* MapScreen.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				91AB9F042A1BAD640068F553 /* LocationRequestView.swift in Sources */,
+				9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */,
 				918DD10B2A17D3F500E44590 /* MacroChallengeCodeApp.swift in Sources */,
 				9158056F2A1CAE97007E579F /* Path.swift in Sources */,
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
@@ -467,7 +471,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -499,7 +503,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;

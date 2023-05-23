@@ -24,50 +24,47 @@ struct MapScreen: View {
             Circle()
                 .fill(Color.blue)
                 .frame(width: 10, height: 10)
-            Image(systemName: "arrow.up")
-                         .resizable()
-                         .aspectRatio(contentMode: .fit)
-                         .frame(width: 100, height: 100)
-                         .foregroundColor(.yellow)
-                     .rotationEffect(.degrees(gyroRotation), anchor: .center)
+            IndicatorView()
+                .rotationEffect(.degrees(gyroRotation), anchor: .center)
+                .animation(.easeInOut, value: gyroRotation)
                 .onAppear {
                     startGyroscopeUpdates()
-                   // updateUserLocation()
+                    // updateUserLocation()
                 }
                 .onDisappear {
                     stopGyroscopeUpdates()
                 }
+            VStack{
+                Spacer()
+                // Used to see if my idea were correct
+                Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
+                    .onAppear{
+                        path.addLocation(userLocation, checkLocation: path.checkDistance)
+                    }
+                    .onChange(of: userLocation) { newValue in
+                        path.addLocation(newValue, checkLocation: path.checkDistance)
+                        print("New Print!\n \(path.getLocations())\n\n ")
+                    }
+            }
+            
         }
-        
-        
-        // Used to see if my idea were correct
-         Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
-         .onAppear{
-             path.addLocation(userLocation, checkLocation: path.checkDistance)
-         }
-         .onChange(of: userLocation) { newValue in
-         path.addLocation(newValue, checkLocation: path.checkDistance)
-         print("New Print!\n \(path.getLocations())\n\n ")
-         }
-         
-        
         
     }
     
     func startGyroscopeUpdates() {
         if motionManager.isGyroAvailable {
-                   motionManager.gyroUpdateInterval = 0.1
-                   motionManager.startGyroUpdates(to: .main) { gyroData, _ in
-                       if let rotationRate = gyroData?.rotationRate {
-                           self.gyroRotation = rotationRate.z * 10
-                       }
-                   }
-               }
-       }
-       
-       func stopGyroscopeUpdates() {
-           motionManager.stopGyroUpdates()
-       }
+            motionManager.gyroUpdateInterval = 0.1
+            motionManager.startGyroUpdates(to: .main) { gyroData, _ in
+                if let rotationRate = gyroData?.rotationRate {
+                    self.gyroRotation = rotationRate.z * 10
+                }
+            }
+        }
+    }
+    
+    func stopGyroscopeUpdates() {
+        motionManager.stopGyroUpdates()
+    }
 }
 
 struct MapScreen_Previews: PreviewProvider {
