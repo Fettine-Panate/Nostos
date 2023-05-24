@@ -25,11 +25,9 @@ struct MapScreen: View {
                     Spacer()
                     Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
                         .onChange(of: userLocation) { loc in
-                            
                             path.addLocation(loc, checkLocation: path.checkDistance)
-                            print(path.getLocations().count)
                         }
-                    NavigationLink(destination: {PinsMapView(path: <#T##PathCustom#>)}, label: {Text("Mappa con pin")})
+                    NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {Text("Mappa con pin")})
                 }
             }
         }

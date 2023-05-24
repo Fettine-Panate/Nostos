@@ -9,9 +9,6 @@ import SwiftUI
 
 struct IndicatorView: View {
     
-    let timer = Timer
-        .publish(every: 0.2, on: .main, in: .common)
-        .autoconnect()
     
     var body: some View {
         ZStack{
@@ -39,8 +36,6 @@ struct IndicatorView: View {
             Circle()
                 .foregroundColor(.orange)
                 .frame(width: 70,height: 70)
-        }.onReceive(timer) { time in
-            
         }
     }
 }

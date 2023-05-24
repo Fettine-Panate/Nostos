@@ -7,8 +7,12 @@
 
 import Foundation
 import CoreLocation
+import MapKit
+
 
 class LocationManager: NSObject, ObservableObject {
+    
+    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.837034, longitude: 14.306127), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     private let manager = CLLocationManager()
     @Published var userLocation : CLLocation?
     static let shared = LocationManager()
@@ -24,6 +28,8 @@ class LocationManager: NSObject, ObservableObject {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
+  
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
@@ -32,10 +38,9 @@ extension LocationManager: CLLocationManagerDelegate {
             print("DEBUG: restricted")
         case .denied:
             print("DEBUG: denied")
-        case .authorizedAlways:
+        case .authorizedAlways, .authorizedWhenInUse:
             print("DEBUG: authorizedAlways")
-        case .authorizedWhenInUse:
-            print("DEBUG: authorizedWhenInUse")
+            region = MKCoordinateRegion(center: manager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
         @unknown default:
             print("DEBUG: unknown")
         }
