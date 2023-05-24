@@ -44,6 +44,7 @@ struct CompassMarkerView: View {
                 .rotationEffect(self.textAngle())
                 .padding(.bottom, 350 * CGFloat(fontSizerForDevice()))
         }.rotationEffect(Angle(degrees: marker.degrees))
+            .animation(.easeInOut, value: marker.degrees)
     }
     
     private func capsuleWidth() -> CGFloat {
@@ -66,22 +67,22 @@ struct CompassMarkerView: View {
 struct CompassView : View {
     @ObservedObject var compassHeading = CompassHeading()
     
+
     var body: some View {
+        
         GeometryReader{ geo in
             ZStack{
                 VStack {
                     ZStack {
-//                        Image("Bussola")
-//                            .renderingMode(.original)
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(width: 400 * CGFloat(fontSizerForDevice()),height: 400 * CGFloat(fontSizerForDevice()))
                         ForEach(Marker.markers(), id: \.self) { marker in
                             CompassMarkerView(marker: marker,
-                                              compassDegress: self.compassHeading.degrees)
+                                              compassDegress: self.compassHeading.degrees )
+                            .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+                            //.animation(.linear, value: compassHeading.degrees) TODO: Find a way to use this correctly
                         }
+                     
                     }
-                    .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+                 
                     .statusBar(hidden: true)
                 }
                 .frame(width:  geo.size.width / 2 ,height:  geo.size.height / 2)

@@ -10,7 +10,6 @@
 		9158056F2A1CAE97007E579F /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158056E2A1CAE97007E579F /* Path.swift */; };
 		915805712A1CB31C007E579F /* MapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915805702A1CB31C007E579F /* MapScreen.swift */; };
 		915805732A1CB785007E579F /* MapBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915805722A1CB785007E579F /* MapBackground.swift */; };
-		915805752A1CB9FF007E579F /* BeamShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915805742A1CB9FF007E579F /* BeamShape.swift */; };
 		918DD10B2A17D3F500E44590 /* MacroChallengeCodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD10A2A17D3F500E44590 /* MacroChallengeCodeApp.swift */; };
 		918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD10C2A17D3F500E44590 /* ContentView.swift */; };
 		918DD10F2A17D3F600E44590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 918DD10E2A17D3F600E44590 /* Assets.xcassets */; };
@@ -47,7 +46,6 @@
 		9158056E2A1CAE97007E579F /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		915805702A1CB31C007E579F /* MapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreen.swift; sourceTree = "<group>"; };
 		915805722A1CB785007E579F /* MapBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBackground.swift; sourceTree = "<group>"; };
-		915805742A1CB9FF007E579F /* BeamShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamShape.swift; sourceTree = "<group>"; };
 		918DD1072A17D3F500E44590 /* MacroChallengeCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacroChallengeCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918DD10A2A17D3F500E44590 /* MacroChallengeCodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroChallengeCodeApp.swift; sourceTree = "<group>"; };
 		918DD10C2A17D3F500E44590 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 				91AB9F032A1BAD640068F553 /* LocationRequestView.swift */,
 				915805702A1CB31C007E579F /* MapScreen.swift */,
 				915805722A1CB785007E579F /* MapBackground.swift */,
-				915805742A1CB9FF007E579F /* BeamShape.swift */,
 				9FF2257B2A1CF09300159166 /* IndicatorView.swift */,
 				9FF2257D2A1D04D000159166 /* CurrentPositionView.swift */,
 				9FF2257F2A1D079800159166 /* CompassHeading.swift */,
@@ -313,7 +310,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915805752A1CB9FF007E579F /* BeamShape.swift in Sources */,
 				915805712A1CB31C007E579F /* MapScreen.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
@@ -483,7 +479,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -515,7 +511,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;

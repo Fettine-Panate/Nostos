@@ -11,43 +11,25 @@ import CoreMotion
 
 struct MapScreen: View {
     var userLocation : CLLocation
-    var path : PathCustom = PathCustom()
+    @StateObject var path = PathCustom()
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
     
     
     var body: some View {
-        
-        //TODO: da fare su una posizione statica (quella dell'utente
+
         ZStack{
-//            CurrentPositionView()
-//                .rotationEffect(.degrees(gyroRotation), anchor: .center)
-//                .animation(.easeInOut, value: gyroRotation)
             MapBackground()
             IndicatorView()
-                .rotationEffect(.degrees(gyroRotation), anchor: .center)
-                .animation(.easeInOut, value: gyroRotation)
-                .onAppear {
-                    startGyroscopeUpdates()
-                    // updateUserLocation()
-                }
-                .onDisappear {
-                    stopGyroscopeUpdates()
-                }
-                // Used to see if my idea were correct
-            
             VStack{
                 Spacer()
                 Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
-                    .onAppear{
-                        path.addLocation(userLocation, checkLocation: path.checkDistance)
-                    }
-                    .onChange(of: userLocation) { newValue in
-                        path.addLocation(newValue, checkLocation: path.checkDistance)
-                        print("New Print!\n \(path.getLocations())\n\n ")
+                    .onChange(of: userLocation) { loc in
+                        
+                        path.addLocation(loc, checkLocation: path.checkDistance)
+                        print(path.getLocations().count)
                     }
             }
-            
         }
         
     }

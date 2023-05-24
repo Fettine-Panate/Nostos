@@ -34,7 +34,7 @@ struct Home: View{
         VStack{
             HStack{
                 Spacer()
-                CompassView()
+               // CompassView(distanceMarkers: 300.0)
             }
             Map(coordinateRegion: $managerDelegate.region, interactionModes:.zoom, showsUserLocation: true, userTrackingMode: $tracking, annotationItems: managerDelegate.pins) { pin in
                 MapPin(coordinate: pin.location.coordinate, tint: .red)
