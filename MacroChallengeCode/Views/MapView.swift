@@ -8,18 +8,23 @@
 import SwiftUI
 import CoreLocation
 
+let degreesOnMeter = 0.0000089
+
 struct MapView: View {
     var path : PathCustom
     var currentUserLocation : CLLocation
+    
     
     
     var body: some View {
         GeometryReader { geometry in
                  ZStack {
                      ForEach(path.getLocations(), id: \.self ){ loc in
-                         let position = calculatePosition(for: loc, in: geometry.size)
-                         Text("\(loc.timestamp)")
-                             .position(position)
+                         if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: 250){
+                             let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: 250)
+                             Text("P")
+                                 .position(position)
+                         }
                      }
                  }
              }
@@ -48,5 +53,44 @@ private func calculatePosition(for element: CLLocation, in size: CGSize) -> CGPo
        let y = latitudeRatio * size.height
        
        return CGPoint(x: x, y: y)
+}
+
+private func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> CGPoint{
     
+    let longPin = loc.coordinate.longitude
+    let longUser = currentLocation.coordinate.longitude
+    
+    let latPin = loc.coordinate.latitude
+    let latUser = currentLocation.coordinate.latitude
+    
+    let longDistance = abs((longPin - longUser)/degreesOnMeter)
+    
+    let latDistance = abs((latPin - latUser)/degreesOnMeter)
+    
+    let maxY = longitudeMetersMax
+    let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
+    
+    let x = sizeOfScreen.width/2 + (latDistance * sizeOfScreen.width/2)/maxX
+    let y = sizeOfScreen.height/2 + (longDistance * sizeOfScreen.height/2)/maxY
+    
+    return CGPoint(x: x, y: y)
+}
+
+
+private func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> Bool{
+    
+    let longPin = loc.coordinate.longitude
+    let longUser = currentLocation.coordinate.longitude
+    
+    let latPin = loc.coordinate.latitude
+    let latUser = currentLocation.coordinate.latitude
+    
+    let longDistance = abs((longPin - longUser)/degreesOnMeter)
+    
+    let latDistance = abs((latPin - latUser)/degreesOnMeter)
+    
+    let maxY = longitudeMetersMax
+    let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
+    
+    return ((longDistance < maxY) && (latDistance < maxX))
 }

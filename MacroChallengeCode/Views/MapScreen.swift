@@ -18,12 +18,17 @@ struct MapScreen: View {
     var body: some View {
         NavigationStack{
             ZStack{
-                MapBackground()
+                //MapBackground()
                 MapView(path: path, currentUserLocation: userLocation)
-                IndicatorView()
+                //IndicatorView()
                 VStack{
                     Spacer()
                     Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
+                        .onAppear(){
+                            path.addLocation(userLocation, checkLocation: {_,_ in 
+                                return true
+                            })
+                        }
                         .onChange(of: userLocation) { loc in
                             path.addLocation(loc, checkLocation: path.checkDistance)
                         }

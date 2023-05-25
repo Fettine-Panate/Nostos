@@ -17,7 +17,8 @@ class PathCustom: ObservableObject {
     // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
-        return distance >= 5
+        let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
+        return distance >= 5 && deltaTime > 4.0
     }
     
     public func getLocations() -> [CLLocation]{
