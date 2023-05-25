@@ -15,11 +15,11 @@ struct MapScreen: View {
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
     
-    
     var body: some View {
         NavigationStack{
             ZStack{
                 MapBackground()
+                MapView(path: path, currentUserLocation: userLocation)
                 IndicatorView()
                 VStack{
                     Spacer()

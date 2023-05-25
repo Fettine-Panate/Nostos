@@ -6,7 +6,7 @@ struct LocationDetailsView: View {
   
   var body: some View {
     VStack(spacing: 20) {
-      Text("\(place.id)")
+        Text("\(place.location.timestamp)")
         .font(.title)
       
         Text(place.location.coordinate.description)
@@ -22,8 +22,8 @@ extension CLLocationCoordinate2D: CustomStringConvertible {
   }
 }
 
-//struct LocationDetailsView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    LocationDetailsView(place: Place(name: "Empire State Building", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0)))
-//  }
-//}
+struct LocationDetailsView_Previews: PreviewProvider {
+  static var previews: some View {
+      LocationDetailsView(place: Pin(location: CLLocation(latitude: 40.837034, longitude: 14.306127)))
+  }
+}

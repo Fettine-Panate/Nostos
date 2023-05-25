@@ -5,12 +5,6 @@ struct PlaceAnnotationView: View {
   
   var body: some View {
     VStack(spacing: 0) {
-      Text(title)
-        .font(.callout)
-        .padding(5)
-        .background(Color(uiColor: .white))
-        .cornerRadius(10)
-        .foregroundColor(Color(uiColor: .black))
       
       Image(systemName: "mappin.circle.fill")
         .font(.title)

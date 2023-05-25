@@ -19,10 +19,6 @@ struct PinsMapView: View {
     var currentUserLocation : CLLocation
     @ObservedObject var compassHeading = CompassHeading()
     @ObservedObject var locationManager = LocationManager.shared
-    //CLLocation Manager deve calcolare la regione attuale
-      
-      //Array pin
-  
     
     var body: some View {
       NavigationView {

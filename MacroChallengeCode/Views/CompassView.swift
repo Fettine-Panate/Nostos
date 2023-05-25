@@ -78,9 +78,7 @@ struct CompassView : View {
                             CompassMarkerView(marker: marker,
                                               compassDegress: self.compassHeading.degrees )
                             .rotationEffect(Angle(degrees: self.compassHeading.degrees))
-                            //.animation(.linear, value: compassHeading.degrees) TODO: Find a way to use this correctly
                         }
-                     
                     }
                  
                     .statusBar(hidden: true)
