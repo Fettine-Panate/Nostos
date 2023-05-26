@@ -37,7 +37,8 @@ struct MapView: View {
                             .animation(.linear, value: position)
                     }
                 }
-            }.gesture(
+            }
+            .gesture(
                 MagnificationGesture()
                     .updating($magnification) { value, magnification, _ in
                         magnification = value
