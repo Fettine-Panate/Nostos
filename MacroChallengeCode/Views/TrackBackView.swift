@@ -70,7 +70,6 @@ struct TrackBackView: View {
                     //                    .stroke(Color.blue, lineWidth: 2)
                     //                    .animation(.default)
                     //                }
-                    .padding(.bottom,geometry.size.height * 0.4)
             }
             //.rotationEffect(Angle(degrees: self.compassHeading.degrees))
             .gesture(
@@ -81,7 +80,7 @@ struct TrackBackView: View {
                     .onChanged { value in
                         currentValue = value
                         magnitude = value * magnitudeinm
-                        scale = value
+                        scale = 1/value
                     }
             )
         }

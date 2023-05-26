@@ -52,7 +52,7 @@ struct MapView: View {
                     .onChanged { value in
                         currentValue = value
                         magnitude = value * magnitudeinm
-                        scale = value
+                        scale = 1/value
                     }
             )
         }
