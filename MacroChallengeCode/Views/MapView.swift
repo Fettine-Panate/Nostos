@@ -12,22 +12,30 @@ let degreesOnMeter = 0.0000089
 
 struct MapView: View {
     var path : PathCustom
+    
+    @ObservedObject var compassHeading = CompassHeading()
+    @ObservedObject var locationManager = LocationManager.shared
+    
     var currentUserLocation : CLLocation
+    @State var magnitude = 250.0
     
     
     
     var body: some View {
         GeometryReader { geometry in
-                 ZStack {
-                     ForEach(path.getLocations(), id: \.self ){ loc in
-                         if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: 250){
-                             let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: 250)
-                             Text("P")
-                                 .position(position)
-                         }
-                     }
-                 }
-             }
+            ZStack {
+                ForEach(path.getLocations(), id: \.self ){ loc in
+                    if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
+                        let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
+                        PinAnnotationView(loc: loc)
+                            .position(position)
+                            .animation(.linear, value: position)
+                    }
+                }
+            }
+        }
+        .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+        //Flickkera un po
     }
 }
 

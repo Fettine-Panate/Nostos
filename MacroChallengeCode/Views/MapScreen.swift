@@ -20,6 +20,7 @@ struct MapScreen: View {
             ZStack{
                 //MapBackground()
                 MapView(path: path, currentUserLocation: userLocation)
+                
                 //IndicatorView()
                 VStack{
                     Spacer()
