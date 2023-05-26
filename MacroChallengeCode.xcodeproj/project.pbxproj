@@ -24,8 +24,6 @@
 		9FF225802A1D079800159166 /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257F2A1D079800159166 /* CompassHeading.swift */; };
 		9FF225822A1D07BD00159166 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225812A1D07BD00159166 /* CompassView.swift */; };
 		9FF225842A1E4E2600159166 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225832A1E4E2600159166 /* PinsMapView.swift */; };
-		9FF225862A1E4EB200159166 /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225852A1E4EB200159166 /* LocationDetailsView.swift */; };
-		9FF225882A1E4ED000159166 /* PlaceAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225872A1E4ED000159166 /* PlaceAnnotationView.swift */; };
 		9FF2258A2A20B70E00159166 /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225892A20B70E00159166 /* PinAnnotationView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,8 +66,6 @@
 		9FF2257F2A1D079800159166 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
 		9FF225812A1D07BD00159166 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 		9FF225832A1E4E2600159166 /* PinsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapView.swift; sourceTree = "<group>"; };
-		9FF225852A1E4EB200159166 /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
-		9FF225872A1E4ED000159166 /* PlaceAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotationView.swift; sourceTree = "<group>"; };
 		9FF225892A20B70E00159166 /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,10 +102,7 @@
 				9FF225832A1E4E2600159166 /* PinsMapView.swift */,
 				915805722A1CB785007E579F /* MapBackground.swift */,
 				9FF2257B2A1CF09300159166 /* IndicatorView.swift */,
-				9FF2257F2A1D079800159166 /* CompassHeading.swift */,
 				9FF225812A1D07BD00159166 /* CompassView.swift */,
-				9FF225852A1E4EB200159166 /* LocationDetailsView.swift */,
-				9FF225872A1E4ED000159166 /* PlaceAnnotationView.swift */,
 				91BE43762A1F8771004C3F89 /* MapView.swift */,
 				9FF225892A20B70E00159166 /* PinAnnotationView.swift */,
 			);
@@ -127,6 +120,8 @@
 		9158056D2A1CAA5E007E579F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */,
+				9FF2257F2A1D079800159166 /* CompassHeading.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -159,7 +154,6 @@
 				9158056B2A1CAA4E007E579F /* Views */,
 				91AB9F022A1B9A8A0068F553 /* Info.plist */,
 				918DD10A2A17D3F500E44590 /* MacroChallengeCodeApp.swift */,
-				91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */,
 				918DD10C2A17D3F500E44590 /* ContentView.swift */,
 				918DD10E2A17D3F600E44590 /* Assets.xcassets */,
 				918DD1102A17D3F600E44590 /* Preview Content */,
@@ -322,7 +316,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FF225882A1E4ED000159166 /* PlaceAnnotationView.swift in Sources */,
 				915805712A1CB31C007E579F /* MapScreen.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
@@ -335,7 +328,6 @@
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
 				9FF225822A1D07BD00159166 /* CompassView.swift in Sources */,
 				91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */,
-				9FF225862A1E4EB200159166 /* LocationDetailsView.swift in Sources */,
 				9FF225842A1E4E2600159166 /* PinsMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,7 +487,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -527,7 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;

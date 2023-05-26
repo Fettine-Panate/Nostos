@@ -25,11 +25,7 @@ struct PinsMapView: View {
           Map(coordinateRegion: $locationManager.region, annotationItems: pins ) { pin in
             
             MapAnnotation(coordinate:pin.location.coordinate) {
-            NavigationLink {
-              LocationDetailsView(place: pin)
-            } label: {
-                PlaceAnnotationView(title: "\(pin.location.altitude)")
-            }
+                 PinAnnotationView(loc: pin.location)
           }
         }
           .onAppear{
