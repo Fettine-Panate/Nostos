@@ -25,20 +25,21 @@ struct TrackBackView: View {
                     }
                 }.overlay{
                     ZStack{
-                        Path { pat in
-                            for (index, loc) in path.getLocations().enumerated() {
-                                if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
-                                    let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
-                                    if index == 0 {
-                                        pat.move(to: point)
-                                    } else {
-                                        pat.addLine(to: point)
+                        withAnimation{
+                            Path { pat in
+                                for (index, loc) in path.getLocations().enumerated() {
+                                    if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
+                                        let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
+                                        if index == 0 {
+                                            pat.move(to: point)
+                                        } else {
+                                            pat.addLine(to: point)
+                                        }
                                     }
                                 }
                             }
+                            .stroke(Color.red, lineWidth: 2)
                         }
-                        .stroke(Color.blue, lineWidth: 2)
-                        .animation(.default)
                     }
                 }
 //                ZStack{
