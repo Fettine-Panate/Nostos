@@ -14,7 +14,7 @@ let magnitudeinm = 250.0
 struct MapView: View {
     var path : PathCustom
     @ObservedObject var locationManager = LocationManager.shared
-    
+    @ObservedObject var compassHeading = CompassHeading()
     var currentUserLocation : CLLocation
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
@@ -30,6 +30,10 @@ struct MapView: View {
                 Text("magnitude: \(magnitude) m ")
                     .font(.largeTitle)
                     .padding(.top,500)
+                IndicatorView()
+                    .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
+                    .scaleEffect(0.3)
+                    .rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
                         let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
