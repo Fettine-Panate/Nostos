@@ -23,23 +23,40 @@ struct TrackBackView: View {
                             .position(position)
                             .animation(.linear, value: position)
                     }
-                }
-                ZStack{
-                    Path { pat in
-                        for (index, loc) in path.getLocations().enumerated() {
-                            if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
-                                let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
-                                if index == 0 {
-                                    pat.move(to: point)
-                                } else {
-                                    pat.addLine(to: point)
+                }.overlay{
+                    ZStack{
+                        Path { pat in
+                            for (index, loc) in path.getLocations().enumerated() {
+                                if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
+                                    let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
+                                    if index == 0 {
+                                        pat.move(to: point)
+                                    } else {
+                                        pat.addLine(to: point)
+                                    }
                                 }
                             }
                         }
+                        .stroke(Color.blue, lineWidth: 2)
+                        .animation(.default)
                     }
-                    .stroke(Color.blue, lineWidth: 2)
-                    .animation(.default)
                 }
+//                ZStack{
+//                    Path { pat in
+//                        for (index, loc) in path.getLocations().enumerated() {
+//                            if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
+//                                let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
+//                                if index == 0 {
+//                                    pat.move(to: point)
+//                                } else {
+//                                    pat.addLine(to: point)
+//                                }
+//                            }
+//                        }
+//                    }
+//                    .stroke(Color.blue, lineWidth: 2)
+//                    .animation(.default)
+//                }
             }
         }
     }

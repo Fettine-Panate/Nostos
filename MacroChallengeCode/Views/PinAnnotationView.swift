@@ -11,7 +11,15 @@ import CoreLocation
 struct PinAnnotationView: View {
     let loc : CLLocation
     var body: some View {
-        Text("P")
+        ZStack{
+            Circle()
+                .foregroundColor(.red)
+                .frame(width: 20, height: 20)
+            
+            Circle()
+                .stroke(Color.red, lineWidth: 1)
+                .frame(width: 30, height: 30)
+        }
 //        VStack(spacing: 0) {
 //
 //            Text(loc.timestamp.formatted(.dateTime))
