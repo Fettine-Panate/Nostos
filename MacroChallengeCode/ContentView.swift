@@ -12,14 +12,11 @@ import CoreLocation
 
 
 struct ContentView: View {
-    @ObservedObject var locationManager = LocationManager.shared
+    
     
     var body: some View {
-        if locationManager.userLocation == nil {
-            LocationRequestView()
-        } else if let location = locationManager.userLocation {
-            MapScreen(userLocation: location)
-        }
+      
+        StartView()
     }
 }
 
