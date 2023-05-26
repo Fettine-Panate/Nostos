@@ -25,6 +25,7 @@
 		9FF225822A1D07BD00159166 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225812A1D07BD00159166 /* CompassView.swift */; };
 		9FF225842A1E4E2600159166 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225832A1E4E2600159166 /* PinsMapView.swift */; };
 		9FF2258A2A20B70E00159166 /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225892A20B70E00159166 /* PinAnnotationView.swift */; };
+		9FF2258E2A20EA7700159166 /* TrackBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2258D2A20EA7700159166 /* TrackBackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		9FF225812A1D07BD00159166 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 		9FF225832A1E4E2600159166 /* PinsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapView.swift; sourceTree = "<group>"; };
 		9FF225892A20B70E00159166 /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
+		9FF2258D2A20EA7700159166 /* TrackBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				9FF2257B2A1CF09300159166 /* IndicatorView.swift */,
 				9FF225812A1D07BD00159166 /* CompassView.swift */,
 				91BE43762A1F8771004C3F89 /* MapView.swift */,
+				9FF2258D2A20EA7700159166 /* TrackBackView.swift */,
 				9FF225892A20B70E00159166 /* PinAnnotationView.swift */,
 			);
 			path = Views;
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				915805712A1CB31C007E579F /* MapScreen.swift in Sources */,
+				9FF2258E2A20EA7700159166 /* TrackBackView.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
 				91AB9F042A1BAD640068F553 /* LocationRequestView.swift in Sources */,
@@ -487,7 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -519,7 +523,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;

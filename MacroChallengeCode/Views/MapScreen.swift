@@ -34,6 +34,10 @@ struct MapScreen: View {
                             path.addLocation(loc, checkLocation: path.checkDistance)
                         }
                     NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {Text("Mappa con pin")})
+                    
+                    VStack{
+                        NavigationLink(destination: {TrackBackView(currentUserLocation: userLocation, path: path)}, label: {Text("Torna indietro").foregroundColor(.red)})
+                    }
                 }
             }
         }

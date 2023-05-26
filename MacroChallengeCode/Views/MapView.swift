@@ -25,11 +25,10 @@ struct MapView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color.blue
-                
-                        Text("magnitude: \(magnitude) m ")
-                            .font(.largeTitle)
-                            .padding(.top,500)
+                Color.yellow
+                Text("magnitude: \(magnitude) m ")
+                    .font(.largeTitle)
+                    .padding(.top,500)
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
                         let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
@@ -38,17 +37,16 @@ struct MapView: View {
                             .animation(.linear, value: position)
                     }
                 }
-            }
-                .gesture(
-                    MagnificationGesture()
-                        .updating($magnification) { value, magnification, _ in
-                            magnification = value
-                        }
-                        .onChanged { value in
-                            currentValue = value
-                            magnitude = value * magnitudeinm
-                        }
-                )
+            }.gesture(
+                MagnificationGesture()
+                    .updating($magnification) { value, magnification, _ in
+                        magnification = value
+                    }
+                    .onChanged { value in
+                        currentValue = value
+                        magnitude = value * magnitudeinm
+                    }
+            )
         }
     }
 }
@@ -67,17 +65,17 @@ struct Constants {
 }
 
 
-private func calculatePosition(for element: CLLocation, in size: CGSize) -> CGPoint {
+func calculatePosition(for element: CLLocation, in size: CGSize) -> CGPoint {
     let latitudeRatio = (element.coordinate.latitude - Constants.minLatitude) / (Constants.maxLatitude - Constants.minLatitude)
     let longitudeRatio = (element.coordinate.longitude - Constants.minLongitude) / (Constants.maxLongitude - Constants.minLongitude)
-       
-       let x = longitudeRatio * size.width
-       let y = latitudeRatio * size.height
-       
-       return CGPoint(x: x, y: y)
+    
+    let x = longitudeRatio * size.width
+    let y = latitudeRatio * size.height
+    
+    return CGPoint(x: x, y: y)
 }
 
-private func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> CGPoint{
+func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> CGPoint{
     
     let longPin = loc.coordinate.longitude
     let longUser = currentLocation.coordinate.longitude
@@ -99,7 +97,7 @@ private func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, si
 }
 
 
-private func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> Bool{
+func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> Bool{
     
     let longPin = loc.coordinate.longitude
     let longUser = currentLocation.coordinate.longitude
