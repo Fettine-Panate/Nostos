@@ -91,9 +91,9 @@ func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScre
     let latPin = loc.coordinate.latitude
     let latUser = currentLocation.coordinate.latitude
     
-    let longDistance = abs((longPin - longUser)/degreesOnMeter)
+    let longDistance = (longPin - longUser)/degreesOnMeter
     
-    let latDistance = abs((latPin - latUser)/degreesOnMeter)
+    let latDistance = (latPin - latUser)/degreesOnMeter
     
     let maxY = longitudeMetersMax
     let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
