@@ -35,15 +35,16 @@ struct MapView: View {
                     .scaleEffect(0.3)
                     .rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.getLocations(), id: \.self ){ loc in
-                    if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude){
-                        let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, longitudeMetersMax: magnitude)
+                    if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
+                        let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
                         PinAnnotationView(loc: loc)
                             .position(position)
                             .animation(.linear, value: position)
-                            .scaleEffect(scale)
+                            .scaleEffect(scale/3)
                     }
                 }
             }
+            .frame(width: geometry.size.width,height: geometry.size.height)
             .gesture(
                 MagnificationGesture()
                     .updating($magnification) { value, magnification, _ in
@@ -83,7 +84,7 @@ func calculatePosition(for element: CLLocation, in size: CGSize) -> CGPoint {
     return CGPoint(x: x, y: y)
 }
 
-func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> CGPoint{
+func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> CGPoint{
     
     let longPin = loc.coordinate.longitude
     let longUser = currentLocation.coordinate.longitude
@@ -95,17 +96,17 @@ func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScre
     
     let latDistance = (latPin - latUser)/degreesOnMeter
     
-    let maxY = longitudeMetersMax
+    let maxY = latitudeMetersMax
     let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
     
-    let x = sizeOfScreen.width/2 + (latDistance * sizeOfScreen.width/2)/maxX
-    let y = sizeOfScreen.height/2 + (longDistance * sizeOfScreen.height/2)/maxY
+    let y = sizeOfScreen.height/2 - (latDistance * sizeOfScreen.height)/maxY
+    let x = sizeOfScreen.width/2 + (longDistance * sizeOfScreen.width)/maxX
     
     return CGPoint(x: x, y: y)
 }
 
 
-func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, longitudeMetersMax: CGFloat) -> Bool{
+func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> Bool{
     
     let longPin = loc.coordinate.longitude
     let longUser = currentLocation.coordinate.longitude
@@ -117,8 +118,8 @@ func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: C
     
     let latDistance = abs((latPin - latUser)/degreesOnMeter)
     
-    let maxY = longitudeMetersMax
+    let maxY = latitudeMetersMax
     let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
     
-    return ((longDistance < maxY) && (latDistance < maxX))
+    return ((latDistance < maxY) && (longDistance < maxX))
 }
