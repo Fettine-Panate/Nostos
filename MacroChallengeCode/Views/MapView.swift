@@ -27,7 +27,7 @@ struct MapView: View {
             ZStack {
                 Text("magnitude: \(magnitude) m ")
                     .font(.largeTitle)
-                    .padding(.top,500)
+                    .padding(.bottom,500)
                 IndicatorView()
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                     .scaleEffect(0.6)

@@ -15,27 +15,59 @@ struct MapScreen: View {
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
     
+    
     var body: some View {
         NavigationStack{
             ZStack{
                 MapView(path: path, currentUserLocation: userLocation)
                 VStack{
                     Spacer()
-                    Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
+                    //componente messo solo per vedere
+//                    BoxHourView()
+//                        .frame(height: 120)
+//                        .padding(.horizontal)
+                    //                    Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
+                    //                        .onAppear(){
+                    //                            path.addLocation(userLocation, checkLocation: {_,_ in
+                    //                                return true
+                    //                            })
+                    //                        }
+                    //                        .onChange(of: userLocation) { loc in
+                    //                            if path.isComingBack() == false {
+                    //                                path.addLocation(loc, checkLocation: path.checkDistance)
+                    //                            } else {
+                    //                                //path.removeCheckpoint()
+                    //                            }
+                    //                        }
+                    
+                    BoxNavigationButton(text: "Lat:\(userLocation.coordinate.latitude)\n Lon:\(userLocation.coordinate.longitude)")
                         .onAppear(){
-                            path.addLocation(userLocation, checkLocation: {_,_ in 
+                            path.addLocation(userLocation, checkLocation: {_,_ in
                                 return true
                             })
-                        }
+                        }.frame(height: 50).padding(.horizontal)
                         .onChange(of: userLocation) { loc in
-                            path.addLocation(loc, checkLocation: path.checkDistance)
+                            if path.isComingBack() == false {
+                                path.addLocation(loc, checkLocation: path.checkDistance)
+                            } else {
+                                //path.removeCheckpoint()
+                            }
                         }
-                    NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {Text("Mappa con pin")})
-                    
-                    VStack{
-                        NavigationLink(destination: {TrackBackView(currentUserLocation: userLocation, path: path)}, label: {Text("Torna indietro").foregroundColor(.red)})
-                    }
+                    HStack{
+                        NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {
+                            BoxNavigationButton(text: "Mappa con pin")
+                        })
+                        NavigationLink(destination: {
+                            TrackBackView(currentUserLocation: userLocation, path: path)
+                        }, label: {
+                            BoxNavigationButton(text: "Torna indietro")
+                        }).onTapGesture {
+                            path.setComingBack(comingBack: true)
+                        }
+                    }.frame(height: 100).padding(.horizontal)
                 }
+            }.onAppear(){
+                path.setComingBack(comingBack: false)
             }
         }
     }
