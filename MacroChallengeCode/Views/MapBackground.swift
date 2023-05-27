@@ -13,20 +13,32 @@ struct MapBackground: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.red.opacity(0.6), lineWidth: 8)
+                .stroke(Color.red.opacity(0.8), lineWidth: 8)
                 .frame(width: size.height/4, height: size.height/4)
             
             Circle()
-                .stroke(Color.red.opacity(0.5), lineWidth: 8)
+                .stroke(Color.red.opacity(0.7), lineWidth: 8)
                 .frame(width: (2 * size.height)/4, height: (2 * size.height)/4)
             
             Circle()
-                .stroke(Color.red.opacity(0.3), lineWidth: 8)
+                .stroke(Color.red.opacity(0.6), lineWidth: 8)
                 .frame(width: (3 * size.height)/4, height: (3 * size.height)/4)
             
             Circle()
-                .stroke(Color.red.opacity(0.1), lineWidth: 8)
+                .stroke(Color.red.opacity(0.5), lineWidth: 8)
                 .frame(width: size.height, height: size.height)
+            
+            Circle()
+                .stroke(Color.red.opacity(0.4), lineWidth: 8)
+                .frame(width: size.height * 5/4, height: size.height * 5/4)
+            
+            Circle()
+                .stroke(Color.red.opacity(0.3), lineWidth: 8)
+                .frame(width: size.height * 6/4, height: size.height * 6/4)
+            
+            Circle()
+                .stroke(Color.red.opacity(0.2), lineWidth: 8)
+                .frame(width: size.height * 7/4, height: size.height * 7/4)
         }
     }
 }

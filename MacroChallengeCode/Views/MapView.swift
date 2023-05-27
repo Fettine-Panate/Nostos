@@ -26,9 +26,12 @@ struct MapView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack{
-                    BoxNavigationButton(text: "Range on screen: \(magnitude) m ")
+                    BoxNavigationButton(text: "Hiking!")
                         .frame(height: 50)
-                        .padding()
+                        .padding(.horizontal)
+                    BoxDataView(text: "Range on screen: \(magnitude) m ")
+                        .frame(height: 50)
+                        .padding(.horizontal)
                     Spacer()
                 }
                 IndicatorView()

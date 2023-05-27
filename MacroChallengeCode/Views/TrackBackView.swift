@@ -19,57 +19,68 @@ struct TrackBackView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack{
-                IndicatorView()
-                    .scaleEffect(0.6)
-                    .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
-            }
-            ZStack {
-                ForEach(path.getLocations(), id: \.self ){ loc in
-                    if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                        let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
-                        PinAnnotationView(loc: loc)
-                            .position(position)
-                            .animation(.linear, value: position)
-                            .scaleEffect(scale / 3)
-                    }
+                VStack{
+                    BoxNavigationButton(text: "Coming back! ")
+                        .frame(height: 50)
+                        .padding(.horizontal)
+                    BoxDataView(text: "Range on screen: \(magnitude) m ")
+                        .frame(height: 50)
+                        .padding(.horizontal)
+                    Spacer()
                 }
-                .overlay{
-                    ZStack{
-                        withAnimation{
-                            Path { pat in
-                                for (index, loc) in path.getLocations().enumerated() {
-                                    if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                                        let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
-                                        if index == 0 {
-                                            pat.move(to: point)
-                                        } else {
-                                            pat.addLine(to: point)
+            ZStack{
+                ZStack{
+                    IndicatorView()
+                        .scaleEffect(0.6)
+                        .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
+                }
+                ZStack {
+                    ForEach(path.getLocations(), id: \.self ){ loc in
+                        if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
+                            let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                            PinAnnotationView(loc: loc)
+                                .position(position)
+                                .animation(.linear, value: position)
+                                .scaleEffect(scale / 3)
+                        }
+                    }
+                    .overlay{
+                        ZStack{
+                            withAnimation{
+                                Path { pat in
+                                    for (index, loc) in path.getLocations().enumerated() {
+                                        if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
+                                            let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                                            if index == 0 {
+                                                pat.move(to: point)
+                                            } else {
+                                                pat.addLine(to: point)
+                                            }
                                         }
                                     }
                                 }
+                                .stroke(Color.red, lineWidth: 2 * scale)
+                                .scaleEffect(scale / 3)
                             }
-                            .stroke(Color.red, lineWidth: 2 * scale)
-                            .scaleEffect(scale / 3)
                         }
                     }
-                }
-            }.frame(width: geometry.size.width,height: geometry.size.height)
-                .rotationEffect(Angle(degrees: self.compassHeading.degrees))
-                .background(){
-                    MapBackground(size: geometry.size)
-                }
-                .gesture(
-                    MagnificationGesture()
-                        .updating($magnification) { value, magnification, _ in
-                            magnification = value
-                        }
-                        .onChanged { value in
-                            currentValue = value
-                            magnitude = value * magnitudeinm
-                            scale = 1/value
-                        }
-                )
+                }.frame(width: geometry.size.width,height: geometry.size.height)
+                    .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+                    .background(){
+                        MapBackground(size: geometry.size)
+                    }
+                    .gesture(
+                        MagnificationGesture()
+                            .updating($magnification) { value, magnification, _ in
+                                magnification = value
+                            }
+                            .onChanged { value in
+                                currentValue = value
+                                magnitude = value * magnitudeinm
+                                scale = 1/value
+                            }
+                    )
+            }.position(CGPoint(x: geometry.size.width/2, y: geometry.size.height))
         }
     }
 }

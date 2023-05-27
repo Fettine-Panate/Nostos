@@ -30,6 +30,7 @@
 		9FF225902A22169900159166 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2258F2A22169900159166 /* ProgressBarView.swift */; };
 		9FF225922A22189600159166 /* BoxHourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225912A22189600159166 /* BoxHourView.swift */; };
 		9FF225942A22285400159166 /* BoxNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225932A22285400159166 /* BoxNavigationButton.swift */; };
+		9FF225962A222EB800159166 /* BoxDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225952A222EB800159166 /* BoxDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		9FF2258F2A22169900159166 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		9FF225912A22189600159166 /* BoxHourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxHourView.swift; sourceTree = "<group>"; };
 		9FF225932A22285400159166 /* BoxNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNavigationButton.swift; sourceTree = "<group>"; };
+		9FF225952A222EB800159166 /* BoxDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				9FF225892A20B70E00159166 /* PinAnnotationView.swift */,
 				917A8C522A20E6F400A32868 /* StartView.swift */,
 				917A8C542A20F34700A32868 /* SemisphereButton.swift */,
+				9FF225952A222EB800159166 /* BoxDataView.swift */,
 				9FF2258F2A22169900159166 /* ProgressBarView.swift */,
 				9FF225912A22189600159166 /* BoxHourView.swift */,
 				9FF225932A22285400159166 /* BoxNavigationButton.swift */,
@@ -344,6 +347,7 @@
 				91BE43772A1F8771004C3F89 /* MapView.swift in Sources */,
 				9158056F2A1CAE97007E579F /* Path.swift in Sources */,
 				9FF2258A2A20B70E00159166 /* PinAnnotationView.swift in Sources */,
+				9FF225962A222EB800159166 /* BoxDataView.swift in Sources */,
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
 				9FF225822A1D07BD00159166 /* CompassView.swift in Sources */,
 				91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */,

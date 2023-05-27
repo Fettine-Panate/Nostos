@@ -40,7 +40,7 @@ struct MapScreen: View {
                     //                            }
                     //                        }
                     
-                    BoxNavigationButton(text: "Lat:\(userLocation.coordinate.latitude)\n Lon:\(userLocation.coordinate.longitude)")
+                    BoxDataView(text: "Lat: \(userLocation.coordinate.latitude)\nLon: \(userLocation.coordinate.longitude)")
                         .onAppear(){
                             path.addLocation(userLocation, checkLocation: {_,_ in
                                 return true
