@@ -11,7 +11,7 @@ import CoreLocation
 struct TrackBackView: View {
     var currentUserLocation : CLLocation
     @StateObject var path : PathCustom
-    @ObservedObject var compassHeading = CompassHeading()
+    @StateObject var compassHeading = CompassHeading()
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
     @State var magnitude = 250.0
@@ -22,7 +22,6 @@ struct TrackBackView: View {
             ZStack {
                 IndicatorView()
                     .scaleEffect(0.6)
-                //.rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                         let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
