@@ -25,9 +25,12 @@ struct MapView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Text("magnitude: \(magnitude) m ")
-                    .font(.largeTitle)
-                    .padding(.bottom,500)
+                VStack{
+                    BoxNavigationButton(text: "Range on screen: \(magnitude) m ")
+                        .frame(height: 50)
+                        .padding()
+                    Spacer()
+                }
                 IndicatorView()
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                     .scaleEffect(0.6)
