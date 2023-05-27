@@ -20,7 +20,6 @@
 		918DD1262A17D3F600E44590 /* MacroChallengeCodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD1252A17D3F600E44590 /* MacroChallengeCodeUITests.swift */; };
 		918DD1282A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD1272A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift */; };
 		91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */; };
-		91AB9F042A1BAD640068F553 /* LocationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F032A1BAD640068F553 /* LocationRequestView.swift */; };
 		91BE43772A1F8771004C3F89 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE43762A1F8771004C3F89 /* MapView.swift */; };
 		9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257B2A1CF09300159166 /* IndicatorView.swift */; };
 		9FF225802A1D079800159166 /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257F2A1D079800159166 /* CompassHeading.swift */; };
@@ -65,7 +64,6 @@
 		918DD1272A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroChallengeCodeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerDelegate.swift; sourceTree = "<group>"; };
 		91AB9F022A1B9A8A0068F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		91AB9F032A1BAD640068F553 /* LocationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestView.swift; sourceTree = "<group>"; };
 		91BE43762A1F8771004C3F89 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9FF2257B2A1CF09300159166 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		9FF2257F2A1D079800159166 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 		9158056B2A1CAA4E007E579F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				91AB9F032A1BAD640068F553 /* LocationRequestView.swift */,
 				915805702A1CB31C007E579F /* MapScreen.swift */,
 				9FF225832A1E4E2600159166 /* PinsMapView.swift */,
 				915805722A1CB785007E579F /* MapBackground.swift */,
@@ -330,7 +327,6 @@
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				917A8C552A20F34700A32868 /* SemisphereButton.swift in Sources */,
 				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
-				91AB9F042A1BAD640068F553 /* LocationRequestView.swift in Sources */,
 				9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */,
 				918DD10B2A17D3F500E44590 /* MacroChallengeCodeApp.swift in Sources */,
 				91BE43772A1F8771004C3F89 /* MapView.swift in Sources */,
@@ -499,7 +495,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -531,7 +527,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
