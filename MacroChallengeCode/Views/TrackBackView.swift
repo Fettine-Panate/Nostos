@@ -19,9 +19,12 @@ struct TrackBackView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
+            ZStack{
                 IndicatorView()
                     .scaleEffect(0.6)
+                    .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
+            }
+            ZStack {
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                         let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)

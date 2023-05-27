@@ -33,9 +33,6 @@ struct MapView: View {
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                     .scaleEffect(0.6)
                     .rotationEffect(Angle(degrees: self.compassHeading.degrees))
-                    .onChange(of: self.compassHeading.degrees) { newValue in
-                
-                    }
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                         let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
