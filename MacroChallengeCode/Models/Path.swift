@@ -18,7 +18,7 @@ class PathCustom: ObservableObject {
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
         let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
-        return distance >= 5 && deltaTime > 4.0
+        return distance >= 5 && deltaTime > 4.0 && distance < 30
     }
     
     public func getLocations() -> [CLLocation]{
