@@ -19,7 +19,7 @@ struct MapView: View {
     var currentUserLocation : CLLocation
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
-    @State var magnitude = 150.0
+    @State var magnitude = 100.0
     @State var scale = 1.0
     
     
@@ -48,7 +48,7 @@ struct MapView: View {
                         PinAnnotationView(loc: loc)
                             .position(position)
                             .animation(.linear, value: position)
-                            .scaleEffect(scale/3)
+                            .scaleEffect(scale/2)
                     }
                 }
             }.background(){

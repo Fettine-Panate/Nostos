@@ -16,8 +16,8 @@ struct BoxSliderView: View {
                 Color.red
                 VStack{
                     HStack{
-                        Slider(value: $magnitude, in: 200...10000, step: 1)
-                            .accentColor(.red.opacity(0.3))
+                        Slider(value: $magnitude, in: 100...10000, step: 1)
+                            .accentColor(.white)
                             .padding(.horizontal)
                     }
                 }
