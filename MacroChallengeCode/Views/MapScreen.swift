@@ -18,10 +18,7 @@ struct MapScreen: View {
     var body: some View {
         NavigationStack{
             ZStack{
-                //MapBackground()
                 MapView(path: path, currentUserLocation: userLocation)
-                
-                //IndicatorView()
                 VStack{
                     Spacer()
                     Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")

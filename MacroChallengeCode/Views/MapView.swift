@@ -26,13 +26,12 @@ struct MapView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color.yellow
                 Text("magnitude: \(magnitude) m ")
                     .font(.largeTitle)
                     .padding(.top,500)
                 IndicatorView()
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
-                    .scaleEffect(0.3)
+                    .scaleEffect(0.6)
                     .rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
@@ -43,6 +42,8 @@ struct MapView: View {
                             .scaleEffect(scale/3)
                     }
                 }
+            }.background(){
+                MapBackground(size: geometry.size)
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
             .gesture(
