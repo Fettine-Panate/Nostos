@@ -51,7 +51,7 @@ struct TrackBackView: View {
                                     }
                                 }
                                 .stroke(Color.red, lineWidth: 2 * scale)
-                                .scaleEffect(scale / 3)
+                                .scaleEffect(scale / 2)
                             }
                         }
                     }
