@@ -14,20 +14,11 @@ struct TrackBackView: View {
     @StateObject var compassHeading = CompassHeading()
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
-    @State var magnitude = 250.0
+    @State var magnitude = 150.0
     @State var scale = 1.0
     
     var body: some View {
         GeometryReader { geometry in
-                VStack{
-                    BoxNavigationButton(text: "Coming back! ")
-                        .frame(height: 50)
-                        .padding(.horizontal)
-                    BoxDataView(text: "Range on screen: \(magnitude) m ")
-                        .frame(height: 50)
-                        .padding(.horizontal)
-                    Spacer()
-                }
             ZStack{
                 ZStack{
                     IndicatorView()
@@ -81,6 +72,22 @@ struct TrackBackView: View {
                             }
                     )
             }.position(CGPoint(x: geometry.size.width/2, y: geometry.size.height))
+                ZStack{
+                    VStack{
+                        BoxNavigationButton(text: "Coming back! ")
+                            .frame(height: 50)
+                            .padding(.horizontal)
+                        BoxDataView(text: "Range on screen: \(magnitude) m ")
+                            .frame(height: 50)
+                            .padding(.horizontal)
+                        BoxSliderView(magnitude: $magnitude)
+                            .frame(height: 40)
+                            .padding(.horizontal)
+                            .rotationEffect(.degrees(-90))
+                            .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
+                        Spacer()
+                    }
+                }
         }
     }
 }

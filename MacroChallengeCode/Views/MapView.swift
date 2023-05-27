@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import Combine
 
 let degreesOnMeter = 0.0000089
 let magnitudeinm = 250.0
@@ -18,7 +19,7 @@ struct MapView: View {
     var currentUserLocation : CLLocation
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
-    @State var magnitude = 250.0
+    @State var magnitude = 150.0
     @State var scale = 1.0
     
     
@@ -31,6 +32,9 @@ struct MapView: View {
                         .padding(.horizontal)
                     BoxDataView(text: "Range on screen: \(magnitude) m ")
                         .frame(height: 50)
+                        .padding(.horizontal)
+                    BoxSliderView(magnitude: $magnitude)
+                        .frame(height: 40)
                         .padding(.horizontal)
                     Spacer()
                 }

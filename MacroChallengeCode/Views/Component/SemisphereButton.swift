@@ -18,7 +18,7 @@ struct SemisphereButton: View {
             ZStack {
                 Circle()
                     .trim(from: 0.50, to: 1)
-                    .fill(Color.blue)
+                    .fill(Color.red)
                     .frame(width: 200 , height: 200)
                   //  .rotationEffect(.degrees(180))
                    
