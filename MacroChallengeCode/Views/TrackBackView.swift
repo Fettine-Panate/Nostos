@@ -55,8 +55,7 @@ struct TrackBackView: View {
                             }
                         }
                     }
-                }.frame(width: geometry.size.width,height: geometry.size.height)
-                    .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+                }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
                     .background(){
                         MapBackground(size: geometry.size)
                     }
@@ -71,48 +70,28 @@ struct TrackBackView: View {
                                 scale = 1/value
                             }
                     )
-            }.position(CGPoint(x: geometry.size.width/2, y: geometry.size.height))
-                ZStack{
-                    VStack{
-                        BoxNavigationButton(text: "Coming back! ")
-                            .frame(height: 50)
-                            .padding(.horizontal)
-                        BoxDataView(text: "Range on screen: \(magnitude) m ")
-                            .frame(height: 50)
-                            .padding(.horizontal)
-                        BoxSliderView(magnitude: $magnitude)
-                            .frame(height: 40)
-                            .padding(.horizontal)
-                            .rotationEffect(.degrees(-90))
-                            .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
-                        Spacer()
-                    }
+            }
+            .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height))
+            ZStack{
+                VStack{
+                    BoxNavigationButton(text: "Coming back! ")
+                        .frame(height: 50)
+                        .padding(.horizontal)
+                    BoxDataView(text: "Range on screen: \(magnitude) m ")
+                        .frame(height: 50)
+                        .padding(.horizontal)
+                    BoxSliderView(magnitude: $magnitude)
+                        .frame(height: 40)
+                        .padding(.horizontal)
+                        .rotationEffect(.degrees(-90))
+                        .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
+                    Spacer()
                 }
+            }
         }
     }
 }
 
-
-func calculatePosition3(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> CGPoint{
-    
-    let longPin = loc.coordinate.longitude
-    let longUser = currentLocation.coordinate.longitude
-    
-    let latPin = loc.coordinate.latitude
-    let latUser = currentLocation.coordinate.latitude
-    
-    let longDistance = (longPin - longUser)/degreesOnMeter
-    
-    let latDistance = (latPin - latUser)/degreesOnMeter
-    
-    let maxY = latitudeMetersMax
-    let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
-    
-    let y = sizeOfScreen.height - (latDistance * sizeOfScreen.height)/maxY
-    let x = sizeOfScreen.width/2 + (longDistance * sizeOfScreen.width)/maxX
-    
-    return CGPoint(x: x, y: y)
-}
 
 
 
