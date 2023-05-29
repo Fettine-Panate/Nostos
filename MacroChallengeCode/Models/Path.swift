@@ -9,18 +9,21 @@ import Foundation
 import CoreLocation
 
 
-
 class PathCustom: ObservableObject {
     
     @Published var locations : [CLLocation] = []
     @Published var comingBack = false
     
     
+    static var minDistance = 5.0
+    static var maxDistance = 30.0
+    static var maxDeltaTime = 4.0
+    
     // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
         let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
-        return distance >= 5 && deltaTime > 4.0 && distance < 30
+        return distance >= minDistance && maxDistance < maxDistance
     }
     
     public func getLocations() -> [CLLocation]{
