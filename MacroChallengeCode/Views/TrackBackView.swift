@@ -22,7 +22,7 @@ struct TrackBackView: View {
             ZStack{
                 ZStack{
                     IndicatorView()
-                        .scaleEffect(0.6)
+                        .scaleEffect(0.2)
                         .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 }
                 ZStack {
@@ -49,6 +49,7 @@ struct TrackBackView: View {
                                             }
                                         }
                                     }
+                                    pat.addLine(to: CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                                 }
                                 .stroke(Color.red, lineWidth: 2 * scale)
                                 .scaleEffect(scale / 2)
@@ -71,7 +72,7 @@ struct TrackBackView: View {
                             }
                     )
             }
-            .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height))
+            .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             ZStack{
                 VStack{
                     BoxNavigationButton(text: "Coming back! ")

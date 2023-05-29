@@ -39,7 +39,6 @@ struct MapScreen: View {
                     //                                //path.removeCheckpoint()
                     //                            }
                     //                        }
-                    
                     BoxDataView(text: "Lat: \(userLocation.coordinate.latitude)\nLon: \(userLocation.coordinate.longitude)")
                         .onAppear(){
                             path.addLocation(userLocation, checkLocation: {_,_ in
