@@ -57,7 +57,7 @@ struct MapScreen: View {
                             BoxNavigationButton(text: "Mappa con pin")
                         })
                         NavigationLink(destination: {
-                            TrackBackView(currentUserLocation: userLocation, path: path)
+                            TrackBackView(currentUserLocation: userLocation, previouspath: path)
                         }, label: {
                             BoxNavigationButton(text: "Torna indietro")
                         }).onTapGesture {

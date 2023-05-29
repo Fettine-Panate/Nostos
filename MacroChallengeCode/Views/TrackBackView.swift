@@ -10,12 +10,15 @@ import CoreLocation
 
 struct TrackBackView: View {
     var currentUserLocation : CLLocation
-    @StateObject var path : PathCustom
+    @StateObject var previouspath : PathCustom
+    @State var path : PathCustom = PathCustom()
     @StateObject var compassHeading = CompassHeading()
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
     @State var magnitude = 100.0
     @State var scale = 1.0
+    
+
     
     var body: some View {
         GeometryReader { geometry in
@@ -89,6 +92,9 @@ struct TrackBackView: View {
                     Spacer()
                 }
             }
+        }
+        .onAppear(){
+            self.path = self.previouspath
         }
     }
 }

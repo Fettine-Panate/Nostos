@@ -15,6 +15,7 @@ class PathCustom: ObservableObject {
     @Published var locations : [CLLocation] = []
     @Published var comingBack = false
     
+    
     // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
@@ -25,6 +26,7 @@ class PathCustom: ObservableObject {
     public func getLocations() -> [CLLocation]{
         return locations
     }
+    
     
     public func isComingBack() -> Bool{
         return comingBack
@@ -41,21 +43,21 @@ class PathCustom: ObservableObject {
     }
     
     //TODO: removeCheckpoint
-//    
-//    public func removeCheckpoint(currentUserLocation: CLLocation){
-//        let array = locations.reversed()
-//        var ind = 0
-//        if comingBack{
-//            for (index, loc) in  array.enumerated(){
-//                if currentUserLocation.distance(from: loc) <= 10.0{
-//                    ind = locations.count - index
-//                    break
-//                }
-//            }
-//            locations.remove(atOffsets: IndexSet(integer: ind))
-//        }
-//        
-//    }
+    
+    public func removeCheckpoint(currentUserLocation: CLLocation){
+        let array = locations.reversed()
+        var ind = 0
+        if comingBack{
+            for (index, loc) in  array.enumerated(){
+                if currentUserLocation.distance(from: loc) <= 5.0{
+                    ind = locations.count - index
+                    break
+                }
+            }
+            locations.remove(atOffsets: IndexSet(integer: ind))
+        }
+        
+    }
     
 }
 
