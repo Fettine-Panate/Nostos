@@ -17,7 +17,8 @@ struct StartView: View {
     var body: some View {
         if(!isStarted){
             ZStack{
-                RollingView()
+                RollingView(sunriseHour: 6, sunsutHour: 18)
+                    .scaleEffect(1.2)
                 VStack{
                     SemisphereButton {
                         withAnimation {

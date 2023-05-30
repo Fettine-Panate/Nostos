@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BezelView: View {
     @State var ind = 0
-    let day : dayFase = dayFase(sunrise: 6, sunset: 18)
+    let day : dayFase 
     
     var body: some View {
         ZStack{
@@ -47,6 +47,6 @@ struct AngleView: View {
 
 struct BezelView_Previews: PreviewProvider {
     static var previews: some View {
-        BezelView()
+        BezelView( day: dayFase(sunrise: 6, sunset: 18))
     }
 }
