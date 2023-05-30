@@ -12,12 +12,9 @@ import CoreLocation
 
 
 struct ContentView: View {
-    
-    
     var body: some View {
-      
-        StartView()
-    }
+            StartView()
+        }
 }
 
 

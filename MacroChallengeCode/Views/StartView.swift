@@ -8,32 +8,38 @@
 import SwiftUI
 import CoreLocation
 
+
 struct StartView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @State var isStarted = false
+    var hapticManager = HapticManager()
+    let minutes = Array(stride(from: 5, through: 15, by: 1))
+
     var body: some View {
         if(!isStarted){
             ZStack{
-                SemisphereButton {
-                    withAnimation {
-                       
-                        if(LocationManager.shared.userLocation == nil){
-                            LocationManager.shared.requestLocation()
-                            
+                VStack{
+                    SemisphereButton {
+                        withAnimation {
+
+                            if(LocationManager.shared.userLocation == nil){
+                                LocationManager.shared.requestLocation()
+
+                            }
+                            isStarted = true
+                            hapticManager?.playFeedback()
                         }
-                        isStarted = true
                     }
                 }
             }
         }else if let userLocation = locationManager.userLocation {
             MapScreen(userLocation: userLocation)
         }
-       
     }
 }
 
-struct StartView_Previews: PreviewProvider {
-    static var previews: some View {
-        StartView()
-    }
-}
+//struct StartView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StartView(selectedMetres:
+//    }
+//}

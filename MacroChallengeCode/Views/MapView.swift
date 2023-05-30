@@ -55,17 +55,17 @@ struct MapView: View {
                 MapBackground(size: geometry.size)
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
-            .gesture(
-                MagnificationGesture()
-                    .updating($magnification) { value, magnification, _ in
-                        magnification = value
-                    }
-                    .onChanged { value in
-                        currentValue = value
-                        magnitude = value * magnitudeinm
-                        scale = 1/value
-                    }
-            )
+//            .gesture(
+//                MagnificationGesture()
+//                    .updating($magnification) { value, magnification, _ in
+//                        magnification = value
+//                    }
+//                    .onChanged { value in
+//                        currentValue = value
+//                        magnitude = value * magnitudeinm
+//                        scale = 1/value
+//                    }
+//            )
         }
     }
 }

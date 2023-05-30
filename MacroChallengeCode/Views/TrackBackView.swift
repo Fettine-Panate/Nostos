@@ -17,6 +17,8 @@ struct TrackBackView: View {
     @State private var currentValue: CGFloat = 0.0
     @State var magnitude = 100.0
     @State var scale = 1.0
+    var hapticManager = HapticManager()
+    
     
 
     
@@ -63,17 +65,22 @@ struct TrackBackView: View {
                     .background(){
                         MapBackground(size: geometry.size)
                     }
-                    .gesture(
-                        MagnificationGesture()
-                            .updating($magnification) { value, magnification, _ in
-                                magnification = value
-                            }
-                            .onChanged { value in
-                                currentValue = value
-                                magnitude = value * magnitudeinm
-                                scale = 1/value
-                            }
-                    )
+//                    .gesture(
+//                        MagnificationGesture()
+//                            .updating($magnification) { value, magnification, _ in
+//                                magnification = value
+//                            }
+//                            .onChanged { value in
+//                                currentValue = value
+//                                magnitude = value * magnitudeinm
+//                                scale = 1/value
+//                            }
+//                    )
+            }
+            .onChange(of: currentUserLocation) { loc in
+                if path.removeCheckpoint(currentUserLocation: loc){
+                    hapticManager?.playFeedback()
+                }
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             ZStack{

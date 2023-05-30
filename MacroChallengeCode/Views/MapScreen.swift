@@ -48,8 +48,6 @@ struct MapScreen: View {
                         .onChange(of: userLocation) { loc in
                             if path.isComingBack() == false {
                                 path.addLocation(loc, checkLocation: path.checkDistance)
-                            } else {
-                                //path.removeCheckpoint()
                             }
                         }
                     HStack{

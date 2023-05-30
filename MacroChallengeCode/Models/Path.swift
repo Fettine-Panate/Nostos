@@ -14,7 +14,6 @@ class PathCustom: ObservableObject {
     @Published var locations : [CLLocation] = []
     @Published var comingBack = false
     
-    
     static var minDistance = 5.0
     static var maxDistance = 30.0
     static var maxDeltaTime = 4.0
@@ -39,6 +38,11 @@ class PathCustom: ObservableObject {
         self.comingBack = comingBack
     }
     
+    public func setMinDistance(min: Double){
+        PathCustom.minDistance = min
+        PathCustom.maxDistance = min + 20.0
+    }
+    
     func addLocation(_ location: CLLocation, checkLocation : (CLLocation, CLLocation) -> Bool) {
         if checkLocation(location, locations.last ?? CLLocation()) {
             locations.append(location)
@@ -47,19 +51,21 @@ class PathCustom: ObservableObject {
     
     //TODO: removeCheckpoint
     
-    public func removeCheckpoint(currentUserLocation: CLLocation){
+    public func removeCheckpoint(currentUserLocation: CLLocation) -> Bool{
+        var find = false
         let array = locations.reversed()
         var ind = 0
         if comingBack{
             for (index, loc) in  array.enumerated(){
                 if currentUserLocation.distance(from: loc) <= 5.0{
                     ind = locations.count - index
+                    find = true
                     break
                 }
             }
             locations.remove(atOffsets: IndexSet(integer: ind))
         }
-        
+        return find
     }
     
 }

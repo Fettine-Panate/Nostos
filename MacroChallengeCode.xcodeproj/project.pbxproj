@@ -32,6 +32,7 @@
 		9FF225942A22285400159166 /* BoxNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225932A22285400159166 /* BoxNavigationButton.swift */; };
 		9FF225962A222EB800159166 /* BoxDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225952A222EB800159166 /* BoxDataView.swift */; };
 		9FF225992A2269E900159166 /* BoxSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225982A2269E900159166 /* BoxSliderView.swift */; };
+		9FF2259B2A26372D00159166 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2259A2A26372D00159166 /* HapticManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		9FF225932A22285400159166 /* BoxNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNavigationButton.swift; sourceTree = "<group>"; };
 		9FF225952A222EB800159166 /* BoxDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDataView.swift; sourceTree = "<group>"; };
 		9FF225982A2269E900159166 /* BoxSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxSliderView.swift; sourceTree = "<group>"; };
+		9FF2259A2A26372D00159166 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */,
 				9FF2257F2A1D079800159166 /* CompassHeading.swift */,
+				9FF2259A2A26372D00159166 /* HapticManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				9FF2258A2A20B70E00159166 /* PinAnnotationView.swift in Sources */,
 				9FF225962A222EB800159166 /* BoxDataView.swift in Sources */,
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
+				9FF2259B2A26372D00159166 /* HapticManager.swift in Sources */,
 				9FF225822A1D07BD00159166 /* CompassView.swift in Sources */,
 				91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */,
 				9FF225842A1E4E2600159166 /* PinsMapView.swift in Sources */,
