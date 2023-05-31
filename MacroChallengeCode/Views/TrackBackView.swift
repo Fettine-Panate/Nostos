@@ -104,7 +104,7 @@ struct TrackBackView: View {
             }
         }
         .onAppear(){
-            self.path = self.previouspath
+            self.path = PathCustom(path: self.previouspath)
         }
     }
 }

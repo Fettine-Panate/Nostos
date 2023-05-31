@@ -17,6 +17,17 @@ class PathCustom: ObservableObject {
     static var maxDistance = 30.0
     static var maxDeltaTime = 4.0
     
+    init() {
+        self.locations = []
+        self.comingBack = false
+    }
+    
+    init(path : PathCustom) {
+        for (index, loc) in path.getLocations().enumerated() {
+            self.locations.append(loc)
+        }
+    }
+
     // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
