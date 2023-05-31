@@ -19,7 +19,6 @@ class PathCustom: ObservableObject {
     
     init() {
         self.locations = []
-        self.comingBack = false
     }
     
     init(path : PathCustom) {
