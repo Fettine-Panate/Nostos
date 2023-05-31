@@ -44,6 +44,7 @@ struct RollingView: View{
                                 let dragVector = CGVector(dx: value.translation.width, dy: value.translation.height)
                                 let angle = Angle(radians: Double(atan2(dragVector.dy, dragVector.dx)))
                                 rotationAngle += angle
+                                
                                 if ((rotationAngle + Angle(radians: Double(atan2(dragOffset.height, dragOffset.width)))).degrees) >= 0{
                                     index = (((rotationAngle + Angle(radians: Double(atan2(dragOffset.height, dragOffset.width)))).degrees) + 7.5)/15
                                 } else {
@@ -51,6 +52,7 @@ struct RollingView: View{
                                     
                                 }
                                 index = Double((12 - (Int(index) % 24)) + 12)
+                                
                                 print(index)
                                 print(rotationAngle.degrees)
                             }
