@@ -26,14 +26,15 @@ struct RollingView: View{
             // Da lavorarci
             Color(day.hours[Int(index) % 24].color).opacity(0.7)
                 .ignoresSafeArea()
+                .animation(.linear, value: (Int(index) % 24))
                 Rectangle()
                     .frame(width: 2,height: 20)
                     .padding(.bottom,300)
                 BezelView(day: day)
                     .rotationEffect(
-//                        Angle(degrees: -7.5)
                     rotationAngle + Angle(radians: Double(atan2(dragOffset.height, dragOffset.width)))
                     )
+                    .animation(.linear, value: ( rotationAngle + Angle(radians: Double(atan2(dragOffset.height, dragOffset.width)))))
                     .gesture(
                         DragGesture()
                             .updating($dragOffset) { value, state, _ in
