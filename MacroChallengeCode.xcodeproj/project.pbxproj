@@ -21,6 +21,15 @@
 		918DD1282A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD1272A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift */; };
 		91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */; };
 		91BE43772A1F8771004C3F89 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE43762A1F8771004C3F89 /* MapView.swift */; };
+		9AECAA702A279C6B007926B8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */; };
+		9AECAA722A279C6B007926B8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA712A279C6B007926B8 /* SwiftUI.framework */; };
+		9AECAA752A279C6B007926B8 /* SunsetWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA742A279C6B007926B8 /* SunsetWidgetBundle.swift */; };
+		9AECAA772A279C6B007926B8 /* SunsetWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA762A279C6B007926B8 /* SunsetWidgetLiveActivity.swift */; };
+		9AECAA792A279C6B007926B8 /* SunsetWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA782A279C6B007926B8 /* SunsetWidget.swift */; };
+		9AECAA7B2A279C6C007926B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AECAA7A2A279C6C007926B8 /* Assets.xcassets */; };
+		9AECAA7F2A279C6C007926B8 /* SunsetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA762A279C6B007926B8 /* SunsetWidgetLiveActivity.swift */; };
+		9AECAA872A27A13D007926B8 /* SunKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9AECAA862A27A13D007926B8 /* SunKit */; };
 		9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257B2A1CF09300159166 /* IndicatorView.swift */; };
 		9FF225802A1D079800159166 /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257F2A1D079800159166 /* CompassHeading.swift */; };
 		9FF225822A1D07BD00159166 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225812A1D07BD00159166 /* CompassView.swift */; };
@@ -53,7 +62,28 @@
 			remoteGlobalIDString = 918DD1062A17D3F500E44590;
 			remoteInfo = MacroChallengeCode;
 		};
+		9AECAA7D2A279C6C007926B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 918DD0FF2A17D3F500E44590 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AECAA6C2A279C6B007926B8;
+			remoteInfo = SunsetWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9AECAA802A279C6C007926B8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9AECAA7F2A279C6C007926B8 /* SunsetWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9158056E2A1CAE97007E579F /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
@@ -74,6 +104,14 @@
 		91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerDelegate.swift; sourceTree = "<group>"; };
 		91AB9F022A1B9A8A0068F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91BE43762A1F8771004C3F89 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunsetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		9AECAA712A279C6B007926B8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9AECAA742A279C6B007926B8 /* SunsetWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetWidgetBundle.swift; sourceTree = "<group>"; };
+		9AECAA762A279C6B007926B8 /* SunsetWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		9AECAA782A279C6B007926B8 /* SunsetWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetWidget.swift; sourceTree = "<group>"; };
+		9AECAA7A2A279C6C007926B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9AECAA7C2A279C6C007926B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FF2257B2A1CF09300159166 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		9FF2257F2A1D079800159166 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
 		9FF225812A1D07BD00159166 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
@@ -96,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AECAA872A27A13D007926B8 /* SunKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +149,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AECAA6A2A279C6B007926B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AECAA722A279C6B007926B8 /* SwiftUI.framework in Frameworks */,
+				9AECAA702A279C6B007926B8 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +208,8 @@
 				918DD1092A17D3F500E44590 /* MacroChallengeCode */,
 				918DD11A2A17D3F600E44590 /* MacroChallengeCodeTests */,
 				918DD1242A17D3F600E44590 /* MacroChallengeCodeUITests */,
+				9AECAA732A279C6B007926B8 /* SunsetWidget */,
+				9AECAA6E2A279C6B007926B8 /* Frameworks */,
 				918DD1082A17D3F500E44590 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -170,6 +220,7 @@
 				918DD1072A17D3F500E44590 /* MacroChallengeCode.app */,
 				918DD1172A17D3F600E44590 /* MacroChallengeCodeTests.xctest */,
 				918DD1212A17D3F600E44590 /* MacroChallengeCodeUITests.xctest */,
+				9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +265,27 @@
 			path = MacroChallengeCodeUITests;
 			sourceTree = "<group>";
 		};
+		9AECAA6E2A279C6B007926B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */,
+				9AECAA712A279C6B007926B8 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AECAA732A279C6B007926B8 /* SunsetWidget */ = {
+			isa = PBXGroup;
+			children = (
+				9AECAA742A279C6B007926B8 /* SunsetWidgetBundle.swift */,
+				9AECAA762A279C6B007926B8 /* SunsetWidgetLiveActivity.swift */,
+				9AECAA782A279C6B007926B8 /* SunsetWidget.swift */,
+				9AECAA7A2A279C6C007926B8 /* Assets.xcassets */,
+				9AECAA7C2A279C6C007926B8 /* Info.plist */,
+			);
+			path = SunsetWidget;
+			sourceTree = "<group>";
+		};
 		9FF225972A22675E00159166 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,12 +309,17 @@
 				918DD1032A17D3F500E44590 /* Sources */,
 				918DD1042A17D3F500E44590 /* Frameworks */,
 				918DD1052A17D3F500E44590 /* Resources */,
+				9AECAA802A279C6C007926B8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9AECAA7E2A279C6C007926B8 /* PBXTargetDependency */,
 			);
 			name = MacroChallengeCode;
+			packageProductDependencies = (
+				9AECAA862A27A13D007926B8 /* SunKit */,
+			);
 			productName = MacroChallengeCode;
 			productReference = 918DD1072A17D3F500E44590 /* MacroChallengeCode.app */;
 			productType = "com.apple.product-type.application";
@@ -283,6 +360,23 @@
 			productReference = 918DD1212A17D3F600E44590 /* MacroChallengeCodeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9AECAA6C2A279C6B007926B8 /* SunsetWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AECAA832A279C6C007926B8 /* Build configuration list for PBXNativeTarget "SunsetWidgetExtension" */;
+			buildPhases = (
+				9AECAA692A279C6B007926B8 /* Sources */,
+				9AECAA6A2A279C6B007926B8 /* Frameworks */,
+				9AECAA6B2A279C6B007926B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SunsetWidgetExtension;
+			productName = SunsetWidgetExtension;
+			productReference = 9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -304,6 +398,9 @@
 						CreatedOnToolsVersion = 14.3;
 						TestTargetID = 918DD1062A17D3F500E44590;
 					};
+					9AECAA6C2A279C6B007926B8 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 				};
 			};
 			buildConfigurationList = 918DD1022A17D3F500E44590 /* Build configuration list for PBXProject "MacroChallengeCode" */;
@@ -315,6 +412,9 @@
 				Base,
 			);
 			mainGroup = 918DD0FE2A17D3F500E44590;
+			packageReferences = (
+				9AECAA852A27A13D007926B8 /* XCRemoteSwiftPackageReference "SunKit" */,
+			);
 			productRefGroup = 918DD1082A17D3F500E44590 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -322,6 +422,7 @@
 				918DD1062A17D3F500E44590 /* MacroChallengeCode */,
 				918DD1162A17D3F600E44590 /* MacroChallengeCodeTests */,
 				918DD1202A17D3F600E44590 /* MacroChallengeCodeUITests */,
+				9AECAA6C2A279C6B007926B8 /* SunsetWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -350,6 +451,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9AECAA6B2A279C6B007926B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AECAA7B2A279C6C007926B8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -372,6 +481,7 @@
 				91BE43772A1F8771004C3F89 /* MapView.swift in Sources */,
 				9158056F2A1CAE97007E579F /* Path.swift in Sources */,
 				9FF225A62A26A13500159166 /* DayFase.swift in Sources */,
+				9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */,
 				9FF2258A2A20B70E00159166 /* PinAnnotationView.swift in Sources */,
 				9FF225962A222EB800159166 /* BoxDataView.swift in Sources */,
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
@@ -401,6 +511,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9AECAA692A279C6B007926B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AECAA772A279C6B007926B8 /* SunsetWidgetLiveActivity.swift in Sources */,
+				9AECAA752A279C6B007926B8 /* SunsetWidgetBundle.swift in Sources */,
+				9AECAA792A279C6B007926B8 /* SunsetWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -413,6 +533,11 @@
 			isa = PBXTargetDependency;
 			target = 918DD1062A17D3F500E44590 /* MacroChallengeCode */;
 			targetProxy = 918DD1222A17D3F600E44590 /* PBXContainerItemProxy */;
+		};
+		9AECAA7E2A279C6C007926B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AECAA6C2A279C6B007926B8 /* SunsetWidgetExtension */;
+			targetProxy = 9AECAA7D2A279C6C007926B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -534,17 +659,19 @@
 		918DD12C2A17D3F600E44590 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the location to get track of your path";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -566,17 +693,19 @@
 		918DD12D2A17D3F600E44590 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the location to get track of your path";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -671,6 +800,60 @@
 			};
 			name = Release;
 		};
+		9AECAA812A279C6C007926B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SunsetWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.francesco.academy.MacroChallengeCode.SunsetWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9AECAA822A279C6C007926B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SunsetWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.francesco.academy.MacroChallengeCode.SunsetWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -710,7 +893,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9AECAA832A279C6C007926B8 /* Build configuration list for PBXNativeTarget "SunsetWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AECAA812A279C6C007926B8 /* Debug */,
+				9AECAA822A279C6C007926B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9AECAA852A27A13D007926B8 /* XCRemoteSwiftPackageReference "SunKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Sunlitt/SunKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9AECAA862A27A13D007926B8 /* SunKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AECAA852A27A13D007926B8 /* XCRemoteSwiftPackageReference "SunKit" */;
+			productName = SunKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 918DD0FF2A17D3F500E44590 /* Project object */;
 }
