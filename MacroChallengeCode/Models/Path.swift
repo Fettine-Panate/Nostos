@@ -22,7 +22,7 @@ class PathCustom: ObservableObject {
     }
     
     init(path : PathCustom) {
-        for (index, loc) in path.getLocations().reversed().enumerated() {
+        for (index, loc) in path.getLocations().enumerated() {
             self.locations.append(loc)
         }
     }
