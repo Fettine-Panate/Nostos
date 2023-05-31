@@ -55,18 +55,18 @@ class PathCustom: ObservableObject {
     
     public func removeCheckpoint(currentUserLocation: CLLocation) -> Bool{
         var find = false
-        let array = locations.reversed()
+        let array = locations // Il più lontano è 0
         var ind = 0
         
         for (index, loc) in  array.enumerated(){
             if currentUserLocation.distance(from: loc) <= 5.0{
-                ind = locations.count - index
+                ind = index // trovo il ping piu lontano uguale
                 find = true
                 print("trovato")
                 break
             }
         }
-        locations.remove(atOffsets: IndexSet(integer: ind))
+        locations.remove(atOffsets: IndexSet(integer: ind)) // locations sarà da più lontano al più vicino cosi che posso fare il pop
         return find
     }
     
