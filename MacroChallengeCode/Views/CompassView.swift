@@ -80,7 +80,6 @@ struct CompassView : View {
                             .rotationEffect(Angle(degrees: self.compassHeading.degrees))
                         }
                     }
-                 
                     .statusBar(hidden: true)
                 }
                 .frame(width:  geo.size.width / 2 ,height:  geo.size.height / 2)

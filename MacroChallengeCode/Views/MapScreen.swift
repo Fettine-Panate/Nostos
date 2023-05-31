@@ -41,14 +41,10 @@ struct MapScreen: View {
                     //                        }
                     BoxDataView(text: "Lat: \(userLocation.coordinate.latitude)\nLon: \(userLocation.coordinate.longitude)")
                         .onAppear(){
-                            path.addLocation(userLocation, checkLocation: {_,_ in
-                                return true
-                            })
+                            path.addLocation(userLocation, checkLocation: path.checkDistance)
                         }.frame(height: 50).padding(.horizontal)
                         .onChange(of: userLocation) { loc in
-                            if path.isComingBack() == false {
                                 path.addLocation(loc, checkLocation: path.checkDistance)
-                            }
                         }
                     HStack{
                         NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {
@@ -58,13 +54,9 @@ struct MapScreen: View {
                             TrackBackView(currentUserLocation: userLocation, previouspath: path)
                         }, label: {
                             BoxNavigationButton(text: "Torna indietro")
-                        }).onTapGesture {
-                            path.setComingBack(comingBack: true)
-                        }
+                        })
                     }.frame(height: 100).padding(.horizontal)
                 }
-            }.onAppear(){
-                path.setComingBack(comingBack: false)
             }
         }
     }

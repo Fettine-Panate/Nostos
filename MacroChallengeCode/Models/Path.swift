@@ -12,7 +12,6 @@ import CoreLocation
 class PathCustom: ObservableObject {
     
     @Published var locations : [CLLocation] = []
-    @Published var comingBack = false
     
     static var minDistance = 5.0
     static var maxDistance = 30.0
@@ -21,21 +20,13 @@ class PathCustom: ObservableObject {
     // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
-        let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
+       // let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
+        print(distance)
         return distance >= minDistance && distance <= maxDistance
     }
     
     public func getLocations() -> [CLLocation]{
         return locations
-    }
-    
-    
-    public func isComingBack() -> Bool{
-        return comingBack
-    }
-    
-    public func setComingBack(comingBack: Bool){
-        self.comingBack = comingBack
     }
     
     public func setMinDistance(min: Double){
@@ -44,9 +35,10 @@ class PathCustom: ObservableObject {
     }
     
     func addLocation(_ location: CLLocation, checkLocation : (CLLocation, CLLocation) -> Bool) {
-        if checkLocation(location, locations.last ?? CLLocation()) {
-            locations.append(location)
-        }
+                if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation()))
+                    {
+                    locations.append(location)
+                }
     }
     
     //TODO: removeCheckpoint
@@ -55,16 +47,16 @@ class PathCustom: ObservableObject {
         var find = false
         let array = locations.reversed()
         var ind = 0
-        if comingBack{
-            for (index, loc) in  array.enumerated(){
-                if currentUserLocation.distance(from: loc) <= 5.0{
-                    ind = locations.count - index
-                    find = true
-                    break
-                }
+        
+        for (index, loc) in  array.enumerated(){
+            if currentUserLocation.distance(from: loc) <= 5.0{
+                ind = locations.count - index
+                find = true
+                print("trovato")
+                break
             }
-            locations.remove(atOffsets: IndexSet(integer: ind))
         }
+        locations.remove(atOffsets: IndexSet(integer: ind))
         return find
     }
     
