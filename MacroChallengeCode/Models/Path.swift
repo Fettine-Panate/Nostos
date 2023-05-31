@@ -22,7 +22,7 @@ class PathCustom: ObservableObject {
     }
     
     init(path : PathCustom) {
-        for (index, loc) in path.getLocations().enumerated() {
+        for (index, loc) in path.getLocations().reversed().enumerated() {
             self.locations.append(loc)
         }
     }
@@ -60,7 +60,7 @@ class PathCustom: ObservableObject {
         
         for (index, loc) in  array.enumerated(){
             if currentUserLocation.distance(from: loc) <= 5.0{
-                ind = locations.count - index
+                ind = array.count - index
                 find = true
                 print("trovato")
                 break
