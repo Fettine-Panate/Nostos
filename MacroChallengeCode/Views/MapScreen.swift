@@ -49,6 +49,7 @@ struct MapScreen: View {
                             pathsJSON.removeLast()
                             pathsJSON.append(path)
                             savePack("Paths", pathsJSON)
+                            print("center: \(path.getCenter()) \n distance:  \(path.getTotalDistance())\n time:  \(path.getTotalTime())\n num:  \(path.getLocations().count)")
                         }
                     HStack{
                         NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {
@@ -64,6 +65,7 @@ struct MapScreen: View {
             }.onAppear(){
                 pathsJSON.append(path)
                 savePack("Paths", pathsJSON)
+                print("salvato")
             }
         }
     }
