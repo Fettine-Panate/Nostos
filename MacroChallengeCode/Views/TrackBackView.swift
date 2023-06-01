@@ -11,7 +11,7 @@ import CoreLocation
 struct TrackBackView: View {
     var currentUserLocation : CLLocation
     @StateObject var previouspath : PathCustom
-    @State var path : PathCustom = PathCustom()
+    @State var path : PathCustom = PathCustom(title: "\(Date().description)")
     @StateObject var compassHeading = CompassHeading()
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0

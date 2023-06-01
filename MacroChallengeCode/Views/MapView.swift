@@ -85,7 +85,7 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(), currentUserLocation: CLLocation(latitude: 40.837034, longitude: 14.306127))
+        MapView(path: PathCustom(title: "\(Date().description)"), currentUserLocation: CLLocation(latitude: 40.837034, longitude: 14.306127))
     }
 }
 

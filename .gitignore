@@ -38,3 +38,4 @@ fastlane/sign&cert
 *.save
 ._*
 *.bak
+MacroChallengeCode.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved

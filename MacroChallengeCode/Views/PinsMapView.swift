@@ -42,6 +42,6 @@ struct PinsMapView: View {
 
 struct PinsMapView_Previews: PreviewProvider {
     static var previews: some View {
-        PinsMapView(path: PathCustom(), currentUserLocation: CLLocation())
+        PinsMapView(path: PathCustom(title: "\(Date().description)"), currentUserLocation: CLLocation())
     }
 }
