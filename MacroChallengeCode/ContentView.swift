@@ -12,9 +12,11 @@ import CoreLocation
 
 
 struct ContentView: View {
+    @State var pathsJSON = itemsJSON
     var body: some View {
-            StartView()
+        StartView(pathsJSON : $pathsJSON)
         }
+        
 }
 
 

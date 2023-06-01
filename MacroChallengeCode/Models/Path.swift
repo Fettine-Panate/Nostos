@@ -7,21 +7,30 @@
 
 import Foundation
 import CoreLocation
+import CLLocationWrapper
 
 
-class PathCustom: ObservableObject {
+class PathCustom: ObservableObject , Codable {
     
+    enum CodingKeys: String, CodingKey {
+        case title
+        case locations
+    }
+    
+    var title : String
     @Published var locations : [CLLocation] = []
-    
+    static var encodedLocationWrapper : [Data] = []
     static var minDistance = 5.0
     static var maxDistance = 30.0
     static var maxDeltaTime = 4.0
     
-    init() {
+    init(title: String) {
+        self.title = title
         self.locations = []
     }
     
     init(path : PathCustom) {
+        self.title = path.title
         for (index, loc) in path.getLocations().enumerated() {
             self.locations.append(loc)
         }
@@ -78,6 +87,47 @@ class PathCustom: ObservableObject {
        
         print("Locations count: \(locations.count)")
         return find
+    }
+
+    
+    public required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        title = try values.decode(String.self, forKey: .title)
+        
+        var decodedLocationWrapper : [CLLocationWrapper] = []
+        let jsonDecoder = JSONDecoder()
+        do {
+            
+            for index in 0 ..< PathCustom.encodedLocationWrapper.count {
+                decodedLocationWrapper.append(try jsonDecoder.decode(CLLocationWrapper.self, from: PathCustom.encodedLocationWrapper[index]))
+            }
+        } catch {
+            print("Error! Location wrapper decode failed: '\(error)'")
+        }
+        
+        locations.removeAll()
+        for locWr in decodedLocationWrapper{
+            locations.append(locWr.location)
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        var locationWrappers : [CLLocationWrapper] = []
+        for loc in locations {
+            locationWrappers.append(CLLocationWrapper(location: loc))
+        }
+        let jsonEncoder = JSONEncoder()
+        do {
+           
+            for locWr in locationWrappers {
+                PathCustom.encodedLocationWrapper.append(try jsonEncoder.encode(locWr.location))
+            }
+        } catch {
+            print("Error! Location wrapper encode failed: '\(error)'")
+        }
     }
     
   
