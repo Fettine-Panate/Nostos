@@ -47,6 +47,8 @@
 		9FF2259F2A26514400159166 /* BezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2259E2A26514400159166 /* BezelView.swift */; };
 		9FF225A62A26A13500159166 /* DayFase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225A52A26A13500159166 /* DayFase.swift */; };
 		9FF225A82A26AC9100159166 /* RollingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225A72A26AC9100159166 /* RollingView.swift */; };
+		9FF225CD2A29302200159166 /* RecapPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225CC2A29302200159166 /* RecapPathView.swift */; };
+		9FF225CF2A293B5500159166 /* ListPathsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225CE2A293B5500159166 /* ListPathsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +132,8 @@
 		9FF2259E2A26514400159166 /* BezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezelView.swift; sourceTree = "<group>"; };
 		9FF225A52A26A13500159166 /* DayFase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFase.swift; sourceTree = "<group>"; };
 		9FF225A72A26AC9100159166 /* RollingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingView.swift; sourceTree = "<group>"; };
+		9FF225CC2A29302200159166 /* RecapPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapPathView.swift; sourceTree = "<group>"; };
+		9FF225CE2A293B5500159166 /* ListPathsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPathsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +186,9 @@
 				9FF225892A20B70E00159166 /* PinAnnotationView.swift */,
 				917A8C522A20E6F400A32868 /* StartView.swift */,
 				9FF2259E2A26514400159166 /* BezelView.swift */,
+				9FF225CE2A293B5500159166 /* ListPathsView.swift */,
 				9FF225A72A26AC9100159166 /* RollingView.swift */,
+				9FF225CC2A29302200159166 /* RecapPathView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				915805712A1CB31C007E579F /* MapScreen.swift in Sources */,
 				9FF225992A2269E900159166 /* BoxSliderView.swift in Sources */,
 				9FF225942A22285400159166 /* BoxNavigationButton.swift in Sources */,
+				9FF225CD2A29302200159166 /* RecapPathView.swift in Sources */,
 				9FF2258E2A20EA7700159166 /* TrackBackView.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				917A8C552A20F34700A32868 /* SemisphereButton.swift in Sources */,
@@ -493,6 +500,7 @@
 				9FF225962A222EB800159166 /* BoxDataView.swift in Sources */,
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
 				9FF2259B2A26372D00159166 /* HapticManager.swift in Sources */,
+				9FF225CF2A293B5500159166 /* ListPathsView.swift in Sources */,
 				9FF225822A1D07BD00159166 /* CompassView.swift in Sources */,
 				91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */,
 				9FF2259F2A26514400159166 /* BezelView.swift in Sources */,
@@ -673,7 +681,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -707,7 +715,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -815,7 +823,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunsetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
@@ -842,7 +850,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = T479J3S372;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunsetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
