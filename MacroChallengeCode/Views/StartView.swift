@@ -10,6 +10,7 @@ import CoreLocation
 
 
 struct StartView: View {
+    @Binding var pathsJSON : [PathCustom]
     @ObservedObject var locationManager = LocationManager.shared
     @State var isStarted = false
     var hapticManager = HapticManager()
@@ -32,13 +33,13 @@ struct StartView: View {
                 }
             }
         }else if let userLocation = locationManager.userLocation {
-            MapScreen(userLocation: userLocation)
+            MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON)
         }
     }
 }
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView()
+        StartView(pathsJSON: .constant([]))
     }
 }

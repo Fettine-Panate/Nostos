@@ -11,7 +11,8 @@ import CoreMotion
 
 struct MapScreen: View {
     var userLocation : CLLocation
-    @StateObject var path = PathCustom()
+    @Binding var pathsJSON : [PathCustom]
+    @StateObject var path = PathCustom(title: "FINTO")
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
     
@@ -45,6 +46,9 @@ struct MapScreen: View {
                         }.frame(height: 50).padding(.horizontal)
                         .onChange(of: userLocation) { loc in
                                 path.addLocation(loc, checkLocation: path.checkDistance)
+                            pathsJSON.removeLast()
+                            pathsJSON.append(path)
+                            savePack("Paths", pathsJSON)
                         }
                     HStack{
                         NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {
@@ -57,6 +61,9 @@ struct MapScreen: View {
                         })
                     }.frame(height: 100).padding(.horizontal)
                 }
+            }.onAppear(){
+                pathsJSON.append(path)
+                savePack("Paths", pathsJSON)
             }
         }
     }
@@ -79,6 +86,6 @@ struct MapScreen: View {
 
 struct MapScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MapScreen(userLocation: CLLocation())
+        MapScreen(userLocation: CLLocation(), pathsJSON: .constant([]))
     }
 }

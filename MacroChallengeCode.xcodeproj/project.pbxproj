@@ -45,6 +45,8 @@
 		9FF2259F2A26514400159166 /* BezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2259E2A26514400159166 /* BezelView.swift */; };
 		9FF225A62A26A13500159166 /* DayFase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225A52A26A13500159166 /* DayFase.swift */; };
 		9FF225A82A26AC9100159166 /* RollingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225A72A26AC9100159166 /* RollingView.swift */; };
+		9FF225C82A28DB1B00159166 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225C72A28DB1B00159166 /* JsonManager.swift */; };
+		9FF225CB2A28E39200159166 /* CLLocationWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 9FF225CA2A28E39200159166 /* CLLocationWrapper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +129,7 @@
 		9FF2259E2A26514400159166 /* BezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezelView.swift; sourceTree = "<group>"; };
 		9FF225A52A26A13500159166 /* DayFase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFase.swift; sourceTree = "<group>"; };
 		9FF225A72A26AC9100159166 /* RollingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingView.swift; sourceTree = "<group>"; };
+		9FF225C72A28DB1B00159166 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FF225CB2A28E39200159166 /* CLLocationWrapper in Frameworks */,
 				9AECAA872A27A13D007926B8 /* SunKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +202,7 @@
 				91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */,
 				9FF2257F2A1D079800159166 /* CompassHeading.swift */,
 				9FF2259A2A26372D00159166 /* HapticManager.swift */,
+				9FF225C72A28DB1B00159166 /* JsonManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 			name = MacroChallengeCode;
 			packageProductDependencies = (
 				9AECAA862A27A13D007926B8 /* SunKit */,
+				9FF225CA2A28E39200159166 /* CLLocationWrapper */,
 			);
 			productName = MacroChallengeCode;
 			productReference = 918DD1072A17D3F500E44590 /* MacroChallengeCode.app */;
@@ -414,6 +420,7 @@
 			mainGroup = 918DD0FE2A17D3F500E44590;
 			packageReferences = (
 				9AECAA852A27A13D007926B8 /* XCRemoteSwiftPackageReference "SunKit" */,
+				9FF225C92A28E39200159166 /* XCRemoteSwiftPackageReference "CLLocationWrapper" */,
 			);
 			productRefGroup = 918DD1082A17D3F500E44590 /* Products */;
 			projectDirPath = "";
@@ -491,6 +498,7 @@
 				9FF2259F2A26514400159166 /* BezelView.swift in Sources */,
 				9FF225842A1E4E2600159166 /* PinsMapView.swift in Sources */,
 				917A8C532A20E6F400A32868 /* StartView.swift in Sources */,
+				9FF225C82A28DB1B00159166 /* JsonManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,6 +921,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		9FF225C92A28E39200159166 /* XCRemoteSwiftPackageReference "CLLocationWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yonivav/CLLocationWrapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -920,6 +936,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9AECAA852A27A13D007926B8 /* XCRemoteSwiftPackageReference "SunKit" */;
 			productName = SunKit;
+		};
+		9FF225CA2A28E39200159166 /* CLLocationWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FF225C92A28E39200159166 /* XCRemoteSwiftPackageReference "CLLocationWrapper" */;
+			productName = CLLocationWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
