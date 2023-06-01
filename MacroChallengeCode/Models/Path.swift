@@ -31,7 +31,6 @@ class PathCustom: ObservableObject {
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
        // let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
-        print(distance)
         return distance >= minDistance && distance <= maxDistance
     }
     
@@ -59,14 +58,23 @@ class PathCustom: ObservableObject {
         var ind = 0
         
         for (index, loc) in  array.enumerated(){
-            if currentUserLocation.distance(from: loc) <= 5.0{
+            let distance = currentUserLocation.distance(from: loc)
+            if distance <= 5.0{
+                print(distance)
                 ind = index // trovo il ping piu lontano uguale
                 find = true
-                print("trovato")
                 break
             }
         }
-        locations.remove(atOffsets: IndexSet(integer: ind)) // locations sarà da più lontano al più vicino cosi che posso fare il pop
+        if find {
+            for i in ind ..< locations.count{
+                print("dal \(i) a \(locations.count)")
+                locations.removeLast()
+            }
+        }
+       
+        print("Locations count: \(locations.count)")
+        //locations.remove(atOffsets: IndexSet(integer: ind)) // locations sarà da più lontano al più vicino cosi che posso fare il pop
         return find
     }
     

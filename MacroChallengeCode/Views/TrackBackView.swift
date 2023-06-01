@@ -78,12 +78,9 @@ struct TrackBackView: View {
 //                    )
             }
             .onChange(of: currentUserLocation) { loc in
-                print("Sono entrato")
                 if path.removeCheckpoint(currentUserLocation: loc){
                     hapticManager?.playFeedback()
                 }
-                print(path.getLocations().count)
-                print(previouspath.getLocations().count)
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             ZStack{

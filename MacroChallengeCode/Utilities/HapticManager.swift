@@ -61,7 +61,7 @@ class HapticManager {
         let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1.0)
         let totalDuration: TimeInterval = Double(count) * 0.1
         
-        let event = CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: 0, duration: totalDuration)
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0, duration: totalDuration)
         
         do {
             try hapticEngine.start()
