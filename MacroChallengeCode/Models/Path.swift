@@ -30,6 +30,7 @@ class PathCustom: ObservableObject {
     // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
+        
        // let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
         return distance >= minDistance && distance <= maxDistance
     }
@@ -44,10 +45,12 @@ class PathCustom: ObservableObject {
     }
     
     func addLocation(_ location: CLLocation, checkLocation : (CLLocation, CLLocation) -> Bool) {
-                if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation()))
+        print("Accuracy: \(location.horizontalAccuracy)")
+        if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation())) && location.horizontalAccuracy <= (PathCustom.minDistance + PathCustom.maxDistance)/2
                     {
                     locations.append(location)
                 }
+          
     }
     
     //TODO: removeCheckpoint
@@ -74,10 +77,12 @@ class PathCustom: ObservableObject {
         }
        
         print("Locations count: \(locations.count)")
-        //locations.remove(atOffsets: IndexSet(integer: ind)) // locations sarà da più lontano al più vicino cosi che posso fare il pop
         return find
     }
     
+  
+    
 }
+
 
 
