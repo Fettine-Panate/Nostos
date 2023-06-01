@@ -12,7 +12,7 @@ import CoreMotion
 struct MapScreen: View {
     var userLocation : CLLocation
     @Binding var pathsJSON : [PathCustom]
-    @StateObject var path = PathCustom(title: "FINTO")
+    @StateObject var path = PathCustom(title: "\(Date().description)")
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
     
