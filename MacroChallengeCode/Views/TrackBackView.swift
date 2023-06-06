@@ -106,7 +106,8 @@ struct TrackBackView: View {
             }
             .onChange(of: currentUserLocation) { loc in
                 if path.removeCheckpoint(currentUserLocation: loc){
-                    hapticManager?.playFeedback()
+                    // a volte fa crashare l'app
+                   // hapticManager?.playFeedback()
                 }
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
@@ -137,7 +138,7 @@ struct TrackBackView: View {
         
         .onAppear(){
             self.path = PathCustom(path: self.previouspath)
-            print(currentHour)
+
         }
     }
 }

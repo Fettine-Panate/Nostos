@@ -53,8 +53,7 @@ struct RollingView: View{
                                 }
                                 index = Double((12 - (Int(index) % 24)) + 12)
                                 
-                              //  print(index)
-                              //  print(rotationAngle.degrees)
+                          
                             }
                     )
         }

@@ -15,9 +15,6 @@ struct ContentView: View {
     @State var pathsJSON = itemsJSON
     var body: some View {
         StartView(pathsJSON : $pathsJSON)
-            .onAppear(){
-                print(pathsJSON.count)
-            }
     }
         
 }
