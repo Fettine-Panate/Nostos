@@ -32,13 +32,10 @@ struct ShowPathView: View {
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
             ZStack{
                 Color(day.hours[currentHour].color).opacity(0.7).ignoresSafeArea()
-                if(!isStarted){
-                    MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON)
-                }else {
-                    CircularSliderView()
-                    
-                }
-            }
+                MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON).opacity(isStarted ? 0 : 1)
+                    .animation(.easeInOut(duration: 0.5), value: isPresented)
+                    CircularSliderView().opacity(isStarted ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5), value: isPresented)
             Button(action: {
                 isStarted.toggle()
             }){
@@ -54,6 +51,7 @@ struct ShowPathView: View {
                 }
                 .scaleEffect(1.5)
             }.position(CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1))
+        }
         }
     }
 }

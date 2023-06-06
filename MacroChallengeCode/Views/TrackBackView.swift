@@ -25,7 +25,8 @@ struct TrackBackView: View {
         formatter.dateFormat = "HH"
         return formatter
     }()
-    let day = dayFase(sunrise: 06, sunset: 18)
+    @State var index = 0
+    let day = dayFase(sunrise: 06, sunset: 21)
     
     
 
@@ -42,22 +43,24 @@ struct TrackBackView: View {
                         .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 }
                 ZStack {
-                    var index = 0
                     ForEach(path.getLocations(), id: \.self ){ loc in
                         if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                             let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
-                            if index == 0{
+                            if loc == path.locations[0]{
                                 LastPinAnnotationView(loc: loc)
                                     .position(position)
                                     .animation(.linear, value: position)
                                     .scaleEffect(scale/2)
-                            } else if index < path.getLocations().count{
-                                PinAnnotationView(loc: loc)
+                                    .onAppear(){
+                                        index += 1
+                                    }
+                            } else if loc == path.locations.last{
+                                FirstPinAnnotationView(loc: loc)
                                     .position(position)
                                     .animation(.linear, value: position)
                                     .scaleEffect(scale/2)
                             } else{
-                                FirstPinAnnotationView(loc: loc)
+                                PinAnnotationView(loc: loc)
                                     .position(position)
                                     .animation(.linear, value: position)
                                     .scaleEffect(scale/2)
