@@ -27,25 +27,37 @@ struct MapView: View {
     @State var sun: Sun?
     @State var activity: Activity<SunsetWidgetAttributes>? = nil
     
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH"
+        return formatter
+    }()
+    let day = dayFase(sunrise: 06, sunset: 18)
+    
     
     var body: some View {
+        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack {
-                VStack{
-                    BoxNavigationButton(text: "Hiking!")
-                        .frame(height: 50)
-                        .padding(.horizontal)
-                    BoxDataView(text: "Range on screen: \(magnitude) m ")
-                        .frame(height: 50)
-                        .padding(.horizontal)
-                    BoxSliderView(magnitude: $magnitude)
-                        .frame(height: 40)
-                        .padding(.horizontal)
-                    Spacer()
-                }
+//                VStack{
+//                    BoxNavigationButton(text: "Hiking!")
+//                        .frame(height: 50)
+//                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+//                        .padding(.horizontal)
+//                    BoxDataView(text: "Range on screen: \(magnitude) m ")
+//                        .frame(height: 50)
+//                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+//                        .padding(.horizontal)
+//                    BoxSliderView(magnitude: $magnitude)
+//                        .frame(height: 40)
+//                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+//                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
+//                        .padding(.horizontal)
+//                    Spacer()
+//                }
                 IndicatorView()
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
-                    .scaleEffect(0.2)
+                    .scaleEffect(0.5)
                     .rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){

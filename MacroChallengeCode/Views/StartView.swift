@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import SunKit
 
 
 struct StartView: View {
@@ -15,11 +16,12 @@ struct StartView: View {
     @State var isStarted = false
     @State var isPresented = false
     var hapticManager = HapticManager()
+    @State var sun : Sun?
     
     var body: some View {
         if(!isStarted){
             ZStack{
-                    RollingView(sunriseHour: 6, sunsutHour: 18)
+                    RollingView(sunriseHour: 6, sunsutHour: 21)
                         .scaleEffect(1.2)
                 if pathsJSON.count > 0{
                     VStack{
@@ -55,7 +57,7 @@ struct StartView: View {
                     }
             }
         }else if let userLocation = locationManager.userLocation {
-            MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON)
+            ShowPathView(pathsJSON: $pathsJSON, userLocation: userLocation)
         }
     }
 }

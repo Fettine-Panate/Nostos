@@ -15,27 +15,28 @@ struct IndicatorView: View {
             Circle()
                 .trim(from: 0.65, to: 0.85)
                 .stroke(
-                    .red.opacity(0.4),
+                    .black.opacity(0.15),
                     lineWidth: 130
                 )
                 .frame(width: 130,height: 130)
             Circle()
                 .trim(from: 0.65, to: 0.85)
                 .stroke(
-                    .red.opacity(0.4),
+                    .black.opacity(0.15),
                     lineWidth: 100
                 )
                 .frame(width: 100,height: 100)
             Circle()
                 .trim(from: 0.65, to: 0.85)
                 .stroke(
-                    .red.opacity(0.4),
+                    .black.opacity(0.15),
                     lineWidth: 70
                 )
                 .frame(width: 70,height: 70)
             Circle()
-                .foregroundColor(.red)
+                .foregroundColor(.white)
                 .frame(width: 70,height: 70)
+                .shadow(radius: 1)
         }
     }
 }

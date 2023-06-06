@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import CoreMotion
+import SunKit
 
 struct MapScreen: View {
     var userLocation : CLLocation
@@ -15,32 +16,25 @@ struct MapScreen: View {
     @StateObject var path = PathCustom(title: "\(Date().description)")
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH"
+        return formatter
+    }()
+    let day : dayFase  = dayFase(sunrise: 06, sunset: 21)
     
     
     var body: some View {
+        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         NavigationStack{
             ZStack{
+                Color(day.hours[currentHour].color).opacity(0.7).ignoresSafeArea()
                 MapView(path: path, currentUserLocation: userLocation)
                 VStack{
                     Spacer()
-                    //componente messo solo per vedere
-//                    BoxHourView()
-//                        .frame(height: 120)
-//                        .padding(.horizontal)
-                    //                    Text("\(userLocation.coordinate.latitude) and \(userLocation.coordinate.longitude)")
-                    //                        .onAppear(){
-                    //                            path.addLocation(userLocation, checkLocation: {_,_ in
-                    //                                return true
-                    //                            })
-                    //                        }
-                    //                        .onChange(of: userLocation) { loc in
-                    //                            if path.isComingBack() == false {
-                    //                                path.addLocation(loc, checkLocation: path.checkDistance)
-                    //                            } else {
-                    //                                //path.removeCheckpoint()
-                    //                            }
-                    //                        }
                     BoxDataView(text: "Lat: \(userLocation.coordinate.latitude)\nLon: \(userLocation.coordinate.longitude)")
+                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
                         .onAppear(){
                             path.addLocation(userLocation, checkLocation: path.checkDistance)
                         }.frame(height: 50).padding(.horizontal)
@@ -52,15 +46,16 @@ struct MapScreen: View {
                             print("center: \(path.getCenter()) \n distance:  \(path.getTotalDistance())\n time:  \(path.getTotalTime())\n num:  \(path.getLocations().count)")
                         }
                     HStack{
-                        NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {
-                            BoxNavigationButton(text: "Mappa con pin")
-                        })
+//                        NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {
+//                            BoxNavigationButton(text: "Mappa con pin")
+//                        })
                         NavigationLink(destination: {
                             TrackBackView(currentUserLocation: userLocation, previouspath: path)
                         }, label: {
                             BoxNavigationButton(text: "Torna indietro")
+                                .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
                         })
-                    }.frame(height: 100).padding(.horizontal)
+                    }.frame(height: 50).padding(.horizontal)
                 }
             }.onAppear(){
                 pathsJSON.append(path)

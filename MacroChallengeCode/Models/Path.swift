@@ -12,17 +12,20 @@ import CLLocationWrapper
 
 class PathCustom: ObservableObject , Codable {
     
-    
-    
     enum CodingKeys: String, CodingKey {
         case title
         case locations
-        case encodedLocationWrapper
+        // case encodedLocationWrappers
+        case response
+        
+        enum EncodedLocationWrappers: String, CodingKey {
+            case encodedLocation
+        }
     }
     
     var title : String
     @Published var locations : [CLLocation] = []
-    static var encodedLocationWrapper : [Data] = []
+    static var encodedLocationWrappers : [CLLocationWrapper] = []
     static var minDistance = 5.0
     static var maxDistance = 30.0
     static var maxDeltaTime = 4.0
@@ -38,12 +41,12 @@ class PathCustom: ObservableObject , Codable {
             self.locations.append(loc)
         }
     }
-
+    
     // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
         
-       // let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
+        // let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
         return distance >= minDistance && distance <= maxDistance
     }
     
@@ -52,7 +55,7 @@ class PathCustom: ObservableObject , Codable {
     }
     
     public func getw() -> Int {
-        return PathCustom.encodedLocationWrapper.count
+        return PathCustom.encodedLocationWrappers.count
     }
     
     public func getTotalDistance() -> Double{
@@ -107,10 +110,10 @@ class PathCustom: ObservableObject , Codable {
     func addLocation(_ location: CLLocation, checkLocation : (CLLocation, CLLocation) -> Bool) {
         print("Accuracy: \(location.horizontalAccuracy)")
         if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation())) && location.horizontalAccuracy <= (PathCustom.minDistance + PathCustom.maxDistance)/2
-                    {
-                    locations.append(location)
-                }
-          
+        {
+            locations.append(location)
+        }
+        
     }
     
     //TODO: removeCheckpoint
@@ -135,56 +138,79 @@ class PathCustom: ObservableObject , Codable {
                 locations.removeLast()
             }
         }
-       
+        
         print("Locations count: \(locations.count)")
         return find
     }
-
     
-    public required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-
-        title = try values.decode(String.self, forKey: .title)
-
-        var decodedLocationWrapper : [CLLocationWrapper] = []
-        let jsonDecoder = try decoder.container(keyedBy: CodingKeys.self)
-        do {
-
-            for index in 0 ..< PathCustom.encodedLocationWrapper.count {
-                decodedLocationWrapper.append(try jsonDecoder.decode(CLLocationWrapper.self, forKey: .encodedLocationWrapper))
+    
+//    public required init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        let response = try container.nestedContainer(keyedBy:
+//                                                        CodingKeys.self, forKey: .response)
+//        self.title = try response.decode(String.self, forKey: .title)
+//        var decodedLocationWrapper : [CLLocationWrapper] = []
+//        decodedLocationWrapper = try response.decode([CLLocationWrapper].self, forKey: .encodedLocationWrappers)
+//        locations.removeAll()
+//        for locWr in decodedLocationWrapper{
+//            locations.append(locWr.location)
+//        }
+//    }
+//
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        var response = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .response)
+//        var locationWrappers : [CLLocationWrapper]? = []
+//        for loc in locations {
+//            print("appendo")
+//            locationWrappers?.append(CLLocationWrapper(location: loc))
+//        }
+//        try response.encode(self.title, forKey: .title)
+//        try response.encode(locationWrappers, forKey: .encodedLocationWrappers)
+//    }
+    
+    
+        public required init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+    
+            title = try values.decode(String.self, forKey: .title)
+            var decodedLocationWrappers : [CLLocationWrapper] = []
+    
+            let jsonDecoder = try decoder.container(keyedBy: CodingKeys.self)
+            do {
+                let decodedLocationWrapper = try jsonDecoder.decode([CLLocationWrapper].self, forKey: .locations)
+                decodedLocationWrappers.append(contentsOf: decodedLocationWrapper)
+            } catch {
+                print("Error! Location wrapper decode failed: '\(error)'")
             }
-        } catch {
-            print("Error! Location wrapper decode failed: '\(error)'")
+            locations.removeAll()
+            for locWr in decodedLocationWrappers{
+                locations.append(locWr.location)
+            }
         }
-
-        locations.removeAll()
-        for locWr in decodedLocationWrapper{
-            locations.append(locWr.location)
-        }
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        try container.encode(title, forKey: .title)
-        var locationWrappers : [CLLocationWrapper] = []
-        for loc in locations {
-            locationWrappers.append(CLLocationWrapper(location: loc))
-        }
-        var jsonEncoder = encoder.container(keyedBy: CodingKeys.self)
-        do {
-           
-            try container.encode(locationWrappers, forKey: .encodedLocationWrapper)
-//            for locWr in locationWrappers {
-//                PathCustom.encodedLocationWrapper.append(try jsonEncoder.encode(locWr.location, forKey: .encodedLocationWrapper))
+    
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+    
+            try container.encode(title, forKey: .title)
+//            var locationWrappers : [CLLocationWrapper]? = []
+//            for loc in locations {
+//                locationWrappers?.append(CLLocationWrapper(location: loc))
 //            }
-        } catch {
-            print("Error! Location wrapper encode failed: '\(error)'")
+            
+            var jsonEncoder = encoder.container(keyedBy: CodingKeys.self)
+            do {
+                try container.encode(locations, forKey: .locations)
+            } catch {
+                print("Error! Location wrapper encode failed: '\(error)'")
+            }
         }
+}
+
+extension CLLocationWrapper{
+    subscript(index: String) -> CLLocationWrapper? {
+        return nil
     }
-    
-  
-    
 }
 
 

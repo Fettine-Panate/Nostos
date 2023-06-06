@@ -32,6 +32,8 @@
 		9AECAA7F2A279C6C007926B8 /* SunsetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA762A279C6B007926B8 /* SunsetWidgetLiveActivity.swift */; };
 		9AECAA872A27A13D007926B8 /* SunKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9AECAA862A27A13D007926B8 /* SunKit */; };
+		9F8ED0E92A2F58EB00C223ED /* CircularSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED0E82A2F58EB00C223ED /* CircularSliderView.swift */; };
+		9F8ED0EB2A2F81A500C223ED /* ShowPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED0EA2A2F81A500C223ED /* ShowPathView.swift */; };
 		9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257B2A1CF09300159166 /* IndicatorView.swift */; };
 		9FF225802A1D079800159166 /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257F2A1D079800159166 /* CompassHeading.swift */; };
 		9FF225822A1D07BD00159166 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225812A1D07BD00159166 /* CompassView.swift */; };
@@ -117,6 +119,8 @@
 		9AECAA782A279C6B007926B8 /* SunsetWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetWidget.swift; sourceTree = "<group>"; };
 		9AECAA7A2A279C6C007926B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AECAA7C2A279C6C007926B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F8ED0E82A2F58EB00C223ED /* CircularSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSliderView.swift; sourceTree = "<group>"; };
+		9F8ED0EA2A2F81A500C223ED /* ShowPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPathView.swift; sourceTree = "<group>"; };
 		9FF2257B2A1CF09300159166 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		9FF2257F2A1D079800159166 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
 		9FF225812A1D07BD00159166 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 				915805722A1CB785007E579F /* MapBackground.swift */,
 				91BE43762A1F8771004C3F89 /* MapView.swift */,
 				9FF225832A1E4E2600159166 /* PinsMapView.swift */,
+				9F8ED0EA2A2F81A500C223ED /* ShowPathView.swift */,
 				9FF2257B2A1CF09300159166 /* IndicatorView.swift */,
 				9FF225812A1D07BD00159166 /* CompassView.swift */,
 				9FF2258D2A20EA7700159166 /* TrackBackView.swift */,
@@ -306,6 +311,7 @@
 				9FF225952A222EB800159166 /* BoxDataView.swift */,
 				917A8C542A20F34700A32868 /* SemisphereButton.swift */,
 				9FF225982A2269E900159166 /* BoxSliderView.swift */,
+				9F8ED0E82A2F58EB00C223ED /* CircularSliderView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -487,6 +493,7 @@
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				917A8C552A20F34700A32868 /* SemisphereButton.swift in Sources */,
 				9FF225A82A26AC9100159166 /* RollingView.swift in Sources */,
+				9F8ED0E92A2F58EB00C223ED /* CircularSliderView.swift in Sources */,
 				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
 				9FF225922A22189600159166 /* BoxHourView.swift in Sources */,
 				9FF225902A22169900159166 /* ProgressBarView.swift in Sources */,
@@ -496,6 +503,7 @@
 				9158056F2A1CAE97007E579F /* Path.swift in Sources */,
 				9FF225A62A26A13500159166 /* DayFase.swift in Sources */,
 				9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */,
+				9F8ED0EB2A2F81A500C223ED /* ShowPathView.swift in Sources */,
 				9FF2258A2A20B70E00159166 /* PinAnnotationView.swift in Sources */,
 				9FF225962A222EB800159166 /* BoxDataView.swift in Sources */,
 				915805732A1CB785007E579F /* MapBackground.swift in Sources */,
