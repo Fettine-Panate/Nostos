@@ -12,13 +12,11 @@ struct BoxDataView: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.red
-                Color.black.opacity(0.2)
+                Color.white
                 VStack{
                     HStack{
                         Text(text)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.white)
                             .multilineTextAlignment(.leading)
                         Spacer()
                     }.padding(.horizontal)

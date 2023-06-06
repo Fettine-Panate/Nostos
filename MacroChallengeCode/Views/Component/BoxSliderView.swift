@@ -13,11 +13,10 @@ struct BoxSliderView: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.red
+                Color.white
                 VStack{
                     HStack{
                         Slider(value: $magnitude, in: 100...10000, step: 1)
-                            .accentColor(.white)
                             .padding(.horizontal)
                     }
                 }

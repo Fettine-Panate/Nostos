@@ -12,17 +12,17 @@ struct BoxNavigationButton: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.red
+                Color.white
                 VStack{
                     HStack{
                         Text(text)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.white)
                             .multilineTextAlignment(.leading)
                     }
                 }
             }
         }
+        .shadow(radius: 1)
         .cornerRadius(10)
     }
 }
