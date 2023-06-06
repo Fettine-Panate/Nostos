@@ -21,10 +21,10 @@ struct MapScreen: View {
         formatter.dateFormat = "HH"
         return formatter
     }()
-    let day : dayFase  = dayFase(sunrise: 06, sunset: 21)
     
     
     var body: some View {
+        let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation, timeZone: TimeZone.current).sunset)) ?? 21)
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         NavigationStack{
             ZStack{

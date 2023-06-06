@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import Foundation
+import SunKit
 
 
 struct TrackBackView: View {
@@ -26,12 +27,13 @@ struct TrackBackView: View {
         return formatter
     }()
     @State var index = 0
-    let day = dayFase(sunrise: 06, sunset: 21)
     
     
 
     
     var body: some View {
+        let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: currentUserLocation, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: currentUserLocation, timeZone: TimeZone.current).sunset)) ?? 21)
+        
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack{
@@ -117,11 +119,6 @@ struct TrackBackView: View {
                         .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
                         .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
                         .padding(.horizontal)
-                    BoxDataView(text: "Range on screen: \(magnitude) m ")
-                        .frame(height: 40)
-                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-                        .padding(.horizontal)
                     BoxSliderView(magnitude: $magnitude)
                         .frame(height: 40)
                         .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
@@ -130,6 +127,11 @@ struct TrackBackView: View {
                         .rotationEffect(.degrees(-90))
                         .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
                     Spacer()
+                    BoxDataView(text: "Range on screen: \(magnitude) m ")
+                        .frame(height: 40)
+                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
+                        .padding(.horizontal)
                 }
             }
         }

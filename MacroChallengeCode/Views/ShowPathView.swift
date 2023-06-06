@@ -25,16 +25,18 @@ struct ShowPathView: View {
         formatter.dateFormat = "HH"
         return formatter
     }()
-    let day : dayFase = dayFase(sunrise: 06, sunset: 20)
+    
     
     var body: some View {
+        let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation, timeZone: TimeZone.current).sunset)) ?? 21)
+        
         GeometryReader{ geo in
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
             ZStack{
                 Color(day.hours[currentHour].color).opacity(0.7).ignoresSafeArea()
                 MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON).opacity(isStarted ? 0 : 1)
                     .animation(.easeInOut(duration: 0.5), value: isPresented)
-                    CircularSliderView().opacity(isStarted ? 1 : 0)
+                CircularSliderView(sunset: Sun(location: userLocation, timeZone: TimeZone.current).sunset, start: .now).opacity(isStarted ? 1 : 0)
                     .animation(.easeInOut(duration: 0.5), value: isPresented)
             Button(action: {
                 isStarted.toggle()

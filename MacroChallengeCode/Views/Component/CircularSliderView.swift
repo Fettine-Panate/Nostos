@@ -9,16 +9,31 @@ import SwiftUI
 
 struct CircularSliderView: View {
     @State var progress1 = 0.0
+    let sunset : Date
+    let start : Date
+    let currentHour =  Date()
+    init(progress1: Double = 0.0, sunset: Date, start: Date) {
+        self.sunset = sunset
+        self.start = start
+        if sunset.timeIntervalSince(currentHour) >  0 {
+            self.progress1 = (0.90 * currentHour.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+        } else {
+            self.progress1 = 1.0
+        }
+    }
     
     var body: some View {
         ZStack {
             VStack {
-                CircularSlider(value: $progress1)
+                CircularSlider(value: $progress1,sunset: sunset,start: start)
                     .frame(width:250, height: 250)
                     .rotationEffect(Angle(degrees: 180))
                 
             }
             .padding()
+            .onAppear(){
+                progress1 = (0.90 * currentHour.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+            }
         }
     }
 }
@@ -26,13 +41,25 @@ struct CircularSliderView: View {
 
 struct CircularSlider: View {
     @Binding var progress: Double
+    let sunset : Date
+    let start : Date
+    @State var tapped = false
+    @State var deltat = ""
 
     @State private var rotationAngle = Angle(degrees: 0)
     private var minValue = 0.0
     private var maxValue = 1.0
     
-    init(value progress: Binding<Double>, in bounds: ClosedRange<Int> = 0...1) {
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    
+    init(value progress: Binding<Double>, in bounds: ClosedRange<Int> = 0...1, sunset: Date, start: Date) {
         self._progress = progress
+        self.sunset = sunset
+        self.start = start
         
         self.minValue = Double(bounds.first ?? 0)
         self.maxValue = Double(bounds.last ?? 1)
@@ -66,8 +93,9 @@ struct CircularSlider: View {
                                 style: StrokeStyle(lineWidth: sliderWidth))
                         .rotationEffect(Angle(degrees: -72))
                         .overlay() {
-                            Text("\((progress/0.90), specifier: "%.2f")")
-                                .font(.system(size: radius * 0.6, weight: .bold, design:.rounded))
+                            Text(tapped ? "Time to sunset :\n" + deltat :  dateFormatter.string(from: Date()) )
+                                .font(.system(size: tapped ? radius * 0.2 : radius * 0.6 , weight: .bold, design:.rounded))
+                                .multilineTextAlignment(.center)
                                 .rotationEffect(Angle(degrees: 180))
                         }
                     Circle()
@@ -86,6 +114,8 @@ struct CircularSlider: View {
                             DragGesture(minimumDistance: 0.0)
                                 .onChanged() { value in
                                     changeAngle(location: value.location)
+                                    deltat = formatSecondsToHMS(Int((sunset.timeIntervalSince(start) * (0.90 - progress))/0.90))
+                                    tapped = true
                                 }
                         )
                 }
@@ -98,11 +128,18 @@ struct CircularSlider: View {
             }
         }
     }
+    
+    func formatSecondsToHMS(_ totalSeconds: Int) -> String {
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        
+        return String(format: "%02d:%02d", hours, minutes)
+    }
 }
 
 
 struct CircularSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularSliderView()
+        CircularSliderView(sunset: .now, start: .now)
     }
 }
