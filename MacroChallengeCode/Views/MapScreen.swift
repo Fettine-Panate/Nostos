@@ -45,9 +45,6 @@ struct MapScreen: View {
                             savePack("Paths", pathsJSON)
                         }
                     HStack{
-//                        NavigationLink(destination: {PinsMapView(path: path, currentUserLocation: userLocation)}, label: {
-//                            BoxNavigationButton(text: "Mappa con pin")
-//                        })
                         NavigationLink(destination: {
                             TrackBackView(currentUserLocation: userLocation, previouspath: path)
                         }, label: {

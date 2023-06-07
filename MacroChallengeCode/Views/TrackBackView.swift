@@ -47,7 +47,7 @@ struct TrackBackView: View {
                 ZStack {
                     ForEach(path.getLocations(), id: \.self ){ loc in
                         if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                            let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                            let position = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
                             if loc == path.locations[0]{
                                 LastPinAnnotationView(loc: loc)
                                     .position(position)
@@ -75,7 +75,7 @@ struct TrackBackView: View {
                                 Path { pat in
                                     for (index, loc) in path.getLocations().enumerated() {
                                         if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                                            let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                                            let point = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
                                             if index == 0 {
                                                 pat.move(to: point)
                                             } else {

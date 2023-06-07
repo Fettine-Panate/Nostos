@@ -19,7 +19,7 @@ struct RecapPathView: View {
             VStack{
                 VStack{
                     ForEach(path.getLocations(), id: \.self ){ loc in
-                        let position = calculatePosition2(loc: loc, currentLocation: path.getCenter(), sizeOfScreen: CGSize(width: geo.size.width, height: geo.size.height/2), latitudeMetersMax: path.getMax())
+                        let position = calculatePosition(loc: loc, currentLocation: path.getCenter(), sizeOfScreen: CGSize(width: geo.size.width, height: geo.size.height/2), latitudeMetersMax: path.getMax())
                         PinAnnotationView(loc: loc)
                             .position(position)
                             .animation(.linear, value: position)
@@ -32,7 +32,7 @@ struct RecapPathView: View {
                         withAnimation{
                             Path { pat in
                                 for (index, loc) in path.getLocations().enumerated() {
-                                    let point = calculatePosition2(loc: loc, currentLocation: path.getCenter(), sizeOfScreen: CGSize(width: geo.size.width, height: geo.size.height * 2/3), latitudeMetersMax: path.getMax())
+                                    let point = calculatePosition(loc: loc, currentLocation: path.getCenter(), sizeOfScreen: CGSize(width: geo.size.width, height: geo.size.height * 2/3), latitudeMetersMax: path.getMax())
                                     if index == 0 {
                                         pat.move(to: point)
                                     } else {
