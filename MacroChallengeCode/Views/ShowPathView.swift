@@ -19,7 +19,7 @@ struct ShowPathView: View {
     @StateObject var path = PathCustom(title: "\(Date().description)")
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
-    var hapticManager = HapticManager()
+    //var hapticManager = HapticManager()
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH"

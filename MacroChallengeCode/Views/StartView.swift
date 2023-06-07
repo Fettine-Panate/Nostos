@@ -15,7 +15,7 @@ struct StartView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @State var isStarted = false
     @State var isPresented = false
-    var hapticManager = HapticManager()
+    //var hapticManager = HapticManager()
     @State var sun : Sun?
     
     var body: some View {
@@ -47,7 +47,7 @@ struct StartView: View {
                                     LocationManager.shared.requestLocation()
                                 }
                                 isStarted = true
-                                hapticManager?.playFeedback()
+                                //hapticManager?.playFeedback()
                             }
                         }.scaleEffect(0.8)
                     }
