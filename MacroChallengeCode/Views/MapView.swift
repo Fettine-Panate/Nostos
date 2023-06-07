@@ -181,7 +181,7 @@ extension MapView {
         print("Activitiy Added Successfully: \(String(describing: activity?.id))")
     }
     
-    func stopActivity() {
+    static func stopActivity() {
         let finalStatus = SunsetWidgetAttributes.ContentState()
         let finalContent = ActivityContent(state: finalStatus, staleDate: nil)
         Task {
