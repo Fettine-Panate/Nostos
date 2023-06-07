@@ -697,6 +697,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LightWay;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
@@ -731,6 +732,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LightWay;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;

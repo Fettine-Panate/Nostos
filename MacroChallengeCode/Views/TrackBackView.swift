@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import Foundation
+import SunKit
 
 
 struct TrackBackView: View {
@@ -19,18 +20,20 @@ struct TrackBackView: View {
     @State private var currentValue: CGFloat = 0.0
     @State var magnitude = 100.0
     @State var scale = 1.0
-    var hapticManager = HapticManager()
+    //var hapticManager = HapticManager()
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH"
         return formatter
     }()
-    let day = dayFase(sunrise: 06, sunset: 18)
+    @State var index = 0
     
     
 
     
     var body: some View {
+        let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: currentUserLocation, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: currentUserLocation, timeZone: TimeZone.current).sunset)) ?? 21)
+        
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack{
@@ -42,22 +45,24 @@ struct TrackBackView: View {
                         .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 }
                 ZStack {
-                    var index = 0
                     ForEach(path.getLocations(), id: \.self ){ loc in
                         if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                            let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
-                            if index == 0{
+                            let position = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                            if loc == path.locations[0]{
                                 LastPinAnnotationView(loc: loc)
                                     .position(position)
                                     .animation(.linear, value: position)
                                     .scaleEffect(scale/2)
-                            } else if index < path.getLocations().count{
-                                PinAnnotationView(loc: loc)
+                                    .onAppear(){
+                                        index += 1
+                                    }
+                            } else if loc == path.locations.last{
+                                FirstPinAnnotationView(loc: loc)
                                     .position(position)
                                     .animation(.linear, value: position)
                                     .scaleEffect(scale/2)
                             } else{
-                                FirstPinAnnotationView(loc: loc)
+                                PinAnnotationView(loc: loc)
                                     .position(position)
                                     .animation(.linear, value: position)
                                     .scaleEffect(scale/2)
@@ -70,7 +75,7 @@ struct TrackBackView: View {
                                 Path { pat in
                                     for (index, loc) in path.getLocations().enumerated() {
                                         if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                                            let point = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                                            let point = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
                                             if index == 0 {
                                                 pat.move(to: point)
                                             } else {
@@ -103,12 +108,21 @@ struct TrackBackView: View {
             }
             .onChange(of: currentUserLocation) { loc in
                 if path.removeCheckpoint(currentUserLocation: loc){
-                    hapticManager?.playFeedback()
+                    // a volte fa crashare l'app
+                   // hapticManager?.playFeedback()
                 }
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             ZStack{
                 VStack{
+                    BoxSliderView(magnitude: $magnitude)
+                        .frame(height: 40)
+                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
+                        .padding(.horizontal)
+                        .rotationEffect(.degrees(-90))
+                        .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
+                    Spacer()
                     BoxNavigationButton(text: "Coming back! ")
                         .frame(height: 40)
                         .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
@@ -119,14 +133,6 @@ struct TrackBackView: View {
                         .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
                         .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
                         .padding(.horizontal)
-                    BoxSliderView(magnitude: $magnitude)
-                        .frame(height: 40)
-                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-                        .padding(.horizontal)
-                        .rotationEffect(.degrees(-90))
-                        .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
-                    Spacer()
                 }
             }
         }
@@ -134,7 +140,7 @@ struct TrackBackView: View {
         
         .onAppear(){
             self.path = PathCustom(path: self.previouspath)
-            print(currentHour)
+
         }
     }
 }

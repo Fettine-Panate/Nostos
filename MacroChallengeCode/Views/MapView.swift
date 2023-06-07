@@ -39,29 +39,13 @@ struct MapView: View {
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack {
-//                VStack{
-//                    BoxNavigationButton(text: "Hiking!")
-//                        .frame(height: 50)
-//                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-//                        .padding(.horizontal)
-//                    BoxDataView(text: "Range on screen: \(magnitude) m ")
-//                        .frame(height: 50)
-//                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-//                        .padding(.horizontal)
-//                    BoxSliderView(magnitude: $magnitude)
-//                        .frame(height: 40)
-//                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-//                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-//                        .padding(.horizontal)
-//                    Spacer()
-//                }
                 IndicatorView()
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                     .scaleEffect(0.5)
                     .rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.getLocations(), id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                        let position = calculatePosition2(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                        let position = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
                         PinAnnotationView(loc: loc)
                             .position(position)
                             .animation(.linear, value: position)
@@ -80,17 +64,6 @@ struct MapView: View {
                     isRunning.toggle()
                 }
             }
-            //            .gesture(
-            //                MagnificationGesture()
-            //                    .updating($magnification) { value, magnification, _ in
-            //                        magnification = value
-            //                    }
-            //                    .onChanged { value in
-            //                        currentValue = value
-            //                        magnitude = value * magnitudeinm
-            //                        scale = 1/value
-            //                    }
-            //            )
         }
     }
 }
@@ -109,17 +82,9 @@ struct Constants {
 }
 
 
-func calculatePosition(for element: CLLocation, in size: CGSize) -> CGPoint {
-    let latitudeRatio = (element.coordinate.latitude - Constants.minLatitude) / (Constants.maxLatitude - Constants.minLatitude)
-    let longitudeRatio = (element.coordinate.longitude - Constants.minLongitude) / (Constants.maxLongitude - Constants.minLongitude)
-    
-    let x = longitudeRatio * size.width
-    let y = latitudeRatio * size.height
-    
-    return CGPoint(x: x, y: y)
-}
 
-func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> CGPoint{
+
+func calculatePosition(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> CGPoint{
     
     let longPin = loc.coordinate.longitude
     let longUser = currentLocation.coordinate.longitude

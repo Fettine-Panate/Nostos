@@ -19,26 +19,25 @@ struct ShowPathView: View {
     @StateObject var path = PathCustom(title: "\(Date().description)")
     @State private var gyroRotation = 0.0
     private let motionManager = CMMotionManager()
-    var hapticManager = HapticManager()
+    //var hapticManager = HapticManager()
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH"
         return formatter
     }()
-    let day : dayFase = dayFase(sunrise: 06, sunset: 20)
+    
     
     var body: some View {
+        let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation, timeZone: TimeZone.current).sunset)) ?? 21)
+        
         GeometryReader{ geo in
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
             ZStack{
                 Color(day.hours[currentHour].color).opacity(0.7).ignoresSafeArea()
-                if(!isStarted){
-                    MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON)
-                }else {
-                    CircularSliderView()
-                    
-                }
-            }
+                MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON).opacity(isStarted ? 0 : 1)
+                    .animation(.easeInOut(duration: 0.5), value: isPresented)
+                CircularSliderView(sunset: Sun(location: userLocation, timeZone: TimeZone.current).sunset, start: .now).opacity(isStarted ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5), value: isPresented)
             Button(action: {
                 isStarted.toggle()
             }){
@@ -54,6 +53,7 @@ struct ShowPathView: View {
                 }
                 .scaleEffect(1.5)
             }.position(CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1))
+        }
         }
     }
 }

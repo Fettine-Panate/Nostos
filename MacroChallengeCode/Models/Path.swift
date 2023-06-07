@@ -108,7 +108,7 @@ class PathCustom: ObservableObject , Codable {
     }
     
     func addLocation(_ location: CLLocation, checkLocation : (CLLocation, CLLocation) -> Bool) {
-        print("Accuracy: \(location.horizontalAccuracy)")
+       
         if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation())) && location.horizontalAccuracy <= (PathCustom.minDistance + PathCustom.maxDistance)/2
         {
             locations.append(location)
@@ -126,7 +126,7 @@ class PathCustom: ObservableObject , Codable {
         for (index, loc) in  array.enumerated(){
             let distance = currentUserLocation.distance(from: loc)
             if distance <= 5.0{
-                print(distance)
+          
                 ind = index // trovo il ping piu lontano uguale
                 find = true
                 break
@@ -134,12 +134,9 @@ class PathCustom: ObservableObject , Codable {
         }
         if find {
             for i in ind ..< locations.count{
-                print("dal \(i) a \(locations.count)")
                 locations.removeLast()
             }
         }
-        
-        print("Locations count: \(locations.count)")
         return find
     }
     
