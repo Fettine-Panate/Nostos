@@ -20,7 +20,7 @@ struct TrackBackView: View {
     @State private var currentValue: CGFloat = 0.0
     @State var magnitude = 100.0
     @State var scale = 1.0
-    var hapticManager = HapticManager()
+    //var hapticManager = HapticManager()
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH"
@@ -115,11 +115,6 @@ struct TrackBackView: View {
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             ZStack{
                 VStack{
-                    BoxNavigationButton(text: "Coming back! ")
-                        .frame(height: 40)
-                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-                        .padding(.horizontal)
                     BoxSliderView(magnitude: $magnitude)
                         .frame(height: 40)
                         .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
@@ -128,6 +123,11 @@ struct TrackBackView: View {
                         .rotationEffect(.degrees(-90))
                         .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
                     Spacer()
+                    BoxNavigationButton(text: "Coming back! ")
+                        .frame(height: 40)
+                        .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+                        .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
+                        .padding(.horizontal)
                     BoxDataView(text: "Range on screen: \(magnitude) m ")
                         .frame(height: 40)
                         .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
