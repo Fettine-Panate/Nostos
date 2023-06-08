@@ -7,14 +7,33 @@
 
 import SwiftUI
 
+
+
+
 struct SwitchModeButton: View {
+    var imageName : String
+    var color : String
+    
+    @Binding var screen : Screens
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            withAnimation {
+                screen = .circularSliderView
+            }
+        } label: {
+            Image(systemName: imageName)
+                .foregroundColor(Color(color).opacity(0.7))
+        }
+        .background(){
+            RoundedRectangle(cornerRadius: 5.0)
+                .foregroundColor(.white)
+        }
+
     }
 }
 
 struct SwitchModeButton_Previews: PreviewProvider {
     static var previews: some View {
-        SwitchModeButton()
+        SwitchModeButton(imageName: "globe", color: "midday", screen: .constant(.circularSliderView))
     }
 }

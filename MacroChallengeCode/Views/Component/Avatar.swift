@@ -8,13 +8,30 @@
 import SwiftUI
 
 struct Avatar: View {
+    
+    @State var screen : Screens = .startView
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        Circle()
+            .frame(width: 35, height: 35)
+            .shadow(radius: 1)
+        //                   .scaleEffect(0.5)
+        //                   .foregroundColor(.white)
+        //                   .onTapGesture {
+        //                       screen = .mapScreenView
+        //                   }
+        
     }
+    
+    
 }
+
+
+
 
 struct Avatar_Previews: PreviewProvider {
     static var previews: some View {
-        Avatar()
+        Avatar(screen: .startView)
     }
 }

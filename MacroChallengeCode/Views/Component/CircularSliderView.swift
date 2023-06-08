@@ -13,16 +13,27 @@ struct CircularSliderView: View {
     @State private var start = Date()
     @State var tapped = false
     @State var currentTime =  Date()
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    init(progress1: Double = 0.0, sunset: Date, start: Date) {
-        self.sunset = sunset
-        self.start = start
-        if sunset.timeIntervalSince(currentTime) >  0 {
-            self.progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
-        } else {
-            self.progress1 = 1.0
-        }
+    // let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @Binding var screen : Screens
+    var ns: Namespace.ID {
+        _ns ?? namespace
     }
+    @Namespace var namespace
+    let _ns: Namespace.ID?
+    init(progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>, namespace: Namespace.ID? = nil) {
+        self.sunset = sunset
+        self._screen = screen
+        self._ns = namespace
+//        self.start = start
+//        if sunset.timeIntervalSince(currentTime) >  0 {
+//            self.progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+//        } else {
+//            self.progress1 = 1.0
+//        }
+    }
+    
+    
+    
     
     var body: some View {
         GeometryReader{ gr in
@@ -42,19 +53,23 @@ struct CircularSliderView: View {
                         }
                         .scaleEffect(1.5)
                     }.position(CGPoint(x: gr.size.width * 0.1, y: gr.size.height * 0.1))
-                    CircularSlider(value: $progress1,sunset: sunset,tapped: $tapped)
-                        .frame(width:250, height: 250)
-                        .rotationEffect(Angle(degrees: 180))
+//                CircularSlider(value: Binding(get: {0}, set: { _, _ in }),sunset: sunset,tapped: $tapped)
+//                        .frame(width:250, height: 250)
+//                        .rotationEffect(Angle(degrees: 180))
+                Avatar()
+                    .foregroundColor(.orange)
+                    .matchedGeometryEffect(id: "avatar", in: ns)
+                    .offset(y: 300)
                     
                 .padding()
                 .onAppear(){
-                    progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+//                    progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
                 }
             }
-            .onReceive(timer){ _ in
-                currentTime = Date()
-                progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
-            }
+//            .onReceive(timer){ _ in
+//                currentTime = Date()
+//                progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+//            }
         }
     }
 }
@@ -176,6 +191,6 @@ struct CircularSlider: View {
 
 struct CircularSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularSliderView(sunset: .now, start: .now)
+        CircularSliderView(sunset: .now, start: .now, screen: .constant(.circularSliderView))
     }
 }
