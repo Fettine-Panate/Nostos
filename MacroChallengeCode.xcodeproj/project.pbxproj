@@ -24,6 +24,7 @@
 		91BE43772A1F8771004C3F89 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE43762A1F8771004C3F89 /* MapView.swift */; };
 		91C447C92A28F40500319349 /* CLLocationWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 91C447C82A28F40500319349 /* CLLocationWrapper */; };
 		91C447CB2A28F46A00319349 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C447CA2A28F46A00319349 /* JsonManager.swift */; };
+		9A601E302A33502500795F77 /* NotificationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */; };
 		9AECAA702A279C6B007926B8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */; };
 		9AECAA722A279C6B007926B8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA712A279C6B007926B8 /* SwiftUI.framework */; };
 		9AECAA752A279C6B007926B8 /* SunsetWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA742A279C6B007926B8 /* SunsetWidgetBundle.swift */; };
@@ -113,6 +114,7 @@
 		91AB9F022A1B9A8A0068F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91BE43762A1F8771004C3F89 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		91C447CA2A28F46A00319349 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
+		9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerDelegate.swift; sourceTree = "<group>"; };
 		9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunsetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9AECAA712A279C6B007926B8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -215,6 +217,7 @@
 				9FF2257F2A1D079800159166 /* CompassHeading.swift */,
 				9FF2259A2A26372D00159166 /* HapticManager.swift */,
 				91C447CA2A28F46A00319349 /* JsonManager.swift */,
+				9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				9F8ED0E92A2F58EB00C223ED /* CircularSliderView.swift in Sources */,
 				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
 				916EEDFD2A3216E000FA7298 /* SwitchModeButton.swift in Sources */,
+				9A601E302A33502500795F77 /* NotificationManagerDelegate.swift in Sources */,
 				9FF225922A22189600159166 /* BoxHourView.swift in Sources */,
 				9FF225902A22169900159166 /* ProgressBarView.swift in Sources */,
 				9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */,
