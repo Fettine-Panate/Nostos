@@ -34,6 +34,9 @@ struct StartView: View {
                 Button {
                     withAnimation {
                         screen = .activity
+                        // TODO: Start the activity and schedule notification
+                        NotificationManager.shared.createNotification(title: "Time's Up!", body: "Its time to go back!")
+                        LiveActivityManager.shared.addActivity()
                     }
                 } label: {
                     Text("Start Activity")
