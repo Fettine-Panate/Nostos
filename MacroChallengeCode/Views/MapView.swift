@@ -47,6 +47,7 @@ struct MapView: View {
                             .position(position)
                             .animation(.linear, value: position)
                             .scaleEffect(scale/2)
+                        
                     }
                 }
                 Avatar()

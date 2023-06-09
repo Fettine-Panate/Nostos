@@ -39,7 +39,7 @@ struct ActivityContainerView: View {
                 case .map:
                     ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, _ns: ns)
                 case .sunset:
-                    CircularSliderView(sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: .now, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns)
+                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: .now, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns)
                 }
                 
                 Button {

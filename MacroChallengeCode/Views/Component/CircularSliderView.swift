@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct CircularSliderView: View {
+    @Binding var pathsJSON : [PathCustom]
+    @ObservedObject var path : PathCustom
+    @Binding var userLocation : CLLocation?
     @State var progress1 = 0.0
     let sunset : Date
     @State private var start = Date()
@@ -24,12 +28,15 @@ struct CircularSliderView: View {
     }
     @Namespace var namespace
     let _ns: Namespace.ID?
-    init(progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID? = nil) {
+    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID? = nil) {
         self.sunset = sunset
         self._screen = screen
         self._ns = namespace
         self._mapScreen = mapScreen
         self._activity = activity
+        self.path = path
+        self._userLocation = userLocation
+        self._pathsJSON = pathsJSON
 //        self.start = start
 //        if sunset.timeIntervalSince(currentTime) >  0 {
 //            self.progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
@@ -84,6 +91,12 @@ struct CircularSliderView: View {
                                 
                             }
                     )
+            }
+            .onChange(of: userLocation) { newValue in
+                path.addLocation(userLocation!, checkLocation: path.checkDistance)
+                pathsJSON.removeLast()
+                pathsJSON.append(path)
+                savePack("Paths", pathsJSON)
             }
         }
     }
@@ -262,6 +275,6 @@ func changeAngle(value: CGPoint) -> Angle {
 
 struct CircularSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularSliderView(sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView))
+        CircularSliderView(pathsJSON: .constant([]), path: PathCustom(title: ""), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView))
     }
 }
