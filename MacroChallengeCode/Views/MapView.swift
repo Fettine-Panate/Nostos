@@ -9,7 +9,6 @@ import SwiftUI
 import CoreLocation
 import Combine
 import ActivityKit
-import SunKit
 
 let degreesOnMeter = 0.0000089
 let magnitudeinm = 250.0
@@ -24,9 +23,6 @@ struct MapView: View {
     @State private var currentValue: CGFloat = 0.0
     @State var magnitude = 100.0
     @State var scale = 1.0
-    @State var isRunning = false
-    @State var sun: Sun?
-    @State var activity: Activity<SunsetWidgetAttributes>? = nil
     
     @Binding var screen : Screens
     @Binding var mapScreen : MapSwitch
@@ -66,12 +62,6 @@ struct MapView: View {
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
             .onAppear {
-                if !isRunning {
-                    sun = Sun(location: currentUserLocation!, timeZone: TimeZone.current)
-                    sun?.setDate(.now)
-                    addActivity()
-                    isRunning.toggle()
-                }
                 path.addLocation(currentUserLocation!, checkLocation: path.checkDistance)
                 pathsJSON.append(path)
                 savePack("Paths", pathsJSON)
@@ -134,40 +124,4 @@ func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: C
     let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
     
     return ((latDistance < maxY) && (longDistance < maxX))
-}
-
-extension MapView {
-    
-    func addActivity() {
-        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-            print("\(ActivityAuthorizationError.self)")
-            return
-        }
-        guard Activity<SunsetWidgetAttributes>.activities.isEmpty else {
-            print("Cannot run multiple istance of the same activity!")
-            return
-        }
-        let attributes = SunsetWidgetAttributes(sunsetTime: sun?.sunset ?? .now)
-        let state = SunsetWidgetAttributes.ContentState()
-        let activityContent = ActivityContent(state: state, staleDate: Calendar.current.date(byAdding: .hour, value: 12, to: Date())!)
-        do {
-            activity = try Activity<SunsetWidgetAttributes>.request(attributes: attributes, content: activityContent, pushType: nil)
-        } catch(let error) {
-            print("Error in creating live activity:  \(error.localizedDescription)")
-        }
-        print("Activitiy Added Successfully: \(String(describing: activity?.id))")
-    }
-    
-    func stopActivity() {
-        let finalStatus = SunsetWidgetAttributes.ContentState()
-        let finalContent = ActivityContent(state: finalStatus, staleDate: nil)
-        Task {
-            for activity in Activity<SunsetWidgetAttributes>.activities {
-                await activity.end(finalContent, dismissalPolicy: .immediate)
-                print("Ending Live Activity: \(activity.id)")
-            }
-        }
-    }
-    
-    
 }
