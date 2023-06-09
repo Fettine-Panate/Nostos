@@ -14,11 +14,19 @@ struct SwitchModeButton: View {
     var imageName : String
     var color : String
     
-    @Binding var screen : Screens
+    @Binding var activity : ActivityEnum
+    
     var body: some View {
         Button {
             withAnimation {
-                screen = .circularSliderView
+                switch activity {
+                case .map:
+                    activity = .sunset
+                case .sunset:
+                    activity = .map
+
+                }
+                
             }
         } label: {
             Image(systemName: imageName)
@@ -34,6 +42,6 @@ struct SwitchModeButton: View {
 
 struct SwitchModeButton_Previews: PreviewProvider {
     static var previews: some View {
-        SwitchModeButton(imageName: "globe", color: "midday", screen: .constant(.circularSliderView))
+        SwitchModeButton(imageName: "globe", color: "midday", activity: .constant(.map))
     }
 }

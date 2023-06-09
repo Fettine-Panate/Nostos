@@ -11,18 +11,26 @@ import CoreLocation
 import SunKit
 
 
-enum Screens: Equatable {
+enum Screens {
     case startView
-    case circularSliderView
-    case mapScreenView
-  //Todo: per fare il bottone per cambiare activity
-    // case activity
+    case activity
+}
+
+enum ActivityEnum {
+    case map
+    case sunset
+}
+
+enum MapSwitch {
+    case mapView
+    case trackBack
 }
 
 struct ContentView: View {
     @State var pathsJSON = itemsJSON
     @State var changeScreen = 0
     @State var screen : Screens = .startView
+    @State var activity : ActivityEnum = .map
     @State var mapScreen : MapSwitch = .mapView
     @Namespace var ns
     @StateObject var path : PathCustom = PathCustom(title: "\(Date().description)")
@@ -39,16 +47,9 @@ struct ContentView: View {
             switch screen {
             case .startView:
                 StartView(pathsJSON: $pathsJSON, screen: $screen, _ns: ns)
-            case .circularSliderView:
+            case .activity:
                 if(LocationManager.shared.userLocation != nil){
-                    CircularSliderView(sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: .now, screen: $screen, namespace: ns)
-                }else{
-                    Text("Activate into your settings the GPS track")
-                }
-            case .mapScreenView:
-                if(LocationManager.shared.userLocation != nil){
-                    
-                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, path: path, mapScreen: $mapScreen, screen: $screen,_ns: ns)
+                    ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, path: path, screen: $screen, activity: $activity, mapScreen: $mapScreen, _ns: ns)
                 }else{
                     Text("Activate into your settings the GPS track")
                 }
