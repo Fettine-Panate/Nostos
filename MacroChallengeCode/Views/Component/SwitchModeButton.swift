@@ -29,12 +29,11 @@ struct SwitchModeButton: View {
                 
             }
         } label: {
-            Image(systemName: imageName)
-                .foregroundColor(Color(color).opacity(0.7))
-        }
-        .background(){
-            RoundedRectangle(cornerRadius: 5.0)
-                .foregroundColor(.white)
+            ZStack{
+                Color.white
+                Image(systemName: imageName)
+                    .foregroundColor(Color(color).opacity(0.7))
+            }.cornerRadius(10)
         }
 
     }

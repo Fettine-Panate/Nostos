@@ -57,7 +57,7 @@ struct ActivityContainerView: View {
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                 
                 SwitchModeButton(imageName: (activity == .map) ? "sunset.fill" : "globe" , color: day.hours[currentHour].color, activity: $activity
-                )
+                ).frame(width: geo.size.width * 0.1, height: geo.size.width * 0.1)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.2)
             }
         }
