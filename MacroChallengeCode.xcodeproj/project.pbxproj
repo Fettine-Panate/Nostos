@@ -26,6 +26,7 @@
 		91C447C92A28F40500319349 /* CLLocationWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 91C447C82A28F40500319349 /* CLLocationWrapper */; };
 		91C447CB2A28F46A00319349 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C447CA2A28F46A00319349 /* JsonManager.swift */; };
 		9A601E302A33502500795F77 /* NotificationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */; };
+		9A601E322A336EE400795F77 /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A601E312A336EE400795F77 /* LiveActivityManager.swift */; };
 		9AECAA702A279C6B007926B8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */; };
 		9AECAA722A279C6B007926B8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA712A279C6B007926B8 /* SwiftUI.framework */; };
 		9AECAA752A279C6B007926B8 /* SunsetWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA742A279C6B007926B8 /* SunsetWidgetBundle.swift */; };
@@ -117,6 +118,8 @@
 		91BE43762A1F8771004C3F89 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		91C447CA2A28F46A00319349 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
 		9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerDelegate.swift; sourceTree = "<group>"; };
+		9A601E312A336EE400795F77 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
+		9A601E332A33771800795F77 /* MacroChallengeCode.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacroChallengeCode.entitlements; sourceTree = "<group>"; };
 		9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunsetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9AECAA712A279C6B007926B8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -221,6 +224,7 @@
 				9FF2259A2A26372D00159166 /* HapticManager.swift */,
 				91C447CA2A28F46A00319349 /* JsonManager.swift */,
 				9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */,
+				9A601E312A336EE400795F77 /* LiveActivityManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -251,6 +255,7 @@
 		918DD1092A17D3F500E44590 /* MacroChallengeCode */ = {
 			isa = PBXGroup;
 			children = (
+				9A601E332A33771800795F77 /* MacroChallengeCode.entitlements */,
 				9158056D2A1CAA5E007E579F /* Utilities */,
 				9158056C2A1CAA57007E579F /* Models */,
 				9158056B2A1CAA4E007E579F /* Views */,
@@ -515,6 +520,7 @@
 				9158056F2A1CAE97007E579F /* Path.swift in Sources */,
 				9FF225A62A26A13500159166 /* DayFase.swift in Sources */,
 				9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */,
+				9A601E322A336EE400795F77 /* LiveActivityManager.swift in Sources */,
 				9F8ED0EB2A2F81A500C223ED /* ShowPathView.swift in Sources */,
 				9FF2258A2A20B70E00159166 /* PinAnnotationView.swift in Sources */,
 				9FF225962A222EB800159166 /* BoxDataView.swift in Sources */,
@@ -698,10 +704,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MacroChallengeCode/MacroChallengeCode.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -733,10 +740,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MacroChallengeCode/MacroChallengeCode.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -845,7 +853,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunsetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
@@ -872,7 +880,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4BNM7WSTN5;
+				DEVELOPMENT_TEAM = A8HBA34LL5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunsetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
