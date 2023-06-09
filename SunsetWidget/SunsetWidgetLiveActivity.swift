@@ -29,7 +29,7 @@ struct SunsetWidgetLiveActivity: Widget {
             // Lock screen/banner UI goes here
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 15, style: .continuous)
-                    .fill(Color.black)
+                    .fill(Color.clear)
                 HStack(spacing: 10) {
                     //Text("Sunset")
                     Image(systemName: "sunset.fill")
