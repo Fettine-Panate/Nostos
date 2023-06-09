@@ -15,7 +15,6 @@ struct StartView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @State var isStarted = false
     @State var isPresented = false
-    //var hapticManager = HapticManager()
     @State var sun : Sun?
     
     var body: some View {
@@ -58,6 +57,9 @@ struct StartView: View {
             }
         }else if let userLocation = locationManager.userLocation {
             ShowPathView(pathsJSON: $pathsJSON, userLocation: userLocation)
+                .onAppear(){
+                    print("Ciaone")
+                }
         }
     }
 }

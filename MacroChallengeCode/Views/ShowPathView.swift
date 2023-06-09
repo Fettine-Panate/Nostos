@@ -36,23 +36,23 @@ struct ShowPathView: View {
                 Color(day.hours[currentHour].color).opacity(0.7).ignoresSafeArea()
                 MapScreen(userLocation: userLocation, pathsJSON: $pathsJSON).opacity(isStarted ? 0 : 1)
                     .animation(.easeInOut(duration: 0.5), value: isPresented)
-                CircularSliderView(sunset: Sun(location: userLocation, timeZone: TimeZone.current).sunset, start: .now).opacity(isStarted ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.5), value: isPresented)
+                CircularSliderView(isPresented: $isPresented,sunset: Sun(location: userLocation, timeZone: TimeZone.current).sunset, start: .now).opacity(isStarted ? 1 : 0)
             Button(action: {
                 isStarted.toggle()
             }){
-                VStack{
-                    Image(systemName: "globe")
-                        .padding(5)
-                        .foregroundColor(
-                            Color(day.hours[currentHour].color).opacity(0.7))
+                ZStack{
+                    Color.white
+                    VStack{
+                        Image(systemName: isStarted ? "target" : "sunset")
+                            .padding(5)
+                            .foregroundColor(
+                                Color(day.hours[currentHour].color).opacity(0.7))
+                    }
                 }
-                .background(){
-                    RoundedRectangle(cornerRadius: 5.0)
-                        .foregroundColor(.white)
-                }
-                .scaleEffect(1.5)
-            }.position(CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1))
+                .frame(width: geo.size.width * 1/10, height: geo.size.width * 1/10)
+                .cornerRadius(10)
+            }
+            .position(CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1))
         }
         }
     }

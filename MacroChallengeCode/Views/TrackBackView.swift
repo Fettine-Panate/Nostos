@@ -116,12 +116,10 @@ struct TrackBackView: View {
             ZStack{
                 VStack{
                     BoxSliderView(magnitude: $magnitude)
-                        .frame(height: 40)
+                        .frame(width: geometry.size.width * 1/10, height: geometry.size.width * 1/5)
                         .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
                         .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-                        .padding(.horizontal)
-                        .rotationEffect(.degrees(-90))
-                        .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
+                        .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/5))
                     Spacer()
                     BoxNavigationButton(text: "Coming back! ")
                         .frame(height: 40)
