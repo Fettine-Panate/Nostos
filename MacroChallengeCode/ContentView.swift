@@ -59,6 +59,7 @@ struct ContentView: View {
         .onAppear{
             if(LocationManager.shared.userLocation == nil){
                 LocationManager.shared.requestLocation()
+                NotificationManager.shared.requestAuthorization()
             }
         }
     }
