@@ -15,10 +15,6 @@ let degreesOnMeter = 0.0000089
 let magnitudeinm = 250.0
 
 
-enum MapSwitch {
-    case mapView
-    case trackBack
-}
 
 struct MapView: View {
     var path : PathCustom
@@ -92,7 +88,7 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.mapScreenView), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil)
+        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil)
     }
 }
 
