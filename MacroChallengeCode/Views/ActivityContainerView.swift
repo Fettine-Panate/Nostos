@@ -48,6 +48,8 @@ struct ActivityContainerView: View {
                         //TODO: create a func to do this
                         mapScreen = .mapView
                         activity = .map
+                        // TODO: Stop the activity
+                        LiveActivityManager.shared.stopActivity()
                     }
                 } label: {
                     Text("Stop activity")
