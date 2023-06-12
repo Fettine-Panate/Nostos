@@ -1,10 +1,3 @@
-//
-//  BoxSliderView.swift
-//  MacroChallengeCode
-//
-//  Created by Raffaele Martone on 27/05/23.
-//
-
 import SwiftUI
 import Combine
 
@@ -16,7 +9,7 @@ struct BoxSliderView: View {
                         HStack{
                             ZStack{
                                 if magnitude >= 10000{
-                                    Color.gray
+                                    Color("inactiveGray")
                                 } else {
                                     Color.white
                                 }
@@ -25,13 +18,7 @@ struct BoxSliderView: View {
                                         magnitude = magnitude + 100
                                     }}, label: {
                                         Text("+")
-                                    }).background(){
-                                        if magnitude >= 10000{
-                                            Color.gray
-                                        } else{
-                                            Color.white
-                                        }
-                                    }
+                                    })
                             }
                         }
                         .frame( height: gr.size.height * 48/100)
@@ -42,7 +29,7 @@ struct BoxSliderView: View {
                         HStack{
                             ZStack{
                                 if magnitude <= 100{
-                                    Color.gray
+                                    Color("inactiveGray")
                                 } else {
                                     Color.white
                                 }
@@ -51,13 +38,7 @@ struct BoxSliderView: View {
                                         magnitude = magnitude - 100
                                     } }, label: {
                                         Text("-")
-                                    }).background(){
-                                        if magnitude <= 100{
-                                            Color.gray
-                                        } else {
-                                            Color.white
-                                        }
-                                    }
+                                    })
                             }
                         }
                         .frame(height: gr.size.height * 48/100)

@@ -7,9 +7,6 @@
 import Foundation
 
 var itemsJSON: [PathCustom] = loadPack("Paths")
-
-
-
 func loadPack<T: Decodable>(_ filename: String) -> T {
     
     let data : Data

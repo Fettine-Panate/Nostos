@@ -9,60 +9,71 @@ import SwiftUI
 import CoreLocation
 import Combine
 import ActivityKit
-import SunKit
 
 let degreesOnMeter = 0.0000089
 let magnitudeinm = 250.0
 
+
+
 struct MapView: View {
     var path : PathCustom
-    @ObservedObject var locationManager = LocationManager.shared
     @StateObject var compassHeading = CompassHeading()
-    var currentUserLocation : CLLocation
+    @Binding var currentUserLocation : CLLocation?
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
-    @State var magnitude = 100.0
+ 
     @State var scale = 1.0
-    @State var isRunning = false
-    @State var sun: Sun?
-    @State var activity: Activity<SunsetWidgetAttributes>? = nil
     
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH"
-        return formatter
-    }()
-    let day = dayFase(sunrise: 06, sunset: 18)
+    @Binding var screen : Screens
+    @Binding var mapScreen : MapSwitch
+    @Binding var pathsJSON : [PathCustom]
     
+    var ns: Namespace.ID {
+        _ns ?? namespace
+    }
+    @Namespace var namespace
+    let _ns: Namespace.ID?
+    
+    @Binding var magnitude : Double
     
     var body: some View {
-        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
+   
         GeometryReader { geometry in
             ZStack {
                 IndicatorView()
-                    .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
-                    .scaleEffect(0.5)
                     .rotationEffect(Angle(degrees: self.compassHeading.degrees))
-                ForEach(path.getLocations(), id: \.self ){ loc in
-                    if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                        let position = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                ForEach(path.locations, id: \.self ){ loc in
+                    if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
+                        let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
                         PinAnnotationView(loc: loc)
                             .position(position)
                             .animation(.linear, value: position)
                             .scaleEffect(scale/2)
+                        
                     }
                 }
+                Avatar()
+                    .matchedGeometryEffect(id: "avatar", in: ns)
+                    .foregroundColor(.white)
+                    .onLongPressGesture {
+                        withAnimation {
+                           mapScreen = .trackBack
+                        }
+                    }
             }.background(){
                 MapBackground(size: geometry.size)
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
             .onAppear {
-                if !isRunning {
-                    sun = Sun(location: currentUserLocation, timeZone: TimeZone.current)
-                    sun?.setDate(.now)
-                    addActivity()
-                    isRunning.toggle()
-                }
+                path.addLocation(currentUserLocation!, checkLocation: path.checkDistance)
+                pathsJSON.append(path)
+                savePack("Paths", pathsJSON)
+            }
+            .onChange(of: currentUserLocation) { loc in
+                path.addLocation(loc!, checkLocation: path.checkDistance)
+                pathsJSON.removeLast()
+                pathsJSON.append(path)
+                savePack("Paths", pathsJSON)
             }
         }
     }
@@ -70,16 +81,10 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(title: "\(Date().description)"), currentUserLocation: CLLocation(latitude: 40.837034, longitude: 14.306127))
+        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil, magnitude: .constant(100.0))
     }
 }
 
-struct Constants {
-    static let minLatitude = -90.0
-    static let maxLatitude = 90.0
-    static let minLongitude = -180.0
-    static let maxLongitude = 180.0
-}
 
 
 
@@ -106,6 +111,41 @@ func calculatePosition(loc: CLLocation, currentLocation: CLLocation, sizeOfScree
 }
 
 
+//Da provare in radianti
+func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> CGPoint {
+    let longitudePin = loc.coordinate.longitude
+    let longitudeUser = currentLocation.coordinate.longitude
+    let latitudePin = loc.coordinate.latitude
+    let latitudeUser = currentLocation.coordinate.latitude
+    
+    let deltaLongitude = (longitudePin - longitudeUser).radians
+    let deltaLatitude = (latitudePin - latitudeUser).radians
+    
+    let halfScreenWidth = sizeOfScreen.width / 2
+    let halfScreenHeight = sizeOfScreen.height / 2
+    
+    let latitudeScale = sizeOfScreen.height / latitudeMetersMax
+  
+    let horizontalDistance = deltaLongitude * EarthRadius * cos(latitudeUser.radians)
+    let verticalDistance = deltaLatitude * EarthRadius
+    
+    let x = halfScreenWidth + (horizontalDistance * latitudeScale)
+    let y = halfScreenHeight - (verticalDistance * latitudeScale)
+    
+    return CGPoint(x: x, y: y)
+}
+
+
+let EarthRadius: Double = 6_371_000
+
+// Estensione per convertire un valore in radianti
+extension Double {
+    var radians: Double {
+        return self * .pi / 180.0
+    }
+}
+
+
 func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> Bool{
     
     let longPin = loc.coordinate.longitude
@@ -122,40 +162,4 @@ func isDisplayable(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: C
     let maxX = (maxY*sizeOfScreen.width)/sizeOfScreen.height
     
     return ((latDistance < maxY) && (longDistance < maxX))
-}
-
-extension MapView {
-    
-    func addActivity() {
-        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-            print("\(ActivityAuthorizationError.self)")
-            return
-        }
-        guard Activity<SunsetWidgetAttributes>.activities.isEmpty else {
-            print("Cannot run multiple istance of the same activity!")
-            return
-        }
-        let attributes = SunsetWidgetAttributes(sunsetTime: sun?.sunset ?? .now)
-        let state = SunsetWidgetAttributes.ContentState()
-        let activityContent = ActivityContent(state: state, staleDate: Calendar.current.date(byAdding: .hour, value: 12, to: Date())!)
-        do {
-            activity = try Activity<SunsetWidgetAttributes>.request(attributes: attributes, content: activityContent, pushType: nil)
-        } catch(let error) {
-            print("Error in creating live activity:  \(error.localizedDescription)")
-        }
-        print("Activitiy Added Successfully: \(String(describing: activity?.id))")
-    }
-    
-    static func stopActivity() {
-        let finalStatus = SunsetWidgetAttributes.ContentState()
-        let finalContent = ActivityContent(state: finalStatus, staleDate: nil)
-        Task {
-            for activity in Activity<SunsetWidgetAttributes>.activities {
-                await activity.end(finalContent, dismissalPolicy: .immediate)
-                print("Ending Live Activity: \(activity.id)")
-            }
-        }
-    }
-    
-    
 }

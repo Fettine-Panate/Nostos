@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct dayFase{
+    
     var hours : [hour]
     
     init(sunrise: Int, sunset : Int) {

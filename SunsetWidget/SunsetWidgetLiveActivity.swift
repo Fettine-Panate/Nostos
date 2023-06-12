@@ -29,8 +29,8 @@ struct SunsetWidgetLiveActivity: Widget {
             // Lock screen/banner UI goes here
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 15, style: .continuous)
-                    .fill(Color.black.opacity(0.25))
-                HStack(spacing: 15) {
+                    .fill(Color.clear)
+                HStack(spacing: 10) {
                     //Text("Sunset")
                     Image(systemName: "sunset.fill")
                         .font(.system(size: 35))
@@ -43,8 +43,6 @@ struct SunsetWidgetLiveActivity: Widget {
                     .tint(.white)
                     .foregroundColor(.white)
                     .padding(.vertical, -15)
-                    .scaleEffect(x: 1.5, y: 1.5, anchor: .center)
-                    .padding(.horizontal, 30)
                     Text(context.attributes.sunsetTime, style: .time)
                         .font(.system(size: 20, design: .rounded))
                         .fontWeight(.medium)
