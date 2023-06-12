@@ -21,7 +21,7 @@ struct MapView: View {
     @Binding var currentUserLocation : CLLocation?
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
-    @State var magnitude = 100.0
+ 
     @State var scale = 1.0
     
     @Binding var screen : Screens
@@ -33,6 +33,8 @@ struct MapView: View {
     }
     @Namespace var namespace
     let _ns: Namespace.ID?
+    
+    @Binding var magnitude : Double
     
     var body: some View {
    
@@ -79,7 +81,7 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil)
+        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil, magnitude: .constant(100.0))
     }
 }
 
@@ -106,6 +108,41 @@ func calculatePosition(loc: CLLocation, currentLocation: CLLocation, sizeOfScree
     let x = sizeOfScreen.width/2 + (longDistance * sizeOfScreen.width)/maxX
     
     return CGPoint(x: x, y: y)
+}
+
+
+//Da provare in radianti
+func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScreen: CGSize, latitudeMetersMax: CGFloat) -> CGPoint {
+    let longitudePin = loc.coordinate.longitude
+    let longitudeUser = currentLocation.coordinate.longitude
+    let latitudePin = loc.coordinate.latitude
+    let latitudeUser = currentLocation.coordinate.latitude
+    
+    let deltaLongitude = (longitudePin - longitudeUser).radians
+    let deltaLatitude = (latitudePin - latitudeUser).radians
+    
+    let halfScreenWidth = sizeOfScreen.width / 2
+    let halfScreenHeight = sizeOfScreen.height / 2
+    
+    let latitudeScale = sizeOfScreen.height / latitudeMetersMax
+  
+    let horizontalDistance = deltaLongitude * EarthRadius * cos(latitudeUser.radians)
+    let verticalDistance = deltaLatitude * EarthRadius
+    
+    let x = halfScreenWidth + (horizontalDistance * latitudeScale)
+    let y = halfScreenHeight - (verticalDistance * latitudeScale)
+    
+    return CGPoint(x: x, y: y)
+}
+
+
+let EarthRadius: Double = 6_371_000
+
+// Estensione per convertire un valore in radianti
+extension Double {
+    var radians: Double {
+        return self * .pi / 180.0
+    }
 }
 
 

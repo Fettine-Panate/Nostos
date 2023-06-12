@@ -8,6 +8,13 @@
 import SwiftUI
 import CoreLocation
 
+let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+
+
 struct CircularSliderView: View {
     @Binding var pathsJSON : [PathCustom]
     @ObservedObject var path : PathCustom
@@ -46,7 +53,7 @@ struct CircularSliderView: View {
     }
     
     @State var progress : Double = 0.0
-    @State var rotationAngle : Double = 0.0
+    @State var rotationAngle : Angle = Angle(degrees: 0.0)
     @State var remaingTimeToSunset : Int = 0 //seconds
     @State var dateOfAvatarPosition : Date = Date()
     
@@ -79,18 +86,27 @@ struct CircularSliderView: View {
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
                     .offset(y: radius)
-                    .rotationEffect(Angle(degrees: 18.0 + rotationAngle))
+                    .rotationEffect(
+                        Angle(degrees: 18)
+                       +  rotationAngle
+                    )
                     .gesture(
                         DragGesture(minimumDistance: 0.0)
                             .onChanged(){ value in
                                 progress = changeProgress(value: value.location, progress: progress)
-                                print(progress)
-                                rotationAngle = progress * 360
+                                rotationAngle = changeAngle(value: value.location)
                                 remaingTimeToSunset = Int((sunset.timeIntervalSince(start) * progress) / 0.9)
                                 dateOfAvatarPosition = start.addingTimeInterval(Double(remaingTimeToSunset))
                                 
                             }
                     )
+                iconSlider(text: Text(dateFormatter.string(from: path.locations.first?.timestamp ?? Date())),angle: Angle(degrees: 18.0) , radius: radius)
+                    .rotationEffect(Angle(degrees: 18))
+                iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)) , radius: radius)
+                    .rotationEffect( calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)))
+                iconSlider(text: Text(dateFormatter.string(from: sunset)),angle: Angle(degrees: 342) , radius: radius)
+                    .rotationEffect(Angle(degrees: 342))
+                
             }
             .onChange(of: userLocation) { newValue in
                 path.addLocation(userLocation!, checkLocation: path.checkDistance)
@@ -102,6 +118,20 @@ struct CircularSliderView: View {
     }
 }
 
+
+
+func calculateAngleFromDate(sunsetTime: Date, startTime: Date, inputTime: Date)-> Angle{
+
+    let x = inputTime.timeIntervalSince(startTime)/sunsetTime.timeIntervalSince(startTime)
+    return Angle(degrees: x * 360)
+    
+}
+
+func calculateTimeToReturn(sunset: Date, startTime: Date) -> Date{
+    let ret = startTime.addingTimeInterval(sunset.timeIntervalSince(startTime)/2)
+    return ret
+}
+
 func changeProgress(value: CGPoint, progress : Double) -> Double {
     let vector = CGVector(dx: -value.x, dy: value.y)
     let angleRadians = atan2(vector.dx, vector.dy)
@@ -111,11 +141,10 @@ func changeProgress(value: CGPoint, progress : Double) -> Double {
         ret = ((positiveAngle / ((2.0 * .pi))))
     }
     print("returning : \(ret)")
-    
     return ret
 }
 func changeAngle(value: CGPoint) -> Angle {
-    let vector = CGVector(dx: value.x, dy: -value.y)
+    let vector = CGVector(dx: -value.x, dy: value.y)
     let angleRadians = atan2(vector.dx, vector.dy)
     let positiveAngle = angleRadians < 0.0 ? angleRadians + (2.0 * .pi) : angleRadians
     var ret : Angle = Angle(degrees: 0.0)
@@ -270,7 +299,32 @@ func changeAngle(value: CGPoint) -> Angle {
 //}
 
 
-
+struct iconSlider : View {
+    
+    var icon : Image?
+    var text : Text?
+    
+    var angle : Angle
+    var radius : Double
+    
+    
+    var body: some View{
+        VStack{
+            Rectangle()
+                .frame(width: 2,height: 10)
+            VStack{
+                if (icon == nil){
+                    text.padding(10)
+                }else{
+                    icon.padding(10)
+                }
+            }.rotationEffect(-angle)
+        }
+        .offset(y: radius * 1.3)
+       
+        
+    }
+}
 
 
 struct CircularSliderView_Previews: PreviewProvider {

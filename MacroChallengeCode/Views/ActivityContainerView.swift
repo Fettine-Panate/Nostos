@@ -13,7 +13,7 @@ struct ActivityContainerView: View {
     
     @Binding var pathsJSON : [PathCustom]
     @Binding var userLocation : CLLocation?
-    @ObservedObject var path : PathCustom
+    @StateObject var path : PathCustom = PathCustom(title: "\(Date().description)")
     @Binding var screen : Screens
     @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
@@ -28,6 +28,8 @@ struct ActivityContainerView: View {
     @Namespace var namespace
     let _ns: Namespace.ID?
     
+    @State var magnitude : Double = 100.0
+
     var body: some View {
         let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
@@ -37,7 +39,11 @@ struct ActivityContainerView: View {
 
                 switch activity {
                 case .map:
-                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, _ns: ns)
+                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, _ns: ns, magnitude: $magnitude)
+                        
+                    BoxSliderView(magnitude: $magnitude)
+                        .frame(width: geo.size.width * 0.1, height: geo.size.width * 0.2).position(x: geo.size.width * 0.9, y: geo.size.height * 0.2)
+                        .foregroundColor( Color(day.hours[currentHour].color).opacity(0.7))
                 case .sunset:
                     CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: .now, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns)
                 }
@@ -58,7 +64,7 @@ struct ActivityContainerView: View {
                 
                 SwitchModeButton(imageName: (activity == .map) ? "sunset.fill" : "globe" , color: day.hours[currentHour].color, activity: $activity
                 ).frame(width: geo.size.width * 0.1, height: geo.size.width * 0.1)
-                    .position(x: geo.size.width * 0.9, y: geo.size.height * 0.2)
+                    .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
             }
         }
     }

@@ -23,6 +23,8 @@ struct ShowPathView: View {
     }
     @Namespace var namespace
     let _ns: Namespace.ID?
+    @Binding var magnitude : Double 
+
     
     var body: some View {
       
@@ -32,12 +34,12 @@ struct ShowPathView: View {
             ZStack{
                 switch mapScreen{
                 case .mapView:
-                    MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, _ns: ns)
+                    MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, _ns: ns, magnitude: $magnitude)
                 case .trackBack:
-                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, mapScreen: $mapScreen, _ns: ns)
-
+                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, mapScreen: $mapScreen, _ns: ns,  magnitude: $magnitude)
                 }
-
+              
+                
             }
         }
         

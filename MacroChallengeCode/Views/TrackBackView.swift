@@ -18,13 +18,12 @@ struct TrackBackView: View {
     @StateObject var compassHeading = CompassHeading()
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
-    @State var magnitude = 100.0
+   
     @State var scale = 1.0
     
     @Binding var screen : Screens
     @Binding var mapScreen : MapSwitch
     @State var index = 0
-    
     
     var ns: Namespace.ID {
         _ns ?? namespace
@@ -32,19 +31,13 @@ struct TrackBackView: View {
     @Namespace var namespace
     let _ns: Namespace.ID?
     
+    @Binding var magnitude : Double
     
     var body: some View{
         GeometryReader { geometry in
             ZStack{
                 IndicatorView()
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
-                Avatar()
-                    .matchedGeometryEffect(id: "avatar", in: ns)
-                    .onTapGesture {
-                        withAnimation(.spring()) {
-                            mapScreen = .mapView
-                        }
-                    }
                 ForEach(path.locations, id: \.self){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                         let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
@@ -69,6 +62,13 @@ struct TrackBackView: View {
                         }
                     }
                 }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
+                Avatar()
+                    .matchedGeometryEffect(id: "avatar", in: ns)
+                    .onTapGesture {
+                        withAnimation(.spring()) {
+                            mapScreen = .mapView
+                        }
+                    }
             }
             .background{
                 MapBackground(size: geometry.size)
@@ -78,7 +78,9 @@ struct TrackBackView: View {
                 self.path = PathCustom(path: self.previouspath)
             }
             .onChange(of: currentUserLocation) { newValue in
-                path.removeCheckpoint(currentUserLocation: currentUserLocation!)
+                if (path.removeCheckpoint(currentUserLocation: currentUserLocation!)){
+                    //Vibration or anything
+                }
             }
         }
         
