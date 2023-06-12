@@ -30,6 +30,8 @@ struct ActivityContainerView: View {
     @Namespace var namespace
     let _ns: Namespace.ID?
     
+    @State var start = Date()
+    
     @State var magnitude : Double = 100.0
 
     var body: some View {
@@ -47,7 +49,7 @@ struct ActivityContainerView: View {
                         .frame(width: geo.size.width * 0.1, height: geo.size.width * 0.2).position(x: geo.size.width * 0.9, y: geo.size.height * 0.2)
                         .foregroundColor( Color(day.hours[currentHour].color).opacity(0.7))
                 case .sunset:
-                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: .now, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
+                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
                         .padding(70)
                 }
                 

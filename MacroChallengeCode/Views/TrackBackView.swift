@@ -63,6 +63,7 @@ struct TrackBackView: View {
                     }
                 }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
                 Avatar()
+                    .foregroundColor(Color("white"))
                     .matchedGeometryEffect(id: "avatar", in: ns)
                     .onTapGesture {
                         withAnimation(.spring()) {
