@@ -12,7 +12,7 @@ struct BoxNavigationButton: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.white
+                Color("white")
                 VStack{
                     HStack{
                         Text(text)

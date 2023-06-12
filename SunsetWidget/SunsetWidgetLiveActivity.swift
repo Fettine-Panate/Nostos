@@ -34,19 +34,23 @@ struct SunsetWidgetLiveActivity: Widget {
                     //Text("Sunset")
                     Image(systemName: "sunset.fill")
                         .font(.system(size: 35))
-                        .foregroundColor(.white)
+                        .foregroundColor(
+                            Color("white"))
                         .padding(.vertical, 15)
                     ProgressView(timerInterval: context.attributes.progressInterval, countsDown: true) {
                         Text("Time left")
                             .font(.caption)
                     }
-                    .tint(.white)
-                    .foregroundColor(.white)
+                    .tint(
+                        Color("white"))
+                    .foregroundColor(
+                        Color("white"))
                     .padding(.vertical, -15)
                     Text(context.attributes.sunsetTime, style: .time)
                         .font(.system(size: 20, design: .rounded))
                         .fontWeight(.medium)
-                        .foregroundColor(.white)
+                        .foregroundColor(
+                            Color("white"))
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 10)
@@ -74,27 +78,33 @@ struct SunsetWidgetLiveActivity: Widget {
                     ProgressView(timerInterval: context.attributes.progressInterval, countsDown: true) {
                         // Label needed?
                     }
-                    .tint(.white)
-                    .foregroundColor(.white)
+                    .tint(
+                        Color("white"))
+                    .foregroundColor(
+                        Color("white"))
                     .scaleEffect(x: 1.5, y: 1.5, anchor: .center)
                     .padding(.horizontal, 57)
                     .padding(.vertical, 5)
                 }
             } compactLeading: {
                 Image(systemName: "sunset.fill")
-                    .foregroundColor(Color.white)
+                    .foregroundColor(
+                        Color("white"))
             } compactTrailing: {
                 Text(context.attributes.sunsetTime, style: .time)
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.medium)
-                    .foregroundColor(.white)
+                    .foregroundColor(
+                        Color("white"))
             } minimal: {
                 Image(systemName: "sunset.fill")
-                    .foregroundColor(Color.white)
+                    .foregroundColor(
+                        Color("white"))
                     .padding()
             }
             .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.white)
+            .keylineTint(
+                Color("white"))
         }
     }
 }

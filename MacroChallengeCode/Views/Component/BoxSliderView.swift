@@ -11,7 +11,8 @@ struct BoxSliderView: View {
                                 if magnitude >= 10000{
                                     Color("inactiveGray")
                                 } else {
-                                    Color.white
+                                    
+                                        Color("white")
                                 }
                                 Button(action: {
                                     if magnitude < 10000{
@@ -31,7 +32,8 @@ struct BoxSliderView: View {
                                 if magnitude <= 100{
                                     Color("inactiveGray")
                                 } else {
-                                    Color.white
+                                    
+                                        Color("white")
                                 }
                                 Button(action: {
                                     if magnitude > 100{

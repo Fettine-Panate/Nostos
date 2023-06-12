@@ -30,7 +30,8 @@ struct StartView: View {
                 Color.orange.ignoresSafeArea()
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
-                    .foregroundColor(.white)
+                    .foregroundColor(
+                        Color("white"))
                 Button {
                     withAnimation {
                         screen = .activity
@@ -39,7 +40,14 @@ struct StartView: View {
                         LiveActivityManager.shared.addActivity()
                     }
                 } label: {
-                    Text("Start Activity")
+                    VStack{
+                        Text("Start Activity")
+                            .foregroundColor(Color.orange)
+                            .padding()
+                    }.background(){
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("white"))
+                    }
                 }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
             }

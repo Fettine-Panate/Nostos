@@ -35,7 +35,7 @@ struct MapView: View {
     let _ns: Namespace.ID?
     
     @Binding var magnitude : Double
-    
+    let day : dayFase
     var body: some View {
    
         GeometryReader { geometry in
@@ -54,14 +54,15 @@ struct MapView: View {
                 }
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
-                    .foregroundColor(.white)
+                    .foregroundColor(
+                        Color("white"))
                     .onLongPressGesture {
                         withAnimation {
                            mapScreen = .trackBack
                         }
                     }
             }.background(){
-                MapBackground(size: geometry.size)
+                MapBackground(size: geometry.size, day : day)
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
             .onAppear {
@@ -81,7 +82,7 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil, magnitude: .constant(100.0))
+        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil, magnitude: .constant(100.0), day: dayFase(sunrise: 06, sunset: 20))
     }
 }
 

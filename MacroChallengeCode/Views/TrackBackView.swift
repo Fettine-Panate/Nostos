@@ -32,7 +32,7 @@ struct TrackBackView: View {
     let _ns: Namespace.ID?
     
     @Binding var magnitude : Double
-    
+    let day : dayFase
     var body: some View{
         GeometryReader { geometry in
             ZStack{
@@ -71,7 +71,7 @@ struct TrackBackView: View {
                     }
             }
             .background{
-                MapBackground(size: geometry.size)
+                MapBackground(size: geometry.size, day: day)
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             .onAppear(){

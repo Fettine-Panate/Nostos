@@ -9,6 +9,13 @@ import SwiftUI
 import CoreLocation
 import SunKit
 
+
+let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH"
+    return formatter
+}()
+
 struct ActivityContainerView: View {
     
     @Binding var pathsJSON : [PathCustom]
@@ -17,11 +24,6 @@ struct ActivityContainerView: View {
     @Binding var screen : Screens
     @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH"
-        return formatter
-    }()
     var ns: Namespace.ID {
         _ns ?? namespace
     }
@@ -39,13 +41,14 @@ struct ActivityContainerView: View {
 
                 switch activity {
                 case .map:
-                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, _ns: ns, magnitude: $magnitude)
+                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, _ns: ns, magnitude: $magnitude, day : day)
                         
                     BoxSliderView(magnitude: $magnitude)
                         .frame(width: geo.size.width * 0.1, height: geo.size.width * 0.2).position(x: geo.size.width * 0.9, y: geo.size.height * 0.2)
                         .foregroundColor( Color(day.hours[currentHour].color).opacity(0.7))
                 case .sunset:
-                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: .now, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns)
+                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: .now, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
+                        .padding(70)
                 }
                 
                 Button {
@@ -58,7 +61,15 @@ struct ActivityContainerView: View {
                         LiveActivityManager.shared.stopActivity()
                     }
                 } label: {
-                    Text("Stop activity")
+                    VStack{
+                        Text("Stop Activity")
+                            .padding()
+                            .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
+                            
+                    }.background(){
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color("white"))
+                        }
                 }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                 

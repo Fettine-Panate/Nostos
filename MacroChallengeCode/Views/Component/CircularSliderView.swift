@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreLocation
 
-let dateFormatter: DateFormatter = {
+let dateFormatterHHMM: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter
@@ -20,12 +20,15 @@ struct CircularSliderView: View {
     @ObservedObject var path : PathCustom
     @Binding var userLocation : CLLocation?
     @State var progress1 = 0.0
+    @State var dragged = false
     let sunset : Date
     @State private var start = Date()
     @State var tapped = false
     @State var currentTime =  Date()
+    @State var pastTime = 0.0
+    @State var currentTimeSlider =  Date()
     @State var currentPosition : CGPoint?
-    // let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @Binding var screen : Screens
     @Binding var activity : ActivityEnum
     @Binding var mapScreen : MapSwitch
@@ -35,7 +38,10 @@ struct CircularSliderView: View {
     }
     @Namespace var namespace
     let _ns: Namespace.ID?
-    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID? = nil) {
+    
+    let day : dayFase
+    
+    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID? = nil, day: dayFase) {
         self.sunset = sunset
         self._screen = screen
         self._ns = namespace
@@ -44,13 +50,9 @@ struct CircularSliderView: View {
         self.path = path
         self._userLocation = userLocation
         self._pathsJSON = pathsJSON
-//        self.start = start
-//        if sunset.timeIntervalSince(currentTime) >  0 {
-//            self.progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
-//        } else {
-//            self.progress1 = 1.0
-//        }
+        self.day = day
     }
+    
     
     @State var progress : Double = 0.0
     @State var rotationAngle : Angle = Angle(degrees: 0.0)
@@ -59,7 +61,8 @@ struct CircularSliderView: View {
     
     
     var body: some View {
-      
+        let currentTimeIndex = Int(dateFormatter.string(from: Date()))
+        
         GeometryReader{ gr in
             let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
             let sliderWidth = 0.1 * radius
@@ -67,46 +70,69 @@ struct CircularSliderView: View {
                 //Cerchio interno
                 Circle()
                     .trim(from: 0, to: 0.9)
-                    .stroke(Color.black.opacity(0.2),
+                    .stroke(Color.black.opacity(day.hours[currentTimeIndex!].accentObjectOp),
                     style: StrokeStyle(lineWidth: sliderWidth))
                     .rotationEffect(Angle(degrees: 108))
                     .frame(width: radius * 2, height: radius * 2)
                     .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
                 //Cerchio progress
-                Circle()
-                    .trim(from: 0, to: progress)
-                    .stroke(Color.blue,
-                    style: StrokeStyle(lineWidth: sliderWidth))
-                    .rotationEffect(Angle(degrees: 108))
-                    .frame(width: radius * 2, height: radius * 2)
-                    .overlay {
-                        Text("PlaceHolder")
-                    }
-                    .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
+                    Circle()
+                        .trim(from: !dragged ? 0 : progress, to: !dragged ? progress : 0.9)
+                        .stroke(Color("white"),
+                                style: StrokeStyle(lineWidth: sliderWidth))
+                        .rotationEffect(Angle(degrees: 108))
+                        .frame(width: radius * 2, height: radius * 2)
+                        .overlay {
+                            Text("")
+                        }
+                        .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
+                        .animation(.easeInOut(duration: 0.4), value: dragged)
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
+                    .foregroundColor(Color("white"))
                     .offset(y: radius)
                     .rotationEffect(
                         Angle(degrees: 18)
                        +  rotationAngle
                     )
+                    .animation(.easeInOut(duration: 0.4), value: dragged)
                     .gesture(
                         DragGesture(minimumDistance: 0.0)
                             .onChanged(){ value in
-                                progress = changeProgress(value: value.location, progress: progress)
-                                rotationAngle = changeAngle(value: value.location)
+                                dragged = true
+                                let minAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: .now)
+                                progress = changeProgress(value: value.location, progress: progress, minAngle: minAngle)
+                                rotationAngle = changeAngle(value: value.location, currentAngle: rotationAngle, minAngle: minAngle)
                                 remaingTimeToSunset = Int((sunset.timeIntervalSince(start) * progress) / 0.9)
                                 dateOfAvatarPosition = start.addingTimeInterval(Double(remaingTimeToSunset))
                                 
                             }
+                            .onEnded(){_ in
+                                dragged = false
+                            }
                     )
-                iconSlider(text: Text(dateFormatter.string(from: path.locations.first?.timestamp ?? Date())),angle: Angle(degrees: 18.0) , radius: radius)
+                iconSlider(text: Text(dateFormatterHHMM.string(from: path.locations.first?.timestamp ?? Date())),angle: Angle(degrees: 18.0) , radius: radius)
                     .rotationEffect(Angle(degrees: 18))
+                    .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                 iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)) , radius: radius)
                     .rotationEffect( calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)))
-                iconSlider(text: Text(dateFormatter.string(from: sunset)),angle: Angle(degrees: 342) , radius: radius)
+                    .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                iconSlider(text: Text(dateFormatterHHMM.string(from: sunset)),angle: Angle(degrees: 342) , radius: radius)
                     .rotationEffect(Angle(degrees: 342))
+                    .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                if dragged{
+                    iconSlider(text: Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)),angle: rotationAngle + Angle(degrees: 18) , radius: radius)
+                        .rotationEffect(rotationAngle + Angle(degrees: 18))
+                        .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                }
                 
+                Text("Past time to start:\n" + formatSecondsToHMS(Int(pastTime)))
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.center)
+                    .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                    .foregroundColor(Color("white"))
+                                
+                                
             }
             .onChange(of: userLocation) { newValue in
                 path.addLocation(userLocation!, checkLocation: path.checkDistance)
@@ -115,9 +141,24 @@ struct CircularSliderView: View {
                 savePack("Paths", pathsJSON)
             }
         }
+                    .onReceive(timer){ _ in
+                        currentTime = Date()
+                        pastTime = currentTime.timeIntervalSince(start)
+                        if !dragged{
+                            progress = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+                            rotationAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: currentTime)
+                        }
+                        
+                    }
     }
 }
 
+    func formatSecondsToHMS(_ totalSeconds: Int) -> String {
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let seconds = (totalSeconds % 3600) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
 
 
 func calculateAngleFromDate(sunsetTime: Date, startTime: Date, inputTime: Date)-> Angle{
@@ -132,23 +173,24 @@ func calculateTimeToReturn(sunset: Date, startTime: Date) -> Date{
     return ret
 }
 
-func changeProgress(value: CGPoint, progress : Double) -> Double {
+func changeProgress(value: CGPoint, progress : Double, minAngle : Angle) -> Double {
     let vector = CGVector(dx: -value.x, dy: value.y)
     let angleRadians = atan2(vector.dx, vector.dy)
     let positiveAngle = angleRadians < 0.0 ? angleRadians + (2.0 * .pi) : angleRadians
     var ret : Double = progress
-    if Angle(radians: positiveAngle) <= Angle(degrees: 324) && Angle(radians: positiveAngle) >= Angle(degrees: 0){
+    if Angle(radians: positiveAngle) <= Angle(degrees: 324) && Angle(radians: positiveAngle) >= minAngle  {
         ret = ((positiveAngle / ((2.0 * .pi))))
     }
     print("returning : \(ret)")
     return ret
 }
-func changeAngle(value: CGPoint) -> Angle {
+
+func changeAngle(value: CGPoint,currentAngle: Angle, minAngle : Angle) -> Angle {
     let vector = CGVector(dx: -value.x, dy: value.y)
     let angleRadians = atan2(vector.dx, vector.dy)
     let positiveAngle = angleRadians < 0.0 ? angleRadians + (2.0 * .pi) : angleRadians
-    var ret : Angle = Angle(degrees: 0.0)
-    if Angle(radians: positiveAngle) <= Angle(degrees: 324) && Angle(radians: positiveAngle) >= Angle(degrees: 0){
+    var ret : Angle = currentAngle
+    if Angle(radians: positiveAngle) <= Angle(degrees: 324) && Angle(radians: positiveAngle) >=  minAngle {
         ret = Angle(radians: positiveAngle)
     }
     return ret
@@ -314,13 +356,13 @@ struct iconSlider : View {
                 .frame(width: 2,height: 10)
             VStack{
                 if (icon == nil){
-                    text.padding(10)
+                    text.padding(5)
                 }else{
-                    icon.padding(10)
+                    icon.padding(5)
                 }
             }.rotationEffect(-angle)
         }
-        .offset(y: radius * 1.3)
+        .offset(y: radius * 1.45)
        
         
     }
@@ -329,6 +371,6 @@ struct iconSlider : View {
 
 struct CircularSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularSliderView(pathsJSON: .constant([]), path: PathCustom(title: ""), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView))
+        CircularSliderView(pathsJSON: .constant([]), path: PathCustom(title: ""), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView), day: dayFase(sunrise: 06, sunset: 20))
     }
 }

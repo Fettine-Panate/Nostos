@@ -46,7 +46,8 @@ struct ProgressBarView: View {
             HStack{
                 Rectangle()
                     .frame(width:CGFloat(proportion),height: 8)
-                    .foregroundColor(.white)
+                    .foregroundColor(
+                        Color("white"))
                     .animation(.easeOut, value: proportion)
                 Spacer()
             }

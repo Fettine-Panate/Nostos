@@ -23,7 +23,8 @@ struct SemisphereButton: View {
                   //  .rotationEffect(.degrees(180))
                    
                 Text("Start")
-                    .foregroundColor(.white)
+                    .foregroundColor(
+                        Color("white"))
                     .font(.headline)
                    
             }

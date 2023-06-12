@@ -30,7 +30,8 @@ struct SwitchModeButton: View {
             }
         } label: {
             ZStack{
-                Color.white
+                
+                    Color("white")
                 Image(systemName: imageName)
                     .foregroundColor(Color(color).opacity(0.7))
             }.cornerRadius(10)
