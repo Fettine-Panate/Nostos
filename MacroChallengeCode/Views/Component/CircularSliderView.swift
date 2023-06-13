@@ -77,11 +77,15 @@ struct CircularSliderView: View {
                         .stroke(Color("white"),
                                 style: StrokeStyle(lineWidth: sliderWidth))
                         .rotationEffect(Angle(degrees: 108))
+                        .matchedGeometryEffect(id: "circle", in: ns)
+                        .matchedGeometryEffect(id: "circle1", in: ns)
+                        .matchedGeometryEffect(id: "circle2", in: ns)
+                        .matchedGeometryEffect(id: "circle3", in: ns)
+                        .matchedGeometryEffect(id: "circle4", in: ns)
                         .frame(width: radius * 2, height: radius * 2)
                         .overlay {
                             Text("")
                         }
-                        .matchedGeometryEffect(id: "circle", in: ns)
                         .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
                         .animation(.easeInOut(duration: 0.4), value: dragged)
                        

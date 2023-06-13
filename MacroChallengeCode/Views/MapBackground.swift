@@ -20,23 +20,26 @@ struct MapBackground: View {
             
             Circle()
                 .stroke(Color.black.opacity(day.hours[currentHour].accentObjectOp), lineWidth: 15)
-                .frame(width: size.height/4, height: size.height/4)
                 .matchedGeometryEffect(id: "circle", in: ns)
-            
+                .frame(width: size.height/4, height: size.height/4)
             Circle()
                 .stroke(Color.black.opacity(day.hours[currentHour].accentObjectOp), lineWidth: 15)
+                .matchedGeometryEffect(id: "circle1", in: ns)
                 .frame(width: (2 * size.height)/4, height: (2 * size.height)/4)
             
             Circle()
                 .stroke(Color.black.opacity(day.hours[currentHour].accentObjectOp), lineWidth: 15)
+                .matchedGeometryEffect(id: "circle2", in: ns)
                 .frame(width: (3 * size.height)/4, height: (3 * size.height)/4)
             
             Circle()
                 .stroke(Color.black.opacity(day.hours[currentHour].accentObjectOp), lineWidth: 15)
+                .matchedGeometryEffect(id: "circle3", in: ns)
                 .frame(width: size.height, height: size.height)
             
             Circle()
                 .stroke(Color.black.opacity(day.hours[currentHour].accentObjectOp), lineWidth: 15)
+                .matchedGeometryEffect(id: "circle4", in: ns)
                 .frame(width: size.height * 5/4, height: size.height * 5/4)
             
             Circle()
