@@ -33,10 +33,11 @@ struct MapView: View {
     @Binding var magnitude : Double
     let day : dayFase
     var body: some View {
-   
+        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack {
                 IndicatorView()
+                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.2))
                     .matchedGeometryEffect(id: "indicator", in: ns)
                     //.rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.locations, id: \.self ){ loc in
@@ -45,11 +46,11 @@ struct MapView: View {
                         PinAnnotationView(loc: loc)
                             .position(position)
                             .animation(.linear, value: position)
-                            .scaleEffect(scale/2)
+                            .scaleEffect(scale/3)
                         
                     }
                 }
-                .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+                .rotationEffect(Angle(degrees: -self.compassHeading.degrees))
 
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)

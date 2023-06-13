@@ -139,14 +139,14 @@ struct CircularSliderView: View {
                         .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                     }
                     if !dragged{
-                        Text("Activity time:\n  **\(formatSecondsToHMS(Int(pastTime)))** ")
+                        Text("Activity time:\n**\(formatSecondsToHMS(Int(pastTime)))**")
                             .font(.title2)
                             .multilineTextAlignment(.center)
                             .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
                             .foregroundColor(Color("white"))
                     } else {
                         
-                        Text("Time to sunset:\n  **\(formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))** ")
+                        Text("Time to sunset:\n**\(formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))**")
                             .font(.title2)
                             .multilineTextAlignment(.center)
                             .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)

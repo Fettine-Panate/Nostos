@@ -12,20 +12,16 @@ struct IndicatorView: View {
     var body: some View {
         ZStack{
             ZStack{
-                Circle()
-                    .trim(from: 0.65, to: 0.85)
-                    .stroke(
-                        .black.opacity(0.15),
-                        lineWidth: 70
-                    )
-                    .frame(width: 70,height: 70)
-            }
-            .scaleEffect(0.7)
-         
+                RoundedRectangle(cornerRadius: 10)
+                    .trim(from: 0.125,to: 0.625)
+                    .frame(width: 35,height: 35)
+                
+            }.rotationEffect(Angle(degrees: 135))
+                .scaleEffect(0.7)
+                .padding(.bottom,25)
         }
     }
 }
-
 
 
 

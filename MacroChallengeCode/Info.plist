@@ -7,5 +7,7 @@
 		<string>fetch</string>
 		<string>location</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
