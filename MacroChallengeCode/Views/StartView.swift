@@ -18,11 +18,8 @@ struct StartView: View {
     @State var isPresented = false
     @State var sun : Sun?
     @Binding var screen: Screens
-    var ns: Namespace.ID {
-        _ns ?? namespace
-    }
-    @Namespace var namespace
-    var _ns: Namespace.ID?
+    var ns: Namespace.ID
+    
     var body: some View {
         
         GeometryReader{ geo in
@@ -101,6 +98,6 @@ struct StartView: View {
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView(pathsJSON: .constant([]), screen: .constant(.startView))
+        StartView(pathsJSON: .constant([]), screen: .constant(.startView), ns: Namespace.init().wrappedValue)
     }
 }

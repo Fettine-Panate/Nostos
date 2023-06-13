@@ -18,11 +18,8 @@ struct ShowPathView: View {
     @Binding var activity: ActivityEnum
     @Binding var screen : Screens
     
-    var ns: Namespace.ID {
-        _ns ?? namespace
-    }
-    @Namespace var namespace
-    let _ns: Namespace.ID?
+    var ns: Namespace.ID
+    
     @Binding var magnitude : Double 
 
     let day : dayFase
@@ -35,9 +32,9 @@ struct ShowPathView: View {
             ZStack{
                 switch mapScreen{
                 case .mapView:
-                    MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, _ns: ns, magnitude: $magnitude, day : day)
+                    MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, ns: ns, magnitude: $magnitude, day : day)
                 case .trackBack:
-                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, mapScreen: $mapScreen, _ns: ns,  magnitude: $magnitude, day : day)
+                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, mapScreen: $mapScreen, ns: ns,  magnitude: $magnitude, day : day)
                 }
               
                 

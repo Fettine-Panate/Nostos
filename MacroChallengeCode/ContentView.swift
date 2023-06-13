@@ -33,6 +33,7 @@ struct ContentView: View {
     @State var activity : ActivityEnum = .map
     @State var mapScreen : MapSwitch = .mapView
     @Namespace var ns
+    
     init(pathsJSON: [PathCustom] = itemsJSON, changeScreen: Int = 0, screen: Screens = .startView) {
         self.pathsJSON = pathsJSON
         self.changeScreen = changeScreen
@@ -45,10 +46,10 @@ struct ContentView: View {
         ZStack{
             switch screen {
             case .startView:
-                StartView(pathsJSON: $pathsJSON, screen: $screen, _ns: ns)
+                StartView(pathsJSON: $pathsJSON, screen: $screen, ns: ns)
             case .activity:
                 if(LocationManager.shared.userLocation != nil){
-                    ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, _ns: ns)
+                    ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns)
                 }else{
                     Text("Activate into your settings the GPS track")
                 }

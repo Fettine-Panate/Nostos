@@ -32,19 +32,15 @@ struct CircularSliderView: View {
     @Binding var activity : ActivityEnum
     @Binding var mapScreen : MapSwitch
     
-    var ns: Namespace.ID {
-        _ns ?? namespace
-    }
-    @Namespace var namespace
-    let _ns: Namespace.ID?
+    var ns: Namespace.ID
     
     let day : dayFase
     
-    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID? = nil, day: dayFase) {
+    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: dayFase) {
         self.sunset = sunset
         self.start = start
         self._screen = screen
-        self._ns = namespace
+        self.ns = namespace
         self._mapScreen = mapScreen
         self._activity = activity
         self.path = path
@@ -85,8 +81,10 @@ struct CircularSliderView: View {
                         .overlay {
                             Text("")
                         }
+                        .matchedGeometryEffect(id: "circle", in: ns)
                         .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
                         .animation(.easeInOut(duration: 0.4), value: dragged)
+                       
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
                     .foregroundColor(Color("white"))
@@ -397,6 +395,6 @@ struct iconSlider : View {
 
 struct CircularSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularSliderView(pathsJSON: .constant([]), path: PathCustom(title: ""), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView), day: dayFase(sunrise: 06, sunset: 20))
+        CircularSliderView(pathsJSON: .constant([]), path: PathCustom(title: ""), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView), namespace: Namespace.init().wrappedValue, day: dayFase(sunrise: 06, sunset: 20))
     }
 }

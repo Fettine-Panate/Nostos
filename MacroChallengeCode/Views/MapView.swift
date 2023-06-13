@@ -28,11 +28,7 @@ struct MapView: View {
     @Binding var mapScreen : MapSwitch
     @Binding var pathsJSON : [PathCustom]
     
-    var ns: Namespace.ID {
-        _ns ?? namespace
-    }
-    @Namespace var namespace
-    let _ns: Namespace.ID?
+    var ns: Namespace.ID
     
     @Binding var magnitude : Double
     let day : dayFase
@@ -62,7 +58,7 @@ struct MapView: View {
                         }
                     }
             }.background(){
-                MapBackground(size: geometry.size, day : day)
+                MapBackground(size: geometry.size, day : day, ns: ns)
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
             .onAppear {
@@ -82,7 +78,7 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), _ns: nil, magnitude: .constant(100.0), day: dayFase(sunrise: 06, sunset: 20))
+        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), ns: Namespace.init().wrappedValue, magnitude: .constant(100.0), day: dayFase(sunrise: 06, sunset: 20))
     }
 }
 

@@ -25,11 +25,7 @@ struct TrackBackView: View {
     @Binding var mapScreen : MapSwitch
     @State var index = 0
     
-    var ns: Namespace.ID {
-        _ns ?? namespace
-    }
-    @Namespace var namespace
-    let _ns: Namespace.ID?
+    var ns: Namespace.ID
     
     @Binding var magnitude : Double
     let day : dayFase
@@ -72,7 +68,7 @@ struct TrackBackView: View {
                     }
             }
             .background{
-                MapBackground(size: geometry.size, day: day)
+                MapBackground(size: geometry.size, day: day, ns: ns)
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             .onAppear(){

@@ -9,8 +9,11 @@ import SwiftUI
 import MapKit
 
 struct MapBackground: View {
-    var size : CGSize
+    var size : CGSize 
     let day : dayFase
+    
+    var ns: Namespace.ID
+    
     var body: some View {
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         ZStack {
@@ -18,6 +21,7 @@ struct MapBackground: View {
             Circle()
                 .stroke(Color.black.opacity(day.hours[currentHour].accentObjectOp), lineWidth: 15)
                 .frame(width: size.height/4, height: size.height/4)
+                .matchedGeometryEffect(id: "circle", in: ns)
             
             Circle()
                 .stroke(Color.black.opacity(day.hours[currentHour].accentObjectOp), lineWidth: 15)
@@ -48,6 +52,6 @@ struct MapBackground: View {
 
 struct MapBackground_Previews: PreviewProvider {
     static var previews: some View {
-        MapBackground(size: CGSize(width: 393.0, height: 759.0), day: dayFase(sunrise: 06, sunset: 18))
+        MapBackground(size: CGSize(width: 393.0, height: 759.0), day: dayFase(sunrise: 06, sunset: 18), ns: Namespace.init().wrappedValue)
     }
 }

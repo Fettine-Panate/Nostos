@@ -24,11 +24,8 @@ struct ActivityContainerView: View {
     @Binding var screen : Screens
     @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
-    var ns: Namespace.ID {
-        _ns ?? namespace
-    }
-    @Namespace var namespace
-    let _ns: Namespace.ID?
+    var ns: Namespace.ID
+    
     
     @State var start = Date()
     
@@ -40,10 +37,10 @@ struct ActivityContainerView: View {
         GeometryReader{ geo in
             ZStack{
                 Color(day.hours[currentHour].color).opacity(0.7).ignoresSafeArea()
-
+                
                 switch activity {
                 case .map:
-                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, _ns: ns, magnitude: $magnitude, day : day)
+                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day)
                         
                     BoxSliderView(magnitude: $magnitude)
                         .frame(width: geo.size.width * 0.1, height: geo.size.width * 0.2).position(x: geo.size.width * 0.9, y: geo.size.height * 0.2)
@@ -86,6 +83,6 @@ struct ActivityContainerView: View {
 
 struct ActivityContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityContainerView(pathsJSON: .constant([]), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), path: PathCustom(title: "Hello"), screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.trackBack), _ns: nil)
+        ActivityContainerView(pathsJSON: .constant([]), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), path: PathCustom(title: "Hello"), screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.trackBack), ns: Namespace.init().wrappedValue)
     }
 }
