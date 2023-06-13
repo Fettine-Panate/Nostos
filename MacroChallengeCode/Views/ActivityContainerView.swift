@@ -30,6 +30,9 @@ struct ActivityContainerView: View {
     @Namespace var namespace
     let _ns: Namespace.ID?
     
+    
+    
+    
     @State var start = Date()
     
     @State var magnitude : Double = 100.0

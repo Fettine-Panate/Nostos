@@ -23,15 +23,14 @@ struct ShowPathView: View {
     }
     @Namespace var namespace
     let _ns: Namespace.ID?
+    
+    
     @Binding var magnitude : Double 
 
     let day : dayFase
     
     var body: some View {
-      
-        
         GeometryReader{ geo in
-     
             ZStack{
                 switch mapScreen{
                 case .mapView:
@@ -39,11 +38,8 @@ struct ShowPathView: View {
                 case .trackBack:
                     TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, mapScreen: $mapScreen, _ns: ns,  magnitude: $magnitude, day : day)
                 }
-              
-                
             }
         }
-        
     }
 }
 

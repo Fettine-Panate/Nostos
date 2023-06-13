@@ -62,7 +62,7 @@ struct MapView: View {
                         }
                     }
             }.background(){
-                MapBackground(size: geometry.size, day : day)
+                MapBackground(size: geometry.size, day : day,  _ns: ns)
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
             .onAppear {

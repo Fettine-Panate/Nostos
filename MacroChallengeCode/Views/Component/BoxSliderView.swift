@@ -8,16 +8,16 @@ struct BoxSliderView: View {
                     VStack(spacing: 0){
                         HStack{
                             ZStack{
-                                if magnitude >= 10000{
+                                if magnitude <= 100{
                                     Color("inactiveGray")
                                 } else {
                                     
                                         Color("white")
                                 }
                                 Button(action: {
-                                    if magnitude < 10000{
-                                        magnitude = magnitude + 100
-                                    }}, label: {
+                                    if magnitude > 100{
+                                        magnitude = magnitude - 100
+                                    } }, label: {
                                         Text("+")
                                     })
                             }
@@ -29,16 +29,16 @@ struct BoxSliderView: View {
                         .frame(height: gr.size.height * 2/100)
                         HStack{
                             ZStack{
-                                if magnitude <= 100{
+                                if magnitude >= 10000{
                                     Color("inactiveGray")
                                 } else {
                                     
                                         Color("white")
                                 }
-                                Button(action: {
-                                    if magnitude > 100{
-                                        magnitude = magnitude - 100
-                                    } }, label: {
+                                Button(action:{
+                                    if magnitude < 10000{
+                                        magnitude = magnitude + 100
+                                    }} , label: {
                                         Text("-")
                                     })
                             }

@@ -38,13 +38,13 @@ struct CircularSliderView: View {
     @Namespace var namespace
     let _ns: Namespace.ID?
     
+    
     let day : dayFase
     
     init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID? = nil, day: dayFase) {
         self.sunset = sunset
         self.start = start
         self._screen = screen
-        self._ns = namespace
         self._mapScreen = mapScreen
         self._activity = activity
         self.path = path
@@ -65,7 +65,8 @@ struct CircularSliderView: View {
         
         GeometryReader{ gr in
             let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
-            let sliderWidth = 0.1 * radius
+            let sliderWidth = 10.0
+            
             ZStack {
                 //Cerchio interno
                 Circle()
@@ -77,6 +78,7 @@ struct CircularSliderView: View {
                     .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
                 //Cerchio progress
                     Circle()
+                    .matchedGeometryEffect(id: "cir", in: ns)
                         .trim(from: !dragged ? 0 : progress, to: !dragged ? progress : 0.9)
                         .stroke(Color("white"),
                                 style: StrokeStyle(lineWidth: sliderWidth))
@@ -111,7 +113,7 @@ struct CircularSliderView: View {
                                 dragged = false
                             }
                     )
-                iconSlider(text: Text(dateFormatterHHMM.string(from: path.locations.first?.timestamp ?? Date())),angle: Angle(degrees: 18.0) , radius: radius)
+                iconSlider(text: Text(dateFormatterHHMM.string(from: start)),angle: Angle(degrees: 18.0) , radius: radius)
                     .rotationEffect(Angle(degrees: 18))
                     .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                 iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)) , radius: radius)

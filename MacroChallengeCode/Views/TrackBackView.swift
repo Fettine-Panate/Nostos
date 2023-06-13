@@ -31,6 +31,7 @@ struct TrackBackView: View {
     @Namespace var namespace
     let _ns: Namespace.ID?
     
+    
     @Binding var magnitude : Double
     let day : dayFase
     var body: some View{
@@ -72,7 +73,7 @@ struct TrackBackView: View {
                     }
             }
             .background{
-                MapBackground(size: geometry.size, day: day)
+                MapBackground(size: geometry.size, day : day,  _ns: ns)
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             .onAppear(){

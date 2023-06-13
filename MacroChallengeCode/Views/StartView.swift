@@ -23,6 +23,10 @@ struct StartView: View {
     }
     @Namespace var namespace
     var _ns: Namespace.ID?
+    
+    
+    
+    
     var body: some View {
         
         GeometryReader{ geo in
