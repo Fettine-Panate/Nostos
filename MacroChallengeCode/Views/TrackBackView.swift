@@ -33,6 +33,7 @@ struct TrackBackView: View {
         GeometryReader { geometry in
             ZStack{
                 IndicatorView()
+                    .matchedGeometryEffect(id: "indicator", in: ns)
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 ForEach(path.locations, id: \.self){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
@@ -68,7 +69,7 @@ struct TrackBackView: View {
                     }
             }
             .background{
-                MapBackground(size: geometry.size, day: day, ns: ns)
+                MapBackground(size: geometry.size, day: day, magnitude: $magnitude, ns: ns)
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
             .onAppear(){

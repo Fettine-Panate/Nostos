@@ -12,7 +12,6 @@ struct Avatar: View {
     var body: some View {
         Circle()
             .frame(width: 35, height: 35)
-            .shadow(radius: 1)
     }
 }
 

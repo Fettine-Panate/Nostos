@@ -37,7 +37,8 @@ struct MapView: View {
         GeometryReader { geometry in
             ZStack {
                 IndicatorView()
-                    .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+                    .matchedGeometryEffect(id: "indicator", in: ns)
+                    //.rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.locations, id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                         let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
@@ -48,6 +49,8 @@ struct MapView: View {
                         
                     }
                 }
+                .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
                     .foregroundColor(
@@ -58,7 +61,7 @@ struct MapView: View {
                         }
                     }
             }.background(){
-                MapBackground(size: geometry.size, day : day, ns: ns)
+                MapBackground(size: geometry.size, day : day, magnitude: $magnitude, ns: ns)
             }
             .frame(width: geometry.size.width,height: geometry.size.height)
             .onAppear {

@@ -27,7 +27,7 @@ struct CircularSliderView: View {
     @State var currentTime =  Date()
     @State var pastTime = 0.0
     @State var currentPosition : CGPoint?
-     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     @Binding var screen : Screens
     @Binding var activity : ActivityEnum
     @Binding var mapScreen : MapSwitch
@@ -48,7 +48,7 @@ struct CircularSliderView: View {
         self._pathsJSON = pathsJSON
         self.day = day
     }
-    
+    @State var isBeforeTheSunset = true
     
     @State var progress : Double = 0.0
     @State var rotationAngle : Angle = Angle(degrees: 0.0)
@@ -61,7 +61,7 @@ struct CircularSliderView: View {
         
         GeometryReader{ gr in
             let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
-            let sliderWidth = 0.1 * radius
+            let sliderWidth = 10.0
             ZStack {
                 //Cerchio interno
                 Circle()
@@ -101,16 +101,20 @@ struct CircularSliderView: View {
                     .gesture(
                         DragGesture(minimumDistance: 0.0)
                             .onChanged(){ value in
-                                dragged = true
-                                let minAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: .now)
-                                progress = changeProgress(value: value.location, progress: progress, minAngle: minAngle)
-                                rotationAngle = changeAngle(value: value.location, currentAngle: rotationAngle, minAngle: minAngle)
-                                remaingTimeToSunset = Int((sunset.timeIntervalSince(start) * progress) / 0.9)
-                                dateOfAvatarPosition = start.addingTimeInterval(Double(remaingTimeToSunset))
+                                if isBeforeTheSunset{
+                                    dragged = true
+                                    let minAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: .now)
+                                    progress = changeProgress(value: value.location, progress: progress, minAngle: minAngle)
+                                    rotationAngle = changeAngle(value: value.location, currentAngle: rotationAngle, minAngle: minAngle)
+                                    remaingTimeToSunset = Int((sunset.timeIntervalSince(start) * progress) / 0.9)
+                                    dateOfAvatarPosition = start.addingTimeInterval(Double(remaingTimeToSunset))
+                                }
                                 
                             }
                             .onEnded(){_ in
-                                dragged = false
+                                if isBeforeTheSunset{
+                                    dragged = false
+                                }
                             }
                     )
                 iconSlider(text: Text(dateFormatterHHMM.string(from: path.locations.first?.timestamp ?? Date())),angle: Angle(degrees: 18.0) , radius: radius)
@@ -119,36 +123,42 @@ struct CircularSliderView: View {
                 iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)) , radius: radius)
                     .rotationEffect( calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)))
                     .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
-                iconSlider(text: Text(dateFormatterHHMM.string(from: sunset)),angle: Angle(degrees: 342) , radius: radius)
+                iconSlider(icon: Image(systemName: "sunset"), text: Text( dateFormatterHHMM.string(from: sunset))
+                ,angle: Angle(degrees: 342) , radius: radius)
                     .rotationEffect(Angle(degrees: 342))
                     .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                 
-            iconSlider(icon: Image(systemName: "sunset") ,angle: Angle(degrees: 312) , radius: radius)
-                .rotationEffect(Angle(degrees: 312))
-                .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
-                
-                if dragged{
-                    iconSlider(text: Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)),angle: rotationAngle + Angle(degrees: 18) , radius: radius)
+//            iconSlider(icon: Image(systemName: "sunset") ,angle: Angle(degrees: 312) , radius: radius)
+//                .rotationEffect(Angle(degrees: 312))
+//                .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                if isBeforeTheSunset{
+                    if dragged{
+                        iconSlider(text:
+                                    Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)),angle: rotationAngle + Angle(degrees: 18) , radius: radius)
                         .rotationEffect(rotationAngle + Angle(degrees: 18))
                         .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
-                }
-                @State var textOpacity = 0.0
-                
-                if !dragged{
-                    Text("Past time to start:\n" + formatSecondsToHMS(Int(pastTime)))
-                        .fontWeight(.semibold)
-                        .multilineTextAlignment(.center)
-                        .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
-                        .foregroundColor(Color("white"))
-                } else {
-                    
-                    Text("Time to sunset:\n" + formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))
-                            .fontWeight(.semibold)
+                    }
+                    if !dragged{
+                        Text("Activity time:\n  **\(formatSecondsToHMS(Int(pastTime)))** ")
+                            .font(.title2)
+                            .multilineTextAlignment(.center)
+                            .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                            .foregroundColor(Color("white"))
+                    } else {
+                        
+                        Text("Time to sunset:\n  **\(formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))** ")
+                            .font(.title2)
+                            .multilineTextAlignment(.center)
+                            .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                            .foregroundColor(Color("white"))
+                    }
+                }else{
+                        Text("Activity time:\n  **\(formatSecondsToHMS(Int(pastTime)))** ")
+                            .font(.title2)
                             .multilineTextAlignment(.center)
                             .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
                             .foregroundColor(Color("white"))
                 }
-                                
                                 
             }
             .onChange(of: userLocation) { newValue in
@@ -160,15 +170,26 @@ struct CircularSliderView: View {
         }
         .onAppear(){
             pastTime = currentTime.timeIntervalSince(start)
+            if sunset.timeIntervalSince(currentTime) <= 0{
+                isBeforeTheSunset = false
+            }
         }
                     .onReceive(timer){ _ in
                         currentTime = Date()
+                        if sunset.timeIntervalSince(currentTime) <= 0{
+                            isBeforeTheSunset = false
+                        }
                         pastTime = currentTime.timeIntervalSince(start)
-                        if !dragged{
-                            withAnimation(){
-                                progress = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
-                                rotationAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: currentTime)
+                        if isBeforeTheSunset{
+                            if !dragged{
+                                withAnimation(.linear(duration: 5)){
+                                    progress = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+                                    rotationAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: currentTime)
+                                }
                             }
+                        } else{
+                            progress = 0.90
+                            rotationAngle = Angle(degrees: 0.90 * 360)
                         }
                         
                     }
@@ -185,7 +206,7 @@ struct CircularSliderView: View {
 func formatSecondsToHM(_ totalSeconds: Int) -> String {
     let hours = totalSeconds / 3600
     let minutes = (totalSeconds % 3600) / 60
-    return String(format: "%02d:%02d", hours, minutes)
+    return String(format: "%02d:%02d:00", hours, minutes)
 }
 
 

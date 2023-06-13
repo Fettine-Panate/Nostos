@@ -65,6 +65,7 @@ struct ActivityContainerView: View {
                 } label: {
                     VStack{
                         Text("Stop Activity")
+                            .fontWeight(.semibold)
                             .padding()
                             .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
                             

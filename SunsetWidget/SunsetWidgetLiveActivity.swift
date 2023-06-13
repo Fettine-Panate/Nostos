@@ -38,7 +38,7 @@ struct SunsetWidgetLiveActivity: Widget {
                             Color.white)
                         .padding(.vertical, 15)
                     ProgressView(timerInterval: context.attributes.progressInterval, countsDown: true) {
-                        Text("Time left")
+                        Text("Time to sunset")
                             .font(.caption)
                     }
                     .tint(
