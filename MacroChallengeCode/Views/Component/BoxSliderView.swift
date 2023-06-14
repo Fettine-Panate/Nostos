@@ -8,14 +8,14 @@ struct BoxSliderView: View {
                     VStack(spacing: 0){
                         HStack{
                             ZStack{
-                                if magnitude <= 30{
+                                if magnitude <= 40{
                                     Color("inactiveGray")
                                 } else {
                                     
                                         Color("white")
                                 }
                                 Button(action: {
-                                    if magnitude > 30{
+                                    if magnitude > 40{
                                         magnitude = magnitude / 2
                                     } }, label: {
                                         Text("+")
