@@ -12,19 +12,18 @@ struct IndicatorView: View {
     var body: some View {
 
             ZStack{
-                RoundedTriangle()
-                    .frame(width: 45, height: 75)
-                    .padding(.bottom, 55)
-                    .opacity(0.2)
-                    
-                  
-                 
-            }
-            .scaleEffect(0.7)
-         
-        
-    }
+
+                RoundedRectangle(cornerRadius: 10)
+                    .trim(from: 0.125,to: 0.625)
+                    .frame(width: 35,height: 35)
+                
+            }.rotationEffect(Angle(degrees: 135))
+                .scaleEffect(0.7)
+                .padding(.bottom,20)
+        }
+
 }
+
 
 struct RoundedTriangle : Shape {
     func path(in rect: CGRect) -> Path {
@@ -43,7 +42,6 @@ struct RoundedTriangle : Shape {
         return path
     }
 }
-
 
 struct IndicatorView_Previews: PreviewProvider {
     static var previews: some View {

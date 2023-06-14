@@ -30,9 +30,11 @@ struct TrackBackView: View {
     @Binding var magnitude : Double
     let day : dayFase
     var body: some View{
+        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack{
                 IndicatorView()
+                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.2))
                     .matchedGeometryEffect(id: "indicator", in: ns)
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 ForEach(path.locations, id: \.self){ loc in
@@ -42,7 +44,7 @@ struct TrackBackView: View {
                             LastPinAnnotationView(loc: loc)
                                 .position(position)
                                 .animation(.linear, value: position)
-                                .scaleEffect(scale/2)
+                                .scaleEffect(scale/3)
                                 .onAppear{
                                     index += 1
                                 }
@@ -50,12 +52,12 @@ struct TrackBackView: View {
                             FirstPinAnnotationView(loc: loc)
                                 .position(position)
                                 .animation(.linear, value: position)
-                                .scaleEffect(scale/2)
+                                .scaleEffect(scale/3)
                         } else{
                             PinAnnotationView(loc: loc)
                                 .position(position)
                                 .animation(.linear, value: position)
-                                .scaleEffect(scale/2)
+                                .scaleEffect(scale/3)
                         }
                     }
                 }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
