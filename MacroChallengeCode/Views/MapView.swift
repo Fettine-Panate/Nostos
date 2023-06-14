@@ -37,7 +37,7 @@ struct MapView: View {
         GeometryReader { geometry in
             ZStack {
                 IndicatorView()
-                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.2))
+                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.1))
                     .matchedGeometryEffect(id: "indicator", in: ns)
                     //.rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.locations, id: \.self ){ loc in

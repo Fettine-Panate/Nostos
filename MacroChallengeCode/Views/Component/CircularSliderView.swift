@@ -117,7 +117,7 @@ struct CircularSliderView: View {
                                 }
                             }
                     )
-                iconSlider(text: Text(dateFormatterHHMM.string(from: path.locations.first?.timestamp ?? Date())),angle: Angle(degrees: 18.0) , radius: radius)
+                iconSlider(text: Text(dateFormatterHHMM.string(from: start)),angle: Angle(degrees: 18.0) , radius: radius)
                     .rotationEffect(Angle(degrees: 18))
                     .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                 iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)) , radius: radius)
@@ -134,19 +134,19 @@ struct CircularSliderView: View {
                 if isBeforeTheSunset{
                     if dragged{
                         iconSlider(text:
-                                    Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)),angle: rotationAngle + Angle(degrees: 18) , radius: radius)
+                                    Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)).bold(),angle: rotationAngle + Angle(degrees: 18) , radius: radius, rect: false)
                         .rotationEffect(rotationAngle + Angle(degrees: 18))
                         .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                     }
                     if !dragged{
-                        Text("Activity time:\n**\(formatSecondsToHMS(Int(pastTime)))**")
+                        Text("Activity time:\n__\(formatSecondsToHMS(Int(pastTime)))__")
                             .font(.title2)
                             .multilineTextAlignment(.center)
                             .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
                             .foregroundColor(Color("white"))
                     } else {
                         
-                        Text("Time to sunset:\n**\(formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))**")
+                        Text("Time to sunset:\n__\(formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))__")
                             .font(.title2)
                             .multilineTextAlignment(.center)
                             .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
@@ -397,12 +397,23 @@ struct iconSlider : View {
     
     var angle : Angle
     var radius : Double
+    var rect : Bool?
+    
+    init(icon: Image? = nil, text: Text? = nil, angle: Angle, radius: Double, rect: Bool? = true) {
+        self.icon = icon
+        self.text = text
+        self.angle = angle
+        self.radius = radius
+        self.rect = rect
+    }
     
     
     var body: some View{
         VStack{
-            Rectangle()
-                .frame(width: 2,height: 10)
+            if rect! {
+                Rectangle()
+                    .frame(width: 2,height: 10)
+            }
             VStack{
                 if (icon == nil){
                     text.padding(5)
