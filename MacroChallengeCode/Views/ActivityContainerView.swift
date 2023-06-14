@@ -46,13 +46,14 @@ struct ActivityContainerView: View {
                 case .map:
                     ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day)
                     
-                    
                     BoxSliderView(magnitude: $magnitude)
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
                         .foregroundColor( Color(day.hours[currentHour].color).opacity(0.7))
                 case .sunset:
                     CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
                         .padding(70)
+                case .finished:
+                    ArrivedBackView()
                 }
                 
                 Button {
