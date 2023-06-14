@@ -720,7 +720,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LightWay;
+				INFOPLIST_KEY_CFBundleDisplayName = Nostos;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the location to get track of your path";
@@ -762,7 +762,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LightWay;
+				INFOPLIST_KEY_CFBundleDisplayName = Nostos;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need the location to get track of your path";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the location to get track of your path";
