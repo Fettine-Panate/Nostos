@@ -18,6 +18,9 @@ let dateFormatter: DateFormatter = {
 
 struct ActivityContainerView: View {
     
+    
+    @State var showAlert = false
+    
     @Binding var pathsJSON : [PathCustom]
     @Binding var userLocation : CLLocation?
     @StateObject var path : PathCustom = PathCustom(title: "\(Date().description)")
@@ -54,14 +57,7 @@ struct ActivityContainerView: View {
                 }
                 
                 Button {
-                    withAnimation {
-                        screen = .startView
-                        //TODO: create a func to do this
-                        mapScreen = .mapView
-                        activity = .map
-                        // TODO: Stop the activity
-                        LiveActivityManager.shared.stopActivity()
-                    }
+                    showAlert.toggle()
                 } label: {
                     VStack{
                         Text("Stop Activity")
@@ -74,6 +70,23 @@ struct ActivityContainerView: View {
                                 .foregroundColor(Color("white"))
                         }
                 }
+                .alert(isPresented: $showAlert) {
+                          Alert(
+                              title: Text("Do You Really Want To Quit?"),
+                              message: Text("All the pins left until now will be permanently deleted"),
+                              primaryButton: .destructive(Text("Quit")) {
+                                  withAnimation {
+                                      screen = .startView
+                                      //TODO: create a func to do this
+                                      mapScreen = .mapView
+                                      activity = .map
+                                      // TODO: Stop the activity
+                                      LiveActivityManager.shared.stopActivity()
+                                  }
+                              },
+                              secondaryButton: .cancel(Text("Cancel"))
+                          )
+                      }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                 
                 SwitchModeButton(imageName: (activity == .map) ? "sunset.fill" : "globe" , color: day.hours[currentHour].color, activity: $activity
