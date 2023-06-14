@@ -19,7 +19,7 @@ struct IndicatorView: View {
                 
             }.rotationEffect(Angle(degrees: 135))
                 .scaleEffect(0.7)
-                .padding(.bottom,20)
+                .padding(.bottom,15)
         }
 
 }
