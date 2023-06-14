@@ -47,12 +47,6 @@ struct ActivityContainerView: View {
                     ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day)
                     
                     
-                    Text("Going")
-                        .bold()
-                        .font(.title)
-                        .foregroundColor(Color("white"))
-                        .position(CGPoint(x: geo.size.width/2, y: geo.size.height * 1/20))
-                    
                     BoxSliderView(magnitude: $magnitude)
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
                         .foregroundColor( Color(day.hours[currentHour].color).opacity(0.7))
