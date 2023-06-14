@@ -69,12 +69,6 @@ struct TrackBackView: View {
                             mapScreen = .mapView
                         }
                     }
-                Text("Coming Back")
-                    .font(.title)
-                    .bold()
-                .font(.title2)
-                .foregroundColor(Color("white"))
-                .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 0.8/10))
             }
             .background{
                 MapBackground(size: geometry.size, day: day, magnitude: $magnitude, ns: ns)
@@ -92,40 +86,6 @@ struct TrackBackView: View {
         
     }
     
-    
-    //    var body: some View {
-    //        GeometryReader { geometry in
-    //            ZStack{
-    //                ZStack{
-    //                    ZStack{
-    //                        IndicatorView()
-    //                            .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
-    //                    }
-    //                    ZStack {
-    //                        ForEach(path.getLocations(), id: \.self ){ loc in
-    //                            if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-    //                                let position = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
-    //                                if loc == path.locations[0]{
-    //                                  LastPinAnnotationView(loc: loc)
-    //                                        .position(position)
-    //                                        .animation(.linear, value: position)
-    //                                        .scaleEffect(scale/2)
-    //                                        .onAppear(){
-    //                                            index += 1
-    //                                        }
-    //                                } else if loc == path.locations.last{
-    //                                  FirstPinAnnotationView(loc: loc)
-//                                            .position(position)
-//                                            .animation(.linear, value: position)
-//                                            .scaleEffect(scale/2)
-//                                    } else{
-//                                        PinAnnotationView(loc: loc)
-//                                            .position(position)
-//                                            .animation(.linear, value: position)
-//                                            .scaleEffect(scale/2)
-//                                    }
-    //                            }
-    //                        }
     //                        .overlay{
     //                            ZStack{
     //                                withAnimation{
@@ -147,59 +107,6 @@ struct TrackBackView: View {
     //                                }
     //                            }
     //                        }
-    //                    }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
-    //                        .background(){
-    //                            MapBackground(size: geometry.size)
-    //                        }
-    //                    //                    .gesture(
-    //                    //                        MagnificationGesture()
-    //                    //                            .updating($magnification) { value, magnification, _ in
-    //                    //                                magnification = value
-    //                    //                            }
-    //                    //                            .onChanged { value in
-    //                    //                                currentValue = value
-    //                    //                                magnitude = value * magnitudeinm
-    //                    //                                scale = 1/value
-    //                    //                            }
-    //                    //                    )
-    //                }
-    //                .onChange(of: currentUserLocation) { loc in
-    //                    if path.removeCheckpoint(currentUserLocation: loc){
-    //                        // a volte fa crashare l'app
-    //                        // hapticManager?.playFeedback()
-    //                    }
-    //                }
-    //                .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
-    //                ZStack{
-    //                    VStack{
-    //                        BoxSliderView(magnitude: $magnitude)
-    //                            .frame(height: 40)
-    //                            .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-    //                            .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-    //                            .padding(.horizontal)
-    //                            .rotationEffect(.degrees(-90))
-    //                            .position(CGPoint(x: geometry.size.width * 9/10, y: geometry.size.height * 1/3))
-    //                        Spacer()
-    //                        BoxNavigationButton(text: "Coming back! ")
-    //                            .frame(height: 40)
-    //                            .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-    //                            .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-    //                            .padding(.horizontal)
-    //                        BoxDataView(text: "Range on screen: \(magnitude) m ")
-    //                            .frame(height: 40)
-    //                            .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-    //                            .accentColor(Color(day.hours[currentHour].color).opacity(0.7))
-    //                            .padding(.horizontal)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //
-    //        .onAppear(){
-    //            self.path = PathCustom(path: self.previouspath)
-    //
-    //        }
-    //    }
   
 }
 

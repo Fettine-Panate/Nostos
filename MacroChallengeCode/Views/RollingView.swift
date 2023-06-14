@@ -24,7 +24,7 @@ struct RollingView: View{
     var body: some View {
         ZStack{
             // Da lavorarci
-            Color(day.hours[Int(index) % 24].color).opacity(0.7)
+            Color(day.hours[Int(index) % 24].color)
                 .ignoresSafeArea()
                 .animation(.linear, value: (Int(index) % 24))
                 Rectangle()

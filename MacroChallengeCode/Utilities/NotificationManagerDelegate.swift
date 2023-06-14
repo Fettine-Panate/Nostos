@@ -38,7 +38,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         }
     }
     
-    func createNotification(title: String, body: String) {
+    func createNotification(title: String, body: String, sunset : Date , start : Date) {
         
         center.getNotificationSettings { settings in
             guard (settings.authorizationStatus == .authorized) ||
@@ -61,7 +61,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         
         center.setNotificationCategories([category])
         
-        scheduleNotification(timeInterval: 5.0)
+        scheduleNotification(timeInterval: sunset.timeIntervalSince(start)/2)
         
     }
     

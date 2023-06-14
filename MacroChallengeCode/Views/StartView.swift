@@ -33,7 +33,8 @@ struct StartView: View {
                     withAnimation {
                         screen = .activity
                         // TODO: Start the activity and schedule notification
-                        NotificationManager.shared.createNotification(title: "Time's Up!", body: "Its time to go back!")
+                        let location : CLLocation = LocationManager.shared.userLocation!
+                        NotificationManager.shared.createNotification(title: "Time's Up!", body: "Its time to go back!", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
                         LiveActivityManager.shared.addActivity()
                     }
                 } label: {

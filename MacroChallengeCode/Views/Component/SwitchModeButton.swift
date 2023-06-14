@@ -34,7 +34,7 @@ struct SwitchModeButton: View {
                 
                     Color("white")
                 Image(systemName: imageName)
-                    .foregroundColor(Color(color).opacity(0.7))
+                    .foregroundColor(Color(color))
             }.cornerRadius(10)
         }
 
