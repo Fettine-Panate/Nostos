@@ -69,12 +69,6 @@ struct TrackBackView: View {
                             mapScreen = .mapView
                         }
                     }
-                Text("Coming Back")
-                    .font(.title)
-                    .bold()
-                .font(.title2)
-                .foregroundColor(Color("white"))
-                .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 0.8/10))
             }
             .background{
                 MapBackground(size: geometry.size, day: day, magnitude: $magnitude, ns: ns)

@@ -30,12 +30,14 @@ struct ShowPathView: View {
         GeometryReader{ geo in
      
             ZStack{
+                
                 Text(mapScreen == .mapView ? "Going.." : "ComingBack")
-                    .font(.title)
-                    .bold()
+                .font(.title)
+                .bold()
                 .font(.title)
                 .foregroundColor(Color("white"))
                 .position(CGPoint(x: geo.size.width/2, y: geo.size.height * 1/20))
+                
                 switch mapScreen{
                 case .mapView:
                     MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, ns: ns, magnitude: $magnitude, day : day)
