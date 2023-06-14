@@ -14,14 +14,14 @@ struct FocusViewOnBoarding<T: Gesture>: View {
     var positionCircle : [CGPoint]
     var gesture: [T]
   
-
+    
     
     var body: some View {
         GeometryReader{ geo in
             if(onBoardIndex <= 4){
                 ZStack{
-                    Color.black.opacity(0.2).ignoresSafeArea()
-                    VStack{
+                    Color.black.opacity(0.6).ignoresSafeArea()
+                  
                         Circle()
                             .gesture(gesture[onBoardIndex])
                             .frame(width: size[onBoardIndex].width, height: size[onBoardIndex].height)
@@ -31,13 +31,14 @@ struct FocusViewOnBoarding<T: Gesture>: View {
                                 Circle()
                                     .strokeBorder(Color.clear, lineWidth: 0)
                             )
-                           
+                            .position(positionCircle[onBoardIndex])
                         Text(text[onBoardIndex])
                             .font(.system(size: 16, design: .rounded))
                             .foregroundColor(.white)
                             .bold()
-                    }
-                    .position( CGPoint(x: 0 + positionCircle[onBoardIndex].x, y: 10 + positionCircle[onBoardIndex].y))
+                            .position(CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.76))
+                    
+                 
                 }.compositingGroup()
             }
         }

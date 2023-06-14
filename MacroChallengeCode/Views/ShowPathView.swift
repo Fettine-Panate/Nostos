@@ -36,7 +36,7 @@ struct ShowPathView: View {
                 .bold()
                 .font(.title)
                 .foregroundColor(Color("white"))
-                .position(CGPoint(x: geo.size.width/2, y: geo.size.height * 0.8/10))
+                .position(CGPoint(x: geo.size.width/2, y: geo.size.height * 0.6/10))
                 
                 switch mapScreen{
                 case .mapView:
