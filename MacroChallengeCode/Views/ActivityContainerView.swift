@@ -18,9 +18,6 @@ let dateFormatter: DateFormatter = {
 
 struct ActivityContainerView: View {
     
-    
-    @State var showAlert = false
-    
     @Binding var pathsJSON : [PathCustom]
     @Binding var userLocation : CLLocation?
     @StateObject var path : PathCustom = PathCustom(title: "\(Date().description)")
@@ -28,6 +25,7 @@ struct ActivityContainerView: View {
     @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
     var ns: Namespace.ID
+    @State var AlertIsPresented = false
     
     
     
@@ -36,7 +34,7 @@ struct ActivityContainerView: View {
     @State var start = Date()
     
     @State var magnitude : Double = 100.0
-
+    
     var body: some View {
         let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
@@ -47,9 +45,16 @@ struct ActivityContainerView: View {
                 switch activity {
                 case .map:
                     ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day)
-                        
+                    
+                    
+                    Text("Going")
+                        .bold()
+                        .font(.title)
+                        .foregroundColor(Color("white"))
+                        .position(CGPoint(x: geo.size.width/2, y: geo.size.height * 1/20))
+                    
                     BoxSliderView(magnitude: $magnitude)
-                        .frame(width: geo.size.width * 0.1, height: geo.size.width * 0.2).position(x: geo.size.width * 0.9, y: geo.size.height * 0.2)
+                        .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
                         .foregroundColor( Color(day.hours[currentHour].color).opacity(0.7))
                 case .sunset:
                     CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
@@ -59,41 +64,44 @@ struct ActivityContainerView: View {
                 }
                 
                 Button {
-                    showAlert.toggle()
+                    AlertIsPresented = true
                 } label: {
                     VStack{
                         Text("Stop Activity")
                             .fontWeight(.semibold)
                             .padding()
                             .foregroundColor(Color(day.hours[currentHour].color).opacity(0.7))
-                            
+                        
                     }.background(){
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color("white"))
-                        }
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("white"))
+                    }
                 }
-                .alert(isPresented: $showAlert) {
-                          Alert(
-                              title: Text("Do You Really Want To Quit?"),
-                              message: Text("All the pins left until now will be permanently deleted"),
-                              primaryButton: .destructive(Text("Quit")) {
-                                  withAnimation {
-                                      screen = .startView
-                                      //TODO: create a func to do this
-                                      mapScreen = .mapView
-                                      activity = .map
-                                      // TODO: Stop the activity
-                                      LiveActivityManager.shared.stopActivity()
-                                  }
-                              },
-                              secondaryButton: .cancel(Text("Cancel"))
-                          )
-                      }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                 
-                SwitchModeButton(imageName: (activity == .map) ? "sunset.fill" : "globe" , color: day.hours[currentHour].color, activity: $activity
-                ).frame(width: geo.size.width * 0.1, height: geo.size.width * 0.1)
+                
+                
+                SwitchModeButton(imageName: (activity == .map) ? "sunset.fill" : "target" , color: day.hours[currentHour].color, activity: $activity
+                ).frame(width: geo.size.width * 0.11, height: geo.size.width * 0.11)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
+                
+                    .alert(isPresented: $AlertIsPresented){
+                        Alert(title: Text("**Do You Really Want To Quit?**"), message: Text("All the pins left until now will be permanently deleted"),
+                              primaryButton: .destructive(Text("Quit")) {
+                                withAnimation {
+                                    screen = .startView
+                                    //TODO: create a func to do this
+                                    mapScreen = .mapView
+                                    activity = .map
+                                    // TODO: Stop the activity
+                                    LiveActivityManager.shared.stopActivity()
+                                }
+                              },
+                              secondaryButton: .default(Text("Cancel"), action: {
+                                  AlertIsPresented = false
+                              } )
+                                                       )
+                    }
             }
         }
     }

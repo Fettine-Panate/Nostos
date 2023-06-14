@@ -34,7 +34,7 @@ struct TrackBackView: View {
         GeometryReader { geometry in
             ZStack{
                 IndicatorView()
-                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.2))
+                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.1))
                     .matchedGeometryEffect(id: "indicator", in: ns)
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 ForEach(path.locations, id: \.self){ loc in
@@ -69,11 +69,17 @@ struct TrackBackView: View {
                             mapScreen = .mapView
                         }
                     }
+                Text("Coming Back")
+                    .font(.title)
+                    .bold()
+                .font(.title)
+                .foregroundColor(Color("white"))
+                .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 1/20))
             }
             .background{
                 MapBackground(size: geometry.size, day: day, magnitude: $magnitude, ns: ns)
             }
-            .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 2/3))
+            .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 1/2))
             .onAppear(){
                 self.path = PathCustom(path: self.previouspath)
             }
