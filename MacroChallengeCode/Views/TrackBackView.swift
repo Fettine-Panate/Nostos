@@ -22,6 +22,7 @@ struct TrackBackView: View {
     @State var scale = 1.0
     
     @Binding var screen : Screens
+    @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
     @State var index = 0
     
@@ -79,7 +80,12 @@ struct TrackBackView: View {
             }
             .onChange(of: currentUserLocation) { newValue in
                 if (path.removeCheckpoint(currentUserLocation: currentUserLocation!)){
-                    //Vibration or anything
+                    if(path.locations.isEmpty){
+                        withAnimation {
+                            activity = .finished
+                        }
+                      
+                    }
                 }
             }
         }
