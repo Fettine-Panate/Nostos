@@ -16,9 +16,6 @@ struct IndicatorView: View {
                 RoundedTriangle()
                     .frame(width: 35, height: 40)
    
-//                RoundedRectangle(cornerRadius: 10)
-//                    .trim(from: 0.125,to: 0.625)
-//                    .frame(width: 35,height: 35)
                 
             }
                 .padding(.bottom,35)

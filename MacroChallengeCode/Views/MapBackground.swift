@@ -73,6 +73,6 @@ struct MapBackground: View {
 
 struct MapBackground_Previews: PreviewProvider {
     static var previews: some View {
-        MapBackground(size: CGSize(width: 393.0, height: 759.0), day: dayFase(sunrise: 06, sunset: 18), magnitude: .constant(100.0), ns: Namespace.init().wrappedValue)
+        MapBackground(size: CGSize(width: 393.0, height: 759.0), day: dayFase(sunrise: 06, sunset: 18), magnitude: .constant(30.0), ns: Namespace.init().wrappedValue)
     }
 }
