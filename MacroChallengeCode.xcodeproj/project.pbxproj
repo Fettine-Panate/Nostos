@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9126FE232A30BEA600818999 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9126FE222A30BEA600818999 /* Avatar.swift */; };
+		913301F12A39B1B700AB1C23 /* ArrivedBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913301F02A39B1B700AB1C23 /* ArrivedBackView.swift */; };
 		9158056F2A1CAE97007E579F /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158056E2A1CAE97007E579F /* Path.swift */; };
 		915805732A1CB785007E579F /* MapBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915805722A1CB785007E579F /* MapBackground.swift */; };
 		916EEDFD2A3216E000FA7298 /* SwitchModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916EEDFC2A3216E000FA7298 /* SwitchModeButton.swift */; };
@@ -97,6 +98,7 @@
 
 /* Begin PBXFileReference section */
 		9126FE222A30BEA600818999 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		913301F02A39B1B700AB1C23 /* ArrivedBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivedBackView.swift; sourceTree = "<group>"; };
 		9158056E2A1CAE97007E579F /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		915805722A1CB785007E579F /* MapBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBackground.swift; sourceTree = "<group>"; };
 		916EEDFC2A3216E000FA7298 /* SwitchModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchModeButton.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				9FF225CE2A293B5500159166 /* ListPathsView.swift */,
 				9FF225A72A26AC9100159166 /* RollingView.swift */,
 				9FF225CC2A29302200159166 /* RecapPathView.swift */,
+				913301F02A39B1B700AB1C23 /* ArrivedBackView.swift */,
 				916EEDFE2A33559800FA7298 /* ActivityContainerView.swift */,
 			);
 			path = Views;
@@ -530,6 +533,7 @@
 				9FF225822A1D07BD00159166 /* CompassView.swift in Sources */,
 				91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */,
 				9FF2259F2A26514400159166 /* BezelView.swift in Sources */,
+				913301F12A39B1B700AB1C23 /* ArrivedBackView.swift in Sources */,
 				9FF225842A1E4E2600159166 /* PinsMapView.swift in Sources */,
 				917A8C532A20E6F400A32868 /* StartView.swift in Sources */,
 				91C447CB2A28F46A00319349 /* JsonManager.swift in Sources */,

@@ -19,6 +19,7 @@ enum Screens {
 enum ActivityEnum {
     case map
     case sunset
+    case finished
 }
 
 enum MapSwitch {

@@ -54,6 +54,8 @@ struct ActivityContainerView: View {
                 case .sunset:
                     CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
                         .padding(70)
+                case .finished:
+                    ArrivedBackView()
                 }
                 
                 Button {
