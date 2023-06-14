@@ -18,6 +18,7 @@ let dateFormatter: DateFormatter = {
 
 struct ActivityContainerView: View {
     
+    @State var onBoardIndex = defaults.integer(forKey: "ON_BOARDING")
     @Binding var pathsJSON : [PathCustom]
     @Binding var userLocation : CLLocation?
     @StateObject var path : PathCustom = PathCustom(title: "\(Date().description)")
@@ -67,27 +68,76 @@ struct ActivityContainerView: View {
                     }
                 }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
+                .alert(isPresented: $alertIsPresented){
+                    Alert(title: Text("**Do You Really Want To Quit?**"), message: Text("All the pins left until now will be permanently deleted"),
+                          primaryButton: .destructive(Text("Quit")) {
+                            withAnimation {
+                                screen = .startView
+                                //TODO: create a func to do this
+                                mapScreen = .mapView
+                                activity = .map
+                                // TODO: Stop the activity
+                                LiveActivityManager.shared.stopActivity()
+                            }
+                          },
+                          secondaryButton: .default(Text("Cancel"), action: {
+                              alertIsPresented = false
+                          }))
+                        
+                    }
                 
                 SwitchModeButton(imageName: (activity == .map) ? "sunset.fill" : "target" , color: day.hours[currentHour].color, activity: $activity
                 ).frame(width: geo.size.width * 0.11, height: geo.size.width * 0.11)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
                 
-                    .alert(isPresented: $alertIsPresented){
-                        Alert(title: Text("**Do You Really Want To Quit?**"), message: Text("All the pins left until now will be permanently deleted"),
-                              primaryButton: .destructive(Text("Quit")) {
-                                withAnimation {
-                                    screen = .startView
-                                    //TODO: create a func to do this
-                                    mapScreen = .mapView
-                                    activity = .map
-                                    // TODO: Stop the activity
-                                    LiveActivityManager.shared.stopActivity()
-                                }
-                              },
-                              secondaryButton: .default(Text("Cancel"), action: {
-                                  alertIsPresented = false
-                              }))
-                    }
+                   
+                if onBoardIndex == 0{
+                    //SUNSET MODE
+                    FocusViewOnBoarding(size: CGSize(width: 70, height: 70), text: "Tap to switch to Sunset Mode", positionCircle: CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), gesture: TapGesture().onEnded({ bool in
+                        
+                        onBoardIndex += 1
+                        defaults.set(1, forKey: "ON_BOARDING")
+                        activity = .sunset
+                    }))
+                    .matchedGeometryEffect(id: "onBoard", in: ns)
+                }else if onBoardIndex == 1{
+                    //SHOW THE CIRCULARSLIDER
+                    FocusViewOnBoarding(size: CGSize(width: geo.size.width * 0.9, height: geo.size.width * 0.9), text: "You can drag the slider to see how much time left to sunset", positionCircle: CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5), gesture: TapGesture().onEnded({ bool in
+                        
+                        onBoardIndex += 1
+                        defaults.set(2, forKey: "ON_BOARDING")
+                        activity = .sunset
+                    }))
+                    .matchedGeometryEffect(id: "onBoard", in: ns)
+                }else if onBoardIndex == 2{
+                    //GO BACK TO MAP
+                    FocusViewOnBoarding(size: CGSize(width: 70, height: 70), text: "Tap to switch to \"Going\" Mode", positionCircle: CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), gesture: TapGesture().onEnded({ bool in
+                        
+                        
+                        onBoardIndex += 1
+                        defaults.set(3, forKey: "ON_BOARDING")
+                        activity = .map
+                    }))
+                    .matchedGeometryEffect(id: "onBoard", in: ns)
+                }else if onBoardIndex == 3 {
+                    FocusViewOnBoarding(size: CGSize(width: 70, height: 70), text: "Long Press to switch to \"Coming back\" Mode", positionCircle: CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5), gesture: TapGesture().onEnded({ bool in
+                        
+                        
+                        onBoardIndex += 1
+                        defaults.set(4, forKey: "ON_BOARDING")
+                        mapScreen = .trackBack
+                    }))
+                    .matchedGeometryEffect(id: "onBoard", in: ns)
+                }else if onBoardIndex == 4{
+                    FocusViewOnBoarding(size: CGSize(width: geo.size.width * 0.5, height: geo.size.height * 0.2), text: "Tap to end the activity!", positionCircle: CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.9), gesture: TapGesture().onEnded({ bool in
+                        
+                        
+                        onBoardIndex += 1
+                        defaults.set(5, forKey: "ON_BOARDING")
+                        screen = .startView
+                    }))
+                    .matchedGeometryEffect(id: "onBoard", in: ns)
+                }
             }
         }
     }
