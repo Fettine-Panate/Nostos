@@ -43,6 +43,8 @@ struct ContentView: View {
         self.screen = screen
         if defaults.integer(forKey: "ON_BOARDING") == nil {
             defaults.set(0, forKey: "ON_BOARDING")
+        }else if defaults.integer(forKey: "ON_BOARDING") < 5{
+            defaults.set(0, forKey: "ON_BOARDING")
         }
     }
     @ObservedObject var locationManager = LocationManager.shared
