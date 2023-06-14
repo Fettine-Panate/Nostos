@@ -25,11 +25,7 @@ struct ActivityContainerView: View {
     @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
     var ns: Namespace.ID
-    @State var AlertIsPresented = false
-    
-    
-    
-    
+    @State var alertIsPresented = false
     
     @State var start = Date()
     
@@ -57,7 +53,7 @@ struct ActivityContainerView: View {
                 }
                 
                 Button {
-                    AlertIsPresented = true
+                    alertIsPresented = true
                 } label: {
                     VStack{
                         Text("Stop Activity")
@@ -72,13 +68,11 @@ struct ActivityContainerView: View {
                 }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                 
-                
-                
                 SwitchModeButton(imageName: (activity == .map) ? "sunset.fill" : "target" , color: day.hours[currentHour].color, activity: $activity
                 ).frame(width: geo.size.width * 0.11, height: geo.size.width * 0.11)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
                 
-                    .alert(isPresented: $AlertIsPresented){
+                    .alert(isPresented: $alertIsPresented){
                         Alert(title: Text("**Do You Really Want To Quit?**"), message: Text("All the pins left until now will be permanently deleted"),
                               primaryButton: .destructive(Text("Quit")) {
                                 withAnimation {
@@ -91,9 +85,8 @@ struct ActivityContainerView: View {
                                 }
                               },
                               secondaryButton: .default(Text("Cancel"), action: {
-                                  AlertIsPresented = false
-                              } )
-                                                       )
+                                  alertIsPresented = false
+                              }))
                     }
             }
         }

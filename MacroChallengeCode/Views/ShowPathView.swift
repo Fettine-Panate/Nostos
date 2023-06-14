@@ -42,7 +42,7 @@ struct ShowPathView: View {
                 case .mapView:
                     MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, ns: ns, magnitude: $magnitude, day : day)
                 case .trackBack:
-                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, mapScreen: $mapScreen, ns: ns,  magnitude: $magnitude, day : day)
+                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns,  magnitude: $magnitude, day : day)
                 }
               
                 

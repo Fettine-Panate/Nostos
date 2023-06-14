@@ -56,10 +56,10 @@ struct MapBackground: View {
                 .fontWeight(.bold)
                 .offset(y: (-size.height/2  * 3/4) - 12 )
                 .foregroundColor(Color.black.opacity(textOpacity))
-            Text("\(Int(magnitude * 4/8)) m")
-                .fontWeight(.bold)
-                .offset(y: (-size.height/2  * 4/4) - 12 )
-                .foregroundColor(Color.black.opacity(textOpacity))
+//            Text("\(Int(magnitude * 4/8)) m")
+//                .fontWeight(.bold)
+//                .offset(y: (-size.height/2  * 4/4) - 12 )
+//                .foregroundColor(Color.black.opacity(textOpacity))
            
         }
         .onChange(of: magnitude){ _ in
