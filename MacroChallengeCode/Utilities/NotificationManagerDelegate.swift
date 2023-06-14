@@ -51,17 +51,17 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         content.categoryIdentifier = "SUNSET_REMINDER"
         
         let remindAction = UNNotificationAction(identifier: "REMIND_ACTION", title: "Remind me in 10 minutes", options: [])
-
+        
         let category =
-              UNNotificationCategory(identifier: "SUNSET_REMINDER",
-              actions: [remindAction],
-              intentIdentifiers: [],
-              options: []
-              )
+        UNNotificationCategory(identifier: "SUNSET_REMINDER",
+                               actions: [remindAction],
+                               intentIdentifiers: [],
+                               options: []
+        )
         
         center.setNotificationCategories([category])
         
-        scheduleNotification(timeInterval: sunset.timeIntervalSince(start)/2)
+        scheduleNotification(timeInterval: calculateTimeToReturn(sunset: sunset, startTime: start))
         
     }
     

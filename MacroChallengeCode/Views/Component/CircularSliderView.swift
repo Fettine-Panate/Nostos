@@ -120,8 +120,8 @@ struct CircularSliderView: View {
                 iconSlider(text: Text(dateFormatterHHMM.string(from: start)),angle: Angle(degrees: 18.0) , radius: radius)
                     .rotationEffect(Angle(degrees: 18))
                     .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
-                iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)) , radius: radius)
-                    .rotationEffect( calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateTimeToReturn(sunset: sunset, startTime: start)))
+                iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateDateToReturn(sunset: sunset, startTime: start)) , radius: radius)
+                    .rotationEffect( calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateDateToReturn(sunset: sunset, startTime: start)))
                     .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                 iconSlider(icon: Image(systemName: "sunset"), text: Text( dateFormatterHHMM.string(from: sunset))
                 ,angle: Angle(degrees: 342) , radius: radius)
@@ -217,8 +217,13 @@ func calculateAngleFromDate(sunsetTime: Date, startTime: Date, inputTime: Date)-
     
 }
 
-func calculateTimeToReturn(sunset: Date, startTime: Date) -> Date{
+func calculateDateToReturn(sunset: Date, startTime: Date) -> Date{
     let ret = startTime.addingTimeInterval(sunset.timeIntervalSince(startTime)/2)
+    return ret
+}
+
+func calculateTimeToReturn(sunset: Date, startTime: Date) -> TimeInterval{
+    let ret = sunset.timeIntervalSince(startTime)/2
     return ret
 }
 
