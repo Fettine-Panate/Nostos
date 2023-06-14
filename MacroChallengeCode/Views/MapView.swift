@@ -82,7 +82,7 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), ns: Namespace.init().wrappedValue, magnitude: .constant(100.0), day: dayFase(sunrise: 06, sunset: 20))
+        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), ns: Namespace.init().wrappedValue, magnitude: .constant(30.0), day: dayFase(sunrise: 06, sunset: 20))
     }
 }
 

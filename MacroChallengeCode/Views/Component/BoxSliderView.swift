@@ -8,15 +8,15 @@ struct BoxSliderView: View {
                     VStack(spacing: 0){
                         HStack{
                             ZStack{
-                                if magnitude <= 100{
+                                if magnitude <= 30{
                                     Color("inactiveGray")
                                 } else {
                                     
                                         Color("white")
                                 }
                                 Button(action: {
-                                    if magnitude > 100{
-                                        magnitude = magnitude - 100
+                                    if magnitude > 30{
+                                        magnitude = magnitude / 2
                                     } }, label: {
                                         Text("+")
                                     })
@@ -37,7 +37,7 @@ struct BoxSliderView: View {
                                 }
                                 Button(action:{
                                     if magnitude < 10000{
-                                        magnitude = magnitude + 100
+                                        magnitude = magnitude * 2
                                     }} , label: {
                                         Text("-")
                                     })
@@ -52,6 +52,6 @@ struct BoxSliderView: View {
 
 struct BoxSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        BoxSliderView(magnitude: .constant(100.0))
+        BoxSliderView(magnitude: .constant(30.0))
     }
 }

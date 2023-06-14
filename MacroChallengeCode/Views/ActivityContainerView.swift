@@ -29,7 +29,7 @@ struct ActivityContainerView: View {
     
     @State var start = Date()
     
-    @State var magnitude : Double = 100.0
+    @State var magnitude : Double = 30.0
     
     var body: some View {
         let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
