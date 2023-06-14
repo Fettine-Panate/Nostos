@@ -26,6 +26,8 @@ enum MapSwitch {
     case trackBack
 }
 
+let defaults = UserDefaults.standard
+
 struct ContentView: View {
     @State var pathsJSON = itemsJSON
     @State var changeScreen = 0
@@ -38,6 +40,9 @@ struct ContentView: View {
         self.pathsJSON = pathsJSON
         self.changeScreen = changeScreen
         self.screen = screen
+        if defaults.integer(forKey: "ON_BOARDING") == nil {
+            defaults.set(0, forKey: "ON_BOARDING")
+        }
     }
     @ObservedObject var locationManager = LocationManager.shared
     

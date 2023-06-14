@@ -10,23 +10,39 @@ import SwiftUI
 struct IndicatorView: View {
     
     var body: some View {
-        ZStack{
+
             ZStack{
-                Circle()
-                    .trim(from: 0.65, to: 0.85)
-                    .stroke(
-                        .black.opacity(0.15),
-                        lineWidth: 70
-                    )
-                    .frame(width: 70,height: 70)
+                RoundedTriangle()
+                    .frame(width: 45, height: 75)
+                    .padding(.bottom, 55)
+                    .opacity(0.2)
+                    
+                  
+                 
             }
             .scaleEffect(0.7)
          
-        }
+        
     }
 }
 
-
+struct RoundedTriangle : Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        let topPoint = CGPoint(x: rect.midX, y: rect.minY)
+        
+        let startPoint = CGPoint(x: rect.minX, y: rect.maxY)
+        let endPoint = CGPoint(x: rect.maxX, y: rect.maxY)
+        
+        path.move(to: endPoint)
+        path.addArc(tangent1End: topPoint, tangent2End: startPoint, radius: rect.size.width * 0.2)
+        path.addLine(to: startPoint)
+        path.addLine(to: endPoint)
+        
+        return path
+    }
+}
 
 
 struct IndicatorView_Previews: PreviewProvider {
