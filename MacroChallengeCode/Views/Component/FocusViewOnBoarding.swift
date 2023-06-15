@@ -35,6 +35,7 @@ struct FocusViewOnBoarding<T: Gesture>: View {
                         Text(text[onBoardIndex])
                             .font(.system(size: 16, design: .rounded))
                             .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
                             .bold()
                             .position(CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.76))
                     

@@ -62,8 +62,11 @@ struct ActivityContainerView: View {
                             .padding()
                             .foregroundColor(Color(day.hours[currentHour].color))
                         
-                    }.background(){
+                    }
+                    .frame(height: geo.size.width * 0.11)
+                    .background(){
                         RoundedRectangle(cornerRadius: 10)
+                            .frame(height: geo.size.width * 0.11)
                             .foregroundColor(Color("white"))
                     }
                 }
@@ -107,8 +110,8 @@ struct ActivityContainerView: View {
                         TapGesture().onEnded({ bool in
                             withAnimation {
                                 onBoardIndex += 1
-                                defaults.set(3, forKey: "ON_BOARDING")
-                                activity = .map
+                                defaults.set(2, forKey: "ON_BOARDING")
+                                activity = .sunset
                             }
 
                         }),
