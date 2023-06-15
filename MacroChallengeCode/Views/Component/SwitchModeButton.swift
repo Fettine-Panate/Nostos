@@ -49,7 +49,7 @@ struct SwitchModeButton: View {
             }
             .cornerRadius(10)
         }
-
+        .zIndex(activity == ActivityEnum.finished ? -1 : 0)
     }
 }
 
