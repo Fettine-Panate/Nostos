@@ -15,7 +15,7 @@ struct IndicatorView: View {
 
 //                RoundedTriangle()
 //                    .frame(width: 35, height: 40)
-                Image(systemName: "drop.fill")
+                Image("pointer")
                     .resizable()
                     .frame(width: 45, height: 63)
                 
