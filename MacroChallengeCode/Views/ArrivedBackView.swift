@@ -22,6 +22,7 @@ struct ArrivedBackView: View {
         
         GeometryReader{ geo in
             ZStack{
+                Color(day.hours[currentHour].color).ignoresSafeArea()
                 VStack{
                     Image(systemName: "flag.checkered.2.crossed")
                         .resizable()
@@ -36,6 +37,7 @@ struct ArrivedBackView: View {
                     Text("You arrived at your starting point")
                         .foregroundColor(Color("white"))
                         .font(.system(size: 25))
+                        .padding(.bottom, 60)
                     Button {
                         screen = .startView
                         mapScreen = .mapView
