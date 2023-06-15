@@ -12,9 +12,9 @@ struct ArrivedBackView: View {
         GeometryReader{ geo in
             ZStack{
                 VStack{
-                    Image(systemName: "flag.2.crossed.fill")
+                    Image(systemName: "flag.checkered.2.crossed")
                         .resizable()
-                        .frame(width: geo.size.width * 0.8, height: geo.size.width * 0.5)
+                        .frame(width: geo.size.width * 0.23, height: geo.size.width * 0.15)
                         .foregroundColor(Color("white"))
                         
                     Text("Congratulation")
