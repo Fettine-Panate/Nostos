@@ -57,13 +57,14 @@ struct ActivityContainerView: View {
                         alertIsPresented = true
                 } label: {
                     VStack{
-                        Text("Stop Activity")
+                        Text(LocalizedStringKey(".StopActivity"))
                             .fontWeight(.semibold)
                             .padding()
                             .foregroundColor(Color(day.hours[currentHour].color))
                         
                     }
-                    .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
+                    //commentato perchè alcune parole in lingue diverse sono più lunghe e quindi si deve adattare.
+//                    .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
                     .background(){
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height: geo.size.width * 0.11)
@@ -72,8 +73,8 @@ struct ActivityContainerView: View {
                 }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                 .alert(isPresented: $alertIsPresented){
-                    Alert(title: Text("**Do You Really Want To Quit?**"), message: Text("All the pins left until now will be permanently deleted"),
-                          primaryButton: .destructive(Text("Quit")) {
+                    Alert(title: Text(LocalizedStringKey(".DoYouWantoToQuit?")), message: Text(".AllThePinsLeft_description"),
+                          primaryButton: .destructive(Text(LocalizedStringKey(".Quit"))) {
                             withAnimation {
                                 screen = .startView
                                 //TODO: create a func to do this
@@ -83,7 +84,7 @@ struct ActivityContainerView: View {
                                 LiveActivityManager.shared.stopActivity()
                             }
                           },
-                          secondaryButton: .default(Text("Cancel"), action: {
+                          secondaryButton: .default(Text(LocalizedStringKey(".Cancel")), action: {
                               alertIsPresented = false
                           }))
                         
@@ -95,7 +96,7 @@ struct ActivityContainerView: View {
                 
                 
                 
-                FocusViewOnBoarding(onBoardIndex: $onBoardIndex, size: [CGSize(width: 70, height: 60), CGSize(width: geo.size.width * 0.9, height: geo.size.width * 0.9), CGSize(width: 70, height: 70), CGSize(width: 70, height: 70), CGSize(width: geo.size.width * 0.5, height: geo.size.height * 0.2) ], text: ["Tap to switch to Sunset Mode", "You can drag the slider to see how much time left to sunset", "Tap to switch to \"Going\" Mode", "Long Press to switch to \"Coming back\" Mode", "Tap to end the activity!" ], positionCircle: [CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),  CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.9)], gesture: [
+                FocusViewOnBoarding(onBoardIndex: $onBoardIndex, size: [CGSize(width: 70, height: 60), CGSize(width: geo.size.width * 0.9, height: geo.size.width * 0.9), CGSize(width: 70, height: 70), CGSize(width: 70, height: 70), CGSize(width: geo.size.width * 0.5, height: geo.size.height * 0.2) ], text: [LocalizedStringKey(".TapToSwitchToGoingMode"),LocalizedStringKey("..DragTheSliderToSee"), LocalizedStringKey(".TapToSwitchToGoingMode"), ".LongPressToComingBackMode", LocalizedStringKey(".TapToEndActivity") ], positionCircle: [CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),  CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.9)], gesture: [
                     
                         //SUNSET MODE
                         TapGesture().onEnded({ bool in

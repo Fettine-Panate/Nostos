@@ -1,8 +1,18 @@
-/* 
-  Localizable.strings
-  MacroChallengeCode
-
-  Created by Francesco De Stasio on 15/06/23.
-  
-*/
-"StartActivity" = "Start Activity"
+".StartActivity" = "Inizia l'attività";
+".StopActivity" = "Interrompi l'attività";
+".TapToSwitchToSunsetMode" = "Clicca per cambiare alla modalità \"Tramonto\"";
+".DragTheSliderToSee" = "Puoi muovere lo slider per vedere quanto tempo manca al tramonto";
+".TapToSwitchToGoingMode" = "Clicca per cambiare alla modalità \"Andando\"";
+".LongPressToComingBackMode" = "Tieni premuto per cambiare alla modalità \"Tornando indietro\"";
+".TapToEndActivity" = "Clicca per concludere l'attività!";
+".ComingBack" = "Tornando indietro";
+".Going" = "Andando";
+".DoYouWantoToQuit?" = "Vuoi davvero abbandonare?";
+".AllThePinsLeft_description" = "Tutti i pin lasciati fino ad ora verranno persi";
+".Quit" = "Abbandona";
+".Cancel" = "Annulla";
+".Congratulation" = "Congratulazioni";
+".YouArrived" = "Sei arrivato al tuo punto di partenza";
+".Okay" = "Okay";
+".ActivityTime" = "Tempo Attività";
+".TimeToSunset" = "Tempo rimanente al tramonto";

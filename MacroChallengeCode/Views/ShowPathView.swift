@@ -31,7 +31,7 @@ struct ShowPathView: View {
      
             ZStack{
                 
-                Text(mapScreen == .mapView ? "Going.." : "ComingBack")
+                Text(mapScreen == .mapView ? LocalizedStringKey(".Going") : LocalizedStringKey(".ComingBack"))
                 .font(.title)
                 .bold()
                 .font(.title)

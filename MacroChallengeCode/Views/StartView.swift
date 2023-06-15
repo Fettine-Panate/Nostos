@@ -41,7 +41,7 @@ struct StartView: View {
                     }
                 } label: {
                     VStack{
-                        Text("Start Activity")
+                        Text(LocalizedStringKey(".StartActivity"))
                             .fontWeight(.semibold)
                             .foregroundColor(Color.orange)
                             .padding()

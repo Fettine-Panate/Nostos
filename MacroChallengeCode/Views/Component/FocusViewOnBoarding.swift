@@ -10,7 +10,7 @@ import SwiftUI
 struct FocusViewOnBoarding<T: Gesture>: View {
     @Binding var onBoardIndex : Int
     var size : [CGSize]
-    var text : [String]
+    var text : [LocalizedStringKey]
     var positionCircle : [CGPoint]
     var gesture: [T]
   

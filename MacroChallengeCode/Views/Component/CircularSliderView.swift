@@ -140,7 +140,7 @@ struct CircularSliderView: View {
                     }
                     if !dragged{
                         VStack {
-                            Text("Activity time:")
+                            Text(LocalizedStringKey(".ActivityTime"))
                                 .font(.system(size: 25, design: .rounded))
                             Text(formatSecondsToHMS(Int(pastTime)))
                                 .font(.system(size: 30, design: .rounded))
@@ -151,7 +151,7 @@ struct CircularSliderView: View {
                         .foregroundColor(Color("white"))
                     } else {
                         VStack {
-                            Text("Time to sunset:")
+                            Text(LocalizedStringKey(".TimeToSunset"))
                                 .font(.system(size: 25, design: .rounded))
                             Text((formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition)))))
                                 .font(.system(size: 30, design: .rounded))

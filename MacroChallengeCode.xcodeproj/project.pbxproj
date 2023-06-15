@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		910AB7C22A3BBD0A009C792F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 910AB7C42A3BBD0A009C792F /* Localizable.strings */; };
 		9126FE232A30BEA600818999 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9126FE222A30BEA600818999 /* Avatar.swift */; };
 		913301F12A39B1B700AB1C23 /* ArrivedBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913301F02A39B1B700AB1C23 /* ArrivedBackView.swift */; };
 		9158056F2A1CAE97007E579F /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158056E2A1CAE97007E579F /* Path.swift */; };
@@ -99,6 +100,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		910AB7C32A3BBD0A009C792F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		910AB7CA2A3BBDD9009C792F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9126FE222A30BEA600818999 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		913301F02A39B1B700AB1C23 /* ArrivedBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivedBackView.swift; sourceTree = "<group>"; };
 		9158056E2A1CAE97007E579F /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
@@ -272,6 +275,7 @@
 				918DD10C2A17D3F500E44590 /* ContentView.swift */,
 				918DD10E2A17D3F600E44590 /* Assets.xcassets */,
 				918DD1102A17D3F600E44590 /* Preview Content */,
+				910AB7C42A3BBD0A009C792F /* Localizable.strings */,
 			);
 			path = MacroChallengeCode;
 			sourceTree = "<group>";
@@ -451,6 +455,7 @@
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = 918DD0FE2A17D3F500E44590;
 			packageReferences = (
@@ -475,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				918DD1122A17D3F600E44590 /* Preview Assets.xcassets in Resources */,
+				910AB7C22A3BBD0A009C792F /* Localizable.strings in Resources */,
 				918DD10F2A17D3F600E44590 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,11 +601,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		910AB7C42A3BBD0A009C792F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				910AB7C32A3BBD0A009C792F /* en */,
+				910AB7CA2A3BBDD9009C792F /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		918DD1292A17D3F600E44590 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -660,6 +679,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -736,6 +756,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -778,6 +799,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
