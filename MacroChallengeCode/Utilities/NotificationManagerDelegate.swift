@@ -8,6 +8,7 @@
 import Foundation
 import UserNotifications
 
+// TODO: Snooze logic is not working and code need to be re-organized
 
 enum NotificationActions: String {
     case remind
@@ -18,6 +19,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
     static let shared = NotificationManager()
     let center = UNUserNotificationCenter.current()
     let content = UNMutableNotificationContent()
+    let uuidString = UUID().uuidString
     
     private override init() {
         super.init()
@@ -31,14 +33,14 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
                 print(error.localizedDescription)
             }
             if granted {
-                print("Notification Allowed")
+                print("DEBUG: Notification Allowed")
             } else {
-                print("Notification Denied")
+                print("DEBUG: Notification Denied")
             }
         }
     }
     
-    func createNotification(title: String, body: String, sunset : Date , start : Date) {
+    func createNotification(title: String, body: String, timeInterval: TimeInterval) {
         
         center.getNotificationSettings { settings in
             guard (settings.authorizationStatus == .authorized) ||
@@ -56,19 +58,21 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         UNNotificationCategory(identifier: "SUNSET_REMINDER",
                                actions: [remindAction],
                                intentIdentifiers: [],
-                               options: []
+                               options: .customDismissAction
         )
         
         center.setNotificationCategories([category])
         
-        scheduleNotification(timeInterval: calculateTimeToReturn(sunset: sunset, startTime: start))
+//        scheduleNotification(timeInterval: calculateTimeToReturn(sunset: sunset, startTime: start))
+        scheduleNotification(timeInterval: timeInterval)
         
     }
     
     func scheduleNotification(timeInterval: TimeInterval) {
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
         
         center.add(request) { error in
             if let error = error {
@@ -85,10 +89,27 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         switch response.actionIdentifier {
         case "REMIND_ACTION":
-            scheduleNotification(timeInterval: 3) //600
+            print("Entered")
+            /* In case in the future we are going to implement quick actions
+            
+            center.removePendingNotificationRequests(withIdentifiers: ["SunsetReminder"])
+            let newTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let content = UNMutableNotificationContent()
+            content.title = "Nuova notifica"
+            content.body = "Questa è una notifica riprogrammata."
+            let newNotificationIdentifier = "newNotificationIdentifier"
+            let request = UNNotificationRequest(identifier: newNotificationIdentifier, content: content, trigger: newTrigger)
+            UNUserNotificationCenter.current().add(request) { (error) in
+                if let error = error {
+                    print("Errore nell'aggiunta della nuova notifica: \(error.localizedDescription)")
+                } else {
+                    print("Nuova notifica aggiunta con successo.")
+                }
+            }
+            */
             break
         default:
-            print("Dunno mate")
+            print("Default")
             break
         }
         completionHandler()
