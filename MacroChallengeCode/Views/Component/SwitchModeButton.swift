@@ -28,8 +28,6 @@ struct SwitchModeButton: View {
                     activity = .sunset
                 case .sunset:
                     activity = .map
-                case .finished:
-                    print("finished")
                 }
                 
             }
@@ -49,7 +47,6 @@ struct SwitchModeButton: View {
             }
             .cornerRadius(10)
         }
-        .zIndex(activity == ActivityEnum.finished ? -1 : 0)
     }
 }
 

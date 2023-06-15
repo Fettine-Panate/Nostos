@@ -82,9 +82,8 @@ struct TrackBackView: View {
                 if (path.removeCheckpoint(currentUserLocation: currentUserLocation!)){
                     if(path.locations.isEmpty){
                         withAnimation {
-                            activity = .finished
+                            screen = .finished
                         }
-                      
                     }
                 }
             }

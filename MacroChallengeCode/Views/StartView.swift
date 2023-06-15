@@ -33,7 +33,6 @@ struct StartView: View {
                     withAnimation {
                         screen = .activity
                         // TODO: Start the activity and schedule notification
-                        let location : CLLocation = LocationManager.shared.userLocation!
                         if defaults.integer(forKey: "ON_BOARDING") >= 5 {
                             //NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
                             NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", timeInterval: 5)

@@ -14,12 +14,12 @@ import SunKit
 enum Screens {
     case startView
     case activity
+    case finished
 }
 
 enum ActivityEnum {
     case map
     case sunset
-    case finished
 }
 
 enum MapSwitch {
@@ -50,6 +50,7 @@ struct ContentView: View {
     @ObservedObject var locationManager = LocationManager.shared
     
     var body: some View {
+       
         
         ZStack{
             switch screen {
@@ -59,8 +60,19 @@ struct ContentView: View {
                 if(LocationManager.shared.userLocation != nil){
                     ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns)
                 }else{
+                    //TODO schermata quando prova a iniziare senza accettare il gps
                     Text("Activate into your settings the GPS track")
                 }
+            case .finished:
+                if(LocationManager.shared.userLocation != nil){
+                    let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
+                    ArrivedBackView(screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, day: day)
+                }else{
+                    //TODO schermata quando prova a iniziare senza accettare il gps
+                    Text("Activate into your settings the GPS track")
+                }
+             
+                    
             }
   
         }

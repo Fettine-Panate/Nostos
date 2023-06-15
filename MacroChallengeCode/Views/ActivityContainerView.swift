@@ -29,8 +29,9 @@ struct ActivityContainerView: View {
     @State var alertIsPresented = false
     
     @State var start = Date()
-    
+
     @State var magnitude : Double = 40.0
+
     
     var body: some View {
         let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
@@ -49,18 +50,11 @@ struct ActivityContainerView: View {
                 case .sunset:
                     CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
                         .padding(70)
-                case .finished:
-                    ArrivedBackView()
+               
                 }
                 
                 Button {
-                    if !(activity == ActivityEnum.finished) {
                         alertIsPresented = true
-                    } else {
-                        withAnimation {
-                            screen = .startView
-                        }
-                    }
                 } label: {
                     VStack{
                         Text("Stop Activity")
