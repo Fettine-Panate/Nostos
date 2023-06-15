@@ -9,10 +9,10 @@ import SwiftUI
 import CoreLocation
 
 let dateFormatterHHMM: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    return formatter
+}()
 
 
 struct CircularSliderView: View {
@@ -72,30 +72,30 @@ struct CircularSliderView: View {
                     .frame(width: radius * 2, height: radius * 2)
                     .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
                 //Cerchio progress
-                    Circle()
-                        .trim(from: !dragged ? 0 : progress, to: !dragged ? progress : 0.9)
-                        .stroke(Color("white"),
-                                style: StrokeStyle(lineWidth: sliderWidth,lineCap: .round)))
-                        .rotationEffect(Angle(degrees: 108))
-                        .matchedGeometryEffect(id: "circle", in: ns)
-                        .matchedGeometryEffect(id: "circle1", in: ns)
-                        .matchedGeometryEffect(id: "circle2", in: ns)
-                        .matchedGeometryEffect(id: "circle3", in: ns)
-                        .matchedGeometryEffect(id: "circle4", in: ns)
-                        .frame(width: radius * 2, height: radius * 2)
-                        .overlay {
-                            Text("")
-                        }
-                        .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
-                        .animation(.easeInOut(duration: 0.4), value: dragged)
-                       
+                Circle()
+                    .trim(from: !dragged ? 0 : progress, to: !dragged ? progress : 0.9)
+                    .stroke(Color("white"),
+                            style: StrokeStyle(lineWidth: sliderWidth,lineCap: .round))
+                    .rotationEffect(Angle(degrees: 108))
+                    .matchedGeometryEffect(id: "circle", in: ns)
+                    .matchedGeometryEffect(id: "circle1", in: ns)
+                    .matchedGeometryEffect(id: "circle2", in: ns)
+                    .matchedGeometryEffect(id: "circle3", in: ns)
+                    .matchedGeometryEffect(id: "circle4", in: ns)
+                    .frame(width: radius * 2, height: radius * 2)
+                    .overlay {
+                        Text("")
+                    }
+                    .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
+                    .animation(.easeInOut(duration: 0.4), value: dragged)
+                
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
                     .foregroundColor(Color("white"))
                     .offset(y: radius)
                     .rotationEffect(
                         Angle(degrees: 18)
-                       +  rotationAngle
+                        +  rotationAngle
                     )
                     .animation(.easeInOut(duration: 0.4), value: dragged)
                     .gesture(
@@ -128,38 +128,52 @@ struct CircularSliderView: View {
                 .rotationEffect(Angle(degrees: 342))
                 .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                 
-//            iconSlider(icon: Image(systemName: "sunset") ,angle: Angle(degrees: 312) , radius: radius)
-//                .rotationEffect(Angle(degrees: 312))
-//                .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                //            iconSlider(icon: Image(systemName: "sunset") ,angle: Angle(degrees: 312) , radius: radius)
+                //                .rotationEffect(Angle(degrees: 312))
+                //                .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                 if isBeforeTheSunset{
                     if dragged{
                         iconSlider(text:
-                                    Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)).bold(),angle: rotationAngle + Angle(degrees: 18) , radius: radius, rect: false)
+                                    Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)).bold().foregroundColor(Color("white")),angle: rotationAngle + Angle(degrees: 18) , radius: radius, rect: false)
                         .rotationEffect(rotationAngle + Angle(degrees: 18))
-                        .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                        //.opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
                     }
                     if !dragged{
-                        Text("Activity time:\n__\(formatSecondsToHMS(Int(pastTime)))__")
-                            .font(.title2)
-                            .multilineTextAlignment(.center)
-                            .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
-                            .foregroundColor(Color("white"))
+                        VStack {
+                            Text("Activity time:")
+                                .font(.system(size: 25, design: .rounded))
+                            Text(formatSecondsToHMS(Int(pastTime)))
+                                .font(.system(size: 30, design: .rounded))
+                                .bold()
+                        }
+                        .multilineTextAlignment(.center)
+                        .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                        .foregroundColor(Color("white"))
                     } else {
-                        
-                        Text("Time to sunset:\n__\(formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))__")
-                            .font(.title2)
-                            .multilineTextAlignment(.center)
-                            .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
-                            .foregroundColor(Color("white"))
+                        VStack {
+                            Text("Time to sunset:")
+                                .font(.system(size: 25, design: .rounded))
+                            Text((formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition)))))
+                                .font(.system(size: 30, design: .rounded))
+                                .bold()
+                        }
+                        .multilineTextAlignment(.center)
+                        .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                        .foregroundColor(Color("white"))
                     }
                 }else{
-                        Text("Activity time:\n  **\(formatSecondsToHMS(Int(pastTime)))** ")
-                            .font(.title2)
-                            .multilineTextAlignment(.center)
-                            .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
-                            .foregroundColor(Color("white"))
+                    VStack {
+                        Text("Activity time:")
+                            .font(.system(size: 25, design: .rounded))
+                        Text(formatSecondsToHMS(Int(pastTime)))
+                            .font(.system(size: 30, design: .rounded))
+                            .bold()
+                    }
+                    .multilineTextAlignment(.center)
+                    .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                    .foregroundColor(Color("white"))
                 }
-                                
+                
             }
             .onChange(of: userLocation) { newValue in
                 path.addLocation(userLocation!, checkLocation: path.checkDistance)
@@ -174,34 +188,34 @@ struct CircularSliderView: View {
                 isBeforeTheSunset = false
             }
         }
-                    .onReceive(timer){ _ in
-                        currentTime = Date()
-                        if sunset.timeIntervalSince(currentTime) <= 0{
-                            isBeforeTheSunset = false
-                        }
-                        pastTime = currentTime.timeIntervalSince(start)
-                        if isBeforeTheSunset{
-                            if !dragged{
-                                withAnimation(.linear(duration: 5)){
-                                    progress = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
-                                    rotationAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: currentTime)
-                                }
-                            }
-                        } else{
-                            progress = 0.90
-                            rotationAngle = Angle(degrees: 0.90 * 360)
-                        }
-                        
+        .onReceive(timer){ _ in
+            currentTime = Date()
+            if sunset.timeIntervalSince(currentTime) <= 0{
+                isBeforeTheSunset = false
+            }
+            pastTime = currentTime.timeIntervalSince(start)
+            if isBeforeTheSunset{
+                if !dragged{
+                    withAnimation(.linear(duration: 5)){
+                        progress = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
+                        rotationAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: currentTime)
                     }
+                }
+            } else{
+                progress = 0.90
+                rotationAngle = Angle(degrees: 0.90 * 360)
+            }
+            
+        }
     }
 }
 
-    func formatSecondsToHMS(_ totalSeconds: Int) -> String {
-        let hours = totalSeconds / 3600
-        let minutes = (totalSeconds % 3600) / 60
-        let seconds = (totalSeconds % 3600) % 60
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-    }
+func formatSecondsToHMS(_ totalSeconds: Int) -> String {
+    let hours = totalSeconds / 3600
+    let minutes = (totalSeconds % 3600) / 60
+    let seconds = (totalSeconds % 3600) % 60
+    return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+}
 
 func formatSecondsToHM(_ totalSeconds: Int) -> String {
     let hours = totalSeconds / 3600
@@ -211,7 +225,7 @@ func formatSecondsToHM(_ totalSeconds: Int) -> String {
 
 
 func calculateAngleFromDate(sunsetTime: Date, startTime: Date, inputTime: Date)-> Angle{
-
+    
     let x = inputTime.timeIntervalSince(startTime)/sunsetTime.timeIntervalSince(startTime)
     return Angle(degrees: x * 360)
     
@@ -263,10 +277,10 @@ func changeAngle(value: CGPoint,currentAngle: Angle, minAngle : Angle) -> Angle 
 //                    progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
 //                }
 //            }
-            
-            
-              
-       
+
+
+
+
 //            .onReceive(timer){ _ in
 //                currentTime = Date()
 //                progress1 = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
@@ -417,18 +431,20 @@ struct iconSlider : View {
         VStack{
             if rect! {
                 Rectangle()
-                    .frame(width: 2,height: 10)
+                    .frame(width: 3,height: 10)
+                    .cornerRadius(10)
             }
             VStack{
                 if (icon == nil){
                     text.padding(5)
+                        .bold()
                 }else{
                     icon.padding(5)
                 }
             }.rotationEffect(-angle)
         }
         .offset(y: radius * 1.45)
-       
+        
         
     }
 }
