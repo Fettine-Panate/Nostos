@@ -63,7 +63,7 @@ struct ActivityContainerView: View {
                             .foregroundColor(Color(day.hours[currentHour].color))
                         
                     }
-                    .frame(height: geo.size.width * 0.11)
+                    .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
                     .background(){
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height: geo.size.width * 0.11)

@@ -28,37 +28,37 @@ struct ArrivedBackView: View {
                         .resizable()
                         .frame(width: geo.size.width * 0.23, height: geo.size.width * 0.15)
                         .foregroundColor(Color("white"))
-                        
-                    Text("Congratulation")
+                    
+                    Text(LocalizedStringKey(".Congratulation"))
                         .bold()
                         .foregroundColor(Color("white"))
                         .font(.system(size: 40))
                         .padding()
-                    Text("You arrived at your starting point")
+                    Text(LocalizedStringKey(".YouArrived"))
                         .foregroundColor(Color("white"))
                         .font(.system(size: 25))
-                        .padding(.bottom, 60)
+                }.position(CGPoint(x: geo.size.width/2, y: geo.size.height/2))
+                VStack{
                     Button {
                         screen = .startView
                         mapScreen = .mapView
                         activity = .map
                     } label: {
                         VStack{
-                            Text("OK")
+                            Text(LocalizedStringKey(".Okay"))
                                 .fontWeight(.semibold)
                                 .padding()
                                 .foregroundColor(Color(day.hours[currentHour].color))
                         }
-                        .frame(height: geo.size.width * 0.11)
+                        .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
                         .background(){
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(height: geo.size.width * 0.11)
                                 .foregroundColor(Color("white"))
                         }
                     }
-
                 }
-                .position(x: geo.size.width/2, y: geo.size.height * 0.4)
+                .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                
             }
         }
