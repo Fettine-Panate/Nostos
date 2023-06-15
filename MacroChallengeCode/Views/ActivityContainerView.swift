@@ -142,6 +142,9 @@ struct ActivityContainerView: View {
                     
                 ])
             }
+            .onAppear {
+                UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemBlue
+            }
         }
     }
 }
