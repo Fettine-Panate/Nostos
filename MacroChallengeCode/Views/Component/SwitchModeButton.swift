@@ -10,11 +10,15 @@ import SwiftUI
 
 
 
+enum ImageType {
+    case system(name: String)
+    case custom(name: String)
+}
+
 struct SwitchModeButton: View {
-    var imageName : String
-    var color : String
-    
-    @Binding var activity : ActivityEnum
+    var imageType: ImageType
+    var color: String
+    @Binding var activity: ActivityEnum
     
     var body: some View {
         Button {
@@ -30,12 +34,20 @@ struct SwitchModeButton: View {
                 
             }
         } label: {
-            ZStack{
-                
-                    Color("white")
-                Image(systemName: imageName)
-                    .foregroundColor(Color(color))
-            }.cornerRadius(10)
+            ZStack {
+                Color("white")
+                switch imageType {
+                case .system(let name):
+                    Image(systemName: name)
+                        .foregroundColor(Color(color))
+                        .font(.title)
+                case .custom(let name):
+                    Image(name)
+                        .foregroundColor(Color(color))
+                        .font(.title)
+                }
+            }
+            .cornerRadius(10)
         }
 
     }
@@ -43,6 +55,6 @@ struct SwitchModeButton: View {
 
 struct SwitchModeButton_Previews: PreviewProvider {
     static var previews: some View {
-        SwitchModeButton(imageName: "globe", color: "midday", activity: .constant(.map))
+        SwitchModeButton(imageType: .system(name: "heart.fill"), color: "midday", activity: .constant(.map))
     }
 }
