@@ -38,6 +38,7 @@
 		9AECAA7F2A279C6C007926B8 /* SunsetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA762A279C6B007926B8 /* SunsetWidgetLiveActivity.swift */; };
 		9AECAA872A27A13D007926B8 /* SunKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9AECAA862A27A13D007926B8 /* SunKit */; };
+		9AFCDAD42A3B3AFB00877886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFCDAD32A3B3AFB00877886 /* AppDelegate.swift */; };
 		9F8ED0E92A2F58EB00C223ED /* CircularSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED0E82A2F58EB00C223ED /* CircularSliderView.swift */; };
 		9F8ED0EB2A2F81A500C223ED /* ShowPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED0EA2A2F81A500C223ED /* ShowPathView.swift */; };
 		9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257B2A1CF09300159166 /* IndicatorView.swift */; };
@@ -132,6 +133,7 @@
 		9AECAA782A279C6B007926B8 /* SunsetWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetWidget.swift; sourceTree = "<group>"; };
 		9AECAA7A2A279C6C007926B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AECAA7C2A279C6C007926B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AFCDAD32A3B3AFB00877886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F8ED0E82A2F58EB00C223ED /* CircularSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSliderView.swift; sourceTree = "<group>"; };
 		9F8ED0EA2A2F81A500C223ED /* ShowPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPathView.swift; sourceTree = "<group>"; };
 		9FF2257B2A1CF09300159166 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				91C447CA2A28F46A00319349 /* JsonManager.swift */,
 				9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */,
 				9A601E312A336EE400795F77 /* LiveActivityManager.swift */,
+				9AFCDAD32A3B3AFB00877886 /* AppDelegate.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				91C1D4172A3A0AC300712790 /* FocusViewOnBoarding.swift in Sources */,
 				9FF225802A1D079800159166 /* CompassHeading.swift in Sources */,
 				916EEDFD2A3216E000FA7298 /* SwitchModeButton.swift in Sources */,
+				9AFCDAD42A3B3AFB00877886 /* AppDelegate.swift in Sources */,
 				9A601E302A33502500795F77 /* NotificationManagerDelegate.swift in Sources */,
 				9FF225922A22189600159166 /* BoxHourView.swift in Sources */,
 				9FF225902A22169900159166 /* ProgressBarView.swift in Sources */,
