@@ -92,10 +92,8 @@ struct CircularSliderView: View {
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
                     .foregroundColor(Color("white"))
-                    .offset(y: radius)
-                    .rotationEffect(
-                        Angle(degrees: 18)
-                        +  rotationAngle
+                    .offset(x:sin(18 * Double.pi / 180) * -radius , y: cos(18 * Double.pi / 180) * radius)
+                    .rotationEffect(  rotationAngle
                     )
                     .animation(.easeInOut(duration: 0.4), value: dragged)
                     .gesture(
