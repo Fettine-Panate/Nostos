@@ -138,66 +138,6 @@ struct ActivityContainerView: View {
                             })
                     
                 ])
-                   
-//                if onBoardIndex == 0{
-//                    //SUNSET MODE
-//                    FocusViewOnBoarding(size: CGSize(width: 70, height: 70), text: "Tap to switch to Sunset Mode", positionCircle: CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), gesture: TapGesture().onEnded({ bool in
-//
-//                        withAnimation {
-//                            onBoardIndex += 1
-//                            defaults.set(1, forKey: "ON_BOARDING")
-//                            activity = .sunset
-//                        }
-//
-//                    }))
-//                    .matchedGeometryEffect(id: "onBoard", in: ns)
-//                }else if onBoardIndex == 1{
-//                    //SHOW THE CIRCULARSLIDER
-//                    FocusViewOnBoarding(size: CGSize(width: geo.size.width * 0.9, height: geo.size.width * 0.9), text: "You can drag the slider to see how much time left to sunset", positionCircle: CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5), gesture: TapGesture().onEnded({ bool in
-//
-//                        withAnimation {
-//                            onBoardIndex += 1
-//                            defaults.set(2, forKey: "ON_BOARDING")
-//                            activity = .sunset
-//                        }
-//
-//                    }))
-//                    .matchedGeometryEffect(id: "onBoard", in: ns)
-//                }else if onBoardIndex == 2{
-//                    //GO BACK TO MAP
-//                    FocusViewOnBoarding(size: CGSize(width: 70, height: 70), text: "Tap to switch to \"Going\" Mode", positionCircle: CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), gesture: TapGesture().onEnded({ bool in
-//
-//                        withAnimation {
-//                            onBoardIndex += 1
-//                            defaults.set(3, forKey: "ON_BOARDING")
-//                            activity = .map
-//                        }
-//
-//                    }))
-//                    .matchedGeometryEffect(id: "onBoard", in: ns)
-//                }else if onBoardIndex == 3 {
-//                    FocusViewOnBoarding(size: CGSize(width: 70, height: 70), text: "Long Press to switch to \"Coming back\" Mode", positionCircle: CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5), gesture: TapGesture().onEnded({ bool in
-//
-//                        withAnimation {
-//                            onBoardIndex += 1
-//                            defaults.set(4, forKey: "ON_BOARDING")
-//                            mapScreen = .trackBack
-//                        }
-//
-//                    }))
-//                    .matchedGeometryEffect(id: "onBoard", in: ns)
-//                }else if onBoardIndex == 4{
-//                    FocusViewOnBoarding(size: CGSize(width: geo.size.width * 0.5, height: geo.size.height * 0.2), text: "Tap to end the activity!", positionCircle: CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.9), gesture: TapGesture().onEnded({ bool in
-//
-//                        withAnimation {
-//                            onBoardIndex += 1
-//                            defaults.set(5, forKey: "ON_BOARDING")
-//                            screen = .startView
-//                        }
-//
-//                    }))
-//                    .matchedGeometryEffect(id: "onBoard", in: ns)
-//                }
             }
         }
     }
