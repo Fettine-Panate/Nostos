@@ -54,7 +54,13 @@ struct ActivityContainerView: View {
                 }
                 
                 Button {
-                    alertIsPresented = true
+                    if !(activity == ActivityEnum.finished) {
+                        alertIsPresented = true
+                    } else {
+                        withAnimation {
+                            screen = .startView
+                        }
+                    }
                 } label: {
                     VStack{
                         Text("Stop Activity")
