@@ -39,3 +39,4 @@ fastlane/sign&cert
 ._*
 *.bak
 MacroChallengeCode.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+MacroChallengeCode.xcodeproj/project.pbxproj
