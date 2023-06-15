@@ -46,8 +46,11 @@ struct StartView: View {
                             .fontWeight(.semibold)
                             .foregroundColor(Color.orange)
                             .padding()
-                    }.background(){
+                    }
+                    .frame(height: geo.size.width * 0.11)
+                    .background(){
                         RoundedRectangle(cornerRadius: 10)
+                            .frame(height: geo.size.width * 0.11)
                             .foregroundColor(Color("white"))
                     }
                 }

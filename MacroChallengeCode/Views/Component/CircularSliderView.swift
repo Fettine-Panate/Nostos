@@ -61,13 +61,13 @@ struct CircularSliderView: View {
         
         GeometryReader{ gr in
             let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
-            let sliderWidth = 10.0
+            let sliderWidth = 17.0
             ZStack {
                 //Cerchio interno
                 Circle()
                     .trim(from: 0, to: 0.9)
                     .stroke(Color.black.opacity(day.hours[currentTimeIndex!].accentObjectOp),
-                    style: StrokeStyle(lineWidth: sliderWidth))
+                            style: StrokeStyle(lineWidth: sliderWidth,lineCap: .round))
                     .rotationEffect(Angle(degrees: 108))
                     .frame(width: radius * 2, height: radius * 2)
                     .position(x: gr.size.width * 0.5, y: gr.size.height * 0.5)
@@ -75,7 +75,7 @@ struct CircularSliderView: View {
                     Circle()
                         .trim(from: !dragged ? 0 : progress, to: !dragged ? progress : 0.9)
                         .stroke(Color("white"),
-                                style: StrokeStyle(lineWidth: sliderWidth))
+                                style: StrokeStyle(lineWidth: sliderWidth,lineCap: .round)))
                         .rotationEffect(Angle(degrees: 108))
                         .matchedGeometryEffect(id: "circle", in: ns)
                         .matchedGeometryEffect(id: "circle1", in: ns)

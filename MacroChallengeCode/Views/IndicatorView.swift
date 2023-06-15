@@ -13,12 +13,14 @@ struct IndicatorView: View {
 
             ZStack{
 
-                RoundedTriangle()
-                    .frame(width: 35, height: 40)
-   
+//                RoundedTriangle()
+//                    .frame(width: 35, height: 40)
+                Image(systemName: "drop.fill")
+                    .resizable()
+                    .frame(width: 45, height: 63)
                 
             }
-                .padding(.bottom,35)
+            .padding(.bottom,18)
         }
 
 }
