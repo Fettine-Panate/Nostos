@@ -69,6 +69,7 @@ class PathCustom: ObservableObject , Codable {
     }
     
     public func copy(path : PathCustom){
+        print("Copying the path..")
         self.title = path.title
         self.locations.removeAll()
         for (loc) in path.locations{
@@ -117,6 +118,7 @@ class PathCustom: ObservableObject , Codable {
         if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation())) && location.horizontalAccuracy <= (PathCustom.minDistance + PathCustom.maxDistance)/2
         {
             locations.append(location)
+            print("Locations latitude: \(location.coordinate.latitude) \n\tand longitude: \(location.coordinate.longitude)")
         }
         
     }

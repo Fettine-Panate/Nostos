@@ -103,7 +103,7 @@ struct ActivityContainerView: View {
                 
                 
                 
-                FocusViewOnBoarding(onBoardIndex: $onBoardIndex, size: [CGSize(width: 70, height: 60), CGSize(width: geo.size.width * 0.9, height: geo.size.width * 0.9), CGSize(width: 70, height: 70), CGSize(width: 70, height: 70), CGSize(width: geo.size.width * 0.5, height: geo.size.height * 0.2) ], text: [LocalizedStringKey(".TapToSwitchToGoingMode"),LocalizedStringKey(".DragTheSliderToSee"), LocalizedStringKey(".TapToSwitchToGoingMode"), ".LongPressToComingBackMode", LocalizedStringKey(".TapToEndActivity") ], positionCircle: [CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),  CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.9)], gesture: [
+                FocusViewOnBoarding(onBoardIndex: $onBoardIndex, size: [CGSize(width: 70, height: 60), CGSize(width: geo.size.width * 0.9, height: geo.size.width * 0.9), CGSize(width: 70, height: 70), CGSize(width: 70, height: 70), CGSize(width: geo.size.width * 0.5, height: geo.size.height * 0.2) ], text: [LocalizedStringKey(".TapToSwitchToSunsetMode"),LocalizedStringKey(".DragTheSliderToSee"), LocalizedStringKey(".TapToSwitchToGoingMode"), ".LongPressToComingBackMode", LocalizedStringKey(".TapToEndActivity") ], positionCircle: [CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),CGPoint(x: geo.size.width * 0.9, y: geo.size.height * 0.1), CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.5),  CGPoint(x: geo.size.width * 0.5, y: geo.size.height * 0.9)], gesture: [
                     
                         //SUNSET MODE
                         TapGesture().onEnded({ bool in
@@ -151,7 +151,7 @@ struct ActivityContainerView: View {
                 ])
             }
             .onAppear {
-                if resumeLastPath && !pathsJSON.isEmpty{
+                if resumeLastPath && !pathsJSON.isEmpty && defaults.bool(forKey: "IS_STARTED"){
                     path.copy(path: pathsJSON.last!)
                 }
                 UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemBlue

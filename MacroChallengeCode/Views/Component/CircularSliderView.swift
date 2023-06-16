@@ -237,7 +237,6 @@ func changeProgress(value: CGPoint, progress : Double, minAngle : Angle) -> Doub
     if Angle(radians: positiveAngle) <= Angle(degrees: 324) && Angle(radians: positiveAngle) >= minAngle  {
         ret = ((positiveAngle / ((2.0 * .pi))))
     }
-    print("returning : \(ret)")
     return ret
 }
 

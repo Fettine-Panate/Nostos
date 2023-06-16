@@ -54,14 +54,10 @@ struct ContentView: View {
         self.pathsJSON = pathsJSON
         self.changeScreen = changeScreen
         self.screen = screen
-        if defaults.integer(forKey: "ON_BOARDING") == nil {
-            defaults.set(0, forKey: "ON_BOARDING")
-        }else if defaults.integer(forKey: "ON_BOARDING") < 5{
+        if defaults.integer(forKey: "ON_BOARDING") == nil || defaults.integer(forKey: "ON_BOARDING") < 5{
             defaults.set(0, forKey: "ON_BOARDING")
         }
-        if defaults.bool(forKey: "IS_STARTED") == nil {
-            defaults.set(false, forKey: "IS_STARTED")
-        }
+       
     }
     @ObservedObject var locationManager = LocationManager.shared
     
