@@ -4,13 +4,12 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SFProDisplayRounded-Regular.otf</string>
+		<string>SF-Pro-Rounded-Regular.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>location</string>
-		<string>processing</string>
-		<string>remote-notification</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

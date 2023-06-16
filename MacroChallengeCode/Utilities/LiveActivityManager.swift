@@ -11,7 +11,8 @@ import SunKit
 import CoreLocation
 
 
-class LiveActivityManager {
+
+class LiveActivityManager  {
     
     static let shared = LiveActivityManager()
     var sun: Sun
