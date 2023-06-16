@@ -13,9 +13,8 @@ struct PinAnnotationView: View {
     var body: some View {
         ZStack{
             Circle()
-                .stroke(
-                    Color("white"), lineWidth: 3)
-                .frame(width: 30, height: 30)
+                .fill(Color("white"))
+                .frame(width: 60, height: 60)
         }
     }
 }
@@ -27,12 +26,12 @@ struct FirstPinAnnotationView: View {
             Circle()
                 .foregroundColor(
                     Color("white"))
-                .frame(width: 20, height: 20)
+                .frame(width: 40, height: 40)
             
             Circle()
                 .stroke(
-                    Color("white"), lineWidth: 3)
-                .frame(width: 30, height: 30)
+                    Color("white"), lineWidth: 5)
+                .frame(width: 60, height: 60)
         }
     }
 }
@@ -43,12 +42,12 @@ struct LastPinAnnotationView: View {
         ZStack{
             Circle()
                 .stroke(
-                    Color("white"), lineWidth: 3)
-                .frame(width: 30, height: 30)
+                    Color("white"), lineWidth: 5)
+                .frame(width: 60, height: 60)
             Image(systemName: "flag.checkered")
                 .foregroundColor(
                     Color("white"))
-                .frame(width: 60, height: 60)
+                .font(.largeTitle)
         }
     }
 }
