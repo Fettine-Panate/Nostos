@@ -40,6 +40,7 @@ struct ArrivedBackView: View {
                 }.position(CGPoint(x: geo.size.width/2, y: geo.size.height/2))
                 VStack{
                     Button {
+                        defaults.set(false, forKey: "IS_STARTED")
                         screen = .startView
                         mapScreen = .mapView
                         activity = .map

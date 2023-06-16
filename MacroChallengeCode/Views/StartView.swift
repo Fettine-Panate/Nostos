@@ -19,6 +19,8 @@ struct StartView: View {
     @State var sun : Sun?
     @Binding var screen: Screens
     var ns: Namespace.ID
+    @State var isStartedActivity = defaults.bool(forKey: "IS_STARTED")
+    @Binding var resumeLastPath : Bool
     
     var body: some View {
         
@@ -33,6 +35,7 @@ struct StartView: View {
                     withAnimation {
                         screen = .activity
                         // TODO: Start the activity and schedule notification
+                        defaults.set(true, forKey: "IS_STARTED")
                         if defaults.integer(forKey: "ON_BOARDING") >= 5 {
                             //NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
                             NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", timeInterval: 5)
@@ -55,6 +58,26 @@ struct StartView: View {
                     }
                 }
                 .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
+                
+                .alert(isPresented: $isStartedActivity){
+                    Alert(title: Text(LocalizedStringKey(".DoYouWantoToResume?")), message: Text(".AllThePinsLeft_description"),
+                          primaryButton: .destructive(Text(LocalizedStringKey(".Resume"))) {
+                        withAnimation {
+                            resumeLastPath = true
+                            screen = .activity
+                            // TODO: Start the activity and schedule notification
+                            if defaults.integer(forKey: "ON_BOARDING") >= 5 {
+                                //NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
+                                NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", timeInterval: 5)
+                                LiveActivityManager.shared.addActivity()
+                            }
+                        }
+                          },
+                          secondaryButton: .default(Text(LocalizedStringKey(".No")), action: {
+                        isStartedActivity = false
+                          }))
+                        
+                    }
             }
         }
     }
@@ -106,6 +129,6 @@ struct StartView: View {
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView(pathsJSON: .constant([]), screen: .constant(.startView), ns: Namespace.init().wrappedValue)
+        StartView(pathsJSON: .constant([]), screen: .constant(.startView), ns: Namespace.init().wrappedValue, resumeLastPath: .constant(false))
     }
 }

@@ -36,6 +36,7 @@ struct ContentView: View {
     @State var activity : ActivityEnum = .map
     @State var mapScreen : MapSwitch = .mapView
     @Namespace var ns
+    @State var resumeLastPath = false
     
     init(pathsJSON: [PathCustom] = itemsJSON, changeScreen: Int = 0, screen: Screens = .startView) {
         self.pathsJSON = pathsJSON
@@ -46,6 +47,9 @@ struct ContentView: View {
         }else if defaults.integer(forKey: "ON_BOARDING") < 5{
             defaults.set(0, forKey: "ON_BOARDING")
         }
+        if defaults.bool(forKey: "IS_STARTED") == nil {
+            defaults.set(false, forKey: "IS_STARTED")
+        }
     }
     @ObservedObject var locationManager = LocationManager.shared
     
@@ -55,10 +59,10 @@ struct ContentView: View {
         ZStack{
             switch screen {
             case .startView:
-                StartView(pathsJSON: $pathsJSON, screen: $screen, ns: ns)
+                StartView(pathsJSON: $pathsJSON, screen: $screen, ns: ns, resumeLastPath: $resumeLastPath)
             case .activity:
                 if(LocationManager.shared.userLocation != nil){
-                    ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns)
+                    ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, resumeLastPath: $resumeLastPath)
                 }else{
                     //TODO schermata quando prova a iniziare senza accettare il gps
                     Text("Activate into your settings the GPS track")

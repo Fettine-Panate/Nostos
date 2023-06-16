@@ -16,3 +16,8 @@
 ".Okay" = "Okay";
 ".ActivityTime" = "Tempo Attività";
 ".TimeToSunset" = "Tempo rimanente al tramonto";
+".DoYouWantoToResume?" = "Vuoi riprendere l'ultimo percorso?";
+".Resume" = "Riprendi";
+".No" = "No";
+".LowAccuracy" = "Bassa accuratezza\ndel GPS";
+

@@ -16,3 +16,7 @@
 ".Okay" = "Okay";
 ".ActivityTime" = "Aktivitätsdauer";
 ".TimeToSunset" = "Zeit bis zum Sonnenuntergang";
+".DoYouWantoToResume?" = "Möchten Sie den letzten Pfad fortsetzen?";
+".Resume" = "Fortsetzen";
+".No" = "Nein";
+".LowAccuracy" = "Niedrige\nGPS-Genauigkeit";

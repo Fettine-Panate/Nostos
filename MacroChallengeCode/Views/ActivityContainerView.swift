@@ -31,6 +31,8 @@ struct ActivityContainerView: View {
     @State var start = Date()
 
     @State var magnitude : Double = 40.0
+    @Binding var resumeLastPath : Bool
+    
 
     
     var body: some View {
@@ -76,6 +78,7 @@ struct ActivityContainerView: View {
                     Alert(title: Text(LocalizedStringKey(".DoYouWantoToQuit?")), message: Text(".AllThePinsLeft_description"),
                           primaryButton: .destructive(Text(LocalizedStringKey(".Quit"))) {
                             withAnimation {
+                                defaults.set(false, forKey: "IS_STARTED")
                                 screen = .startView
                                 //TODO: create a func to do this
                                 mapScreen = .mapView
@@ -93,6 +96,14 @@ struct ActivityContainerView: View {
                 SwitchModeButton(imageType: (activity == .map) ? ImageType.custom(name: "sunmode") : ImageType.system(name: "target"), color: day.hours[currentHour].color, activity: $activity
                 ).frame(width: geo.size.width * 0.11, height: geo.size.width * 0.11)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
+                
+                    if ((userLocation!.horizontalAccuracy) > 17.0){
+                        withAnimation(.linear(duration: 0.2)){
+                        LowAccuracyView(size: CGSize(width: geo.size.width * 0.11, height: geo.size.width * 0.11))
+                            .position(x: geo.size.width * 0.1, y: geo.size.height * 0.1)
+                            .foregroundColor(Color("white"))
+                    }
+                }
                 
                 
                 
@@ -144,6 +155,9 @@ struct ActivityContainerView: View {
                 ])
             }
             .onAppear {
+                if resumeLastPath && !pathsJSON.isEmpty{
+                    path.copy(path: pathsJSON.last!)
+                }
                 UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemBlue
             }
         }
@@ -153,6 +167,18 @@ struct ActivityContainerView: View {
 
 struct ActivityContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityContainerView(pathsJSON: .constant([]), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), path: PathCustom(title: "Hello"), screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.trackBack), ns: Namespace.init().wrappedValue)
+        ActivityContainerView(pathsJSON: .constant([]), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), path: PathCustom(title: "Hello"), screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.trackBack), ns: Namespace.init().wrappedValue, resumeLastPath: .constant(false))
+    }
+}
+
+struct LowAccuracyView : View{
+    let size : CGSize
+    
+    var body: some View{
+        HStack{
+            Image(systemName: "antenna.radiowaves.left.and.right.slash")
+                .frame(width: size.width,height: size.height)
+                .font(.title)
+        }
     }
 }

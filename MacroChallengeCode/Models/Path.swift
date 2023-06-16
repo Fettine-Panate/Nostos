@@ -71,6 +71,14 @@ class PathCustom: ObservableObject , Codable {
         return b
     }
     
+    public func copy(path : PathCustom){
+        self.title = path.title
+        self.locations.removeAll()
+        for (loc) in path.locations{
+            self.locations.append(loc)
+        }
+    }
+    
     public func getCenter() -> CLLocation{
         var sumLat = 0.0
         var sumLong = 0.0
