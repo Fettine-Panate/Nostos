@@ -12,9 +12,7 @@ struct IndicatorView: View {
     var body: some View {
 
             ZStack{
-
-//                RoundedTriangle()
-//                    .frame(width: 35, height: 40)
+ 
                 Image("pointer")
                     .resizable()
                     .frame(width: 45, height: 63)

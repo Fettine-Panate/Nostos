@@ -39,18 +39,22 @@ struct MapView: View {
                 IndicatorView()
                     .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.1))
                     .matchedGeometryEffect(id: "indicator", in: ns)
-                    //.rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 ForEach(path.locations, id: \.self ){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                        let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+                        let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen:  geometry.size, latitudeMetersMax: magnitude)
+
                         PinAnnotationView(loc: loc)
                             .position(position)
                             .animation(.linear, value: position)
                             .scaleEffect(scale/3)
+                            .onAppear{
+                                print("Position of the pin: \(position)")
+                            }
                         
                     }
                 }
                 .rotationEffect(Angle(degrees: -self.compassHeading.degrees))
+                
 
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)

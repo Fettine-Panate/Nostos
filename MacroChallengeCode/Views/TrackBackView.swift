@@ -79,14 +79,17 @@ struct TrackBackView: View {
                 self.path = PathCustom(path: self.previouspath)
             }
             .onChange(of: currentUserLocation) { newValue in
-                if (path.removeCheckpoint(currentUserLocation: currentUserLocation!)){
-                    if(path.locations.isEmpty){
-                        withAnimation {
-                            activity = .finished
+                
+                if(defaults.integer(forKey: "ON_BOARDING") > 4){
+                    if (path.removeCheckpoint(currentUserLocation: currentUserLocation!)){
+                        if(path.locations.isEmpty){
+                            withAnimation {
+                                screen = .finished
+                            }
                         }
-                      
                     }
                 }
+               
             }
         }
         

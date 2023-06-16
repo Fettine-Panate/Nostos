@@ -1,0 +1,23 @@
+".StartActivity" = "Iniciar actividad";
+".StopActivity" = "Detener actividad";
+".TapToSwitchToSunsetMode" = "Toca para cambiar al modo \"Puesta de sol\"";
+".DragTheSliderToSee" = "Puedes arrastrar el control deslizante para ver cuánto tiempo queda para la puesta de sol";
+".TapToSwitchToGoingMode" = "Toca para cambiar al modo \"Ir\"";
+".LongPressToComingBackMode" = "Mantén presionado para cambiar al modo \"Regresar\"";
+".TapToEndActivity" = "Toca para finalizar la actividad";
+".ComingBack" = "Regresando";
+".Going" = "Yendo..";
+".DoYouWantoToQuit?" = "¿Realmente quieres salir?";
+".AllThePinsLeft_description" = "Todos los pines restantes hasta ahora se eliminarán permanentemente";
+".Quit" = "Salir";
+".Cancel" = "Cancelar";
+".Congratulation" = "Felicitaciones";
+".YouArrived" = "Has llegado a tu punto de partida";
+".Okay" = "De acuerdo";
+".ActivityTime" = "Tiempo de actividad";
+".TimeToSunset" = "Tiempo hasta la puesta de sol";
+".DoYouWantoToResume?" = "¿Deseas continuar con la última ruta?";
+".Resume" = "Continuar";
+".No" = "No";
+".LowAccuracy" = "Baja precisión\ndel GPS";
+
