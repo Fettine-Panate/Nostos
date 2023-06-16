@@ -122,6 +122,9 @@
 		918DD1272A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroChallengeCodeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerDelegate.swift; sourceTree = "<group>"; };
 		91AB9F022A1B9A8A0068F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		91B95DB82A3C51DC00B5DB31 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		91B95DB92A3C52B400B5DB31 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		91B95DBA2A3C530D00B5DB31 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		91BE43762A1F8771004C3F89 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		91C1D4162A3A0AC300712790 /* FocusViewOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusViewOnBoarding.swift; sourceTree = "<group>"; };
 		91C447CA2A28F46A00319349 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
@@ -456,6 +459,9 @@
 				en,
 				Base,
 				it,
+				es,
+				fr,
+				de,
 			);
 			mainGroup = 918DD0FE2A17D3F500E44590;
 			packageReferences = (
@@ -607,6 +613,9 @@
 			children = (
 				910AB7C32A3BBD0A009C792F /* en */,
 				910AB7CA2A3BBDD9009C792F /* it */,
+				91B95DB82A3C51DC00B5DB31 /* es */,
+				91B95DB92A3C52B400B5DB31 /* fr */,
+				91B95DBA2A3C530D00B5DB31 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -740,7 +749,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -762,7 +771,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -783,7 +792,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MacroChallengeCode/Info.plist;
@@ -805,7 +814,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -823,11 +832,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FTTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT1Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -862,10 +871,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FTUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT1UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -899,7 +908,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunsetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
@@ -910,7 +919,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT.SunsetWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT1.SunsetWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -926,7 +935,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T479J3S372;
+				DEVELOPMENT_TEAM = 4BNM7WSTN5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunsetWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunsetWidget;
@@ -937,7 +946,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT.SunsetWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LightWays.FT1.SunsetWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
