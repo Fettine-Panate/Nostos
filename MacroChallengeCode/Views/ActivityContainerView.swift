@@ -10,11 +10,7 @@ import CoreLocation
 import SunKit
 
 
-let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH"
-    return formatter
-}()
+
 
 struct ActivityContainerView: View {
     @State var onBoardIndex = defaults.integer(forKey: "ON_BOARDING")
@@ -65,8 +61,8 @@ struct ActivityContainerView: View {
                             .foregroundColor(Color(day.hours[currentHour].color))
                         
                     }
-                    //commentato perchè alcune parole in lingue diverse sono più lunghe e quindi si deve adattare.
-//                    .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
+                    .frame(minWidth: geo.size.width * 0.4, minHeight: geo.size.width * 0.11)
+                  
                     .background(){
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height: geo.size.width * 0.11)

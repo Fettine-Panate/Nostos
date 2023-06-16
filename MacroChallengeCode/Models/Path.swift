@@ -15,7 +15,6 @@ class PathCustom: ObservableObject , Codable {
     enum CodingKeys: String, CodingKey {
         case title
         case locations
-        // case encodedLocationWrappers
         case response
         
         enum EncodedLocationWrappers: String, CodingKey {
@@ -42,11 +41,9 @@ class PathCustom: ObservableObject , Codable {
         }
     }
     
-    // Questa funzione lo fa per 10 metri, è una funzione di default per utilizzo rapido
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
-        
-        // let deltaTime = currentLocation.timestamp.timeIntervalSince(lastLocation.timestamp)
+
         return distance >= minDistance && distance <= maxDistance
     }
     

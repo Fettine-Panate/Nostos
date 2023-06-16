@@ -29,6 +29,18 @@ enum MapSwitch {
 
 let defaults = UserDefaults.standard
 
+let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH"
+    return formatter
+}()
+
+let dateFormatterHHMM: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    return formatter
+}()
+
 struct ContentView: View {
     @State var pathsJSON = itemsJSON
     @State var changeScreen = 0
