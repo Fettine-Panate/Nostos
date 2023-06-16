@@ -30,7 +30,6 @@ struct CircularSliderView: View {
     var ns: Namespace.ID
     
     let day : dayFase
-    
     init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: dayFase) {
         self.sunset = sunset
         self.start = start
