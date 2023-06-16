@@ -6,7 +6,7 @@
 ".LongPressToComingBackMode" = "Tieni premuto per cambiare alla modalità \"Tornando indietro\"";
 ".TapToEndActivity" = "Clicca per concludere l'attività!";
 ".ComingBack" = "Tornando indietro";
-".Going" = "Andando";
+".Going" = "Andando..";
 ".DoYouWantoToQuit?" = "Vuoi davvero abbandonare?";
 ".AllThePinsLeft_description" = "Tutti i pin lasciati fino ad ora verranno persi";
 ".Quit" = "Abbandona";

@@ -46,7 +46,8 @@ struct StartView: View {
                             .foregroundColor(Color.orange)
                             .padding()
                     }
-                    .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
+                    //Per lo stesso motivo di stop
+//                    .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
                     .background(){
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height: geo.size.width * 0.11)
