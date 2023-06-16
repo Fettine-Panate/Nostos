@@ -21,7 +21,7 @@ struct MapView: View {
     @Binding var currentUserLocation : CLLocation?
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
- 
+    
     @State var scale = 1.0
     
     @Binding var screen : Screens
@@ -32,61 +32,67 @@ struct MapView: View {
     
     @Binding var magnitude : Double
     let day : dayFase
+    
+    let geometry : CGSize
+    
     var body: some View {
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
-        GeometryReader { geometry in
-            ZStack {
-                IndicatorView()
-                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.1))
-                    .matchedGeometryEffect(id: "indicator", in: ns)
-                ForEach(path.locations, id: \.self ){ loc in
-                    if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-                        let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen:  geometry.size, latitudeMetersMax: magnitude)
-
-                        PinAnnotationView(loc: loc)
-                            .position(position)
-                            .animation(.linear, value: position)
-                            .scaleEffect(scale/3)
-                            .onAppear{
-                                print("Position of the pin: \(position)")
-                            }
-                        
+        
+        
+        
+        ZStack {            
+            IndicatorView()
+                .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.1))
+                .matchedGeometryEffect(id: "indicator", in: ns)
+            ForEach(path.locations, id: \.self ){ loc in
+                if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry, latitudeMetersMax: magnitude){
+                    let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen:  geometry, latitudeMetersMax: magnitude)
+                    
+                    PinAnnotationView(loc: loc)
+                        .position(position)
+                        .animation(.linear, value: position)
+                        .scaleEffect(scale/3)
+                        .onAppear{
+                            print("Position of the pin: \(position)")
+                        }
+                    
+                }
+            }
+            .rotationEffect(Angle(degrees: -self.compassHeading.degrees))
+            
+            
+            Avatar()
+                .matchedGeometryEffect(id: "avatar", in: ns)
+                .foregroundColor(
+                    Color("white"))
+                .onLongPressGesture {
+                    withAnimation {
+                        mapScreen = .trackBack
                     }
                 }
-                .rotationEffect(Angle(degrees: -self.compassHeading.degrees))
-                
-
-                Avatar()
-                    .matchedGeometryEffect(id: "avatar", in: ns)
-                    .foregroundColor(
-                        Color("white"))
-                    .onLongPressGesture {
-                        withAnimation {
-                           mapScreen = .trackBack
-                        }
-                    }
-            }.background(){
-                MapBackground(size: geometry.size, day : day, magnitude: $magnitude, ns: ns)
-            }
-            .frame(width: geometry.size.width,height: geometry.size.height)
-            .onAppear {
-                path.addLocation(currentUserLocation!, checkLocation: path.checkDistance)
-                pathsJSON.append(path)
-                savePack("Paths", pathsJSON)
-            }
-            .onChange(of: currentUserLocation) { loc in
-                path.addLocation(loc!, checkLocation: path.checkDistance)
-                pathsJSON.removeLast()
-                pathsJSON.append(path)
-                savePack("Paths", pathsJSON)
-            }
+        }.background(){
+            MapBackground(size: geometry, day : day, magnitude: $magnitude, ns: ns)
         }
+    
+        .frame(width: geometry.width,height: geometry.height)
+        .onAppear {
+            path.addLocation(currentUserLocation!, checkLocation: path.checkDistance)
+            pathsJSON.append(path)
+            savePack("Paths", pathsJSON)
+        }
+        .onChange(of: currentUserLocation) { loc in
+            path.addLocation(loc!, checkLocation: path.checkDistance)
+            pathsJSON.removeLast()
+            pathsJSON.append(path)
+            savePack("Paths", pathsJSON)
+        }
+        
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), ns: Namespace.init().wrappedValue, magnitude: .constant(30.0), day: dayFase(sunrise: 06, sunset: 20))
+        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), ns: Namespace.init().wrappedValue, magnitude: .constant(30.0), day: dayFase(sunrise: 06, sunset: 20), geometry: CGSize())
     }
 }
 
@@ -130,7 +136,7 @@ func calculatePosition2(loc: CLLocation, currentLocation: CLLocation, sizeOfScre
     let halfScreenHeight = sizeOfScreen.height / 2
     
     let latitudeScale = sizeOfScreen.height / latitudeMetersMax
-  
+    
     let horizontalDistance = deltaLongitude * EarthRadius * cos(latitudeUser.radians)
     let verticalDistance = deltaLatitude * EarthRadius
     
