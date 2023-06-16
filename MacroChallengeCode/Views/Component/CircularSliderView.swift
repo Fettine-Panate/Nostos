@@ -31,12 +31,13 @@ struct CircularSliderView: View {
     @Binding var screen : Screens
     @Binding var activity : ActivityEnum
     @Binding var mapScreen : MapSwitch
+    @Binding var currentHour: Int
     
     var ns: Namespace.ID
     
     let day : dayFase
     
-    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: dayFase) {
+    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: dayFase, currentHour: Binding<Int>) {
         self.sunset = sunset
         self.start = start
         self._screen = screen
@@ -47,6 +48,8 @@ struct CircularSliderView: View {
         self._userLocation = userLocation
         self._pathsJSON = pathsJSON
         self.day = day
+        self._currentHour = currentHour
+//        print("BINDING VALUE: \(currentHour)")
     }
     @State var isBeforeTheSunset = true
     
@@ -58,7 +61,7 @@ struct CircularSliderView: View {
     
     var body: some View {
         let currentTimeIndex = Int(dateFormatter.string(from: Date()))
-        
+        let dateFormatter = DateFormatter()
         GeometryReader{ gr in
             let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
             let sliderWidth = 17.0
@@ -114,6 +117,9 @@ struct CircularSliderView: View {
                             .onEnded(){_ in
                                 if isBeforeTheSunset{
                                     dragged = false
+                                    withAnimation(.linear(duration: 1)){
+                                        dateOfAvatarPosition = Date()
+                                    }
                                 }
                             }
                     )
@@ -140,7 +146,7 @@ struct CircularSliderView: View {
                     }
                     if !dragged{
                         VStack {
-                            Text("Activity time:")
+                            Text("You walked for")
                                 .font(.system(size: 25, design: .rounded))
                             Text(formatSecondsToHMS(Int(pastTime)))
                                 .font(.system(size: 30, design: .rounded))
@@ -151,7 +157,7 @@ struct CircularSliderView: View {
                         .foregroundColor(Color("white"))
                     } else {
                         VStack {
-                            Text("Time to sunset:")
+                            Text("Time left until sunset")
                                 .font(.system(size: 25, design: .rounded))
                             Text((formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition)))))
                                 .font(.system(size: 30, design: .rounded))
@@ -180,6 +186,16 @@ struct CircularSliderView: View {
                 pathsJSON.removeLast()
                 pathsJSON.append(path)
                 savePack("Paths", pathsJSON)
+            }
+            .onChange(of: dateOfAvatarPosition) { newValue in
+                print(newValue)
+                if isBeforeTheSunset {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "HH"
+                    withAnimation {
+                        currentHour = Int(dateFormatter.string(from: newValue)) ?? 0
+                    }
+                }
             }
         }
         .onAppear(){
@@ -249,7 +265,7 @@ func changeProgress(value: CGPoint, progress : Double, minAngle : Angle) -> Doub
     if Angle(radians: positiveAngle) <= Angle(degrees: 324) && Angle(radians: positiveAngle) >= minAngle  {
         ret = ((positiveAngle / ((2.0 * .pi))))
     }
-    print("returning : \(ret)")
+//    print("returning : \(ret)")
     return ret
 }
 
@@ -450,8 +466,8 @@ struct iconSlider : View {
 }
 
 
-struct CircularSliderView_Previews: PreviewProvider {
-    static var previews: some View {
-        CircularSliderView(pathsJSON: .constant([]), path: PathCustom(title: ""), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView), namespace: Namespace.init().wrappedValue, day: dayFase(sunrise: 06, sunset: 20))
-    }
-}
+//struct CircularSliderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CircularSliderView(pathsJSON: .constant([]), path: PathCustom(title: ""), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), sunset: .now, start: .now, screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.mapView), namespace: Namespace.init().wrappedValue, day: dayFase(sunrise: 06, sunset: 20))
+//    }
+//}

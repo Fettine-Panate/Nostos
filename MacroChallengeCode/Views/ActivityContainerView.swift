@@ -32,9 +32,11 @@ struct ActivityContainerView: View {
     
     @State var magnitude : Double = 40.0
     
+    @State var currentHour = Int(dateFormatter.string(from: Date())) ?? 0
+    
     var body: some View {
         let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
-        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
+//        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader{ geo in
             ZStack{
                 Color(day.hours[currentHour].color).ignoresSafeArea()
@@ -47,7 +49,7 @@ struct ActivityContainerView: View {
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
                         .foregroundColor( Color(day.hours[currentHour].color))
                 case .sunset:
-                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day)
+                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, currentHour: $currentHour)
                         .padding(70)
                 case .finished:
                     ArrivedBackView()
@@ -150,6 +152,7 @@ struct ActivityContainerView: View {
             }
             .onAppear {
                 UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemBlue
+                print("ActivityContainerView currentHour: \(currentHour)")
             }
         }
     }
