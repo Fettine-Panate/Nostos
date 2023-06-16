@@ -1,10 +1,12 @@
 ".StartActivity" = "Start Activity";
 ".StopActivity" = "Stop Activity";
+//On Boarding
 ".TapToSwitchToSunsetMode" = "Tap to switch to \"Sunset\" Mode";
 ".DragTheSliderToSee" = "You can drag the slider to see how much time left to sunset";
 ".TapToSwitchToGoingMode" = "Tap to switch to \"Going\" Mode";
 ".LongPressToComingBackMode" = "Long press to switch to \"Coming back\" Mode";
 ".TapToEndActivity" = "Tap to end the activity!";
+
 ".ComingBack" = "Coming Back";
 ".Going" = "Going..";
 ".DoYouWantoToQuit?" = "Do you really want to quit?";

@@ -40,9 +40,11 @@ struct ArrivedBackView: View {
                 }.position(CGPoint(x: geo.size.width/2, y: geo.size.height/2))
                 VStack{
                     Button {
-                        screen = .startView
-                        mapScreen = .mapView
-                        activity = .map
+                        withAnimation {
+                            screen = .startView
+                            mapScreen = .mapView
+                            activity = .map
+                        }
                     } label: {
                         VStack{
                             Text(LocalizedStringKey(".Okay"))
@@ -50,7 +52,7 @@ struct ArrivedBackView: View {
                                 .padding()
                                 .foregroundColor(Color(day.hours[currentHour].color))
                         }
-                        .frame(width: geo.size.width * 0.4 ,height: geo.size.width * 0.11)
+                        .frame(minWidth: geo.size.width * 0.4 ,minHeight: geo.size.width * 0.11)
                         .background(){
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(height: geo.size.width * 0.11)
