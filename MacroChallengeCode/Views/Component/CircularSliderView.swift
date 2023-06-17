@@ -56,7 +56,6 @@ struct CircularSliderView: View {
     
     var body: some View {
         let currentTimeIndex = Int(dateFormatter.string(from: Date()))
-        let dateFormatter = DateFormatter()
         GeometryReader{ gr in
             let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
             let sliderWidth = 17.0
