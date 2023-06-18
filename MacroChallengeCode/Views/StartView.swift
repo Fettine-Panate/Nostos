@@ -40,6 +40,10 @@ struct StartView: View {
                             defaults.set(true, forKey: "IS_STARTED")
                             //NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
                             NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", timeInterval: 5)
+                            guard #available(iOS 16, *) else {
+                                print("Live Activity Not Supported!")
+                                return
+                            }
                             LiveActivityManager.shared.addActivity()
                         }
                     }
@@ -70,6 +74,10 @@ struct StartView: View {
                             if defaults.integer(forKey: "ON_BOARDING") >= 5 {
                                 //NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
                                 NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", timeInterval: 5)
+                                guard #available(iOS 16, *) else {
+                                    print("Live Activity Not Supported!")
+                                    return
+                                }
                                 LiveActivityManager.shared.addActivity()
                             }
                         }
@@ -79,6 +87,22 @@ struct StartView: View {
                           }))
                         
                     }
+            }
+            .onAppear {
+                sun = Sun(location: locationManager.userLocation!, timeZone: TimeZone.current)
+                print("Astronomical Dawn: \(dateFormatterHHMM.string(from: sun!.astronomicalDawn))")
+                print("Nautical Dawn: \(dateFormatterHHMM.string(from: sun!.nauticalDawn))")
+                print("Civil Dawn: \(dateFormatterHHMM.string(from: sun!.civilDawn))")
+                print("Morning Golden Hour Start: \(dateFormatterHHMM.string(from: sun!.morningGoldenHourStart))")
+                print("Sunrise: \(dateFormatterHHMM.string(from: sun!.sunrise))")
+                print("Morning Golden Hour End: \(dateFormatterHHMM.string(from: sun!.morningGoldenHourEnd))")
+                print("Solar Noon: \(dateFormatterHHMM.string(from: sun!.solarNoon))")
+                print("Evening Golden Hour Start: \(dateFormatterHHMM.string(from: sun!.eveningGoldenHourStart))")
+                print("Sunset: \(dateFormatterHHMM.string(from: sun!.sunset))")
+                print("Evening Golden Hour End: \(dateFormatterHHMM.string(from: sun!.eveningGoldenHourEnd))")
+                print("Civil Dusk: \(dateFormatterHHMM.string(from: sun!.civilDusk))")
+                print("Nautical Dusk: \(dateFormatterHHMM.string(from: sun!.nauticalDusk))")
+                print("Astronomical Dusk: \(dateFormatterHHMM.string(from: sun!.astronomicalDusk))")
             }
         }
     }
