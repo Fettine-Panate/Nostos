@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-// TODO: Snooze logic is not working and code need to be re-organized
+// TODO: Set the correct timeInterval for notification scheduling
 
 enum NotificationActions: String {
     case remind
@@ -23,7 +23,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
     
     private override init() {
         super.init()
-        UNUserNotificationCenter.current().delegate.self
+        UNUserNotificationCenter.current().delegate = self
     }
     
     func requestAuthorization() {
@@ -89,10 +89,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         switch response.actionIdentifier {
         case "REMIND_ACTION":
-            print("Entered")
-            /* In case in the future we are going to implement quick actions
-            
-            center.removePendingNotificationRequests(withIdentifiers: ["SunsetReminder"])
+            /* In case in the future we are going to implement quick actions */
             let newTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
             let content = UNMutableNotificationContent()
             content.title = "Nuova notifica"
@@ -106,7 +103,6 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
                     print("Nuova notifica aggiunta con successo.")
                 }
             }
-            */
             break
         default:
             print("Default")
