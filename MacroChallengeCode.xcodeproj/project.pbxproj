@@ -30,6 +30,7 @@
 		91C447CB2A28F46A00319349 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C447CA2A28F46A00319349 /* JsonManager.swift */; };
 		9A601E302A33502500795F77 /* NotificationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */; };
 		9A601E322A336EE400795F77 /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A601E312A336EE400795F77 /* LiveActivityManager.swift */; };
+		9A655C212A3F476500753DE2 /* DayPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A655C202A3F476500753DE2 /* DayPhase.swift */; };
 		9AECAA702A279C6B007926B8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */; };
 		9AECAA722A279C6B007926B8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AECAA712A279C6B007926B8 /* SwiftUI.framework */; };
 		9AECAA752A279C6B007926B8 /* SunsetWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA742A279C6B007926B8 /* SunsetWidgetBundle.swift */; };
@@ -131,6 +132,7 @@
 		9A601E2F2A33502500795F77 /* NotificationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerDelegate.swift; sourceTree = "<group>"; };
 		9A601E312A336EE400795F77 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
 		9A601E332A33771800795F77 /* MacroChallengeCode.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacroChallengeCode.entitlements; sourceTree = "<group>"; };
+		9A655C202A3F476500753DE2 /* DayPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPhase.swift; sourceTree = "<group>"; };
 		9AECAA6D2A279C6B007926B8 /* SunsetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunsetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AECAA6F2A279C6B007926B8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9AECAA712A279C6B007926B8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -225,6 +227,7 @@
 			children = (
 				9158056E2A1CAE97007E579F /* Path.swift */,
 				9FF225A52A26A13500159166 /* DayFase.swift */,
+				9A655C202A3F476500753DE2 /* DayPhase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				9126FE232A30BEA600818999 /* Avatar.swift in Sources */,
 				917A8C552A20F34700A32868 /* SemisphereButton.swift in Sources */,
+				9A655C212A3F476500753DE2 /* DayPhase.swift in Sources */,
 				9FF225A82A26AC9100159166 /* RollingView.swift in Sources */,
 				9F8ED0E92A2F58EB00C223ED /* CircularSliderView.swift in Sources */,
 				91C1D4172A3A0AC300712790 /* FocusViewOnBoarding.swift in Sources */,
