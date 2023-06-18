@@ -32,13 +32,21 @@ struct ActivityContainerView: View {
 
     
     @State var currentHour = Int(dateFormatter.string(from: Date())) ?? 0
+    @State var currentTime = dateFormatterHHMM.string(from: Date())
+    @State var color = ""
+    @State var cachedColor = ""
     
     var body: some View {
         let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
+        let sunColor = DayPhase(sun: Sun(location: userLocation!, timeZone: TimeZone.current))
 //        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader{ geo in
             ZStack{
-                Color(day.hours[currentHour].color).ignoresSafeArea()
+//                Color(day.hours[currentHour].color).ignoresSafeArea()
+                // MARK: Changed the color background logic. Please check, with <3 Pietro
+                withAnimation {
+                    Color(color).ignoresSafeArea()
+                }
                 
                 switch activity {
                 case .map:
@@ -156,8 +164,20 @@ struct ActivityContainerView: View {
                 if resumeLastPath && !pathsJSON.isEmpty && defaults.bool(forKey: "IS_STARTED"){
                     path.copy(path: pathsJSON.last!)
                 }
+                color = sunColor.phases[currentTime]?.color ?? sunColor.getClosestColor(for: currentTime)
+                cachedColor = color
                 UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemBlue
+                let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                    currentTime = dateFormatterHHMM.string(from: Date())
+                }
+                RunLoop.current.add(timer, forMode: .common)
                 print("ActivityContainerView currentHour: \(currentHour)")
+            }
+            .onChange(of: currentTime) { newValue in
+                color = sunColor.phases[currentTime]?.color ?? cachedColor
+                if color != cachedColor {
+                    cachedColor = color
+                }
             }
         }
     }
