@@ -51,12 +51,12 @@ struct TrackBackView: View {
                             FirstPinAnnotationView(loc: loc)
                                 .position(position)
                                 .animation(.linear, value: position)
-                                .scaleEffect(scale/3)
+                                .scaleEffect(scale)
                         } else{
                             PinAnnotationView(loc: loc)
                                 .position(position)
                                 .animation(.linear, value: position)
-                                .scaleEffect(scale/3)
+                                .scaleEffect(scale)
                         }
                     }
                 }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
