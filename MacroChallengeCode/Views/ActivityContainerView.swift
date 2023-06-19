@@ -28,6 +28,7 @@ struct ActivityContainerView: View {
     @State var start = Date()
 
     @State var magnitude : Double = 40.0
+    @State var scale : Double = 1.0
     @Binding var resumeLastPath : Bool
     
 
@@ -49,9 +50,9 @@ struct ActivityContainerView: View {
                 
                 switch activity {
                 case .map:
-                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day, geometry: geo.size)
+                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day, geometry: geo.size, scale: $scale)
                     
-                    BoxSliderView(magnitude: $magnitude)
+                    BoxSliderView(magnitude: $magnitude, scale: $scale)
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
                         .foregroundColor( Color(color))
                 case .sunset:

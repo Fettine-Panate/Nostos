@@ -18,8 +18,7 @@ struct TrackBackView: View {
     @StateObject var compassHeading = CompassHeading()
     @GestureState private var magnification: CGFloat = 1.0
     @State private var currentValue: CGFloat = 0.0
-   
-    @State var scale = 1.0
+    
     
     @Binding var screen : Screens
     @Binding var activity: ActivityEnum
@@ -30,14 +29,13 @@ struct TrackBackView: View {
     
     @Binding var magnitude : Double
     let day : DayPhase
+    
+    @Binding var scale : Double
+    
     var body: some View{
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack{
-                IndicatorView()
-                    .foregroundColor(Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
-                    .matchedGeometryEffect(id: "indicator", in: ns)
-                    .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 ForEach(path.locations, id: \.self){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                         let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
@@ -62,6 +60,11 @@ struct TrackBackView: View {
                         }
                     }
                 }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
+                
+                IndicatorView()
+                    .foregroundColor(Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
+                    .matchedGeometryEffect(id: "indicator", in: ns)
+                    .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 Avatar()
                     .foregroundColor(Color("white"))
                     .matchedGeometryEffect(id: "avatar", in: ns)
@@ -89,7 +92,7 @@ struct TrackBackView: View {
                         }
                     }
                 }
-               
+                
             }
         }
         
@@ -116,7 +119,7 @@ struct TrackBackView: View {
     //                                }
     //                            }
     //                        }
-  
+    
 }
 
 

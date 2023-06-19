@@ -24,6 +24,7 @@ struct ShowPathView: View {
 
     let day : DayPhase
     let geometry : CGSize
+    @Binding var scale : Double
     
     var body: some View {
       
@@ -41,9 +42,9 @@ struct ShowPathView: View {
                 
                 switch mapScreen{
                 case .mapView:
-                    MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, ns: ns, magnitude: $magnitude, day : day, geometry: geometry)
+                    MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, ns: ns, magnitude: $magnitude, day : day, geometry: geometry, scale: $scale)
                 case .trackBack:
-                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns,  magnitude: $magnitude, day : day)
+                    TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns,  magnitude: $magnitude, day : day, scale: $scale)
                 }
               
                 

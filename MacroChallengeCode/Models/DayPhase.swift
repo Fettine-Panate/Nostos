@@ -10,29 +10,29 @@ struct DayPhase {
         self.sun = sun
         var phases = [
             //0
-            Phase(name: "AstronmicalDawnColor", hour: sun.astronomicalDawn, color: BackgroundColorPalette(backgroundColor: "AstronmicalDawnColor", accentObjectOp: 0.25)),
+            Phase(name: "AstronmicalDawnColor", hour: sun.astronomicalDawn, color: BackgroundColorPalette(backgroundColor: "AstronmicalDawnColor", accentObjectOp: 0.10)),
             //1
-            Phase(name: "NauticalDawnColor", hour: sun.nauticalDawn, color: BackgroundColorPalette(backgroundColor: "NauticalDawnColor", accentObjectOp: 0.25)),
+            Phase(name: "NauticalDawnColor", hour: sun.nauticalDawn, color: BackgroundColorPalette(backgroundColor: "NauticalDawnColor", accentObjectOp: 0.10)),
             //2
-            Phase(name: "CivilDawnColor", hour: sun.civilDawn, color: BackgroundColorPalette(backgroundColor: "CivilDawnColor", accentObjectOp: 0.25)),
+            Phase(name: "CivilDawnColor", hour: sun.civilDawn, color: BackgroundColorPalette(backgroundColor: "CivilDawnColor", accentObjectOp: 0.10)),
             //3
             Phase(name: "MorningGoldenHourStartColor", hour: sun.morningGoldenHourStart, color: BackgroundColorPalette(backgroundColor: "MorningGoldenHourStartColor", accentObjectOp: 0.25)),
             //4
-            Phase(name: "SunriseColor", hour:  sun.sunrise, color: BackgroundColorPalette(backgroundColor: "SunriseColor", accentObjectOp: 0.25)),
+            Phase(name: "SunriseColor", hour:  sun.sunrise, color: BackgroundColorPalette(backgroundColor: "SunriseColor", accentObjectOp: 0.10)),
             //5
-            Phase(name: "MorningGoldenHourEnd", hour: sun.morningGoldenHourEnd, color: BackgroundColorPalette(backgroundColor: "MorningGoldenHourEnd", accentObjectOp: 0.25)),
+            Phase(name: "MorningGoldenHourEnd", hour: sun.morningGoldenHourEnd, color: BackgroundColorPalette(backgroundColor: "MorningGoldenHourEnd", accentObjectOp: 0.10)),
             //6
-            Phase(name: "SolarNoonColor", hour: sun.solarNoon, color: BackgroundColorPalette(backgroundColor: "SolarNoonColor", accentObjectOp: 0.25)),
+            Phase(name: "SolarNoonColor", hour: sun.solarNoon, color: BackgroundColorPalette(backgroundColor: "SolarNoonColor", accentObjectOp: 0.10)),
             //7
-            Phase(name: "EveningGoldenHourStart", hour: sun.eveningGoldenHourStart, color: BackgroundColorPalette(backgroundColor: "EveningGoldenHourStart", accentObjectOp: 0.25)),
+            Phase(name: "EveningGoldenHourStart", hour: sun.eveningGoldenHourStart, color: BackgroundColorPalette(backgroundColor: "EveningGoldenHourStart", accentObjectOp: 0.15)),
             //8
-            Phase(name: "Sunset", hour: sun.sunset, color: BackgroundColorPalette(backgroundColor: "Sunset", accentObjectOp: 0.25)),
+            Phase(name: "Sunset", hour: sun.sunset, color: BackgroundColorPalette(backgroundColor: "Sunset", accentObjectOp: 0.15)),
             //9
-            Phase(name: "EveningGoldenHourEndColor", hour: sun.eveningGoldenHourEnd, color: BackgroundColorPalette(backgroundColor: "EveningGoldenHourEndColor", accentObjectOp: 0.25)),
+            Phase(name: "EveningGoldenHourEndColor", hour: sun.eveningGoldenHourEnd, color: BackgroundColorPalette(backgroundColor: "EveningGoldenHourEndColor", accentObjectOp: 0.15)),
             //10
-            Phase(name: "CivilDuskColor", hour: sun.civilDusk, color: BackgroundColorPalette(backgroundColor: "CivilDuskColor", accentObjectOp: 0.25)),
+            Phase(name: "CivilDuskColor", hour: sun.civilDusk, color: BackgroundColorPalette(backgroundColor: "CivilDuskColor", accentObjectOp: 0.15)),
             //11
-            Phase(name: "NauticalDuskColor", hour: sun.nauticalDusk, color: BackgroundColorPalette(backgroundColor: "NauticalDuskColor", accentObjectOp: 0.25)),
+            Phase(name: "NauticalDuskColor", hour: sun.nauticalDusk, color: BackgroundColorPalette(backgroundColor: "NauticalDuskColor", accentObjectOp: 0.15)),
             //12
             Phase(name: "Night", hour: sun.astronomicalDusk, color: BackgroundColorPalette(backgroundColor: "Night", accentObjectOp: 0.25))
         ]
