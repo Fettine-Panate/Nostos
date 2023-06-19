@@ -169,6 +169,11 @@ struct ActivityContainerView: View {
                 
                 color = day.getClosestPhase(currentTime: Date()).color.backgroundColor
             }
+            .onChange(of: dateOfAvatarPosition){ hour in
+                withAnimation(){
+                    color = day.getClosestPhase(currentTime: hour).color.backgroundColor
+                }
+            }
         }
     }
 }

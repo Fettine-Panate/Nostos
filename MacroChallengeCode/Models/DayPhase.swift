@@ -35,13 +35,15 @@ struct DayPhase {
         else if currentTime >= phases[3].hour && currentTime < phases[4].hour {return phases[3]  }
         else if currentTime >= phases[4].hour && currentTime < phases[5].hour {return phases[4]  }
         else if currentTime >= phases[5].hour && currentTime < phases[6].hour {return phases[5]  }
-        else if currentTime >= phases[6].hour && currentTime < phases[7].hour {return phases[6]  }
-        else if currentTime >= phases[7].hour && currentTime < phases[8].hour {return phases[7]  }
+        else if currentTime >= phases[6].hour && currentTime < phases[6].hour.addingTimeInterval(600) {return phases[6]  }
+        else if currentTime >= phases[6].hour.addingTimeInterval(600) && currentTime < phases[7].hour {return phases[7] }
+        else if currentTime >= phases[7].hour && currentTime < phases[8].hour.addingTimeInterval(-600) {return phases[7]  }
+        else if currentTime >= phases[8].hour.addingTimeInterval(-600) && currentTime < phases[8].hour {return phases[7]  }
         else if currentTime >= phases[8].hour && currentTime < phases[9].hour {return phases[8]  }
         else if currentTime >= phases[9].hour && currentTime < phases[10].hour {return phases[9]  }
         else if currentTime >= phases[10].hour && currentTime < phases[11].hour {return phases[10]  }
         else if currentTime >= phases[11].hour && currentTime < phases[12].hour {return phases[11]  }
-        else {return phases[12]  }
+        else { return phases[12]  }
         
     }
     
