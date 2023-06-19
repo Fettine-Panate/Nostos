@@ -7,6 +7,7 @@
 ".LongPressToComingBackMode" = "Long press to switch to \"Coming back\" Mode";
 ".TapToEndActivity" = "Tap to end the activity!";
 
+
 ".ComingBack" = "Coming Back";
 ".Going" = "Going..";
 ".DoYouWantoToQuit?" = "Do you really want to quit?";
@@ -15,10 +16,10 @@
 ".Cancel" = "Cancel";
 ".Congratulation" = "Congratulation";
 ".YouArrived" = "You arrived at your starting point";
-".Okay" = "Okay";
+".Okay" = "OK";
 ".ActivityTime" = "You walked for";
 ".TimeToSunset" = "Time left untill sunset";
-".DoYouWantoToResume?" = "Do You Wanto To Resume The Last Path?";
+".DoYouWantoToResume?" = "Do You Want To Resume The Last Path?";
 ".Resume" = "Resume";
 ".No" = "No";
 ".LowAccuracy" = "Low gps\naccuracy";

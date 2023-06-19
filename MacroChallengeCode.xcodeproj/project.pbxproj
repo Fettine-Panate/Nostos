@@ -24,6 +24,7 @@
 		918DD1262A17D3F600E44590 /* MacroChallengeCodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD1252A17D3F600E44590 /* MacroChallengeCodeUITests.swift */; };
 		918DD1282A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918DD1272A17D3F600E44590 /* MacroChallengeCodeUITestsLaunchTests.swift */; };
 		91AB9F012A1B974A0068F553 /* LocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB9F002A1B974A0068F553 /* LocationManagerDelegate.swift */; };
+		91B95DBC2A40A70400B5DB31 /* ActivateGPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B95DBB2A40A70400B5DB31 /* ActivateGPS.swift */; };
 		91BE43772A1F8771004C3F89 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE43762A1F8771004C3F89 /* MapView.swift */; };
 		91C1D4172A3A0AC300712790 /* FocusViewOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C1D4162A3A0AC300712790 /* FocusViewOnBoarding.swift */; };
 		91C447C92A28F40500319349 /* CLLocationWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 91C447C82A28F40500319349 /* CLLocationWrapper */; };
@@ -125,6 +126,7 @@
 		91B95DB82A3C51DC00B5DB31 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		91B95DB92A3C52B400B5DB31 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		91B95DBA2A3C530D00B5DB31 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		91B95DBB2A40A70400B5DB31 /* ActivateGPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGPS.swift; sourceTree = "<group>"; };
 		91BE43762A1F8771004C3F89 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		91C1D4162A3A0AC300712790 /* FocusViewOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusViewOnBoarding.swift; sourceTree = "<group>"; };
 		91C447CA2A28F46A00319349 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				9FF225CC2A29302200159166 /* RecapPathView.swift */,
 				913301F02A39B1B700AB1C23 /* ArrivedBackView.swift */,
 				916EEDFE2A33559800FA7298 /* ActivityContainerView.swift */,
+				91B95DBB2A40A70400B5DB31 /* ActivateGPS.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				9FF225942A22285400159166 /* BoxNavigationButton.swift in Sources */,
 				9FF225CD2A29302200159166 /* RecapPathView.swift in Sources */,
 				9FF2258E2A20EA7700159166 /* TrackBackView.swift in Sources */,
+				91B95DBC2A40A70400B5DB31 /* ActivateGPS.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				9126FE232A30BEA600818999 /* Avatar.swift in Sources */,
 				917A8C552A20F34700A32868 /* SemisphereButton.swift in Sources */,

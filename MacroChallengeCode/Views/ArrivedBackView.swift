@@ -31,17 +31,15 @@ struct ArrivedBackView: View {
                         .bold()
                         .foregroundColor(Color("white"))
                         .font(.system(size: 40))
-                        .padding()
                     Text(LocalizedStringKey(".YouArrived"))
                         .foregroundColor(Color("white"))
                         .font(.system(size: 25))
+                        .frame(maxWidth: geo.size.width * 0.7)
+                        .multilineTextAlignment(.center)
                 }.position(CGPoint(x: geo.size.width/2, y: geo.size.height/2))
                 VStack{
                     Button {
                         defaults.set(false, forKey: "IS_STARTED")
-                        screen = .startView
-                        mapScreen = .mapView
-                        activity = .map
                         withAnimation {
                             screen = .startView
                             mapScreen = .mapView
