@@ -43,7 +43,7 @@ struct TrackBackView: View {
                             LastPinAnnotationView(loc: loc)
                                 .position(position)
                                 .animation(.linear, value: position)
-                                .scaleEffect(scale/3)
+                                .scaleEffect(scale)
                                 .onAppear{
                                     index += 1
                                 }

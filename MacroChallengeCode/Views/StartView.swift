@@ -87,6 +87,10 @@ struct StartView: View {
                           
                         
                     }
+                .onAppear(){
+                    print("Size of start : w : \(geo.size.width), h : \(geo.size.height)")
+                }
+            
             }
         }
     }

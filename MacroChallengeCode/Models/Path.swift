@@ -43,7 +43,9 @@ class PathCustom: ObservableObject , Codable {
     
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
-
+        if distance >= minDistance && distance <= maxDistance{
+            print(distance)
+        }
         return distance >= minDistance && distance <= maxDistance
     }
     

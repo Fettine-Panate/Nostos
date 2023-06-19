@@ -48,7 +48,7 @@ struct MapView: View {
                     PinAnnotationView(loc: loc)
                         .position(position)
                         .animation(.linear, value: position)
-                        .scaleEffect(scale/3)
+                        .scaleEffect(scale)
                         .onAppear{
                             print("Position of the pin: \(position)")
                         }
@@ -73,12 +73,13 @@ struct MapView: View {
         }.background(){
             MapBackground(size: geometry, day : day, magnitude: $magnitude, ns: ns)
         }
-        
         .frame(width: geometry.width,height: geometry.height)
         .onAppear {
             path.addLocation(currentUserLocation!, checkLocation: path.checkDistance)
             pathsJSON.append(path)
             savePack("Paths", pathsJSON)
+                    print("Size in mao : w : \(geometry.width), h : \(geometry.height)")
+            
         }
         .onChange(of: currentUserLocation) { loc in
             path.addLocation(loc!, checkLocation: path.checkDistance)

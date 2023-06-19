@@ -50,7 +50,10 @@ struct ActivityContainerView: View {
                 
                 switch activity {
                 case .map:
-                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day, geometry: geo.size, scale: $scale)
+                    ShowPathView(pathsJSON: $pathsJSON, userLocation: $userLocation, path: path, mapScreen: $mapScreen,activity: $activity, screen: $screen, ns: ns, magnitude: $magnitude, day : day, geometry: geo.size, scale: $scale).frame(width: geo.size.width,height: geo.size.height)
+                        .onAppear(){
+                            print("Size of activity : w : \(geo.size.width), h : \(geo.size.height)")
+                        }
                     
                     BoxSliderView(magnitude: $magnitude, scale: $scale)
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
