@@ -29,13 +29,13 @@ struct TrackBackView: View {
     var ns: Namespace.ID
     
     @Binding var magnitude : Double
-    let day : dayFase
+    let day : DayPhase
     var body: some View{
         let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack{
                 IndicatorView()
-                    .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.1))
+                    .foregroundColor(Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
                     .matchedGeometryEffect(id: "indicator", in: ns)
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 ForEach(path.locations, id: \.self){ loc in

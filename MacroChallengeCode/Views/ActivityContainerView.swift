@@ -21,6 +21,7 @@ struct ActivityContainerView: View {
     @Binding var screen : Screens
     @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
+    @State var sun : Sun?
     var ns: Namespace.ID
     @State var alertIsPresented = false
     
@@ -31,15 +32,13 @@ struct ActivityContainerView: View {
     
 
     
-    @State var currentHour = Int(dateFormatter.string(from: Date())) ?? 0
+    @State var dateOfAvatarPosition = Date()
     @State var currentTime = dateFormatterHHMM.string(from: Date())
     @State var color = ""
-    @State var cachedColor = ""
     
     var body: some View {
-        let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
-        let sunColor = DayPhase(sun: Sun(location: userLocation!, timeZone: TimeZone.current))
-//        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
+        let day = DayPhase(sun: Sun(location: userLocation!, timeZone: TimeZone.current))
+        
         GeometryReader{ geo in
             ZStack{
 //                Color(day.hours[currentHour].color).ignoresSafeArea()
@@ -54,9 +53,9 @@ struct ActivityContainerView: View {
                     
                     BoxSliderView(magnitude: $magnitude)
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
-                        .foregroundColor( Color(day.hours[currentHour].color))
+                        .foregroundColor( Color(day.getClosestPhase(currentTime: .now).color.backgroundColor))
                 case .sunset:
-                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, currentHour: $currentHour)
+                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, dateOfAvatarPosition: $dateOfAvatarPosition)
                         .padding(70)
                
                 }
@@ -68,7 +67,7 @@ struct ActivityContainerView: View {
                         Text(LocalizedStringKey(".StopActivity"))
                             .fontWeight(.semibold)
                             .padding()
-                            .foregroundColor(Color(day.hours[currentHour].color))
+                            .foregroundColor(Color(day.getClosestPhase(currentTime: .now).color.backgroundColor))
                         
                     }
                     .frame(minWidth: geo.size.width * 0.4, minHeight: geo.size.width * 0.11)
@@ -93,13 +92,13 @@ struct ActivityContainerView: View {
                                 LiveActivityManager.shared.stopActivity()
                             }
                           },
-                          secondaryButton: .default(Text(LocalizedStringKey(".Cancel")), action: {
+                          secondaryButton: .cancel(Text(LocalizedStringKey(".Cancel")), action: {
                               alertIsPresented = false
                           }))
                         
                     }
                 
-                SwitchModeButton(imageType: (activity == .map) ? ImageType.custom(name: "sunmode") : ImageType.system(name: "target"), color: day.hours[currentHour].color, activity: $activity
+                SwitchModeButton(imageType: (activity == .map) ? ImageType.custom(name: "sunmode") : ImageType.system(name: "target"), color: day.getClosestPhase(currentTime: .now).color.backgroundColor, activity: $activity
                 ).frame(width: geo.size.width * 0.11, height: geo.size.width * 0.11)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
                 
@@ -161,23 +160,14 @@ struct ActivityContainerView: View {
                 ])
             }
             .onAppear {
+                sun = Sun(location: userLocation!, timeZone: TimeZone.current)
+                print(sun?.astronomicalDawn)
+                
                 if resumeLastPath && !pathsJSON.isEmpty && defaults.bool(forKey: "IS_STARTED"){
                     path.copy(path: pathsJSON.last!)
                 }
-                color = sunColor.phases[currentTime]?.color ?? sunColor.getClosestColor(for: currentTime)
-                cachedColor = color
-                UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemBlue
-                let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                    currentTime = dateFormatterHHMM.string(from: Date())
-                }
-                RunLoop.current.add(timer, forMode: .common)
-                print("ActivityContainerView currentHour: \(currentHour)")
-            }
-            .onChange(of: currentTime) { newValue in
-                color = sunColor.phases[currentTime]?.color ?? cachedColor
-                if color != cachedColor {
-                    cachedColor = color
-                }
+                
+                color = day.getClosestPhase(currentTime: Date()).color.backgroundColor
             }
         }
     }

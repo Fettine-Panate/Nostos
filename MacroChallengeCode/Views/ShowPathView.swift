@@ -22,7 +22,7 @@ struct ShowPathView: View {
     
     @Binding var magnitude : Double 
 
-    let day : dayFase
+    let day : DayPhase
     let geometry : CGSize
     
     var body: some View {

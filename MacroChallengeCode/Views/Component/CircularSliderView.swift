@@ -26,13 +26,13 @@ struct CircularSliderView: View {
     @Binding var screen : Screens
     @Binding var activity : ActivityEnum
     @Binding var mapScreen : MapSwitch
-    @Binding var currentHour: Int
     
     var ns: Namespace.ID
     
-    let day : dayFase
+    let day : DayPhase
+    @Binding var dateOfAvatarPosition : Date
     
-    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: dayFase, currentHour: Binding<Int>) {
+    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: DayPhase, dateOfAvatarPosition: Binding<Date>) {
         self.sunset = sunset
         self.start = start
         self._screen = screen
@@ -43,7 +43,7 @@ struct CircularSliderView: View {
         self._userLocation = userLocation
         self._pathsJSON = pathsJSON
         self.day = day
-        self._currentHour = currentHour
+        self._dateOfAvatarPosition = dateOfAvatarPosition
 //        print("BINDING VALUE: \(currentHour)")
     }
     @State var isBeforeTheSunset = true
@@ -51,11 +51,10 @@ struct CircularSliderView: View {
     @State var progress : Double = 0.0
     @State var rotationAngle : Angle = Angle(degrees: 0.0)
     @State var remaingTimeToSunset : Int = 0 //seconds
-    @State var dateOfAvatarPosition : Date = Date()
     
     
     var body: some View {
-        let currentTimeIndex = Int(dateFormatter.string(from: Date()))
+        
         GeometryReader{ gr in
             let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
             let sliderWidth = 17.0
@@ -63,7 +62,7 @@ struct CircularSliderView: View {
                 //Cerchio interno
                 Circle()
                     .trim(from: 0, to: 0.9)
-                    .stroke(Color.black.opacity(day.hours[currentTimeIndex!].accentObjectOp),
+                    .stroke(Color.black.opacity(day.getClosestPhase(currentTime: Date()).color.accentObjectOp),
                             style: StrokeStyle(lineWidth: sliderWidth,lineCap: .round))
                     .rotationEffect(Angle(degrees: 108))
                     .frame(width: radius * 2, height: radius * 2)
@@ -117,14 +116,14 @@ struct CircularSliderView: View {
                     )
                 iconSlider(text: Text(dateFormatterHHMM.string(from: start)),angle: Angle(degrees: 18.0) , radius: radius)
                     .rotationEffect(Angle(degrees: 18))
-                    .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                    .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
                 iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateDateToReturn(sunset: sunset, startTime: start)) , radius: radius)
                     .rotationEffect( calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateDateToReturn(sunset: sunset, startTime: start)))
-                    .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                    .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
                 iconSlider(icon: Image(systemName: "sunset.fill"), text: Text( dateFormatterHHMM.string(from: sunset))
                            ,angle: Angle(degrees: 342) , radius: radius)
                 .rotationEffect(Angle(degrees: 342))
-                .opacity(day.hours[currentTimeIndex!].accentObjectOp + 0.1)
+                .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
                 if isBeforeTheSunset{
                     if dragged{
                         iconSlider(text:
@@ -179,9 +178,6 @@ struct CircularSliderView: View {
                 if isBeforeTheSunset {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "HH"
-                    withAnimation {
-                        currentHour = Int(dateFormatter.string(from: newValue)) ?? 0
-                    }
                 }
             }
         }

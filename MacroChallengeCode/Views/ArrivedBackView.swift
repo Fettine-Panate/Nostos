@@ -14,15 +14,13 @@ struct ArrivedBackView: View {
     @Binding var activity: ActivityEnum
     @Binding var mapScreen : MapSwitch
     var ns: Namespace.ID
-    var day: dayFase
+    var day: DayPhase
     
     var body: some View {
-    
-        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         
         GeometryReader{ geo in
             ZStack{
-                Color(day.hours[currentHour].color).ignoresSafeArea()
+                Color(day.getClosestPhase(currentTime: Date()).color.backgroundColor).ignoresSafeArea()
                 VStack{
                     Image(systemName: "flag.checkered.2.crossed")
                         .resizable()
@@ -54,7 +52,7 @@ struct ArrivedBackView: View {
                             Text(LocalizedStringKey(".Okay"))
                                 .fontWeight(.semibold)
                                 .padding()
-                                .foregroundColor(Color(day.hours[currentHour].color))
+                                .foregroundColor(Color(day.getClosestPhase(currentTime: .now).color.backgroundColor))
                         }
                         .frame(minWidth: geo.size.width * 0.4 ,minHeight: geo.size.width * 0.11)
                         .background(){
@@ -71,9 +69,9 @@ struct ArrivedBackView: View {
        
     }
 }
-
-struct ArrivedBackView_Previews: PreviewProvider {
-    static var previews: some View {
-        ArrivedBackView(screen: .constant(.activity), activity: .constant(.map), mapScreen: .constant(.mapView), ns: Namespace.init().wrappedValue, day: dayFase(sunrise: 06, sunset: 19))
-    }
-}
+//
+//struct ArrivedBackView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ArrivedBackView(screen: .constant(.activity), activity: .constant(.map), mapScreen: .constant(.mapView), ns: Namespace.init().wrappedValue, day: dayFase(sunrise: 06, sunset: 19))
+//    }
+//}

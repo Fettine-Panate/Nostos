@@ -56,7 +56,6 @@
 		9FF225992A2269E900159166 /* BoxSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225982A2269E900159166 /* BoxSliderView.swift */; };
 		9FF2259B2A26372D00159166 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2259A2A26372D00159166 /* HapticManager.swift */; };
 		9FF2259F2A26514400159166 /* BezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2259E2A26514400159166 /* BezelView.swift */; };
-		9FF225A62A26A13500159166 /* DayFase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225A52A26A13500159166 /* DayFase.swift */; };
 		9FF225A82A26AC9100159166 /* RollingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225A72A26AC9100159166 /* RollingView.swift */; };
 		9FF225CD2A29302200159166 /* RecapPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225CC2A29302200159166 /* RecapPathView.swift */; };
 		9FF225CF2A293B5500159166 /* ListPathsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF225CE2A293B5500159166 /* ListPathsView.swift */; };
@@ -157,7 +156,6 @@
 		9FF225982A2269E900159166 /* BoxSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxSliderView.swift; sourceTree = "<group>"; };
 		9FF2259A2A26372D00159166 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		9FF2259E2A26514400159166 /* BezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezelView.swift; sourceTree = "<group>"; };
-		9FF225A52A26A13500159166 /* DayFase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFase.swift; sourceTree = "<group>"; };
 		9FF225A72A26AC9100159166 /* RollingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingView.swift; sourceTree = "<group>"; };
 		9FF225CC2A29302200159166 /* RecapPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapPathView.swift; sourceTree = "<group>"; };
 		9FF225CE2A293B5500159166 /* ListPathsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPathsView.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				9158056E2A1CAE97007E579F /* Path.swift */,
-				9FF225A52A26A13500159166 /* DayFase.swift */,
 				9A655C202A3F476500753DE2 /* DayPhase.swift */,
 			);
 			path = Models;
@@ -545,7 +542,6 @@
 				918DD10B2A17D3F500E44590 /* MacroChallengeCodeApp.swift in Sources */,
 				91BE43772A1F8771004C3F89 /* MapView.swift in Sources */,
 				9158056F2A1CAE97007E579F /* Path.swift in Sources */,
-				9FF225A62A26A13500159166 /* DayFase.swift in Sources */,
 				9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */,
 				9A601E322A336EE400795F77 /* LiveActivityManager.swift in Sources */,
 				9F8ED0EB2A2F81A500C223ED /* ShowPathView.swift in Sources */,

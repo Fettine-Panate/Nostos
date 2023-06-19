@@ -16,7 +16,6 @@ struct StartView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @State var isStarted = false
     @State var isPresented = false
-    @State var sun : Sun?
     @Binding var screen: Screens
     var ns: Namespace.ID
     @State var isStartedActivity = defaults.bool(forKey: "IS_STARTED")
@@ -66,7 +65,7 @@ struct StartView: View {
                 
                 .alert(isPresented: $isStartedActivity){
                     Alert(title: Text(LocalizedStringKey(".DoYouWantoToResume?")), message: Text(".AllThePinsLeft_description"),
-                          primaryButton: .destructive(Text(LocalizedStringKey(".Resume"))) {
+                          primaryButton: .default(Text(LocalizedStringKey(".Resume"))) {
                         withAnimation {
                             resumeLastPath = true
                             screen = .activity
@@ -82,27 +81,12 @@ struct StartView: View {
                             }
                         }
                           },
-                          secondaryButton: .default(Text(LocalizedStringKey(".No")), action: {
+                          secondaryButton: .destructive(Text(LocalizedStringKey(".No")).foregroundColor(.blue), action: {
                         isStartedActivity = false
                           }))
+                          
                         
                     }
-            }
-            .onAppear {
-                sun = Sun(location: locationManager.userLocation!, timeZone: TimeZone.current)
-                print("Astronomical Dawn: \(dateFormatterHHMM.string(from: sun!.astronomicalDawn))")
-                print("Nautical Dawn: \(dateFormatterHHMM.string(from: sun!.nauticalDawn))")
-                print("Civil Dawn: \(dateFormatterHHMM.string(from: sun!.civilDawn))")
-                print("Morning Golden Hour Start: \(dateFormatterHHMM.string(from: sun!.morningGoldenHourStart))")
-                print("Sunrise: \(dateFormatterHHMM.string(from: sun!.sunrise))")
-                print("Morning Golden Hour End: \(dateFormatterHHMM.string(from: sun!.morningGoldenHourEnd))")
-                print("Solar Noon: \(dateFormatterHHMM.string(from: sun!.solarNoon))")
-                print("Evening Golden Hour Start: \(dateFormatterHHMM.string(from: sun!.eveningGoldenHourStart))")
-                print("Sunset: \(dateFormatterHHMM.string(from: sun!.sunset))")
-                print("Evening Golden Hour End: \(dateFormatterHHMM.string(from: sun!.eveningGoldenHourEnd))")
-                print("Civil Dusk: \(dateFormatterHHMM.string(from: sun!.civilDusk))")
-                print("Nautical Dusk: \(dateFormatterHHMM.string(from: sun!.nauticalDusk))")
-                print("Astronomical Dusk: \(dateFormatterHHMM.string(from: sun!.astronomicalDusk))")
             }
         }
     }

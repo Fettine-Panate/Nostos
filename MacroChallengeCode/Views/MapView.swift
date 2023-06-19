@@ -31,7 +31,7 @@ struct MapView: View {
     var ns: Namespace.ID
     
     @Binding var magnitude : Double
-    let day : dayFase
+    let day : DayPhase
     
     let geometry : CGSize
     
@@ -42,7 +42,7 @@ struct MapView: View {
         
         ZStack {            
             IndicatorView()
-                .foregroundColor(Color.black.opacity(day.hours[currentHour].accentObjectOp + 0.1))
+                .foregroundColor(Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
                 .matchedGeometryEffect(id: "indicator", in: ns)
             ForEach(path.locations, id: \.self ){ loc in
                 if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry, latitudeMetersMax: magnitude){
@@ -90,11 +90,11 @@ struct MapView: View {
     }
 }
 
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), ns: Namespace.init().wrappedValue, magnitude: .constant(30.0), day: dayFase(sunrise: 06, sunset: 20), geometry: CGSize())
-    }
-}
+//struct MapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapView(path: PathCustom(title: "hello"), currentUserLocation: .constant(CLLocation(latitude: 40.837034, longitude: 14.306127)), screen: .constant(.activity), mapScreen: .constant(.mapView), pathsJSON: .constant([]), ns: Namespace.init().wrappedValue, magnitude: .constant(30.0), day: dayFase(sunrise: 06, sunset: 20), geometry: CGSize())
+//    }
+//}
 
 
 

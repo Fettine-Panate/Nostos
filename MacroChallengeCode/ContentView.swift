@@ -77,7 +77,7 @@ struct ContentView: View {
                 }
             case .finished:
                 if(LocationManager.shared.userLocation != nil){
-                    let day : dayFase = dayFase(sunrise: Int(dateFormatter.string(from: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunrise)) ?? 6, sunset: Int(dateFormatter.string(from: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset)) ?? 21)
+                    let day : DayPhase = DayPhase(sun: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current))
                     ArrivedBackView(screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, day: day)
                 }else{
                     //TODO schermata quando prova a iniziare senza accettare il gps
