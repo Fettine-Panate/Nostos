@@ -53,7 +53,7 @@ struct ActivityContainerView: View {
                     
                     BoxSliderView(magnitude: $magnitude)
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
-                        .foregroundColor( Color(day.getClosestPhase(currentTime: .now).color.backgroundColor))
+                        .foregroundColor( Color(color))
                 case .sunset:
                     CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, dateOfAvatarPosition: $dateOfAvatarPosition)
                         .padding(70)
@@ -67,7 +67,7 @@ struct ActivityContainerView: View {
                         Text(LocalizedStringKey(".StopActivity"))
                             .fontWeight(.semibold)
                             .padding()
-                            .foregroundColor(Color(day.getClosestPhase(currentTime: .now).color.backgroundColor))
+                            .foregroundColor(Color(color))
                         
                     }
                     .frame(minWidth: geo.size.width * 0.4, minHeight: geo.size.width * 0.11)
@@ -98,7 +98,7 @@ struct ActivityContainerView: View {
                         
                     }
                 
-                SwitchModeButton(imageType: (activity == .map) ? ImageType.custom(name: "sunmode") : ImageType.system(name: "target"), color: day.getClosestPhase(currentTime: .now).color.backgroundColor, activity: $activity
+                SwitchModeButton(imageType: (activity == .map) ? ImageType.custom(name: "sunmode") : ImageType.system(name: "target"), color: color, activity: $activity
                 ).frame(width: geo.size.width * 0.11, height: geo.size.width * 0.11)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
                 
@@ -168,6 +168,11 @@ struct ActivityContainerView: View {
                 }
                 
                 color = day.getClosestPhase(currentTime: Date()).color.backgroundColor
+            }
+            .onChange(of: dateOfAvatarPosition){ hour in
+                withAnimation(){
+                    color = day.getClosestPhase(currentTime: hour).color.backgroundColor
+                }
             }
         }
     }
