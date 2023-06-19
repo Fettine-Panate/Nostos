@@ -36,9 +36,6 @@ struct MapView: View {
     @Binding var scale : Double
     
     var body: some View {
-        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
-        
-        
         
         ZStack {
             ForEach(path.locations, id: \.self ){ loc in
@@ -58,7 +55,8 @@ struct MapView: View {
             .rotationEffect(Angle(degrees: -self.compassHeading.degrees))
             
             IndicatorView()
-                .foregroundColor(Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
+                .foregroundColor(day.getClosestPhase(currentTime: .now).name == "Night" ? Color.white.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1) :
+                    Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
                 .matchedGeometryEffect(id: "indicator", in: ns)
             
             Avatar()

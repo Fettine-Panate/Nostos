@@ -12,7 +12,6 @@ struct IndicatorView: View {
     var body: some View {
 
             ZStack{
- 
                 Image("pointer")
                     .resizable()
                     .frame(width: 45, height: 63)

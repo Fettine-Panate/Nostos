@@ -62,7 +62,8 @@ struct TrackBackView: View {
                 }.rotationEffect(Angle(degrees: -self.compassHeading.degrees))
                 
                 IndicatorView()
-                    .foregroundColor(Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
+                    .foregroundColor(day.getClosestPhase(currentTime: .now).name == "Night" ? Color.white.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1) :
+                        Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
                     .matchedGeometryEffect(id: "indicator", in: ns)
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 Avatar()
