@@ -153,6 +153,8 @@ struct ActivityContainerView: View {
                                     onBoardIndex += 1
                                     defaults.set(5, forKey: "ON_BOARDING")
                                     screen = .startView
+                                    mapScreen = .mapView
+                                    activity = .map
                                 }
         
                             })

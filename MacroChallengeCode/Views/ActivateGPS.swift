@@ -16,7 +16,7 @@ struct ActivateGPS: View {
     var body: some View {
         GeometryReader{ geo in
             ZStack{
-                Color.orange.ignoresSafeArea()
+                Color("background").ignoresSafeArea()
                 VStack{
               
                     Image(systemName: "location")

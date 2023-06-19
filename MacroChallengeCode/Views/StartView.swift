@@ -25,7 +25,7 @@ struct StartView: View {
         
         GeometryReader{ geo in
             ZStack {
-                Color.orange.ignoresSafeArea()
+                Color("background").ignoresSafeArea()
                 Avatar()
                     .matchedGeometryEffect(id: "avatar", in: ns)
                     .foregroundColor(
@@ -50,7 +50,7 @@ struct StartView: View {
                     VStack{
                         Text(LocalizedStringKey(".StartActivity"))
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.orange)
+                            .foregroundColor(Color("background"))
                             .padding()
                     }
                     .frame(minWidth: geo.size.width * 0.4, minHeight: geo.size.width * 0.11)
