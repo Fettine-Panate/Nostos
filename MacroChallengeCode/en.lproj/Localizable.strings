@@ -23,3 +23,8 @@
 ".Resume" = "Resume";
 ".No" = "No";
 ".LowAccuracy" = "Low gps\naccuracy";
+
+
+".ActivateGPS" = "Activate your GPS";
+".ActivateGPSDescription" = "Activate your location services in the settings";
+".OpenSettings" = "Open Settings";

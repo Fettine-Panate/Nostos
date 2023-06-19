@@ -20,3 +20,7 @@
 ".Resume" = "Fortsetzen";
 ".No" = "Nein";
 ".LowAccuracy" = "Niedrige\nGPS-Genauigkeit";
+
+".ActivateGPS" = "Aktiviere dein GPS";
+".ActivateGPSDescription" = "Aktiviere deinen Standortdienst in den Einstellungen";
+".OpenSettings" = "Einstellungen öffnen";
