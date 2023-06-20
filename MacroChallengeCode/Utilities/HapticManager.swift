@@ -1,78 +1,40 @@
-//
-//  HapticManager.swift
-//  MacroChallengeCode
-//
-//  Created by Raffaele Martone on 30/05/23.
-//
-
-import Foundation
 import CoreHaptics
-import AVFAudio
 
 class HapticManager {
-    let hapticEngine: CHHapticEngine
-    
+    private var hapticEngine: CHHapticEngine?
     
     init?() {
-        let hapticCapability = CHHapticEngine.capabilitiesForHardware()
-        guard hapticCapability.supportsHaptics else {
-            return nil
-        }
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return nil }
         
         do {
             hapticEngine = try CHHapticEngine()
-        } catch let error {
-            print("Haptic engine Creation Error: \(error)")
+            try hapticEngine?.start()
+        } catch {
+            print("Errore durante l'avvio del motore haptic: \(error.localizedDescription)")
             return nil
         }
-        do {
-            try hapticEngine.start()
-        } catch let error {
-            print("Haptic failed to start Error: \(error)")
-        }
-        hapticEngine.isAutoShutdownEnabled = true
-        
     }
     
-    func playFeedback() {
-        self.playSample(samples: [1.0])
-    }
-    
-    
-    private func playSample(samples: [Float]) {
-        createSample(samples: samples)
-    }
-    
-    
-    private func playHapticFromPattern(_ pattern: CHHapticPattern) throws {
-        try hapticEngine.start()
-        let player = try hapticEngine.makePlayer(with: pattern)
-        try player.start(atTime: CHHapticTimeImmediate)
-    }
-    
-    func stopHapticFeedback() {
-        try hapticEngine.stop()
-    }
-    
-    private func createSample(samples: [Float]){
-        let count = samples.count
-        
-        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0)
-        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1.0)
-        let totalDuration: TimeInterval = Double(count) * 0.1
-        
-        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0, duration: totalDuration)
+    func triggerHaptic() {
+        guard let engine = hapticEngine else { return }
         
         do {
-            try hapticEngine.start()
-            let pattern = try CHHapticPattern(events: [event], parameters: [])
-            let player = try hapticEngine.makePlayer(with: pattern)
-            try player.start(atTime: CHHapticTimeImmediate)
+            let pattern = try CHHapticPattern(events: [createHapticEvent()], parameters: [])
+            let player = try engine.makePlayer(with: pattern)
+            try player.start(atTime: 0)
+            engine.notifyWhenPlayersFinished { _ in
+                return .stopEngine
+            }
         } catch {
-            print(error.localizedDescription)
+            print("Errore durante la riproduzione del feedback haptic: \(error.localizedDescription)")
         }
+    }
+    
+    private func createHapticEvent() -> CHHapticEvent {
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.7)
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
+        let duration = 0.2 // Durata in secondi
+        
+        return CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: 0, duration: duration)
     }
 }
-
-
-

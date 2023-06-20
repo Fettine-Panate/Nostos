@@ -106,7 +106,7 @@ struct ActivityContainerView: View {
                 ).frame(width: geo.size.width * 0.11, height: geo.size.width * 0.11)
                     .position(x: geo.size.width * 0.9, y: geo.size.height * 0.1)
                 
-                    if ((userLocation!.horizontalAccuracy) > 17.0){
+                    if ((userLocation!.horizontalAccuracy) > 10.0){
                         withAnimation(.linear(duration: 0.2)){
                         LowAccuracyView(size: CGSize(width: geo.size.width * 0.11, height: geo.size.width * 0.11))
                             .position(x: geo.size.width * 0.1, y: geo.size.height * 0.1)

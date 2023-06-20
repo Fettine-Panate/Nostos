@@ -31,16 +31,16 @@ struct TrackBackView: View {
     let day : DayPhase
     
     @Binding var scale : Double
+    let hapticManager = HapticManager()
     
     var body: some View{
-        let currentHour =  Int(dateFormatter.string(from: Date())) ?? 0
         GeometryReader { geometry in
             ZStack{
                 ForEach(path.locations, id: \.self){ loc in
                     if isDisplayable(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
                         let position = calculatePosition(loc: loc, currentLocation: currentUserLocation!, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
                         if loc == path.locations.first{
-                            LastPinAnnotationView(loc: loc)
+                            LastPinAnnotationView(loc: loc,angle: Angle(degrees: -self.compassHeading.degrees))
                                 .position(position)
                                 .animation(.linear, value: position)
                                 .scaleEffect(scale)
@@ -63,14 +63,15 @@ struct TrackBackView: View {
                 
                 IndicatorView()
                     .foregroundColor(day.getClosestPhase(currentTime: .now).name == "Night" ? Color.white.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1) :
-                        Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
+                                        Color.black.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1))
                     .matchedGeometryEffect(id: "indicator", in: ns)
                     .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
                 Avatar()
                     .foregroundColor(Color("white"))
                     .matchedGeometryEffect(id: "avatar", in: ns)
-                    .onTapGesture {
-                        withAnimation(.spring()) {
+                    .onLongPressGesture {
+                        hapticManager?.triggerHaptic()
+                        withAnimation() {
                             mapScreen = .mapView
                         }
                     }
@@ -80,6 +81,7 @@ struct TrackBackView: View {
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 1/2))
             .onAppear(){
+                hapticManager?.triggerHaptic()
                 self.path = PathCustom(path: self.previouspath)
             }
             .onChange(of: currentUserLocation) { newValue in

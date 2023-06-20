@@ -34,6 +34,7 @@ struct MapView: View {
     
     let geometry : CGSize
     @Binding var scale : Double
+    let hapticManager = HapticManager()
     
     var body: some View {
         

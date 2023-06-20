@@ -117,7 +117,7 @@ class PathCustom: ObservableObject , Codable {
     
     func addLocation(_ location: CLLocation, checkLocation : (CLLocation, CLLocation) -> Bool) {
        
-        if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation())) && location.horizontalAccuracy <= (PathCustom.minDistance + PathCustom.maxDistance)/2
+        if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation())) && location.horizontalAccuracy <= 10.0 //(PathCustom.minDistance + PathCustom.maxDistance)/7
         {
             locations.append(location)
             print("Locations latitude: \(location.coordinate.latitude) \n\tand longitude: \(location.coordinate.longitude)")

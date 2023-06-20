@@ -38,6 +38,7 @@ struct FirstPinAnnotationView: View {
 
 struct LastPinAnnotationView: View {
     let loc : CLLocation
+    let angle : Angle
     var body: some View {
         ZStack{
             Circle()
@@ -45,6 +46,9 @@ struct LastPinAnnotationView: View {
                     Color("white"), lineWidth: 5)
                 .frame(width: 20, height: 20)
             Image(systemName: "flag.checkered")
+                .resizable()
+                .frame(width: 15, height: 15)
+                .rotationEffect(-angle)
                 .foregroundColor(
                     Color("white"))
                 .font(.largeTitle)
@@ -54,6 +58,6 @@ struct LastPinAnnotationView: View {
 
 struct PinAnnotationView_Previews: PreviewProvider {
     static var previews: some View {
-        LastPinAnnotationView(loc: CLLocation(latitude: 10.0, longitude: 10.0))
+        LastPinAnnotationView(loc: CLLocation(latitude: 10.0, longitude: 10.0), angle: Angle(degrees: 0))
     }
 }

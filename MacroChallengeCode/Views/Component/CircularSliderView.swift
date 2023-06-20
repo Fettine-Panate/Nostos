@@ -20,7 +20,7 @@ struct CircularSliderView: View {
     let start : Date
     @State var tapped = false
     @State var currentTime =  Date()
-    @State var pastTime = 0.0
+    @State var pastTime : TimeInterval = 0.0
     @State var currentPosition : CGPoint?
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     @Binding var screen : Screens
@@ -44,7 +44,14 @@ struct CircularSliderView: View {
         self._pathsJSON = pathsJSON
         self.day = day
         self._dateOfAvatarPosition = dateOfAvatarPosition
-//        print("BINDING VALUE: \(currentHour)")
+        if path.locations.isEmpty{
+            self.pastTime = 0.0
+            print("Sono vuoto")
+        }
+        else{
+            self.pastTime = Date().timeIntervalSince(path.locations[0].timestamp)
+            print("NOn Sono vuoto")
+        }
     }
     @State var isBeforeTheSunset = true
     

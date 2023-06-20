@@ -51,7 +51,7 @@ struct SunsetWidgetLiveActivity: Widget {
                         .font(.system(size: 20, design: .rounded))
                         .fontWeight(.medium)
                         .foregroundColor(
-                                Color.white)
+                            Color.white)
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 10)
@@ -79,8 +79,8 @@ struct SunsetWidgetLiveActivity: Widget {
                     ProgressView(timerInterval: context.attributes.progressInterval, countsDown: true) {
                         // Label needed?
                     }
+                    .padding(.leading,8)
                     .tint(
-                        
                             Color.white)
                     .foregroundColor(
                         
@@ -99,7 +99,6 @@ struct SunsetWidgetLiveActivity: Widget {
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.medium)
                     .foregroundColor(
-                        
                             Color.white)
             } minimal: {
                 Image(systemName: "sunset.fill")

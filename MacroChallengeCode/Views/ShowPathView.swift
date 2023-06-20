@@ -33,10 +33,9 @@ struct ShowPathView: View {
      
             ZStack{
                 
-                Text(mapScreen == .mapView ? LocalizedStringKey(".Going") : LocalizedStringKey(".ComingBack"))
-                .font(.title)
+                Text(mapScreen == .mapView ? LocalizedStringKey("") : LocalizedStringKey(".ComingBack"))
+                .font(.title2)
                 .bold()
-                .font(.title)
                 .foregroundColor(Color("white"))
                 .position(CGPoint(x: geo.size.width/2, y: geo.size.height * 1/10))
                 
@@ -56,7 +55,6 @@ struct ShowPathView: View {
                     
                 }
               
-                
             }
         }
         
