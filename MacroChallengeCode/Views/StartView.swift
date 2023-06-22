@@ -37,8 +37,7 @@ struct StartView: View {
                         
                         if defaults.integer(forKey: "ON_BOARDING") >= 5 {
                             defaults.set(true, forKey: "IS_STARTED")
-                            //NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
-                            NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", timeInterval: 5)
+                            NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: locationManager.userLocation!, timeZone: TimeZone.current).sunset , start: Date())
                             guard #available(iOS 16, *) else {
                                 print("Live Activity Not Supported!")
                                 return
@@ -72,8 +71,7 @@ struct StartView: View {
                             screen = .activity
                             // TODO: Start the activity and schedule notification
                             if defaults.integer(forKey: "ON_BOARDING") >= 5 {
-                                //NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: location, timeZone: TimeZone.current).sunset , start: Date())
-                                NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", timeInterval: 5)
+                                NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: locationManager.userLocation!, timeZone: TimeZone.current).sunset , start: Date())
                                 guard #available(iOS 16, *) else {
                                     print("Live Activity Not Supported!")
                                     return
@@ -85,6 +83,7 @@ struct StartView: View {
                           },
                           secondaryButton: .destructive(Text(LocalizedStringKey(".No")).foregroundColor(.blue), action: {
                         isStartedActivity = false
+                        defaults.set(false, forKey: "IS_STARTED")
                           }))
                           
                         
