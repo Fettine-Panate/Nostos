@@ -18,6 +18,7 @@ struct CircularSliderView: View {
     @State var dragged = false
     let sunset : Date
     let start : Date
+    let eveningGoldenHourEnd : Date
     @State var tapped = false
     @State var currentTime =  Date()
     @State var pastTime : TimeInterval = 0.0
@@ -32,9 +33,10 @@ struct CircularSliderView: View {
     let day : DayPhase
     @Binding var dateOfAvatarPosition : Date
     
-    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: DayPhase, dateOfAvatarPosition: Binding<Date>) {
+    init(pathsJSON: Binding<[PathCustom]>, path: PathCustom, userLocation : Binding<CLLocation?>, progress1: Double = 0.0, sunset: Date, start: Date, eveningGoldenHourEnd: Date , screen : Binding<Screens>,activity: Binding<ActivityEnum>,  mapScreen: Binding<MapSwitch>, namespace: Namespace.ID, day: DayPhase, dateOfAvatarPosition: Binding<Date>) {
         self.sunset = sunset
         self.start = start
+        self.eveningGoldenHourEnd = eveningGoldenHourEnd
         self._screen = screen
         self.ns = namespace
         self._mapScreen = mapScreen
@@ -53,11 +55,11 @@ struct CircularSliderView: View {
             print("NOn Sono vuoto")
         }
     }
-    @State var isBeforeTheSunset = true
+    @State var isBeforeTheEveningGoldenHourEnd = true
     
     @State var progress : Double = 0.0
     @State var rotationAngle : Angle = Angle(degrees: 0.0)
-    @State var remaingTimeToSunset : Int = 0 //seconds
+    @State var remaingTimeToEveningGoldenHourEnd : Int = 0 //seconds
     
     
     var body: some View {
@@ -102,18 +104,18 @@ struct CircularSliderView: View {
                     .gesture(
                         DragGesture(minimumDistance: 0.0)
                             .onChanged(){ value in
-                                if isBeforeTheSunset{
+                                if isBeforeTheEveningGoldenHourEnd{
                                     dragged = true
-                                    let minAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: .now)
+                                    let minAngle = calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: .now)
                                     progress = changeProgress(value: value.location, progress: progress, minAngle: minAngle)
                                     rotationAngle = changeAngle(value: value.location, currentAngle: rotationAngle, minAngle: minAngle)
-                                    remaingTimeToSunset = Int((sunset.timeIntervalSince(start) * progress) / 0.9)
-                                    dateOfAvatarPosition = start.addingTimeInterval(Double(remaingTimeToSunset))
+                                    remaingTimeToEveningGoldenHourEnd = Int((eveningGoldenHourEnd.timeIntervalSince(start) * progress) / 0.9)
+                                    dateOfAvatarPosition = start.addingTimeInterval(Double(remaingTimeToEveningGoldenHourEnd))
                                 }
                                 
                             }
                             .onEnded(){_ in
-                                if isBeforeTheSunset{
+                                if isBeforeTheEveningGoldenHourEnd{
                                     dragged = false
                                     withAnimation(.linear(duration: 1)){
                                         dateOfAvatarPosition = Date()
@@ -124,14 +126,17 @@ struct CircularSliderView: View {
                 iconSlider(text: Text(dateFormatterHHMM.string(from: start)),angle: Angle(degrees: 18.0) , radius: radius)
                     .rotationEffect(Angle(degrees: 18))
                     .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
-                iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateDateToReturn(sunset: sunset, startTime: start)) , radius: radius)
-                    .rotationEffect( calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: calculateDateToReturn(sunset: sunset, startTime: start)))
+                iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: calculateDateToReturn(eveningGoldenHourEnd: eveningGoldenHourEnd, startTime: start)) , radius: radius)
+                    .rotationEffect( calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: calculateDateToReturn(eveningGoldenHourEnd: eveningGoldenHourEnd, startTime: start)))
                     .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
-                iconSlider(icon: Image(systemName: "sunset.fill"), text: Text( dateFormatterHHMM.string(from: sunset))
-                           ,angle: Angle(degrees: 342) , radius: radius)
+                iconSlider(icon: Image(systemName: "sunset.fill"), text: Text( dateFormatterHHMM.string(from: eveningGoldenHourEnd))
+                           ,angle: calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: sunset) , radius: radius)
+                .rotationEffect(calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: sunset))
+                .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
+                iconSlider( icon: Image(systemName: "moon.stars.fill"),angle: Angle(degrees: 342) , radius: radius)
                 .rotationEffect(Angle(degrees: 342))
                 .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
-                if isBeforeTheSunset{
+                if isBeforeTheEveningGoldenHourEnd{
                     if dragged{
                         iconSlider(text:
                                     Text(dateFormatterHHMM.string(from: dateOfAvatarPosition)).bold().foregroundColor(Color("white")),angle: rotationAngle + Angle(degrees: 18) , radius: radius, rect: false)
@@ -152,7 +157,7 @@ struct CircularSliderView: View {
                         VStack {
                             Text(LocalizedStringKey(".TimeToSunset"))
                                 .font(.system(size: 25, design: .rounded))
-                            Text((formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition)))))
+                            Text((formatSecondsToHM(Int(eveningGoldenHourEnd.timeIntervalSince(dateOfAvatarPosition)))))
                                 .font(.system(size: 30, design: .rounded))
                                 .bold()
                         }
@@ -182,7 +187,7 @@ struct CircularSliderView: View {
             }
             .onChange(of: dateOfAvatarPosition) { newValue in
                 print(newValue)
-                if isBeforeTheSunset {
+                if isBeforeTheEveningGoldenHourEnd {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "HH"
                 }
@@ -190,21 +195,21 @@ struct CircularSliderView: View {
         }
         .onAppear(){
             pastTime = currentTime.timeIntervalSince(start)
-            if sunset.timeIntervalSince(currentTime) <= 0{
-                isBeforeTheSunset = false
+            if eveningGoldenHourEnd.timeIntervalSince(currentTime) <= 0{
+                isBeforeTheEveningGoldenHourEnd = false
             }
         }
         .onReceive(timer){ _ in
             currentTime = Date()
-            if sunset.timeIntervalSince(currentTime) <= 0{
-                isBeforeTheSunset = false
+            if eveningGoldenHourEnd.timeIntervalSince(currentTime) <= 0{
+                isBeforeTheEveningGoldenHourEnd = false
             }
             pastTime = currentTime.timeIntervalSince(start)
-            if isBeforeTheSunset{
+            if isBeforeTheEveningGoldenHourEnd{
                 if !dragged{
                     withAnimation(.linear(duration: 5)){
-                        progress = (0.90 * currentTime.timeIntervalSince(start)) / sunset.timeIntervalSince(start)
-                        rotationAngle = calculateAngleFromDate(sunsetTime: sunset, startTime: start, inputTime: currentTime)
+                        progress = (0.90 * currentTime.timeIntervalSince(start)) / eveningGoldenHourEnd.timeIntervalSince(start)
+                        rotationAngle = calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: currentTime)
                     }
                 }
             } else{
@@ -230,20 +235,20 @@ func formatSecondsToHM(_ totalSeconds: Int) -> String {
 }
 
 
-func calculateAngleFromDate(sunsetTime: Date, startTime: Date, inputTime: Date)-> Angle{
+func calculateAngleFromDate(eveningGoldenHourEndTime: Date, startTime: Date, inputTime: Date)-> Angle{
     
-    let x = inputTime.timeIntervalSince(startTime)/sunsetTime.timeIntervalSince(startTime)
+    let x = inputTime.timeIntervalSince(startTime)/eveningGoldenHourEndTime.timeIntervalSince(startTime)
     return Angle(degrees: x * 360)
     
 }
 
-func calculateDateToReturn(sunset: Date, startTime: Date) -> Date{
-    let ret = startTime.addingTimeInterval(sunset.timeIntervalSince(startTime)/2)
+func calculateDateToReturn(eveningGoldenHourEnd: Date, startTime: Date) -> Date{
+    let ret = startTime.addingTimeInterval(eveningGoldenHourEnd.timeIntervalSince(startTime)/2)
     return ret
 }
 
-func calculateTimeToReturn(sunset: Date, startTime: Date) -> TimeInterval{
-    let ret = sunset.timeIntervalSince(startTime)/2
+func calculateTimeToReturn(eveningGoldenHourEnd: Date, startTime: Date) -> TimeInterval{
+    let ret = eveningGoldenHourEnd.timeIntervalSince(startTime)/2
     return ret
 }
 

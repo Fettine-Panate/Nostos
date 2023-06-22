@@ -59,7 +59,7 @@ struct ActivityContainerView: View {
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
                         .foregroundColor( Color(color))
                 case .sunset:
-                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, dateOfAvatarPosition: $dateOfAvatarPosition)
+                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, eveningGoldenHourEnd: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).eveningGoldenHourEnd, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, dateOfAvatarPosition: $dateOfAvatarPosition)
                         .padding(70)
                
                 }
