@@ -93,8 +93,9 @@ struct ActivityContainerView: View {
                                 mapScreen = .mapView
                                 activity = .map
                                 // TODO: Stop the activity
-                                LiveActivityManager.shared.stopActivity()
                             }
+                        LiveActivityManager.shared.stopActivity()
+                        LocationManager.shared.stopLocationUpdates()
                           },
                           secondaryButton: .cancel(Text(LocalizedStringKey(".Cancel")), action: {
                               alertIsPresented = false

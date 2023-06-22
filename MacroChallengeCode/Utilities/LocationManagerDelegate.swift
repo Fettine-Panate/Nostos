@@ -22,12 +22,20 @@ class LocationManager: NSObject, ObservableObject {
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.startUpdatingLocation()
-        manager.allowsBackgroundLocationUpdates = true
+        manager.allowsBackgroundLocationUpdates = false
         manager.showsBackgroundLocationIndicator = true
     }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
+    
+    func startLocationUpdates(){
+        manager.allowsBackgroundLocationUpdates = true
+    }
+    
+    func stopLocationUpdates(){
+        manager.allowsBackgroundLocationUpdates = false
+    }
   
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
