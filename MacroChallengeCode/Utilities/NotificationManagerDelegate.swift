@@ -63,7 +63,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         
         center.setNotificationCategories([category])
         
-        scheduleNotification(timeInterval: calculateTimeToReturn(sunset: sunset, startTime: start))
+        scheduleNotification(timeInterval: calculateTimeToReturn(eveningGoldenHourEnd: sunset, startTime: start))
 //        scheduleNotification(timeInterval: timeInterval)
         
     }
