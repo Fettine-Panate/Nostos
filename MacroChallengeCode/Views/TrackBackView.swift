@@ -31,7 +31,7 @@ struct TrackBackView: View {
     let day : DayPhase
     
     @Binding var scale : Double
-    let hapticManager = HapticManager()
+    let hapticManager = HapticManager.shared
     
     var body: some View{
         GeometryReader { geometry in
@@ -81,7 +81,6 @@ struct TrackBackView: View {
             }
             .position(CGPoint(x: geometry.size.width/2, y: geometry.size.height * 1/2))
             .onAppear(){
-                hapticManager?.triggerHaptic()
                 self.path = PathCustom(path: self.previouspath)
             }
             .onChange(of: currentUserLocation) { newValue in

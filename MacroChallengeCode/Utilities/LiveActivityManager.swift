@@ -46,12 +46,15 @@ class LiveActivityManager  {
     
     func stopActivity() {
         let finalStatus = SunsetWidgetAttributes.ContentState()
-        let finalContent = ActivityContent(state: finalStatus, staleDate: nil)
+        let finalContent = ActivityContent(state: finalStatus, staleDate: Calendar.current.date(byAdding: .hour, value: 12, to: Date())!)
+        
         Task {
-            for activity in Activity<SunsetWidgetAttributes>.activities {
-                await activity.end(finalContent, dismissalPolicy: .immediate)
-                print("Ending Live Activity: \(activity.id)")
-            }
+            await activity?.end(finalContent, dismissalPolicy: .immediate)
+            
+//            for activity in Activity<SunsetWidgetAttributes>.activities {
+//                await activity.end(finalContent, dismissalPolicy: .immediate)
+//                print("Ending Live Activity: \(activity.id)")
+//            }
         }
     }
     
