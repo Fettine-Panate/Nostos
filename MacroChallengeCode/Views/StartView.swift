@@ -83,6 +83,7 @@ struct StartView: View {
                           },
                           secondaryButton: .destructive(Text(LocalizedStringKey(".No")).foregroundColor(.blue), action: {
                         isStartedActivity = false
+                        defaults.set(false, forKey: "IS_STARTED")
                           }))
                           
                         
