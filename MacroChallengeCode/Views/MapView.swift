@@ -34,7 +34,7 @@ struct MapView: View {
     
     let geometry : CGSize
     @Binding var scale : Double
-    let hapticManager = HapticManager()
+    let hapticManager = HapticManager.shared
     
     var body: some View {
         
@@ -65,6 +65,7 @@ struct MapView: View {
                 .foregroundColor(
                     Color("white"))
                 .onLongPressGesture {
+                    hapticManager?.triggerHaptic()
                     withAnimation {
                         mapScreen = .trackBack
                     }

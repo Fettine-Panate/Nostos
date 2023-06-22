@@ -43,6 +43,7 @@ struct StartView: View {
                                 return
                             }
                             LiveActivityManager.shared.addActivity()
+                            locationManager.startLocationUpdates()
                         }
                     }
                 } label: {
@@ -76,11 +77,13 @@ struct StartView: View {
                                     return
                                 }
                                 LiveActivityManager.shared.addActivity()
+                                locationManager.startLocationUpdates()
                             }
                         }
                           },
                           secondaryButton: .destructive(Text(LocalizedStringKey(".No")).foregroundColor(.blue), action: {
                         isStartedActivity = false
+                        defaults.set(false, forKey: "IS_STARTED")
                           }))
                           
                         

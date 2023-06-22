@@ -1,28 +1,42 @@
 import CoreHaptics
 
 class HapticManager {
-    private var hapticEngine: CHHapticEngine?
+    static let shared = HapticManager()
+    let hapticEngine: CHHapticEngine
     
-    init?() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return nil }
+    
+    private init?() {
+        let hapticCapability = CHHapticEngine.capabilitiesForHardware()
+        guard hapticCapability.supportsHaptics else {
+            return nil
+        }
         
         do {
             hapticEngine = try CHHapticEngine()
-            try hapticEngine?.start()
-        } catch {
-            print("Errore durante l'avvio del motore haptic: \(error.localizedDescription)")
+        } catch let error {
+            print("Haptic engine Creation Error: \(error)")
             return nil
         }
+        do {
+            try hapticEngine.start()
+        } catch let error {
+            print("Haptic failed to start Error: \(error)")
+        }
+        hapticEngine.isAutoShutdownEnabled = true
+        
     }
     
+    
     func triggerHaptic() {
-        guard let engine = hapticEngine else { return }
         
         do {
-            let pattern = try CHHapticPattern(events: [createHapticEvent()], parameters: [])
-            let player = try engine.makePlayer(with: pattern)
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.7)
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
+            let duration = 0.2 // Durata in secondi
+            let pattern = try CHHapticPattern(events: [CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: 0, duration: duration)], parameters: [])
+            let player = try hapticEngine.makePlayer(with: pattern)
             try player.start(atTime: 0)
-            engine.notifyWhenPlayersFinished { _ in
+            hapticEngine.notifyWhenPlayersFinished { _ in
                 return .stopEngine
             }
         } catch {
