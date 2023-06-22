@@ -44,6 +44,7 @@ struct StartView: View {
                                 return
                             }
                             LiveActivityManager.shared.addActivity()
+                            locationManager.startLocationUpdates()
                         }
                     }
                 } label: {
@@ -78,6 +79,7 @@ struct StartView: View {
                                     return
                                 }
                                 LiveActivityManager.shared.addActivity()
+                                locationManager.startLocationUpdates()
                             }
                         }
                           },
