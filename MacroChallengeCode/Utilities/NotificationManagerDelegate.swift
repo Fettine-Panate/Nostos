@@ -19,7 +19,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
     static let shared = NotificationManager()
     let center = UNUserNotificationCenter.current()
     let content = UNMutableNotificationContent()
-    let uuidString = UUID().uuidString
+    var uuidString = UUID().uuidString
     
     private override init() {
         super.init()
@@ -40,7 +40,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         }
     }
     
-    func createNotification(title: String, body: String, timeInterval: TimeInterval) {
+    func createNotification(title: String, body: String, sunset: Date, start: Date) {
         
         center.getNotificationSettings { settings in
             guard (settings.authorizationStatus == .authorized) ||
@@ -63,8 +63,8 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         
         center.setNotificationCategories([category])
         
-//        scheduleNotification(timeInterval: calculateTimeToReturn(sunset: sunset, startTime: start))
-        scheduleNotification(timeInterval: timeInterval)
+        scheduleNotification(timeInterval: calculateTimeToReturn(sunset: sunset, startTime: start))
+//        scheduleNotification(timeInterval: timeInterval)
         
     }
     
@@ -90,17 +90,17 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
         switch response.actionIdentifier {
         case "REMIND_ACTION":
             /* In case in the future we are going to implement quick actions */
-            let newTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let newTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 600, repeats: false)
             let content = UNMutableNotificationContent()
-            content.title = "Nuova notifica"
-            content.body = "Questa è una notifica riprogrammata."
-            let newNotificationIdentifier = "newNotificationIdentifier"
-            let request = UNNotificationRequest(identifier: newNotificationIdentifier, content: content, trigger: newTrigger)
+            content.title = "Reminder"
+            content.body = "Consider going back, so that you can arrive before it gets too dark"
+            uuidString = UUID().uuidString
+            let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: newTrigger)
             UNUserNotificationCenter.current().add(request) { (error) in
                 if let error = error {
-                    print("Errore nell'aggiunta della nuova notifica: \(error.localizedDescription)")
+                    print("Error in scheduling new notification: \(error.localizedDescription)")
                 } else {
-                    print("Nuova notifica aggiunta con successo.")
+                    print("New notification added successfully.")
                 }
             }
             break
