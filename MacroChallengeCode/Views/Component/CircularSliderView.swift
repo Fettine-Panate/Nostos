@@ -65,7 +65,7 @@ struct CircularSliderView: View {
     var body: some View {
         
         GeometryReader{ gr in
-            let radius = (min(gr.size.width, gr.size.height) / 2.0)  * 0.9
+            let radius = (min(gr.size.width, gr.size.height) / 2.0) // * 0.9
             let sliderWidth = 17.0
             ZStack {
                 //Cerchio interno
@@ -157,7 +157,7 @@ struct CircularSliderView: View {
                         VStack {
                             Text(LocalizedStringKey(".TimeToSunset"))
                                 .font(.system(size: 25, design: .rounded))
-                            Text((formatSecondsToHM(Int(eveningGoldenHourEnd.timeIntervalSince(dateOfAvatarPosition)))))
+                            Text((Int(sunset.timeIntervalSince(dateOfAvatarPosition))) < 0 ? "00:00:00" : formatSecondsToHM(Int(sunset.timeIntervalSince(dateOfAvatarPosition))))
                                 .font(.system(size: 30, design: .rounded))
                                 .bold()
                         }
@@ -236,9 +236,9 @@ func formatSecondsToHM(_ totalSeconds: Int) -> String {
 
 
 func calculateAngleFromDate(eveningGoldenHourEndTime: Date, startTime: Date, inputTime: Date)-> Angle{
-    
+  
     let x = inputTime.timeIntervalSince(startTime)/eveningGoldenHourEndTime.timeIntervalSince(startTime)
-    return Angle(degrees: x * 360)
+    return Angle(degrees: x * 342)
     
 }
 
