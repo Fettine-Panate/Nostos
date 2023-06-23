@@ -1,5 +1,5 @@
 ".StartActivity" = "Start Activity";
-".StopActivity" = "Stop Activity";
+".StopActivity" = "End Activity";
 //On Boarding
 ".TapToSwitchToSunsetMode" = "Tap to switch to \"Sunset\" Mode";
 ".DragTheSliderToSee" = "You can drag the slider to see how much time left to sunset";

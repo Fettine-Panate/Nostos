@@ -69,7 +69,7 @@ struct CircularSliderView: View {
                 //Cerchio interno
                 Circle()
                     .trim(from: 0, to: 0.9)
-                    .stroke(!isNight ? Color.black.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp) : Color.white.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp),
+                    .stroke(Color.black.opacity(day.getClosestPhase(currentTime: Date()).color.accentObjectOp),
                             style: StrokeStyle(lineWidth: sliderWidth,lineCap: .round))
                     .rotationEffect(Angle(degrees: 108))
                     .frame(width: radius * 2, height: radius * 2)
@@ -115,9 +115,9 @@ struct CircularSliderView: View {
                             .onEnded(){_ in
                                 if isBeforeTheEveningGoldenHourEnd{
                                     dragged = false
-                                    withAnimation(.linear(duration: 1)){
+                              
                                         dateOfAvatarPosition = Date()
-                                    }
+                                  
                                 }
                             }
                     )

@@ -1,5 +1,5 @@
 ".StartActivity" = "Iniciar actividad";
-".StopActivity" = "Detener actividad";
+".StopActivity" = "Finalizar actividad";
 ".TapToSwitchToSunsetMode" = "Toca para cambiar al modo \"Puesta de sol\"";
 ".DragTheSliderToSee" = "Puedes arrastrar el control deslizante para ver cuánto tiempo queda para la puesta de sol";
 ".TapToSwitchToGoingMode" = "Toca para cambiar al modo \"Ir\"";

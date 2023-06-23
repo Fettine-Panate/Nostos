@@ -99,6 +99,8 @@ struct ActivityContainerView: View {
                             }
                         LiveActivityManager.shared.stopActivity()
                         LocationManager.shared.stopLocationUpdates()
+                        
+                        NotificationManager.shared.center.removePendingNotificationRequests(withIdentifiers: [NotificationManager.shared.uuidString])
                           },
                           secondaryButton: .cancel(Text(LocalizedStringKey(".Cancel")), action: {
                               alertIsPresented = false
