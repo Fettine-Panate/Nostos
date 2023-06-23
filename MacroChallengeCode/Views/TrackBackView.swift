@@ -100,27 +100,27 @@ struct TrackBackView: View {
         
     }
     
-    //                        .overlay{
-    //                            ZStack{
-    //                                withAnimation{
-    //                                    Path { pat in
-    //                                        for (index, loc) in path.getLocations().enumerated() {
-    //                                            if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
-    //                                                let point = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
-    //                                                if index == 0 {
-    //                                                    pat.move(to: point)
-    //                                                } else {
-    //                                                    pat.addLine(to: point)
-    //                                                }
-    //                                            }
-    //                                        }
-    //                                        pat.addLine(to: CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
-    //                                    }
-    //                                    .stroke(Color.white, lineWidth: 2 * scale)
-    //                                    .scaleEffect(scale / 2)
-    //                                }
-    //                            }
-    //                        }
+//                            .overlay{
+//                                ZStack{
+//                                    withAnimation{
+//                                        Path { pat in
+//                                            for (index, loc) in path.getLocations().enumerated() {
+//                                                if isDisplayable(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude){
+//                                                    let point = calculatePosition(loc: loc, currentLocation: currentUserLocation, sizeOfScreen: geometry.size, latitudeMetersMax: magnitude)
+//                                                    if index == 0 {
+//                                                        pat.move(to: point)
+//                                                    } else {
+//                                                        pat.addLine(to: point)
+//                                                    }
+//                                                }
+//                                            }
+//                                            pat.addLine(to: CGPoint(x: geometry.size.width/2, y: geometry.size.height/2))
+//                                        }
+//                                        .stroke(Color.white, lineWidth: 2 * scale)
+//                                        .scaleEffect(scale / 2)
+//                                    }
+//                                }
+//                            }
     
 }
 

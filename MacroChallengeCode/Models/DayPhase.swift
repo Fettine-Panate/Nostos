@@ -8,7 +8,7 @@ struct DayPhase {
     
     init(sun: Sun) {
         self.sun = sun
-        var phases = [
+        let phases = [
             //0
             Phase(name: "AstronmicalDawnColor", hour: sun.astronomicalDawn, color: BackgroundColorPalette(backgroundColor: "AstronmicalDawnColor", accentObjectOp: 0.10)),
             //1

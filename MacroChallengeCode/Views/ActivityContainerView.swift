@@ -171,7 +171,6 @@ struct ActivityContainerView: View {
             }
             .onAppear {
                 sun = Sun(location: userLocation!, timeZone: TimeZone.current)
-                print(sun?.astronomicalDawn)
                 
                 color = day.getClosestPhase(currentTime: Date()).color.backgroundColor
                 

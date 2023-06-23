@@ -36,16 +36,13 @@ class PathCustom: ObservableObject , Codable {
     
     init(path : PathCustom) {
         self.title = path.title
-        for (index, loc) in path.getLocations().enumerated() {
+        for loc in path.getLocations() {
             self.locations.append(loc)
         }
     }
     
     let checkDistance: (CLLocation, CLLocation) -> Bool = { currentLocation, lastLocation in
         let distance = currentLocation.distance(from: lastLocation)
-        if distance >= minDistance && distance <= maxDistance{
-            print(distance)
-        }
         return distance >= minDistance && distance <= maxDistance
     }
     
@@ -71,7 +68,6 @@ class PathCustom: ObservableObject , Codable {
     }
     
     public func copy(path : PathCustom){
-        print("Copying the path..")
         self.title = path.title
         self.locations.removeAll()
         for (loc) in path.locations{
@@ -120,7 +116,6 @@ class PathCustom: ObservableObject , Codable {
         if (locations.isEmpty  || checkLocation(location, locations.last ?? CLLocation())) && location.horizontalAccuracy <= 10.0 //(PathCustom.minDistance + PathCustom.maxDistance)/7
         {
             locations.append(location)
-            print("Locations latitude: \(location.coordinate.latitude) \n\tand longitude: \(location.coordinate.longitude)")
         }
         
     }
@@ -142,38 +137,13 @@ class PathCustom: ObservableObject , Codable {
             }
         }
         if find {
-            for i in ind ..< locations.count{
+            for _ in ind ..< locations.count{
                 locations.removeLast()
             }
         }
         return find
     }
     
-    
-//    public required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        let response = try container.nestedContainer(keyedBy:
-//                                                        CodingKeys.self, forKey: .response)
-//        self.title = try response.decode(String.self, forKey: .title)
-//        var decodedLocationWrapper : [CLLocationWrapper] = []
-//        decodedLocationWrapper = try response.decode([CLLocationWrapper].self, forKey: .encodedLocationWrappers)
-//        locations.removeAll()
-//        for locWr in decodedLocationWrapper{
-//            locations.append(locWr.location)
-//        }
-//    }
-//
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        var response = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .response)
-//        var locationWrappers : [CLLocationWrapper]? = []
-//        for loc in locations {
-//            print("appendo")
-//            locationWrappers?.append(CLLocationWrapper(location: loc))
-//        }
-//        try response.encode(self.title, forKey: .title)
-//        try response.encode(locationWrappers, forKey: .encodedLocationWrappers)
-//    }
     
     
         public required init(from decoder: Decoder) throws {
@@ -187,7 +157,7 @@ class PathCustom: ObservableObject , Codable {
                 let decodedLocationWrapper = try jsonDecoder.decode([CLLocationWrapper].self, forKey: .locations)
                 decodedLocationWrappers.append(contentsOf: decodedLocationWrapper)
             } catch {
-                print("Error! Location wrapper decode failed: '\(error)'")
+                print("DEBUG: Error Location wrapper decode failed: '\(error)'")
             }
             locations.removeAll()
             for locWr in decodedLocationWrappers{
@@ -204,11 +174,11 @@ class PathCustom: ObservableObject , Codable {
 //                locationWrappers?.append(CLLocationWrapper(location: loc))
 //            }
             
-            var jsonEncoder = encoder.container(keyedBy: CodingKeys.self)
+            let jsonEncoder = encoder.container(keyedBy: CodingKeys.self)
             do {
                 try container.encode(locations, forKey: .locations)
             } catch {
-                print("Error! Location wrapper encode failed: '\(error)'")
+                print("DEBUG: Error Location wrapper encode failed: '\(error)'")
             }
         }
 }

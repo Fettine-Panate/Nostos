@@ -47,9 +47,6 @@ struct MapView: View {
                         .position(position)
                         .animation(.linear, value: position)
                         .scaleEffect(scale)
-                        .onAppear{
-                            print("Position of the pin: \(position)")
-                        }
                     
                 }
             }
@@ -78,8 +75,6 @@ struct MapView: View {
             path.addLocation(currentUserLocation!, checkLocation: path.checkDistance)
             pathsJSON.append(path)
             savePack("Paths", pathsJSON)
-                    print("Size in mao : w : \(geometry.width), h : \(geometry.height)")
-            
         }
         .onChange(of: currentUserLocation) { loc in
             path.addLocation(loc!, checkLocation: path.checkDistance)

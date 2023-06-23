@@ -14,13 +14,13 @@ class HapticManager {
         do {
             hapticEngine = try CHHapticEngine()
         } catch let error {
-            print("Haptic engine Creation Error: \(error)")
+            print("DEBUG: Haptic engine Creation Error: \(error)")
             return nil
         }
         do {
             try hapticEngine.start()
         } catch let error {
-            print("Haptic failed to start Error: \(error)")
+            print("DEBUG: Haptic failed to start Error: \(error)")
         }
         hapticEngine.isAutoShutdownEnabled = true
         
@@ -40,7 +40,7 @@ class HapticManager {
                 return .stopEngine
             }
         } catch {
-            print("Errore durante la riproduzione del feedback haptic: \(error.localizedDescription)")
+            print("DEBUG: Error during reproducing of the feedback: \(error.localizedDescription)")
         }
     }
     

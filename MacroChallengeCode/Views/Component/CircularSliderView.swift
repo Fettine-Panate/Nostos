@@ -48,15 +48,13 @@ struct CircularSliderView: View {
         self._dateOfAvatarPosition = dateOfAvatarPosition
         if path.locations.isEmpty{
             self.pastTime = 0.0
-            print("Sono vuoto")
         }
         else{
             self.pastTime = Date().timeIntervalSince(path.locations[0].timestamp)
-            print("NOn Sono vuoto")
         }
     }
     @State var isBeforeTheEveningGoldenHourEnd = true
-    
+    @State var isNight = false
     @State var progress : Double = 0.0
     @State var rotationAngle : Angle = Angle(degrees: 0.0)
     @State var remaingTimeToEveningGoldenHourEnd : Int = 0 //seconds
@@ -71,7 +69,7 @@ struct CircularSliderView: View {
                 //Cerchio interno
                 Circle()
                     .trim(from: 0, to: 0.9)
-                    .stroke(Color.black.opacity(day.getClosestPhase(currentTime: Date()).color.accentObjectOp),
+                    .stroke(!isNight ? Color.black.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp) : Color.white.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp),
                             style: StrokeStyle(lineWidth: sliderWidth,lineCap: .round))
                     .rotationEffect(Angle(degrees: 108))
                     .frame(width: radius * 2, height: radius * 2)
@@ -125,17 +123,17 @@ struct CircularSliderView: View {
                     )
                 iconSlider(text: Text(dateFormatterHHMM.string(from: start)),angle: Angle(degrees: 18.0) , radius: radius)
                     .rotationEffect(Angle(degrees: 18))
-                    .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
+                    .foregroundColor(!isNight ? Color.black.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1) : Color.white.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1))
                 iconSlider(icon: Image(systemName: "exclamationmark.triangle.fill"),angle: calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: calculateDateToReturn(eveningGoldenHourEnd: eveningGoldenHourEnd, startTime: start)) , radius: radius)
                     .rotationEffect( calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: calculateDateToReturn(eveningGoldenHourEnd: eveningGoldenHourEnd, startTime: start)))
-                    .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
+                .foregroundColor(!isNight ? Color.black.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1) : Color.white.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1))
                 iconSlider(icon: Image(systemName: "sunset.fill"), text: Text( dateFormatterHHMM.string(from: eveningGoldenHourEnd))
                            ,angle: calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: sunset) , radius: radius)
                 .rotationEffect(calculateAngleFromDate(eveningGoldenHourEndTime: eveningGoldenHourEnd, startTime: start, inputTime: sunset))
-                .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
+                .foregroundColor(!isNight ? Color.black.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1) : Color.white.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1))
                 iconSlider( icon: Image(systemName: "moon.stars.fill"),angle: Angle(degrees: 342) , radius: radius)
                 .rotationEffect(Angle(degrees: 342))
-                .opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.1)
+                .foregroundColor(!isNight ? Color.black.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1) : Color.white.opacity(day.getClosestPhase(currentTime: dateOfAvatarPosition).color.accentObjectOp + 0.1))
                 if isBeforeTheEveningGoldenHourEnd{
                     if dragged{
                         iconSlider(text:
@@ -186,7 +184,6 @@ struct CircularSliderView: View {
                 savePack("Paths", pathsJSON)
             }
             .onChange(of: dateOfAvatarPosition) { newValue in
-                print(newValue)
                 if isBeforeTheEveningGoldenHourEnd {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "HH"
@@ -197,6 +194,11 @@ struct CircularSliderView: View {
             pastTime = currentTime.timeIntervalSince(start)
             if eveningGoldenHourEnd.timeIntervalSince(currentTime) <= 0{
                 isBeforeTheEveningGoldenHourEnd = false
+            }
+            if day.getClosestPhase(currentTime: dateOfAvatarPosition).name == "Night"{
+                isNight = true
+            }else{
+                isNight = false
             }
         }
         .onReceive(timer){ _ in
@@ -216,6 +218,11 @@ struct CircularSliderView: View {
                 progress = 0.90
                 rotationAngle = Angle(degrees: 0.90 * 360)
             }
+                if day.getClosestPhase(currentTime: dateOfAvatarPosition).name == "Night"{
+                    isNight = true
+                }else{
+                    isNight = false
+                }
             
         }
     }

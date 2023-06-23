@@ -42,16 +42,11 @@ struct ShowPathView: View {
                 switch mapScreen{
                 case .mapView:
                     MapView(path: path, currentUserLocation: $userLocation, screen: $screen, mapScreen: $mapScreen, pathsJSON: $pathsJSON, ns: ns, magnitude: $magnitude, day : day, geometry: geometry, scale: $scale).frame(width: geo.size.width,height: geo.size.height)
-                        .onAppear(){
-                            print("Size of map : w : \(geo.size.width), h : \(geo.size.height)")
-                        }
+                     
                     
                         
                 case .trackBack:
                     TrackBackView(currentUserLocation: $userLocation, previouspath: path, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns,  magnitude: $magnitude, day : day, scale: $scale).frame(width: geo.size.width,height: geo.size.height)
-                        .onAppear(){
-                            print("Size of track : w : \(geo.size.width), h : \(geo.size.height)")
-                        }
                     
                 }
               
