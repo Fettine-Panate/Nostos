@@ -86,8 +86,11 @@ struct ActivityContainerView: View {
                 .alert(isPresented: $alertIsPresented){
                     Alert(title: Text(LocalizedStringKey(".DoYouWantoToQuit?")), message: Text(".AllThePinsLeft_description"),
                           primaryButton: .destructive(Text(LocalizedStringKey(".Quit"))) {
+                        defaults.set(false, forKey: "IS_STARTED")
+                        resumeLastPath = false
                             withAnimation {
-                                defaults.set(false, forKey: "IS_STARTED")
+                               
+                                
                                 screen = .startView
                                 //TODO: create a func to do this
                                 mapScreen = .mapView
@@ -170,11 +173,13 @@ struct ActivityContainerView: View {
                 sun = Sun(location: userLocation!, timeZone: TimeZone.current)
                 print(sun?.astronomicalDawn)
                 
+                color = day.getClosestPhase(currentTime: Date()).color.backgroundColor
+                
                 if resumeLastPath && !pathsJSON.isEmpty && defaults.bool(forKey: "IS_STARTED"){
                     path.copy(path: pathsJSON.last!)
+                    print("Im copying..")
                 }
-                
-                color = day.getClosestPhase(currentTime: Date()).color.backgroundColor
+             
             }
             .onChange(of: dateOfAvatarPosition){ hour in
                 withAnimation(){

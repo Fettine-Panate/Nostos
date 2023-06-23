@@ -72,8 +72,6 @@ struct ContentView: View {
                 if(LocationManager.shared.userLocation != nil){
                     ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, resumeLastPath: $resumeLastPath)
                 }else{
-                    
-                    //TODO schermata quando prova a iniziare senza accettare il gps
                     ActivateGPS(screen: $screen, mapScreen: $mapScreen, activity: $activity)
                 }
             case .finished:
@@ -81,7 +79,6 @@ struct ContentView: View {
                     let day : DayPhase = DayPhase(sun: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current))
                     ArrivedBackView(screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, day: day)
                 }else{
-                    //TODO schermata quando prova a iniziare senza accettare il gps
                     ActivateGPS(screen: $screen, mapScreen: $mapScreen, activity: $activity)
                 }
              

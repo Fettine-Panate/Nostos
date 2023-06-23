@@ -32,19 +32,21 @@ struct StartView: View {
                         Color("white"))
                 Button {
                     withAnimation {
+                        
                         screen = .activity
                         // TODO: Start the activity and schedule notification
-                        
-                        if defaults.integer(forKey: "ON_BOARDING") >= 5 {
-                            defaults.set(true, forKey: "IS_STARTED")
-                            NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: locationManager.userLocation!, timeZone: TimeZone.current).sunset , start: Date())
-                            guard #available(iOS 16, *) else {
-                                print("Live Activity Not Supported!")
-                                return
-                            }
-                            LiveActivityManager.shared.addActivity()
-                            locationManager.startLocationUpdates()
+                    }
+                    
+                    
+                    if defaults.integer(forKey: "ON_BOARDING") >= 5 {
+                        defaults.set(true, forKey: "IS_STARTED")
+                        NotificationManager.shared.createNotification(title: "Consider going back", body: "If you start now, you will arrive just before the sunset", sunset: Sun(location: locationManager.userLocation!, timeZone: TimeZone.current).sunset , start: Date())
+                        guard #available(iOS 16, *) else {
+                            print("Live Activity Not Supported!")
+                            return
                         }
+                        LiveActivityManager.shared.addActivity()
+                        locationManager.startLocationUpdates()
                     }
                 } label: {
                     VStack{

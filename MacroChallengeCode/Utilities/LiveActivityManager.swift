@@ -50,11 +50,6 @@ class LiveActivityManager  {
         
         Task {
             await activity?.end(finalContent, dismissalPolicy: .immediate)
-            
-//            for activity in Activity<SunsetWidgetAttributes>.activities {
-//                await activity.end(finalContent, dismissalPolicy: .immediate)
-//                print("Ending Live Activity: \(activity.id)")
-//            }
         }
     }
     
