@@ -42,6 +42,7 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
     
     func createNotification(title: String, body: String, sunset: Date, start: Date) {
         
+        if sunset.timeIntervalSince(start) >  0{
         center.getNotificationSettings { settings in
             guard (settings.authorizationStatus == .authorized) ||
                     (settings.authorizationStatus == .provisional) else { return }
@@ -60,12 +61,10 @@ class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterD
                                intentIdentifiers: [],
                                options: .customDismissAction
         )
-        
-        center.setNotificationCategories([category])
-        
-        scheduleNotification(timeInterval: calculateTimeToReturn(eveningGoldenHourEnd: sunset, startTime: start))
-//        scheduleNotification(timeInterval: timeInterval)
-        
+            center.setNotificationCategories([category])
+            
+            scheduleNotification(timeInterval: calculateTimeToReturn(eveningGoldenHourEnd: sunset, startTime: start))
+        }
     }
     
     func scheduleNotification(timeInterval: TimeInterval) {
