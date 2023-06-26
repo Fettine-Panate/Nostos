@@ -149,7 +149,7 @@ struct CircularSliderView: View {
                                 .bold()
                         }
                         .multilineTextAlignment(.center)
-                        .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                        .position(CGPoint(x: gr.size.width/2, y: gr.size.height * 1/40))
                         .foregroundColor(Color("white"))
                     } else {
                         VStack {
@@ -160,7 +160,7 @@ struct CircularSliderView: View {
                                 .bold()
                         }
                         .multilineTextAlignment(.center)
-                        .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                        .position(CGPoint(x: gr.size.width/2, y: gr.size.height * 1/40))
                         .foregroundColor(Color("white"))
                     }
                 }else{
@@ -172,7 +172,7 @@ struct CircularSliderView: View {
                             .bold()
                     }
                     .multilineTextAlignment(.center)
-                    .position(x: gr.size.width * 0.5, y: gr.size.height * 0.1)
+                    .position(CGPoint(x: gr.size.width/2, y: gr.size.height * 1/40))
                     .foregroundColor(Color("white"))
                 }
                 
@@ -315,7 +315,7 @@ struct iconSlider : View {
                 }
             }.rotationEffect(-angle)
         }
-        .offset(y: radius * 1.45)
+        .offset(y: radius * 1.35)
         
         
     }

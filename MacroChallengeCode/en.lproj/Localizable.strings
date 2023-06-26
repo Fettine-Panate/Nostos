@@ -18,7 +18,7 @@
 ".YouArrived" = "You arrived at your starting point";
 ".Okay" = "OK";
 ".ActivityTime" = "You walked for";
-".TimeToSunset" = "Time left untill sunset";
+".TimeToSunset" = "Time left until sunset";
 ".DoYouWantoToResume?" = "Do You Want To Resume The Last Path?";
 ".Resume" = "Resume";
 ".No" = "No";
