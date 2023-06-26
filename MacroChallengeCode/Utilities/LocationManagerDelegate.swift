@@ -48,7 +48,7 @@ extension LocationManager: CLLocationManagerDelegate {
             print("DEBUG: denied")
         case .authorizedAlways, .authorizedWhenInUse:
             print("DEBUG: authorizedAlways")
-            region = MKCoordinateRegion(center: manager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+            region = MKCoordinateRegion(center: manager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 14.000000, longitude: 41.000000), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
         @unknown default:
             print("DEBUG: unknown")
         }
