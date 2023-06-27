@@ -760,7 +760,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Nostos;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The location will be used to record your path  ";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location will be used to record your path  ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location will be used to record your path ";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -803,7 +803,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Nostos;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The location will be used to record your path  ";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location will be used to record your path  ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The location will be used to record your path ";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

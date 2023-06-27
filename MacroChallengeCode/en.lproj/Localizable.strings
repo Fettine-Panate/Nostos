@@ -25,6 +25,7 @@
 ".LowAccuracy" = "Low gps\naccuracy";
 
 
-".ActivateGPS" = "Activate your GPS";
-".ActivateGPSDescription" = "Activate your location services in the settings";
+".ActivateGPS" = "Enable Location Services";
+".ActivateGPSDescription" = "The location will be used to record your path";
+
 ".OpenSettings" = "Open Settings";

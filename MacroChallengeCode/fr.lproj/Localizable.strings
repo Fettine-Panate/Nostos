@@ -21,6 +21,7 @@
 ".No" = "Non";
 ".LowAccuracy" = "Faible précision\ndu GPS";
 
-".ActivateGPS" = "Activez votre GPS";
-".ActivateGPSDescription" = "Activez vos services de localisation dans les paramètres";
+".ActivateGPS" = "Activer la localisation";
+".ActivateGPSDescription" = "La localisation sera utilisée pour enregistrer votre parcours";
+
 ".OpenSettings" = "Ouvrir les paramètres";

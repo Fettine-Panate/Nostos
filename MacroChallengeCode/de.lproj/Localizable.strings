@@ -21,6 +21,7 @@
 ".No" = "Nein";
 ".LowAccuracy" = "Niedrige\nGPS-Genauigkeit";
 
-".ActivateGPS" = "Aktiviere dein GPS";
-".ActivateGPSDescription" = "Aktiviere deinen Standortdienst in den Einstellungen";
+".ActivateGPS" = "Standort aktivieren";
+".ActivateGPSDescription" = "Der Standort wird verwendet, um Ihren Weg aufzuzeichnen";
+
 ".OpenSettings" = "Einstellungen öffnen";
