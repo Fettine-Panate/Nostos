@@ -69,13 +69,13 @@ struct ContentView: View {
             case .startView:
                 StartView(pathsJSON: $pathsJSON, screen: $screen, ns: ns, resumeLastPath: $resumeLastPath)
             case .activity:
-                if(LocationManager.shared.userLocation != nil){
+                if(LocationManager.shared.isRequestBeingDone()){
                     ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, resumeLastPath: $resumeLastPath)
                 }else{
                     ActivateGPS(screen: $screen, mapScreen: $mapScreen, activity: $activity)
                 }
             case .finished:
-                if(LocationManager.shared.userLocation != nil){
+                if(LocationManager.shared.isRequestBeingDone()){
                     let day : DayPhase = DayPhase(sun: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current))
                     ArrivedBackView(screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, day: day)
                 }else{

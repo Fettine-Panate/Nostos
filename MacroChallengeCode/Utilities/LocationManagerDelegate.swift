@@ -64,5 +64,17 @@ extension LocationManager: CLLocationManagerDelegate {
         manager.requestWhenInUseAuthorization()
     }
     
+    
+    func isRequestBeingDone()->Bool{
+        
+        switch manager.authorizationStatus{
+        case .authorizedWhenInUse:
+            return true
+        case .authorizedAlways:
+            return true
+        default:
+            return false
+        }
+    }
 }
 

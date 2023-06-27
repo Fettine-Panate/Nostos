@@ -63,7 +63,7 @@ struct CircularSliderView: View {
     var body: some View {
         
         GeometryReader{ gr in
-            let radius = (min(gr.size.width, gr.size.height) / 2.0) // * 0.9
+            let radius = (min(gr.size.width, gr.size.height) / 2.2) // * 0.9
             let sliderWidth = 17.0
             ZStack {
                 //Cerchio interno
