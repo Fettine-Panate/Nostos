@@ -49,6 +49,7 @@ struct ContentView: View {
     @State var mapScreen : MapSwitch = .mapView
     @Namespace var ns
     @State var resumeLastPath = false
+    @State var fakeUserLocation : CLLocation? = CLLocation(latitude: 40.837034, longitude: 14.306127)
     
     init(pathsJSON: [PathCustom] = itemsJSON, changeScreen: Int = 0, screen: Screens = .startView) {
         self.pathsJSON = pathsJSON
@@ -72,14 +73,16 @@ struct ContentView: View {
                 if(LocationManager.shared.isRequestBeingDone()){
                     ActivityContainerView(pathsJSON: $pathsJSON, userLocation: $locationManager.userLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, resumeLastPath: $resumeLastPath)
                 }else{
-                    ActivateGPS(screen: $screen, mapScreen: $mapScreen, activity: $activity)
+                    FakeActivityContainerView(pathsJSON: $pathsJSON, userLocation: $fakeUserLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, resumeLastPath: $resumeLastPath)
+                    //ActivateGPS(screen: $screen, mapScreen: $mapScreen, activity: $activity)
                 }
             case .finished:
                 if(LocationManager.shared.isRequestBeingDone()){
                     let day : DayPhase = DayPhase(sun: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current))
                     ArrivedBackView(screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, day: day)
                 }else{
-                    ActivateGPS(screen: $screen, mapScreen: $mapScreen, activity: $activity)
+                    FakeActivityContainerView(pathsJSON: $pathsJSON, userLocation: $fakeUserLocation, screen: $screen, activity: $activity, mapScreen: $mapScreen, ns: ns, resumeLastPath: $resumeLastPath)
+                    //ActivateGPS(screen: $screen, mapScreen: $mapScreen, activity: $activity)
                 }
              
                     

@@ -23,6 +23,7 @@
 ".Resume" = "Resume";
 ".No" = "No";
 ".LowAccuracy" = "Low gps\naccuracy";
+".Naples" = "Data obtained from: Naples, Italy";
 
 
 ".ActivateGPS" = "Enable Location Services";

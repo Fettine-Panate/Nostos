@@ -1,18 +1,15 @@
 //
-//  ActivityContainerView.swift
+//  FakeActivityContainerView.swift
 //  MacroChallengeCode
 //
-//  Created by Francesco De Stasio on 09/06/23.
+//  Created by Raffaele Martone on 28/06/23.
 //
 
 import SwiftUI
 import CoreLocation
 import SunKit
 
-
-
-
-struct ActivityContainerView: View {
+struct FakeActivityContainerView: View {
     @State var onBoardIndex = defaults.integer(forKey: "ON_BOARDING")
     
     @Binding var pathsJSON : [PathCustom]
@@ -42,7 +39,7 @@ struct ActivityContainerView: View {
         
         GeometryReader{ geo in
             ZStack{
-//                Color(day.hours[currentHour].color).ignoresSafeArea()
+                //                Color(day.hours[currentHour].color).ignoresSafeArea()
                 // MARK: Changed the color background logic. Please check, with <3 Pietro
                 withAnimation {
                     Color(color).ignoresSafeArea()
@@ -58,18 +55,62 @@ struct ActivityContainerView: View {
                     BoxSliderView(magnitude: $magnitude, scale: $scale)
                         .frame(width: geo.size.width * 0.11, height: geo.size.width * 0.22).position(x: geo.size.width * 0.9, y: geo.size.height * 0.21)
                         .foregroundColor( Color(color))
-                case .sunset:
-                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).sunset, start: start, eveningGoldenHourEnd: Sun(location: LocationManager.shared.userLocation!, timeZone: TimeZone.current).eveningGoldenHourEnd, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, dateOfAvatarPosition: $dateOfAvatarPosition)
-                        .padding(70)
-               
+                    
+                    VStack{
+                        HStack{
+                            Image(systemName:"location")
+                                .foregroundColor(.black)
+                                .scaledToFit()
+                            
+                            Text(LocalizedStringKey(".ActivateGPS"))
+                                .foregroundColor(.black)
+                                .font(.title3)
+                                .bold()
+                                .multilineTextAlignment(.center)
+                        }
+                        Text(LocalizedStringKey(".ActivateGPSDescription"))
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                    Button {
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                        withAnimation {
+                            screen = .startView
+                            mapScreen = .mapView
+                            activity = .map
+                        }
+                    } label: {
+                        Text(LocalizedStringKey(".OpenSettings"))
+                            .foregroundColor(.blue)
+                            .padding(5)
+                            .background{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(minWidth: geo.size.width * 0.4, minHeight: geo.size.width * 0.11)
+                                    .foregroundColor(Color("white"))
+                            }
+                        
+                    }
+                    }.padding()
+                    .background(){
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color.white.opacity(day.getClosestPhase(currentTime: .now).color.accentObjectOp + 0.4))
                 }
-                
+                    .position(x: geo.size.width * 0.5, y: geo.size.height * 0.75)
+                case .sunset:
+                    CircularSliderView(pathsJSON: $pathsJSON, path: path, userLocation: $userLocation, sunset: Sun(location: userLocation!, timeZone: TimeZone.current).sunset, start: start, eveningGoldenHourEnd: Sun(location: userLocation!, timeZone: TimeZone.current).eveningGoldenHourEnd, screen: $screen,activity: $activity, mapScreen: $mapScreen, namespace: ns, day : day, dateOfAvatarPosition: $dateOfAvatarPosition)
+                        .padding(70)
+                    
+                    Text(LocalizedStringKey(".Naples"))
+                        .position(x: geo.size.width * 0.5, y: geo.size.height * 0.95)
+                        .foregroundColor(Color("white"))
+                    
+                }
                 Button {
                         alertIsPresented = true
                 } label: {
                     VStack{
                         Text(LocalizedStringKey(".StopActivity"))
-                            .fontWeight(.semibold)
                             .padding()
                             .foregroundColor(Color(color))
                         
@@ -193,21 +234,8 @@ struct ActivityContainerView: View {
     }
 }
 
-
-struct ActivityContainerView_Previews: PreviewProvider {
+struct FakeActivityContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityContainerView(pathsJSON: .constant([]), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), path: PathCustom(title: "Hello"), screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.trackBack), ns: Namespace.init().wrappedValue, resumeLastPath: .constant(false))
-    }
-}
-
-struct LowAccuracyView : View{
-    let size : CGSize
-    
-    var body: some View{
-        HStack{
-            Image(systemName: "antenna.radiowaves.left.and.right.slash")
-                .frame(width: size.width,height: size.height)
-                .font(.title)
-        }
+        FakeActivityContainerView(pathsJSON: .constant([]), userLocation: .constant(CLLocation(latitude: 14.000000, longitude: 41.000000)), path: PathCustom(title: "Hello"), screen: .constant(.activity), activity: .constant(.sunset), mapScreen: .constant(.trackBack), ns: Namespace.init().wrappedValue, resumeLastPath: .constant(false))
     }
 }

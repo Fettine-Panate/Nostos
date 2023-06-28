@@ -23,5 +23,6 @@
 
 ".ActivateGPS" = "Activar ubicación";
 ".ActivateGPSDescription" = "La ubicación se utilizará para registrar tu recorrido";
+".Naples" = "Datos obtenidos de: Nápoles, Italia";
 
 ".OpenSettings" = "Abrir configuración";

@@ -42,6 +42,7 @@
 		9AECAA842A279CB2007926B8 /* SunsetWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECAA762A279C6B007926B8 /* SunsetWidgetLiveActivity.swift */; };
 		9AECAA872A27A13D007926B8 /* SunKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9AECAA862A27A13D007926B8 /* SunKit */; };
 		9AFCDAD42A3B3AFB00877886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFCDAD32A3B3AFB00877886 /* AppDelegate.swift */; };
+		9F7459BE2A4CD6F800F781B7 /* FakeActivityContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7459BD2A4CD6F800F781B7 /* FakeActivityContainerView.swift */; };
 		9F8ED0E92A2F58EB00C223ED /* CircularSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED0E82A2F58EB00C223ED /* CircularSliderView.swift */; };
 		9F8ED0EB2A2F81A500C223ED /* ShowPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED0EA2A2F81A500C223ED /* ShowPathView.swift */; };
 		9FF2257C2A1CF09300159166 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2257B2A1CF09300159166 /* IndicatorView.swift */; };
@@ -143,6 +144,7 @@
 		9AECAA7A2A279C6C007926B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AECAA7C2A279C6C007926B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AFCDAD32A3B3AFB00877886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9F7459BD2A4CD6F800F781B7 /* FakeActivityContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeActivityContainerView.swift; sourceTree = "<group>"; };
 		9F8ED0E82A2F58EB00C223ED /* CircularSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSliderView.swift; sourceTree = "<group>"; };
 		9F8ED0EA2A2F81A500C223ED /* ShowPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPathView.swift; sourceTree = "<group>"; };
 		9FF2257B2A1CF09300159166 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				9FF225CC2A29302200159166 /* RecapPathView.swift */,
 				913301F02A39B1B700AB1C23 /* ArrivedBackView.swift */,
 				916EEDFE2A33559800FA7298 /* ActivityContainerView.swift */,
+				9F7459BD2A4CD6F800F781B7 /* FakeActivityContainerView.swift */,
 				91B95DBB2A40A70400B5DB31 /* ActivateGPS.swift */,
 			);
 			path = Views;
@@ -531,6 +534,7 @@
 				91B95DBC2A40A70400B5DB31 /* ActivateGPS.swift in Sources */,
 				918DD10D2A17D3F500E44590 /* ContentView.swift in Sources */,
 				9126FE232A30BEA600818999 /* Avatar.swift in Sources */,
+				9F7459BE2A4CD6F800F781B7 /* FakeActivityContainerView.swift in Sources */,
 				917A8C552A20F34700A32868 /* SemisphereButton.swift in Sources */,
 				9A655C212A3F476500753DE2 /* DayPhase.swift in Sources */,
 				9FF225A82A26AC9100159166 /* RollingView.swift in Sources */,
@@ -751,7 +755,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MacroChallengeCode/MacroChallengeCode.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
 				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
@@ -794,7 +798,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MacroChallengeCode/MacroChallengeCode.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"MacroChallengeCode/Preview Content\"";
 				DEVELOPMENT_TEAM = T479J3S372;
 				ENABLE_PREVIEWS = YES;
